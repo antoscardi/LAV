@@ -5,27 +5,29 @@ import Plotter.*
 
 %% CHOSEN Variables
 show_simulation = true;
-control_time = 4; %SEMPRE 4  
+control_time = 4; % SEMPRE 4  
 global threshold;
-threshold = 0.00050; %--> 1cm 
+threshold = 0.00020; %--> 20 cm 
 global time_step;
 time_step = 0.01;
 global distributed_estimation_mode;
 distributed_estimation_mode = true;
-global dronesSetted;
-dronesSetted = false;
 global trajectory_type;
 trajectory_type = "circ"; % Either "circ","patrol","rect"
 global see_text;
-see_text = true;
+see_text = false;
 global drones_num;
-drones_num = 12;
+drones_num = 8;
 global desired_goal;
 desired_goal = [0.81, 0.9 ,0];
 global video_name;
 video_name = 'prove';
 global do_Video;
 do_Video = false;
+
+%% Set seed for reproducibility
+seed = 42;
+rng(seed)
 
 %% Constants
 NONE = -1;
@@ -41,6 +43,8 @@ est_X = zeros(10, 1);
 est_H = zeros(10, drones_num);
 p = NONE;
 time_instant = 0;
+global dronesSetted;
+dronesSetted = false;
 global last_estimate
 last_estimate = [-1;-1];
 global control_steps;

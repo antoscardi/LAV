@@ -49,9 +49,11 @@ classdef Plotter < handle
                 %obj.fig.WindowState = 'maximized';
                 obj.fig.Position = [420, 1, 1080, 1080]; 
                 % Set up and writing the movie.
+                if do_Video
                 obj.video_writer = VideoWriter(strcat('~/Desktop/',video_name),'Motion JPEG AVI'); % movie name.
                 obj.video_writer.FrameRate = 100; % Frames per second. Larger number correlates to smaller movie time duration. 
                 open(obj.video_writer);
+                end
                 % Generate colors for plot
                 if distributed_estimation_mode == false
                     C = linspecer(3);
@@ -162,7 +164,10 @@ classdef Plotter < handle
         end
 
         function obj = close(obj)
-            close(obj.video_writer);% Saves the movie.
+            global do_Video
+            if do_Video
+                close(obj.video_writer);% Saves the movie.
+            end
             close(obj.fig);
         end
     end
