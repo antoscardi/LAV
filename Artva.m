@@ -1,14 +1,16 @@
 classdef Artva
     properties
         position
+        identifier 
         SNR (1,1) double {mustBePositive} = 0.2 % Signal to Noise Ratio
         noise
     end
     methods
         % Constructor
-        function obj = Artva(p)
-            if nargin == 1
+        function obj = Artva(p,i)
+            if nargin == 2
                 obj.position = p;
+                obj.identifier = i;
             end
         end
 
@@ -45,7 +47,7 @@ classdef Artva
 
             signal = phi.' * x;
 
-            % White noise
+            % White noise, MAYBE MAKE IT DEPENDENT ON THE DISTANCE w.r.t THE GOAL
             amplitudeNoise = obj.SNR * signal;
             % a + (b-a)*rand() noise in an interval of [a,b] where a is the negative of the amplitude of the noise
             obj.noise = -amplitudeNoise + 2.*amplitudeNoise.*rand(size(signal));

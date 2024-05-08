@@ -270,11 +270,9 @@ classdef Drone
             obj.z_new = obj.z_old + delta*z_dot;
             obj.w_new =obj.w_old + delta*w_dot;
 
-            % metti quello nuovo in quello vecchio per la prossima iterazione 
+            % Metti quello nuovo in quello vecchio per la prossima iterazione 
             obj.z_old = obj.z_new;
             obj.w_old = obj.z_new;         
-
-        end 
-        
+        end  
     end
 end

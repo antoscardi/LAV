@@ -54,12 +54,13 @@ classdef Plotter < handle
                 obj.video_writer.FrameRate = 100; % Frames per second. Larger number correlates to smaller movie time duration. 
                 open(obj.video_writer);
                 end
+                % Display the sources
+                obj.scatter_artva = scatter(artva_pos(:,1), artva_pos(:,2), 100,'*','red');
+                hold on
                 % Generate colors for plot
                 if distributed_estimation_mode == false
                     C = linspecer(3);
-                    obj.scatter_artva = scatter(artva_pos(1), artva_pos(2), 100, C(2, :), '*');
-                    hold on
-                    obj.scatter_est_artva = scatter(est_artva_pos(1), est_artva_pos(2), 100, C(3, :), '*');
+                    obj.scatter_est_artva = scatter(est_artva_pos(:, 1), est_artva_pos(:, 2), 100, C(3, :), '*');
                     obj.scatter_drones = scatter(drones_pos(1, :), drones_pos(2, :), 100, C(1, :), 'o', 'filled');
                     % Legend
                     %legend('true position', 'estimated position', 'drones position', 'Location', 'NorthEast','AutoUpdate','off');
@@ -79,7 +80,6 @@ classdef Plotter < handle
                             %obj.averages_labels_handles(i) = text(obj.ax, consensus_mean_array(1,i)+dx, consensus_mean_array(2,i), num2str(i),'FontSize', 10);
                         end
                     end
-                    obj.scatter_artva = scatter(artva_pos(1), artva_pos(2), 100,'*','red','DisplayName','true position');
                     hold on
                     obj.scatter_est_artva = scatter(est_artva_pos(1,:), est_artva_pos(2,:), 100, c1, '*','HandleVisibility', 'off');
                     obj.scatter_drones = scatter(drones_pos(1, :), drones_pos(2, :), 100, c2, 'o', 'filled','HandleVisibility', 'off');
@@ -123,15 +123,15 @@ classdef Plotter < handle
                 obj.th = title(obj.ax, titleString);
                 obj.scatter_drones.XData = drones_pos(1,:);
                 obj.scatter_drones.YData = drones_pos(2,:);
-                obj.scatter_artva.XData = artva_pos(1);
-                obj.scatter_artva.YData = artva_pos(2);
+                obj.scatter_artva.XData = artva_pos(:,1);
+                obj.scatter_artva.YData = artva_pos(:,2);
                 % Create a video
                 if do_Video
                     frame = getframe(obj.fig); % 'gcf' can handle if you zoom in to take a movie.
                     writeVideo(obj.video_writer, frame);
                 end
 
-                if(size(est_artva_pos, 1) == 2)
+                if distributed_estimation_mode == true
                     obj.scatter_est_artva.XData = est_artva_pos(1,:);
                     obj.scatter_est_artva.YData = est_artva_pos(2,:);
                     est_mean = mean(est_artva_pos,2);
@@ -139,9 +139,9 @@ classdef Plotter < handle
                     obj.scatter_est_mean.YData = est_mean(2);
                     obj.scatter_consensus_mean.XData = consensus_mean_array(1,:);
                     obj.scatter_consensus_mean.YData = consensus_mean_array(2,:);
-                elseif(size(est_artva_pos, 1) == 1)
-                    obj.scatter_est_artva.XData = est_artva_pos(1);
-                    obj.scatter_est_artva.YData = est_artva_pos(2);
+                elseif distributed_estimation_mode == false
+                    obj.scatter_est_artva.XData = est_artva_pos(:,1);
+                    obj.scatter_est_artva.YData = est_artva_pos(:,2);
                     % Nel caso in cui non-distribuito the mean does not exist
                 end
                 %%% RICORDATI CHE DEVI SCOMMENTARE ANCHE LA PARTE SOPRA SE VUOI IL TESTO ANCHE PER LE MEDIE
