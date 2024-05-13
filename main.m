@@ -13,7 +13,7 @@ threshold = 0.00020; %--> 20 cm
 global time_step;
 time_step = 0.01;
 global distributed_estimation_mode;
-distributed_estimation_mode = true;
+distributed_estimation_mode = false;
 global trajectory_type;
 trajectory_type = "circ"; % Either "circ","patrol","rect"
 global see_text;
@@ -70,7 +70,7 @@ while true
     tic % start timing
     if(~distributed_estimation_mode)
         % For now do the replan only towards the first ARTVA
-        drones_list = replan(drones_list, drones_num, [estimates{1}.estimated_position,0]);
+        drones_list = replan(drones_list, drones_num, estimates{1}.estimated_position);
         % Move the drones
         for i = 1:drones_num
             drones_list{i} = drones_list{i}.move();
