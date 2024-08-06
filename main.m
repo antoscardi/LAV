@@ -7,6 +7,8 @@ import RLS.*
 
 %% CHOSEN Variables
 show_simulation = true;
+global add_noise;
+add_noise = false;
 control_time = 4; % SEMPRE 4  
 global threshold;
 threshold = 0.00020; %--> 20 cm 

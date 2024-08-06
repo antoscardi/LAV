@@ -1,10 +1,14 @@
 classdef Artva
     properties
+        % Approximation values for a,b
+        a = 1.291
+        b = 1.028
         position
         identifier 
         SNR (1,1) double {mustBePositive} = 0.2 % Signal to Noise Ratio
         noise
     end
+    
     methods
         % Constructor
         function obj = Artva(p,i)
@@ -14,7 +18,9 @@ classdef Artva
             end
         end
 
+        % Method to compute the signal
         function [phi, signal] = getSignal(obj, dronePos)
+            global add_noise;
             droneX = dronePos(1);
             droneY = dronePos(2);
             droneZ = dronePos(3);
@@ -33,25 +39,31 @@ classdef Artva
                    -2 * droneY;         ...
                    -2 * droneZ;         ...
                    1];
-
-            x = [1;      ...
-                 0;      ...
-                 0;      ...
-                 1;      ...
-                 0;      ...
-                 1;      ...
-                 artvaX; ...
-                 artvaY; ...
-                 artvaZ; ...
-                 obj.position*obj.position.'];
+            
+            x = [(obj.b)^2; ...
+                 0;         ...
+                 0;         ...
+                 (obj.a)^2; ...
+                 0;         ...
+                 (obj.a)^2; ...
+                 artvaX;    ...
+                 artvaY;    ...
+                 artvaZ;    ...
+                 obj.position * obj.position.'];
 
             signal = phi.' * x;
 
-            % White noise, MAYBE MAKE IT DEPENDENT ON THE DISTANCE w.r.t THE GOAL
+            if add_noise
+                signal = obj.addNoise(signal);
+            end 
+        end
+
+        % Method to add noise to the signal
+        function signalWithNoise = addNoise(obj, signal)
             amplitudeNoise = obj.SNR * signal;
             % a + (b-a)*rand() noise in an interval of [a,b] where a is the negative of the amplitude of the noise
-            obj.noise = -amplitudeNoise + 2.*amplitudeNoise.*rand(size(signal));
-            signal = signal + obj.noise;
+            obj.noise = -amplitudeNoise + 2 .* amplitudeNoise .* rand(size(signal));
+            signalWithNoise = signal + obj.noise;
         end
     end
 end
