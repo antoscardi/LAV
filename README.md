@@ -1,4 +1,4 @@
-# LAV
+# Localization of Avalanche Victims
 Master Thesis
 
 Optimal Motion planning for Localization of Avalanche Victims with multiple UAVs.  
