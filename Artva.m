@@ -6,7 +6,6 @@ classdef Artva
         position
         identifier 
         SNR (1,1) double {mustBePositive} = 0.2 % Signal to Noise Ratio
-        noise
     end
     
     methods
@@ -52,18 +51,19 @@ classdef Artva
                  obj.position * obj.position.'];
 
             signal = phi.' * x;
+            disp(signal)
 
             if add_noise
                 signal = obj.addNoise(signal);
             end 
         end
 
-        % Method to add noise to the signal
+        % Method to add noise to the signal %%% METTERE DIPENDENZA DA DISTANZA
         function signalWithNoise = addNoise(obj, signal)
             amplitudeNoise = obj.SNR * signal;
             % a + (b-a)*rand() noise in an interval of [a,b] where a is the negative of the amplitude of the noise
-            obj.noise = -amplitudeNoise + 2 .* amplitudeNoise .* rand(size(signal));
-            signalWithNoise = signal + obj.noise;
+            noise = -amplitudeNoise + 2 .* amplitudeNoise .* rand(size(signal));
+            signalWithNoise = signal + noise;
         end
     end
 end

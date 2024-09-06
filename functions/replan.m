@@ -16,9 +16,9 @@ function new_drones_list = replan(drones_list, drones_num, est_artva_pos)
             current_drone = drones_list{i};
             g = current_drone.goal;
             if(g(2) ~= 0)
-                current_drone = current_drone.setGoal([g(1), 0.0, g(3)]);
+                current_drone = current_drone.setGoal([g(1), 0, g(3)]);
             else
-                current_drone = current_drone.setGoal([g(1), 1.0, g(3)]);
+                current_drone = current_drone.setGoal([g(1), 100, g(3)]);
             end
             new_drones_list{i} = current_drone;
             clear current_drone g;
@@ -81,12 +81,12 @@ function new_drones_list = replan(drones_list, drones_num, est_artva_pos)
         if (firstIsIdle && lastIsIdle)
             disp("Replanning");
             current_drone = drones_list{1};
-            current_drone = current_drone.setGoal([1,1,0]);
+            current_drone = current_drone.setGoal([100,100,0]);
             new_drones_list{1} = current_drone;
             clear current_drone;
     
             current_drone = drones_list{drones_num};
-            current_drone = current_drone.setGoal([1,1,0]);
+            current_drone = current_drone.setGoal([100,100,0]);
             new_drones_list{drones_num} = current_drone;
             clear current_drone;
         end

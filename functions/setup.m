@@ -21,13 +21,13 @@ function [drones_list, artva, estimates] =  setup(drones_num, desired_goals)
         angles(i) = omega_i;
         m = tan(deg2rad(omega_i));
         if (omega_i > 315 && omega_i <= 360) || omega_i <= 45
-            drones_list{i} = drones_list{i}.setGoal([1, m*1, 0]);
+            drones_list{i} = drones_list{i}.setGoal([100, m*100, 0]);
         elseif omega_i > 45 && omega_i <= 135
-            drones_list{i} = drones_list{i}.setGoal([1/m, 1 0]);
+            drones_list{i} = drones_list{i}.setGoal([100/m, 100 0]);
         elseif omega_i > 135 && omega_i <= 225
-            drones_list{i} = drones_list{i}.setGoal([-1, m*-1, 0]);
+            drones_list{i} = drones_list{i}.setGoal([-100, m*-100, 0]);
         elseif omega_i > 225 && omega_i <= 315
-            drones_list{i} = drones_list{i}.setGoal([-1/m, -1, 0]);
+            drones_list{i} = drones_list{i}.setGoal([-100/m, -100, 0]);
         end
     end
     disp("Setup completed!")

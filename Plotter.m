@@ -93,27 +93,27 @@ classdef Plotter < handle
                 obj.ax = gca; % gca is Matlab's way of getting the current axes
 
                 if trajectory_type == "rect"
-                    obj.ax.XLim = [0 1];
-                    obj.ax.YLim = [0 1];
+                    obj.ax.XLim = [0 100];
+                    obj.ax.YLim = [0 100];
                     for i = 1:n_drones
-                        line([(i-1/2)/n_drones, (i-1/2)/n_drones], [0, 1], 'LineStyle', '--', 'Color', 'black', 'HandleVisibility', 'off')
+                        line([100*(i-1/2)/n_drones, 100*(i-1/2)/n_drones], [0, 100], 'LineStyle', '--', 'Color', 'black', 'HandleVisibility', 'off')
                     end
                 elseif trajectory_type == "circ"
-                    obj.ax.XLim = [-1 1];
-                    obj.ax.YLim = [-1 1];
-                    viscircles([0, 0], 1, 'LineStyle', '--', 'EdgeColor', 'black','LineWidth',0.5);
+                    obj.ax.XLim = [-100 100];
+                    obj.ax.YLim = [-100 100];
+                    viscircles([0, 0], 100, 'LineStyle', '--', 'EdgeColor', 'black','LineWidth',0.5);
                     for i = 1:length(angles)
                         angle = deg2rad(angles(i));
-                        line([0, cos(angle)], [0, sin(angle)], 'LineStyle', '--', 'Color', 'black', 'HandleVisibility', 'off');
+                        line([0, 100*cos(angle)], [0, 100*sin(angle)], 'LineStyle', '--', 'Color', 'black', 'HandleVisibility', 'off');
                     end     
                 elseif trajectory_type == "patrol"
                     % draw a circle centered on the bottom left corner and with radius 1
-                    obj.ax.XLim = [0 1];
-                    obj.ax.YLim = [0 1];
-                    viscircles([0, 0], 1, 'LineStyle', '--', 'EdgeColor', 'black','LineWidth',0.5);
+                    obj.ax.XLim = [0 100];
+                    obj.ax.YLim = [0 100];
+                    viscircles([0, 0], 100, 'LineStyle', '--', 'EdgeColor', 'black','LineWidth',0.5);
                     for i = 1:length(angles)
                         angle = deg2rad(angles(i));
-                        line([0, cos(angle)], [0, sin(angle)],'LineStyle','--','Color','black','HandleVisibility', 'off');
+                        line([0, 100*cos(angle)], [0, 100*sin(angle)],'LineStyle','--','Color','black','HandleVisibility', 'off');
                     end
                 end
                 obj.is_initialized = true;

@@ -52,8 +52,8 @@ classdef Drone
 %                 obj.v_max = 0.5; 
 %                 obj.a_max = 0.1; 
                 %REAL
-                obj.v_max = 0.05; % 5 m/s
-                obj.a_max = 0.01; % 1 m/s
+                obj.v_max = 5; % 5 m/s
+                obj.a_max = 1; % 1 m/s
                 obj.time_to_full_speed = obj.v_max / obj.a_max;
                 obj.trajectory_length = -1;
 
@@ -83,7 +83,7 @@ classdef Drone
         end
 
         function b = isAtGoal(obj)
-            b = norm(obj.position - obj.goal) <= 0.000001;
+            b = norm(obj.position - obj.goal) <= 0.0001;
         end
 
         function obj = move(obj)
