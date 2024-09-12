@@ -2,14 +2,20 @@ function [drones_list, artva, estimates] =  setup(drones_num, desired_goals)
     disp("Setup started!")
     global angles;
     global n_sources;
+    global do_indipendent;
 
     % Set Artva info
     drones_list = cell([1, drones_num]);
-    artva = cell([1, n_sources]);
-    estimates = cell([1, n_sources]);
-    for i=1:n_sources
-        artva{i} = Artva(desired_goals(i,:),i);
-        estimates{i} = RLS(drones_num, i);
+    if do_indipendent
+        artva = cell([1, n_sources]);
+        estimates = cell([1, n_sources]);
+        for i=1:n_sources
+            artva{i} = Artva(desired_goals(i,:),i);
+            estimates{i} = RLS(i, n_sources, do_indipendent);
+        end
+    elseif ~do_indipendent
+        estimates = RLS(0, n_sources, do_indipendent); % 0 because we do not have an identifier we use the same algorithm for all sources
+        artva = Artva(desired_goals(1,:), desired_goals(2,:));
     end
 
     % Set Drones info

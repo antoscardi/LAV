@@ -18,10 +18,18 @@ classdef MagneticField
         end
         
         % Method to set points and calculate the magnetic field
-        function obj = calculateFieldAtPoints(obj, points, spaceObj)
+        function [obj, H] = calculateFieldAtPoints(obj, points, varargin)
             % Validate points
             if size(points, 1) ~= 3 && size(points, 1) ~= 2
                 error('Points must be a 3xN or 2xN matrix.');
+            end
+        
+            % Check if spaceObj is provided
+            if nargin > 2
+                spaceObj = varargin{1};  % spaceObj is provided as the third argument
+                dimension = spaceObj.Dimension;
+            else
+                dimension = 2;
             end
             
             % Update points property
@@ -48,12 +56,14 @@ classdef MagneticField
             Hz = obj.prefactor .* (2*z.^2 - x.^2 - y.^2);
             
             % Set field_vectors
-            if spaceObj.Dimension == 3
+            if dimension == 3
                 obj.field_vectors = [Hx; Hy; Hz];
-            elseif spaceObj.Dimension == 2
+                H = obj.field_vectors;
+            elseif dimension == 2
                 % Project the points and the field vectors
                 obj.field_vectors = [Hx; Hy];
                 obj.points = obj.points(1:2, :);
+                H = obj.field_vectors;
             end
         end
         

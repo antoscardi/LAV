@@ -7,6 +7,8 @@ import RLS.*
 import MagneticField.*
 
 %% CHOSEN Variables
+global do_indipendent;
+do_indipendent = false;
 show_simulation = true;
 global add_noise;
 add_noise = false;
@@ -16,15 +18,15 @@ threshold = 0.020; %--> 2 cm
 global time_step;
 time_step = 0.01;
 global distributed_estimation_mode;
-distributed_estimation_mode = true;
+distributed_estimation_mode = false;
 global trajectory_type;
 trajectory_type = "circ"; % Either "circ","patrol","rect"
 global see_text;
 see_text = false;
 global drones_num;
-drones_num = 8;
-desired_goals = [72, 83 ,0; ...
-                 72, -83 ,0];
+drones_num = 10;
+desired_goals = [71, 83 ,0; ...
+                 72, -82 ,0];
 global n_sources;
 n_sources = size(desired_goals,1);
 global video_name;
@@ -56,20 +58,24 @@ history_var = zeros(2, control_steps);
 check = ones(1, control_steps);
 k = 1;
 
+
 %% Magnetic Field
 magFieldArray2D = cell(n_sources, 1);
 magFieldArray3D = cell(n_sources, 1);
 
 % 3D Case
+global R_matrices
+R_matrices = cell(n_sources, 1);
 n_points = 40;
 space3D = Space('3D', 3, n_points);
 pitch = deg2rad(180); 
 for i = 1:n_sources
     R = space3D.RotationMatrix(i, 0,pitch,0); % Use roll, pitch, and yaw
+    R_matrices{i} = R;
     space3D.plotCoordinateSystem(R, desired_goals(i, :),['Frame n', num2str(i)]);
     % Homogenous Transformation
     p_source = desired_goals(i, :)';
-    p_local = R' * (space3D.points - p_source);
+    p_local = R.' * (space3D.points - p_source);
     % Calculate the magnetic field
     magField3D = MagneticField();
     magField3D = magField3D.calculateFieldAtPoints(p_local, space3D);
@@ -85,7 +91,7 @@ for i = 1:n_sources
     space2D.plotCoordinateSystem(R, desired_goals(i, 1:2),['Frame n', num2str(i)], true);
     % Homogenous Transformation
     p_source = desired_goals(i, :)';
-    p_local = R' * (space3D.points - p_source);
+    p_local = R.' * (space3D.points - p_source);
     % Calculate the magnetic field
     magField2D = MagneticField();
     magField2D = magField2D.calculateFieldAtPoints(p_local, space2D);
@@ -108,14 +114,14 @@ gradient3D = gradient3D.computeGradient();
 % Plotting each method with proper figure management
 % TA1 has a range of +−atan(sqrt(2)) and TA2 has a range of −π/2 to π/2. They are positive over the source when
 % orientation of the magnetic moment is not horizontal.
+%{
 methods = { 'Tilt1', 'Tilt2', 'Theta','NSS'};
     for i = 1:length(methods)
         figure('Name', [methods{i} ' Edge Detection'], 'NumberTitle', 'off'); % Create a new figure
         values = gradient3D.plotResults(methods{i}); % Plot results for the current method
         drawnow; % Ensure the figure is rendered before proceeding
     end
-
-    
+%}  
 %error('stop')
 %{
 % Example of precomputed objective function values for all timesteps
@@ -142,7 +148,7 @@ de = DE(popSize, F, CR, maxGen, lowerBound, upperBound, dim, objValues);
 % Optimize using precomputed values
 de.optimizeUsingPrecomputedValues();
 %}
-
+%}
 
 % Variables specific to Distributed mode
 est_artva_x_array = zeros(1, drones_num);
@@ -161,7 +167,12 @@ while true
     tic % start timing
     if(~distributed_estimation_mode)
         % For now do the replan only towards the first ARTVA
-        drones_list = replan(drones_list, drones_num, estimates{1}.estimated_position);
+        if do_indipendent
+            drones_list = replan(drones_list, drones_num, estimates{1}.estimated_position);
+        elseif ~do_indipendent
+            drones_list = replan(drones_list, drones_num, estimates_array(:,1));
+        end
+
         % Move the drones
         for i = 1:drones_num
             drones_list{i} = drones_list{i}.move();
@@ -169,18 +180,22 @@ while true
             drones_y_array(i) = drones_list{i}.position(2);
         end
         % Estimate the position of the ARTVAs
-        for j=1:n_sources
-            estimates_array(j,:) = estimates{j}.rls(drones_list, artvas{j});
+        if do_indipendent
+            for j=1:n_sources
+                estimates_array(:,j) = estimates{j}.rls(drones_list, artvas{j});
+            end
+        elseif ~do_indipendent
+            estimates_array = estimates.rls(drones_list, artvas);
         end
         % Save the values to check when the algorithm is not updating the values anymore, only the ones of the first ARTVA
-        history_var(:,k) = [estimates{1}.estimated_position(1); 
-                            estimates{1}.estimated_position(2)];
+        history_var(:,k) = [estimates_array(1,1); 
+                            estimates_array(2,1)];
         [result,check,k,history_var] = stopping_criterium(history_var,check,k);
         if result
             disp("Simulation stopped at: " + time_instant + " seconds" );
             disp("The value of the estimate did not change by " + threshold + " m for more than "+ control_time + "s");
             for j=1:n_sources
-                display_results(j, estimates{j}.estimated_position, artvas{j}.position);
+                display_results(j, estimates_array(:,j), artvas{j}.position');
             end
             break;
         end
@@ -207,15 +222,16 @@ while true
             if result
                 disp("Simulation stopped at: " + time_instant + " seconds" );
                 disp("The value of the estimate did not change by " + threshold + " m for more than "+ control_time + "s");
+                %{
                 for j=1:n_sources
-                    display_results(j, estimates{j}.estimated_position, artvas{j}.position);
+                    display_results(j, estimates_array(:,j), artvas{j}.position');
                 end
+                %}
                 disp("You have estimated the goal with a TRUE  error of: " + norm((artvas{1}.position(1,1:2)) - (mean([est_artva_x_array; est_artva_y_array],2)')) + "m");
                 disp("You have estimated the goal with an error wrt CONSENSUS MEAN: " + norm((artvas{1}.position(1,1:2)) - (consensus_mean_array(:,drones_num)')) + "m");
-                disp("Goal position:" );
-                artvas{1}.position
-                consensus_mean_array(:,drones_num)'
-                mean([est_artva_x_array; est_artva_y_array],2)'
+                disp("Goal position: " + artvas{1}.position);
+                disp("Consensus Mean " + consensus_mean_array(:,drones_num)')
+                disp("True mean " + mean([est_artva_x_array; est_artva_y_array],2)')
                 break;
             end
         end
@@ -230,7 +246,7 @@ while true
 
     if(show_simulation)
         if(~distributed_estimation_mode)
-            p.draw([drones_x_array; drones_y_array], desired_goals, estimates_array, time_instant);
+            p.draw([drones_x_array; drones_y_array], desired_goals, estimates_array', time_instant);
         else
             p.draw([drones_x_array; drones_y_array], desired_goals, [est_artva_x_array; est_artva_y_array],time_instant,consensus_mean_array);
         end
@@ -282,7 +298,7 @@ end
 
 function display_results(i, estimation, truth)
     disp("RESULTS FOR ARTVA " + i);
-    disp("You have estimated the goal with an error of: " + norm((estimation) - (truth)) + " m");
+    disp("You have estimated the goal with an error of: " + norm((estimation) - (truth(1:2))) + " m");
     fprintf('Goal position: [%.3f, %.3f, %.3f]\n', truth);
     fprintf('Estimation: [%.3f, %.3f, %.3f]\n', estimation);
 end
