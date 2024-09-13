@@ -1,15 +1,14 @@
-clear; close all; clc 
-% Define parameters for the EKF algorithm
-lambda = 0.99;  % Forgetting factor
-P = eye(3);     % Initial covariance matrix (3x3 for x, y, z)
-theta = zeros(3,1);  % Initial estimate of source position [x; y; z]
-Q = 0.01 * eye(3); % Process noise covariance
-R = 0.1; % Measurement noise variance
+clear; close all; clc;
+
+% Parameters for the NLS algorithm
+lambda = 0.97;  % Forgetting factor
+P = eye(6);     % Initial covariance matrix (6x6 for two sources [x1, y1, z1, x2, y2, z2])
+theta = zeros(6,1);  % Initial estimate of both sources' positions [x1, y1, z1, x2, y2, z2]
 
 % Define the range and step size for equally spaced points
 range_min = -100;
 range_max = 100;
-step_size = 10;  % Distance between points in each dimension
+step_size = 9;  % Distance between points in each dimension
 
 % Generate a grid of equally spaced points
 [x_points, y_points, z_points] = meshgrid(range_min:step_size:range_max, ...
@@ -18,142 +17,169 @@ step_size = 10;  % Distance between points in each dimension
 
 % Reshape the points into a list of coordinates (N x 3 matrix)
 points = [x_points(:), y_points(:), z_points(:)];
-N = size(points, 1);  % Update N to reflect the number of generated points
-disp(N)
+N = size(points, 1);  % Number of points
 
-% True source position and orientation (yaw, pitch, roll)
-p_source_true = [10; 20; 30];  % True source position
-yaw_true = pi/6;  % 30 degrees
-pitch_true = pi/4;  % 45 degrees
-roll_true = pi/3;  % 60 degrees
+% True source positions
+p_source1_true = [20; 20; 30];  % True position of source 1
+p_source2_true = [-10; -20; -30];  % True position of source 2
 
-% Create synthetic data for the magnetic field modulus H_modulus
-H_modulus_data = zeros(N, 1);
+% Create synthetic data for the total magnetic field modulus H_tot
+H_tot_data = zeros(N, 1);
 for i = 1:N
-    H_modulus_data(i) = mod_H(points(i, :), p_source_true, yaw_true, pitch_true, roll_true) + 0.1 * randn;
+    H1 = magnetic_field(points(i, :), p_source1_true);  % Magnetic field from source 1
+    H2 = magnetic_field(points(i, :), p_source2_true);  % Magnetic field from source 2
+    H_tot_data(i) = total_magnetic_field(H1, H2);       % Total magnetic field magnitude
 end
 
-% Placeholder for estimated source position over time
-theta_history = zeros(N, 3);
+% Placeholder for estimated positions over time
+theta_history = zeros(N, 6);
 
-% Extended Kalman Filter Algorithm
+% Nonlinear Recursive Least Squares Algorithm for Two Sources
 for k = 1:N
-    % Extract current estimate of source position
-    p_source_est = theta;
+    % Extract current estimate of both sources' positions
+    p_source1_est = theta(1:3);  % Estimated position of source 1
+    p_source2_est = theta(4:6);  % Estimated position of source 2
 
-    % Nonlinear function mod_H for current estimate
-    H_est = mod_H(points(k, :), p_source_est, yaw_true, pitch_true, roll_true);
+    % Compute magnetic fields for the estimated positions
+    H1_est = magnetic_field(points(k, :), p_source1_est); 
+    H2_est = magnetic_field(points(k, :), p_source2_est); 
+    
+    % Nonlinear function total_magnetic_field for current estimate
+    H_est = total_magnetic_field(H1_est, H2_est);
 
     % Measurement innovation (error between measured and estimated output)
-    y_tilde = H_modulus_data(k) - H_est;
+    y_tilde = H_tot_data(k) - H_est;
 
-    % Create the Jacobian matrix (partial derivatives w.r.t source position x, y, z)
+    % Unified approach for partial derivatives (same treatment for both sources)
     delta = 1e-4;  % Step size for finite difference
-    dH_dx = (mod_H(points(k, :), p_source_est + [delta; 0; 0], yaw_true, pitch_true, roll_true) - H_est) / delta;
-    dH_dy = (mod_H(points(k, :), p_source_est + [0; delta; 0], yaw_true, pitch_true, roll_true) - H_est) / delta;
-    dH_dz = (mod_H(points(k, :), p_source_est + [0; 0; delta], yaw_true, pitch_true, roll_true) - H_est) / delta;
-    
-    % Create the Jacobian (measurement model linearization)
-    H_jacobian = [dH_dx, dH_dy, dH_dz];
+    phi_k = zeros(6, 1);  % Unified regression vector
 
-    % Kalman gain
-    S = H_jacobian * P * H_jacobian' + R;  % Measurement covariance
-    K = P * H_jacobian' / S;  % Kalman gain
+    % Compute partial derivatives for both sources with respect to the total field
+    for j = 1:3
+        % Identity matrix for perturbation
+        I = eye(3);
 
-    % Update state estimate (source position)
+        % Perturb the position of source 1 and compute the total field
+        perturbed_p1 = p_source1_est + delta * I(:,j);
+        perturbed_H_tot_1 = total_magnetic_field(magnetic_field(points(k, :), perturbed_p1), magnetic_field(points(k, :), p_source2_est));
+        phi_k(j) = (perturbed_H_tot_1 - H_est) / delta;
+
+        % Perturb the position of source 2 and compute the total field
+        perturbed_p2 = p_source2_est + delta * I(:,j);
+        perturbed_H_tot_2 = total_magnetic_field(magnetic_field(points(k, :), p_source1_est), magnetic_field(points(k, :), perturbed_p2));
+        phi_k(j+3) = (perturbed_H_tot_2 - H_est) / delta;
+    end
+
+    % Compute the gain vector
+    K = P * phi_k / (lambda + phi_k' * P * phi_k);
+
+    % Update parameter estimate (RLS update step)
     theta = theta + K * y_tilde;
 
-    % Update covariance estimate
-    P = (eye(3) - K * H_jacobian) * P;
+    % Update the covariance matrix
+    P = (P - K * phi_k' * P) / lambda;
 
     % Store the estimated parameters at each step
     theta_history(k, :) = theta';
 end
 
-% Plot true and estimated source positions over time
-figure;
-subplot(3,1,1);
-plot(1:N, theta_history(:,1), 'r', 'LineWidth', 1.5); hold on;
-plot(1:N, repmat(p_source_true(1), N, 1), 'k--', 'LineWidth', 2);
-xlabel('Time step');
-ylabel('Estimate of x');
-title('Source Position x Estimation');
-legend('Estimated x', 'True x');
+% Plot true and estimated source positions
+plot_estimates(theta_history, p_source1_true, p_source2_true, N);
 
-subplot(3,1,2);
-plot(1:N, theta_history(:,2), 'b', 'LineWidth', 1.5); hold on;
-plot(1:N, repmat(p_source_true(2), N, 1), 'k--', 'LineWidth', 2);
-xlabel('Time step');
-ylabel('Estimate of y');
-title('Source Position y Estimation');
-legend('Estimated y', 'True y');
+% Compute and print errors
+compute_and_print_errors(theta_history, p_source1_true, p_source2_true, N);
 
-subplot(3,1,3);
-plot(1:N, theta_history(:,3), 'g', 'LineWidth', 1.5); hold on;
-plot(1:N, repmat(p_source_true(3), N, 1), 'k--', 'LineWidth', 2);
-xlabel('Time step');
-ylabel('Estimate of z');
-title('Source Position z Estimation');
-legend('Estimated z', 'True z');
+% -- Function Definitions --
 
-% Compute the final absolute errors
-x_error = mean(abs(theta_history(:,1) - p_source_true(1)));
-y_error = mean(abs(theta_history(:,2) - p_source_true(2)));
-z_error = mean(abs(theta_history(:,3) - p_source_true(3)));
-
-% Compute the relative errors
-x_relative_error = mean(abs((theta_history(:,1) - p_source_true(1)) / p_source_true(1)));
-y_relative_error = mean(abs((theta_history(:,2) - p_source_true(2)) / p_source_true(2)));
-z_relative_error = mean(abs((theta_history(:,3) - p_source_true(3)) / p_source_true(3)));
-
-% Print the final errors and relative errors
-fprintf('Final mean absolute errors:\n');
-fprintf('x error: %.5f\n', x_error);
-fprintf('y error: %.5f\n', y_error);
-fprintf('z error: %.5f\n', z_error);
-
-fprintf('Final mean relative errors:\n');
-fprintf('x relative error: %.5f\n', x_relative_error);
-fprintf('y relative error: %.5f\n', y_relative_error);
-fprintf('z relative error: %.5f\n', z_relative_error);
-
-
-% Function definition for mod_H
-function H_modulus = mod_H(point, p_source, yaw, pitch, roll)
-    % Compute the rotation matrices
-    Rx = [1, 0, 0;
-          0, cos(yaw), -sin(yaw);
-          0, sin(yaw), cos(yaw)];
-
-    Ry = [cos(pitch), 0, sin(pitch);
-          0, 1, 0;
-          -sin(pitch), 0, cos(pitch)];
-
-    Rz = [cos(roll), -sin(roll), 0;
-          sin(roll), cos(roll), 0;
-          0, 0, 1];
-      
-    R = Rz * Ry * Rx;
+% Function to compute magnetic field components from a source at p_source
+function H = magnetic_field(point, p_source)
+    % Relative position
+    r = point' - p_source;
+    x = r(1); y = r(2); z = r(3);
     
-    % Compute p_local
-    p_local = R.' * (point' - p_source);
+    % Compute the magnetic field components (Hx, Hy, Hz)
+    Hx = 3*x.*z;
+    Hy = 3*y.*z;
+    Hz = 2*z.^2 - x.^2 - y.^2;
     
-    % Extract local x, y, z coordinates
-    x = p_local(1);
-    y = p_local(2);
-    z = p_local(3);
-    
-    % Compute r, the norm of the position vector
-    r = sqrt(x^2 + y^2 + z^2);
-    
-    % Ensure that r does not get too close to zero
-    if r < 1e-6
-        r = 1e-6;
-    end
-    
-    % Combine components and simplify the final expression
-    H_squared = (4*x^4 + y^4 + z^4 + 5*x^2*y^2 + 5*x^2*z^2 + 2*y^2*z^2)/ r^5;
-    
-    % Compute the modulus of the magnetic field
-    H_modulus = 1/sqrt(H_squared);
+    % Return as vector
+    H = [Hx; Hy; Hz];
 end
+
+% Function to compute the total magnetic field magnitude
+function H_tot = total_magnetic_field(H1, H2)
+    % Magnitudes of the two fields
+    norm_H1 = norm(H1);
+    norm_H2 = norm(H2);
+    
+    % Angle between the two fields
+    cos_alpha = dot(H1, H2) / (norm_H1 * norm_H2);
+    
+    % Total field magnitude using the given formula
+    H_tot = 1/sqrt(norm_H1^2 + norm_H2^2 + 2 * norm_H1 * norm_H2 * cos_alpha);
+end
+
+% Function to plot estimates vs true values
+function plot_estimates(theta_history, p_source1_true, p_source2_true, N)
+    figure;
+    for i = 1:3
+        subplot(3,2,i*2-1);
+        plot(1:N, theta_history(:,i), 'r', 'LineWidth', 1.5); hold on;
+        plot(1:N, repmat(p_source1_true(i), N, 1), 'k--', 'LineWidth', 2);
+        xlabel('Time step');
+        ylabel(['Estimate of source 1 ', char(119+i)]);
+        legend('Estimated', 'True');
+        title(['Source 1 ', char(119+i)]);
+        
+        subplot(3,2,i*2);
+        plot(1:N, theta_history(:,i+3), 'b', 'LineWidth', 1.5); hold on;
+        plot(1:N, repmat(p_source2_true(i), N, 1), 'k--', 'LineWidth', 2);
+        xlabel('Time step');
+        ylabel(['Estimate of source 2 ', char(119+i)]);
+        legend('Estimated', 'True');
+        title(['Source 2 ', char(119+i)]);
+    end
+end
+
+% Function to compute and print absolute and relative errors
+function compute_and_print_errors(theta_history, p_source1_true, p_source2_true, N)
+    % Compute the final absolute errors for both sources
+    x1_error = mean(abs(theta_history(:,1) - p_source1_true(1)));
+    y1_error = mean(abs(theta_history(:,2) - p_source1_true(2)));
+    z1_error = mean(abs(theta_history(:,3) - p_source1_true(3)));
+    
+    x2_error = mean(abs(theta_history(:,4) - p_source2_true(1)));
+    y2_error = mean(abs(theta_history(:,5) - p_source2_true(2)));
+    z2_error = mean(abs(theta_history(:,6) - p_source2_true(3)));
+    
+    % Compute the relative errors for both sources
+    x1_relative_error = mean(abs((theta_history(:,1) - p_source1_true(1)) / p_source1_true(1)));
+    y1_relative_error = mean(abs((theta_history(:,2) - p_source1_true(2)) / p_source1_true(2)));
+    z1_relative_error = mean(abs((theta_history(:,3) - p_source1_true(3)) / p_source1_true(3)));
+    
+    x2_relative_error = mean(abs((theta_history(:,4) - p_source2_true(1)) / p_source2_true(1)));
+    y2_relative_error = mean(abs((theta_history(:,5) - p_source2_true(2)) / p_source2_true(2)));
+    z2_relative_error = mean(abs((theta_history(:,6) - p_source2_true(3)) / p_source2_true(3)));
+    
+    % Print the final errors and relative errors
+    fprintf('Final mean absolute errors for Source 1:\n');
+    fprintf('x1 error: %.5f\n', x1_error);
+    fprintf('y1 error: %.5f\n', y1_error);
+    fprintf('z1 error: %.5f\n', z1_error);
+    
+    fprintf('Final mean absolute errors for Source 2:\n');
+    fprintf('x2 error: %.5f\n', x2_error);
+    fprintf('y2 error: %.5f\n', y2_error);
+    fprintf('z2 error: %.5f\n', z2_error);
+    
+    fprintf('Final mean relative errors for Source 1:\n');
+    fprintf('x1 relative error: %.5f\n', x1_relative_error);
+    fprintf('y1 relative error: %.5f\n', y1_relative_error);
+    fprintf('z1 relative error: %.5f\n', z1_relative_error);
+    
+    fprintf('Final mean relative errors for Source 2:\n');
+    fprintf('x2 relative error: %.5f\n', x2_relative_error);
+    fprintf('y2 relative error: %.5f\n', y2_relative_error);
+    fprintf('z2 relative error: %.5f\n', z2_relative_error);
+end
+
