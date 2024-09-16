@@ -51,7 +51,7 @@ for k = 1:N
     y_tilde = H_tot_data(k) - H_est;
 
     % Unified approach for partial derivatives (same treatment for both sources)
-    delta = 1e-4;  % Step size for finite difference
+    delta = 1e-6;  % Step size for finite difference
     phi_k = zeros(6, 1);  % Unified regression vector
 
     % Compute partial derivatives for both sources with respect to the total field
@@ -93,17 +93,37 @@ compute_and_print_errors(theta_history, p_source1_true, p_source2_true, N);
 
 % Function to compute magnetic field components from a source at p_source
 function H = magnetic_field(point, p_source)
+    pitch = deg2rad(180);
+    roll= 0; 
+    yaw = 0;
+    Rx = [1, 0, 0;
+            0, cos(yaw), -sin(yaw);
+            0, sin(yaw), cos(yaw)];
+
+    Ry = [cos(pitch), 0, sin(pitch);
+            0, 1, 0;
+            -sin(pitch), 0, cos(pitch)];
+
+    Rz = [cos(roll), -sin(roll), 0;
+            sin(roll), cos(roll), 0;
+            0, 0, 1];
+
+    R = Rz * Ry * Rx;
     % Relative position
-    r = point' - p_source;
+    r = R.' * (point' - p_source);
     x = r(1); y = r(2); z = r(3);
+    modulus = sqrt(x^2 + y^2 + z^2);
+    modulus(modulus == 0) = eps;
+            
     
     % Compute the magnetic field components (Hx, Hy, Hz)
-    Hx = 3*x.*z;
-    Hy = 3*y.*z;
-    Hz = 2*z.^2 - x.^2 - y.^2;
+    Hx = 300*x.*z;
+    Hy = 300*y.*z;
+    Hz = 200*z.^2 - x.^2 - y.^2;
     
     % Return as vector
-    H = [Hx; Hy; Hz];
+    H = [Hx; Hy; Hz]./(modulus^5);
+    % H_squared = (4*x^4 + y^4 + z^4 + 5*x^2*y^2 + 5*x^2*z^2 + 2*y^2*z^2);
 end
 
 % Function to compute the total magnetic field magnitude
@@ -116,7 +136,7 @@ function H_tot = total_magnetic_field(H1, H2)
     cos_alpha = dot(H1, H2) / (norm_H1 * norm_H2);
     
     % Total field magnitude using the given formula
-    H_tot = 1/sqrt(norm_H1^2 + norm_H2^2 + 2 * norm_H1 * norm_H2 * cos_alpha);
+    H_tot = sqrt(norm_H1^2 + norm_H2^2 + 2 * norm_H1 * norm_H2 * cos_alpha);
 end
 
 % Function to plot estimates vs true values

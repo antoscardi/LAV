@@ -12,7 +12,7 @@ do_indipendent = false;
 show_simulation = true;
 global add_noise;
 add_noise = false;
-control_time = 4; % SEMPRE 4  
+control_time = 40; % SEMPRE 4  
 global threshold;
 threshold = 0.020; %--> 2 cm 
 global time_step;
@@ -24,7 +24,7 @@ trajectory_type = "circ"; % Either "circ","patrol","rect"
 global see_text;
 see_text = false;
 global drones_num;
-drones_num = 10;
+drones_num = 12;
 desired_goals = [71, 83 ,0; ...
                  72, -82 ,0];
 global n_sources;
@@ -60,8 +60,7 @@ k = 1;
 
 
 %% Magnetic Field
-magFieldArray2D = cell(n_sources, 1);
-magFieldArray3D = cell(n_sources, 1);
+fields_array = cell(n_sources, 1);
 
 % 3D Case
 global R_matrices
@@ -70,43 +69,35 @@ n_points = 40;
 space3D = Space('3D', 3, n_points);
 pitch = deg2rad(180); 
 for i = 1:n_sources
-    R = space3D.RotationMatrix(i, 0,pitch,0); % Use roll, pitch, and yaw
+    R = space3D.RotationMatrix(i, 0, pitch, 0); % Use roll, pitch, and yaw
     R_matrices{i} = R;
     space3D.plotCoordinateSystem(R, desired_goals(i, :),['Frame n', num2str(i)]);
     % Homogenous Transformation
     p_source = desired_goals(i, :)';
     p_local = R.' * (space3D.points - p_source);
     % Calculate the magnetic field
-    magField3D = MagneticField();
-    magField3D = magField3D.calculateFieldAtPoints(p_local, space3D);
-    %magField3D = magField3D.gradient_tensor();
-    magFieldArray3D{i} = magField3D;
-    magField3D.plotFieldInSpace(space3D, n_sources, i);
+    magnetic_field = MagneticField();
+    magnetic_field = magnetic_field.compute(p_local, space3D);
+    fields_array{i} = magnetic_field;
+    magnetic_field.plot(space3D, n_sources, i, false);
 end
 
 % 2D Case
 space2D = Space('2D', 2, n_points);
 for i = 1:n_sources
-    R = space3D.RotationMatrix(i, 0,pitch,0); % Use roll, pitch, and yaw
-    space2D.plotCoordinateSystem(R, desired_goals(i, 1:2),['Frame n', num2str(i)], true);
-    % Homogenous Transformation
-    p_source = desired_goals(i, :)';
-    p_local = R.' * (space3D.points - p_source);
-    % Calculate the magnetic field
-    magField2D = MagneticField();
-    magField2D = magField2D.calculateFieldAtPoints(p_local, space2D);
-    magFieldArray2D{i} = magField2D;
-    magField2D.plotFieldInSpace(space2D, n_sources, i);
+    space2D.plotCoordinateSystem(R_matrices{i}, desired_goals(i, 1:2),['Frame n', num2str(i)], true);
+    magnetic_field = fields_array{i};
+    magnetic_field.plot(space2D, n_sources, i, true);
 end
 
 % Initialize the GradientofSum object with magnetic field data and space data
-gradient3D = GradientofSum(magFieldArray3D, space3D);
+%gradient3D = GradientofSum(magFieldArray3D, space3D);
 
 % Sum the magnetic field vectors
-gradient3D = gradient3D.sumFieldVectors();
+%gradient3D = gradient3D.sumFieldVectors();
 
 % Compute the gradient matrix G
-gradient3D = gradient3D.computeGradient();
+%gradient3D = gradient3D.computeGradient();
 
 % Check simmetry
 %gradient3D.checkSymmetry();

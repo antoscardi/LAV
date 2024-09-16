@@ -5,8 +5,14 @@ classdef RLS < handle
         est_S
         est_beta
         est_X
+        est_P
         identifier
         estimated_position % COULD BE MORE THAN ONE
+        magnetic_field
+        K
+        true_Y
+        J
+        P
     end
     methods 
         % Constructor
@@ -14,11 +20,13 @@ classdef RLS < handle
             global drones_num
             obj.identifier = identifier;
             if ~do_indipendent
-                obj.est_H = zeros(6 , drones_num);
-                obj.est_Y = zeros(drones_num, 3);
-                obj.est_S = eye(6, 6);
-                obj.est_beta = 0.95;
-                obj.est_X = zeros(6, 1);
+                obj.est_beta = 0.97;
+                obj.est_P = eye(n_sources*3);
+                obj.est_X = zeros(n_sources*3, 1);
+                obj.est_Y = zeros(drones_num, 1);
+                obj.true_Y = zeros(drones_num, 1);
+                obj.J = zeros(drones_num, 3);
+                obj.magnetic_field = MagneticField();
             elseif do_indipendent
                 obj.est_H = zeros(10, drones_num);
                 obj.est_Y = zeros(drones_num, 1);
@@ -30,36 +38,47 @@ classdef RLS < handle
         end
         
         % Estimation
+        % Estimation
         function estimate = rls(obj, drones_list, artva)
             global do_indipendent
             global n_sources
             global drones_num
+            
+            % Perturbation step size for numerical differentiation
+            h = 1e-4;
+            
             if ~do_indipendent
-                %  Y RIMANE DI DIMENSIONE 10 PERCHE ogni drone rimane 
+                % Retrieve signals from drones
                 for i = 1:drones_num           
-                    [phi, signal] = artva.getSignal(drones_list{i}.position, obj.identifier);
-                    % Repeat phi for each signal (assuming 3 signals)
-                    phi_stacked = [phi; phi];
-                    %disp(size(phi_stacked))
-                    obj.est_H(:, i) = phi_stacked;
-                    obj.est_Y(i, :) = signal;
+                    [~, signal] = artva.getSignal(drones_list{i}.position, obj.identifier);
+                    obj.true_Y(i) = signal;
+                    drone_pos = drones_list{i}.position';
+                    p_local = 
+                    disp(obj.est_X)
+                    obj.est_Y(i) = obj.magnetic_field.compute();
+                    
                 end
                 
-                % Compute the combined error for all signals
-                combined_error = zeros(size(obj.est_X));  % Initialize combined error as a 20x1 vector
-                for col = 1:3
-                    error = obj.est_Y(:, col) - obj.est_H.' * obj.est_X;  % Error for each signal
-                    combined_error = combined_error + obj.est_H * error;  % Aggregate the error
+                % Compute the error between the predicted and actual signals
+                e_t = obj.true_Y - obj.est_Y;
+                
+                for j = 1:3*n_sources
+                    theta_perturbed = obj.est_X;
+                    theta_perturbed(j) = theta_perturbed(j) + h;
+                    % Perturbed signal prediction
+                    y_perturbed = signal_model(theta_perturbed, drone_positions);
+                    % Numerical derivative (finite difference)
+                    obj.J(:, j) = (y_perturbed - obj.est_Y) / h;
                 end
-
-                % Perform the RLS update by minimizing the combined error
-                obj.est_X = obj.est_X + pinv(obj.est_S) * combined_error;
-                obj.est_S = obj.est_beta*obj.est_S + obj.est_H * obj.est_H.';
-
-                estimate1 = [obj.est_X(1), obj.est_X(2), obj.est_X(3)];
-                estimate2 = [obj.est_X(4), obj.est_X(5), obj.est_X(6)];
-                estimate = [estimate1(1), estimate2(1);...
-                            estimate1(2), estimate2(2)];
+                
+                % Update the Kalman gain
+                obj.K = obj.est_P * obj.J' / (obj.est_beta * eye(drones_num) + obj.J * obj.est_P * obj.J');
+                % Update the estimated position of the source
+                obj.est_X = obj.est_X + obj.K * e_t;
+                % Update the covariance matrix
+                obj.est_P = (obj.est_P - obj.K * obj.J * obj.est_P) / obj.est_beta;  
+                % Return the updated parameter estimates
+                estimate = obj.est_X;
                 disp(estimate)
 
             elseif do_indipendent
