@@ -26,7 +26,7 @@ see_text = false;
 global drones_num;
 drones_num = 12;
 desired_goals = [71, 83 ,0; ...
-                 72, -82 ,0];
+                 50, 50 ,0;];
 global n_sources;
 n_sources = size(desired_goals,1);
 global video_name;
@@ -67,7 +67,7 @@ global R_matrices
 R_matrices = cell(n_sources, 1);
 n_points = 40;
 space3D = Space('3D', 3, n_points);
-pitch = deg2rad(180); 
+pitch = deg2rad(35); 
 for i = 1:n_sources
     R = space3D.RotationMatrix(i, 0, pitch, 0); % Use roll, pitch, and yaw
     R_matrices{i} = R;
@@ -83,21 +83,21 @@ for i = 1:n_sources
 end
 
 % 2D Case
-space2D = Space('2D', 2, n_points);
+%space2D = Space('2D', 2, n_points);
 for i = 1:n_sources
-    space2D.plotCoordinateSystem(R_matrices{i}, desired_goals(i, 1:2),['Frame n', num2str(i)], true);
+    %space2D.plotCoordinateSystem(R_matrices{i}, desired_goals(i, 1:2),['Frame n', num2str(i)], true);
     magnetic_field = fields_array{i};
-    magnetic_field.plot(space2D, n_sources, i, true);
+    %magnetic_field.plot(space2D, n_sources, i, true);
 end
 
 % Initialize the GradientofSum object with magnetic field data and space data
-%gradient3D = GradientofSum(magFieldArray3D, space3D);
+gradient3D = GradientofSum(fields_array, space3D);
 
 % Sum the magnetic field vectors
-%gradient3D = gradient3D.sumFieldVectors();
+gradient3D = gradient3D.sumFieldVectors();
 
 % Compute the gradient matrix G
-%gradient3D = gradient3D.computeGradient();
+gradient3D = gradient3D.computeGradient();
 
 % Check simmetry
 %gradient3D.checkSymmetry();
@@ -105,41 +105,14 @@ end
 % Plotting each method with proper figure management
 % TA1 has a range of +−atan(sqrt(2)) and TA2 has a range of −π/2 to π/2. They are positive over the source when
 % orientation of the magnetic moment is not horizontal.
-%{
-methods = { 'Tilt1', 'Tilt2', 'Theta','NSS'};
+
+%methods = { 'Tilt1', 'Tilt2', 'Theta','NSS'};
+methods = {'NSS'};
     for i = 1:length(methods)
         figure('Name', [methods{i} ' Edge Detection'], 'NumberTitle', 'off'); % Create a new figure
         values = gradient3D.plotResults(methods{i}); % Plot results for the current method
         drawnow; % Ensure the figure is rendered before proceeding
     end
-%}  
-%error('stop')
-%{
-% Example of precomputed objective function values for all timesteps
-% Assuming objValues contains the fitness values corresponding to the best individual at each timestep
-numTimesteps = size(values);
-objValues = values; 
-
-%% WE NEED TO ESTIMATE THE NUMBER OF SOURCES TO THEN USE THE DE ALGORITHM
-%% THE ARTVA Instrument is sort of able to do so https://avyrescue.com/pdfs/microsearchstrips.pdf
-n = 4; 
-
-% DE parameters
-popSize = 100; % Example: Population size (can be adjusted)
-F = 0.8;
-CR = 0.9;
-maxGen = 50;
-lowerBound = repmat([-100, -100, 0], 1, n); % Example lower bound for each source
-upperBound = repmat([100, 100, 100], 1, n);   % Example upper bound for each source
-dim = 3 * n; % Number of dimensions (x, y, z for each of the n sources)
-
-% Create RealTime DE object with precomputed objective function values
-de = DE(popSize, F, CR, maxGen, lowerBound, upperBound, dim, objValues);
-
-% Optimize using precomputed values
-de.optimizeUsingPrecomputedValues();
-%}
-%}
 
 % Variables specific to Distributed mode
 est_artva_x_array = zeros(1, drones_num);
@@ -161,7 +134,7 @@ while true
         if do_indipendent
             drones_list = replan(drones_list, drones_num, estimates{1}.estimated_position);
         elseif ~do_indipendent
-            drones_list = replan(drones_list, drones_num, estimates_array(:,1));
+            drones_list = replan(drones_list, drones_num, estimates.estimated_position(1:3));
         end
 
         % Move the drones

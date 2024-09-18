@@ -20,8 +20,8 @@ points = [x_points(:), y_points(:), z_points(:)];
 N = size(points, 1);  % Number of points
 
 % True source positions
-p_source1_true = [20; 20; 30];  % True position of source 1
-p_source2_true = [-10; -20; -30];  % True position of source 2
+p_source1_true = [20; 20; 0];  % True position of source 1
+p_source2_true = [-10; -20; 0];  % True position of source 2
 
 % Create synthetic data for the total magnetic field modulus H_tot
 H_tot_data = zeros(N, 1);
@@ -93,37 +93,28 @@ compute_and_print_errors(theta_history, p_source1_true, p_source2_true, N);
 
 % Function to compute magnetic field components from a source at p_source
 function H = magnetic_field(point, p_source)
-    pitch = deg2rad(180);
-    roll= 0; 
-    yaw = 0;
-    Rx = [1, 0, 0;
-            0, cos(yaw), -sin(yaw);
-            0, sin(yaw), cos(yaw)];
+    % Rotation matrices assuming fixed pitch, roll, and yaw
+    pitch = deg2rad(100); roll = deg2rad(25); yaw = deg2rad(90);
 
-    Ry = [cos(pitch), 0, sin(pitch);
-            0, 1, 0;
-            -sin(pitch), 0, cos(pitch)];
-
-    Rz = [cos(roll), -sin(roll), 0;
-            sin(roll), cos(roll), 0;
-            0, 0, 1];
+    Rx = [1, 0, 0; 0, cos(yaw), -sin(yaw); 0, sin(yaw), cos(yaw)];
+    Ry = [cos(pitch), 0, sin(pitch); 0, 1, 0; -sin(pitch), 0, cos(pitch)];
+    Rz = [cos(roll), -sin(roll), 0; sin(roll), cos(roll), 0; 0, 0, 1];
 
     R = Rz * Ry * Rx;
+    
     % Relative position
     r = R.' * (point' - p_source);
     x = r(1); y = r(2); z = r(3);
     modulus = sqrt(x^2 + y^2 + z^2);
-    modulus(modulus == 0) = eps;
-            
+    modulus(modulus == 0) = eps; % Avoid division by zero
     
-    % Compute the magnetic field components (Hx, Hy, Hz)
-    Hx = 300*x.*z;
-    Hy = 300*y.*z;
-    Hz = 200*z.^2 - x.^2 - y.^2;
+    % Compute the magnetic field components
+    Hx = 300*x*z;
+    Hy = 300*y*z;
+    Hz = 200*z^2 - x^2 - y^2;
     
-    % Return as vector
-    H = [Hx; Hy; Hz]./(modulus^5);
-    % H_squared = (4*x^4 + y^4 + z^4 + 5*x^2*y^2 + 5*x^2*z^2 + 2*y^2*z^2);
+    % Return the magnetic field vector
+    H = [Hx; Hy; Hz] / (modulus^5);
 end
 
 % Function to compute the total magnetic field magnitude
@@ -172,34 +163,7 @@ function compute_and_print_errors(theta_history, p_source1_true, p_source2_true,
     y2_error = mean(abs(theta_history(:,5) - p_source2_true(2)));
     z2_error = mean(abs(theta_history(:,6) - p_source2_true(3)));
     
-    % Compute the relative errors for both sources
-    x1_relative_error = mean(abs((theta_history(:,1) - p_source1_true(1)) / p_source1_true(1)));
-    y1_relative_error = mean(abs((theta_history(:,2) - p_source1_true(2)) / p_source1_true(2)));
-    z1_relative_error = mean(abs((theta_history(:,3) - p_source1_true(3)) / p_source1_true(3)));
-    
-    x2_relative_error = mean(abs((theta_history(:,4) - p_source2_true(1)) / p_source2_true(1)));
-    y2_relative_error = mean(abs((theta_history(:,5) - p_source2_true(2)) / p_source2_true(2)));
-    z2_relative_error = mean(abs((theta_history(:,6) - p_source2_true(3)) / p_source2_true(3)));
-    
-    % Print the final errors and relative errors
-    fprintf('Final mean absolute errors for Source 1:\n');
-    fprintf('x1 error: %.5f\n', x1_error);
-    fprintf('y1 error: %.5f\n', y1_error);
-    fprintf('z1 error: %.5f\n', z1_error);
-    
-    fprintf('Final mean absolute errors for Source 2:\n');
-    fprintf('x2 error: %.5f\n', x2_error);
-    fprintf('y2 error: %.5f\n', y2_error);
-    fprintf('z2 error: %.5f\n', z2_error);
-    
-    fprintf('Final mean relative errors for Source 1:\n');
-    fprintf('x1 relative error: %.5f\n', x1_relative_error);
-    fprintf('y1 relative error: %.5f\n', y1_relative_error);
-    fprintf('z1 relative error: %.5f\n', z1_relative_error);
-    
-    fprintf('Final mean relative errors for Source 2:\n');
-    fprintf('x2 relative error: %.5f\n', x2_relative_error);
-    fprintf('y2 relative error: %.5f\n', y2_relative_error);
-    fprintf('z2 relative error: %.5f\n', z2_relative_error);
+    % Print the final errors
+    fprintf('Final mean absolute errors for Source 1: %.5f, %.5f, %.5f\n', x1_error, y1_error, z1_error);
+    fprintf('Final mean absolute errors for Source 2: %.5f, %.5f, %.5f\n', x2_error, y2_error, z2_error);
 end
-

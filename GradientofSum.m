@@ -50,7 +50,7 @@ classdef GradientofSum
             
             % Loop over each MagneticField object and sum their vectors
             for k = 1:length(obj.magnetic_fields)
-                obj.field_vectors_sum = obj.field_vectors_sum + obj.magnetic_fields{k}.field_vectors;
+                obj.field_vectors_sum = obj.field_vectors_sum + obj.magnetic_fields{k}.vector_field;
             end
 
             %obj.field_vectors_sum = obj.field_vectors_sum * 10^6;

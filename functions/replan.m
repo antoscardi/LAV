@@ -40,6 +40,7 @@ function new_drones_list = replan(drones_list, drones_num, est_artva_pos)
             for i = 1:drones_num
                 current_drone = drones_list{i};
                 if(~distributed_estimation_mode)
+                    disp(est_artva_pos)
                     current_drone = current_drone.setGoal(est_artva_pos);
                 else
                     new_objective = est_artva_pos(:,i)';

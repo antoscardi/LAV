@@ -39,7 +39,7 @@ classdef MagneticField
             % Magnetic field calculation 
             obj.prefactor = (obj.I * obj.b^2 * obj.increasing_factor) ./ (4 * r.^5);
             Hx = obj.prefactor .* (3*x.*z);
-            Hy = obj.prefactor .* (3*y.*z);
+            Hy = obj.prefactor .* (3*y.*x);
             Hz = obj.prefactor .* (2*z.^2 - x.^2 - y.^2);
             obj.vector_field = [Hx;Hy;Hz];
         end

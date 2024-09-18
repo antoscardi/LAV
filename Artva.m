@@ -75,15 +75,17 @@ classdef Artva
                 p1 = R_matrices{1}.' * (p - p1);
                 p2 = R_matrices{2}.' * (p - p2);
                 % First Magnetic Field
-                obj.magnetic_field = obj.magnetic_field.compute(p1);
-                H_1 = obj.magnetic_field.vector_field;
+                %obj.magnetic_field = obj.magnetic_field.compute(p1);
+                %H_1 = obj.magnetic_field.vector_field;
                 % Second Magnetic Field
-                obj.magnetic_field = obj.magnetic_field.compute(p2);
-                H_2 = obj.magnetic_field.vector_field;
+                %obj.magnetic_field = obj.magnetic_field.compute(p2);
+                %H_2 = obj.magnetic_field.vector_field;
                 % Total Magnetic Field
-                obj.total_magnetic_field = obj.total_magnetic_field.compute(H_1, H_2);
-                H_tot = obj.total_magnetic_field.H_tot;
-                signal = H_tot;
+                %obj.total_magnetic_field = obj.total_magnetic_field.compute(H_1, H_2);
+                %H_tot = obj.total_magnetic_field.H_tot;
+                NSS1 = obj.NormalizedSourceStrength(p1);
+                NSS2 = obj.NormalizedSourceStrength(p2);                
+                signal = NSS1 + NSS2;
                 phi = NaN;
             end
 
@@ -99,5 +101,21 @@ classdef Artva
             noise = -amplitudeNoise + 2 .* amplitudeNoise .* rand(size(signal));
             signalWithNoise = signal + noise;
         end
+
+        function NSS = NormalizedSourceStrength(obj, p)
+            % Calculate distance r between drone position (x, y) and the source
+            x= p(1);
+            y= p(2);
+            r = sqrt(x^2 + y^2);
+            % Prevent r from becoming too small (avoid division by near-zero)
+            r_threshold = 1e-6;
+            if r < r_threshold
+                r = r_threshold;
+            end
+            
+            % Calculate NSS (normalized source strength)
+            NSS = 1/ r^4;
+        end
+        
     end
 end
