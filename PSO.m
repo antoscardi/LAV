@@ -1,31 +1,46 @@
 clear; close all; clc;
 
+%% Set seed for reproducibility
+seed = 42;
+rng(seed)
+
 % Parameters
-N_drones = 2;           % Number of drones (particles)
-N_iterations = 500;      % Number of iterations
+N_drones = 14;           % Increased number of drones for better exploration
+N_iterations = 1000;      % Number of iterations
 bounds = [-100, 100];    % Search space boundaries
-max_velocity = 1.5;      % Maximum allowable velocity (m/s)
+max_velocity = 5;        % Maximum allowable velocity (m/s)
 
 % Source positions (the targets the drones need to find)
-p_sources = [20, 50; ...
-             -50, 80];  
+% Source positions (the targets the drones need to find)
+p_sources = [20, 50;     % Source 1
+             -50, 80;    % Source 2
+             60, -30;    % Source 3
+             10, 90];    % Source 4
+  
 
 % PSO Parameters
-inertia = 0.9;           % Inertia weight
-cognitive = 0.8;         % Cognitive (particle's own best) factor
-social = 1;            % Social (swarm best) factor
+inertia = 1.2;           % Inertia weight
+cognitive = 2;           % Cognitive (particle's own best) factor
+social = 2;              % Social (swarm best) factor
 velocity_scale = 0.01;   % Scaling factor for velocity
+repulsion_factor = 500; % Repulsion factor between drones
 
-% Initialize drone positions at the bottom-left corner of the square
+% Number of groups (e.g., 2 groups for 2 sources)
+N_groups = 4;
+
+% Initialize drone positions at random locations within bounds
 positions = bounds(1) * ones(N_drones, 2);  % Initialize all drones at [-100, -100]
 velocities = velocity_scale * randn(N_drones, 2);  % Small random velocities
 
 p_best = positions;       % Each drone's best known position
 p_best_values = arrayfun(@(i) combinedNSS(positions(i, :), p_sources), 1:N_drones);
 
-% Find the global best position
-[~, g_best_idx] = max(p_best_values);
-g_best = p_best(g_best_idx, :);
+% Initialize group bests (one for each group)
+g_best_local = zeros(N_groups, 2); 
+g_best_local_values = -Inf * ones(N_groups, 1);  % Initialize to a very low value
+
+% Assign drones to groups based on initial random positions
+group_indices = kmeans(positions, N_groups);  % Cluster drones into N_groups
 
 % Visualization setup
 figure;
@@ -36,17 +51,32 @@ xlabel('x'); ylabel('y');
 title('Drone Positions and Movement');
 drawnow;
 
-% PSO Loop with exploration-exploitation adaptation
+% PSO Loop with group-based exploration
 for iter = 1:N_iterations
     % Adapt the inertia and random scaling factor
     inertia = 0.9 - (0.8 * (iter / N_iterations));  % Linearly decrease inertia from 0.9 to 0.1
-    random_scale = 0.1 + (0.9 * (1 - (iter / N_iterations)));  % Reduce randomness as iteration progresses
+    random_scale = 300 * (1 - (iter / N_iterations));  % Starts at 1000% and reduces to 0
+    %repulsion_factor = 500 * (1 - (iter / N_iterations));
     
     for i = 1:N_drones
-        % Update velocity
+        % Update velocity with personal best and group best
+        group_idx = group_indices(i);  % Get the group index for the current drone
         velocities(i, :) = inertia * velocities(i, :) + ...
                            cognitive * rand() * (p_best(i, :) - positions(i, :)) + ...
-                           social * rand() * (g_best - positions(i, :));
+                           social * rand() * (g_best_local(group_idx, :) - positions(i, :));
+
+        % Add repulsion from other drones
+        for j = 1:N_drones
+            if i ~= j
+                distance = norm(positions(i, :) - positions(j, :));
+                if distance > 0
+                    % Repulsion force decreases with distance
+                    repulsion = repulsion_factor / distance^2;
+                    velocities(i, :) = velocities(i, :) + ...
+                                    repulsion * (positions(i, :) - positions(j, :));
+                end
+            end
+        end
                        
         % Add noise with decreasing randomness
         velocities(i, :) = velocities(i, :) + random_scale * randn(1, 2);  % Random noise
@@ -71,11 +101,16 @@ for iter = 1:N_iterations
             p_best(i, :) = positions(i, :);
             p_best_values(i) = value;
         end
+        
+        % Update the group best for each group
+        if value > g_best_local_values(group_idx)
+            g_best_local(group_idx, :) = positions(i, :);
+            g_best_local_values(group_idx) = value;
+        end
     end
     
-    % Update global best if any drone's personal best is better
-    [~, g_best_idx] = max(p_best_values);
-    g_best = p_best(g_best_idx, :);
+    % Reassign drones to groups based on proximity to group bests
+    group_indices = kmeans(positions, N_groups);
     
     % Update the plot
     set(drone_plot, 'XData', positions(:,1), 'YData', positions(:,2));
@@ -84,9 +119,8 @@ for iter = 1:N_iterations
     drawnow;
 end
 
-
 % Final best positions
-scatter(g_best(1), g_best(2), 100, 'g', 'filled');
+scatter(g_best_local(:,1), g_best_local(:,2), 100, 'g', 'filled');
 legend('Sources', 'Drone Positions', 'Best Estimate');
 title('Final Drone Position and Global Best');
 hold off;
@@ -105,10 +139,9 @@ function NSS_value = NSS(position, p_source)
     r = sqrt(sum((position - p_source).^2));
     
     % Prevent division by zero by setting a minimum distance
-    r = max(r, 1e-11);
+    r = max(r, 1e-5);
     
     % Calculate normalized source strength (NSS) based on distance
     C = 1;  % A constant scaling factor
     NSS_value = C / r^4;  % Signal strength diminishes rapidly with distance
 end
-
