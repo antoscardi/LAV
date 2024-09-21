@@ -20,48 +20,52 @@
 
 classdef Particle
     properties
-        position         % Current position of the particle (x, y)
-        velocity         % Current velocity of the particle (x, y)
-        p_best           % Best known position of the particle
-        nss_best_value   % Best known NSS value at the personal best position
-        nss_value        % Current NSS value at the particle's position
-        bounds           % Boundaries of the search space
-        group_idx
-        identifier
+        position            % Current position of the particle (x, y)
+        velocity            % Current velocity of the particle (x, y)
+        p_best              % Best known position of the particle
+        nss_best_value      % Best known NSS value at the personal best position
+        nss_value           % Current NSS value at the particle's position
+        bounds              % Boundaries of the search space
+        group_idx           % Group index of the particle, indicating which group (source) the particle is assigned to
+        identifier          % Unique identifier for the particle, used to distinguish it from other particles
+        velocity_randomness % Factor controlling the amount of randomness added to the particle's velocity updates
+        max_velocity        % Maximum allowed speed for the particle to prevent overly large velocity updates
+
     end
     
     methods
         % Constructor to initialize particle with position, velocity, and bounds
-        function obj = Particle(velocity_scale, bounds, group_idx, identifier)
-            global seed
-            rng(seed)
-            %obj.randomness = 1 - (iter / n_iterations)^2;  % Decrease randomness over time
+        function obj = Particle(velocity_randomness, max_velocity, bounds, group_idx, identifier)
+            obj.max_velocity = max_velocity;
             obj.position =  [bounds(1), bounds(1)];   % Initialize all drones at the lower bound [-100, -100].;
-            obj.velocity = velocity_scale * rand(1,2);
+            obj.velocity = velocity_randomness * rand(1,2);
+            if norm(obj.velocity) > obj.max_velocity
+                obj.velocity = (obj.velocity / norm(obj.velocity)) * obj.max_velocity;
+            end  
             obj.p_best = obj.position;  % Each drone's best-known position starts at its initial position.
             obj.nss_best_value = -Inf;  % Initial best value set to a very low number
             obj.bounds = bounds;
             obj.group_idx = group_idx;
             obj.identifier = identifier;
-            fprintf('Particle initialized at position: [%1d, %1d] with group index: %d\n', obj.position(1), obj.position(2), obj.group_idx);
+            obj.velocity_randomness = velocity_randomness;
+            fprintf('Drone initialized at pos: [%1d, %1d] and vel:[%.1f, %.1f]  with group index: %d\n', obj.position(1), obj.position(2), obj.velocity(1), obj.velocity(2),obj.group_idx);
         end
 
         % Update the particle's velocity based on personal and global best
-        function obj = update_velocity(obj, g_best_local, inertia, cognitive, social, max_velocity)
-            global seed
-            rng(seed);
+        function obj = update_velocity(obj, g_best_local, inertia, cognitive, social)
             % Personal and social components
             obj.velocity = inertia * obj.velocity + ...
                            cognitive * rand() * (obj.p_best - obj.position) + ...
                            social * rand() * (g_best_local - obj.position);
 
-            % Add random noise to velocity
-            %obj.velocity = obj.velocity + obj.randomness* rand(1, 2);
+            % Add random noise to velocity between [-1, 1]
+            obj.velocity = obj.velocity + obj.velocity_randomness * (2 * rand(1, 2) - 1);
+
             % Cap velocity to max allowable speed
-            if norm(obj.velocity) > max_velocity
-                obj.velocity = (obj.velocity / norm(obj.velocity)) * max_velocity;
+            if norm(obj.velocity) > obj.max_velocity
+                obj.velocity = (obj.velocity / norm(obj.velocity)) * obj.max_velocity;
             end     
-            %fprintf('Particle %d velocity updated to: [%.1d, %.1d]\n',obj.identifier, obj.velocity(1), obj.velocity(2));  % Debug print
+            %fprintf('Particle %d velocity updated to: [%.1f, %.1f]\n',obj.identifier, obj.velocity(1), obj.velocity(2));  % Debug print
         end
         
         % Update particle's position based on velocity and apply boundary conditions

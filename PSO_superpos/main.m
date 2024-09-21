@@ -4,7 +4,6 @@ clear; close all; clc;
 % This algorithm needs to ensure finding the number of sources if we have enough drones for each source          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set seed for reproducibility
-global seed;
 seed = 42;
 rng(seed)
 
@@ -14,7 +13,7 @@ rng(seed)
 n_drones = 4;           % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 200;     % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 500;     % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-100, 100];    % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
@@ -32,25 +31,26 @@ p_sources = [20, 50;     % Coordinates of Source 1 (x, y).
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
-inertia_weight = 1.2;    % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
-                         % inertia promotes exploration, while lower values promote faster convergence.
+inertia_initial = 1.2;     % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
+                           % inertia promotes exploration, while lower values promote faster convergence.
 
-cognitive_factor = 2;    % Cognitive factor (personal learning coefficient), governs how much a drone is attracted 
-                         % to its own best-known position. Higher values make drones focus on their personal best.
+cognitive_factor = 2;      % Cognitive factor (personal learning coefficient), governs how much a drone is attracted 
+                           % to its own best-known position. Higher values make drones focus on their personal best.
 
-social_factor = 2;       % Social factor (global learning coefficient), controls how much a drone is influenced by 
-                         % the swarm's global best-known position. Higher values increase the influence of the swarm.
+social_factor = 2;         % Social factor (global learning coefficient), controls how much a drone is influenced by 
+                           % the swarm's global best-known position. Higher values increase the influence of the swarm.
 
-velocity_scale = 0.1;   % Scaling factor for velocity to control the effect of inertia, cognitive, and social 
-                         % factors on the drone's velocity. Keeps velocity updates reasonable in magnitude.
+repulsiion_initial = 1;    % Repulsion factor between drones to avoid clustering. Helps drones spread out to explore 
+                           % different regions by adding a repulsion force between them.
 
-repulsion_factor = 500;  % Repulsion factor between drones to avoid clustering. Helps drones spread out to explore 
-                         % different regions by adding a repulsion force between them.
+velocity_randomness = 0.9; % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
+                           % A higher value increases exploration by adding more variation to the drone's movement,while
+                           % a lower value reduces randomness, promoting more predictable movement towards the target.
 
 % Grouping parameters
-n_groups = n_sources;    % Number of groups (or clusters) for the drones. Each group is associated with one of the 
-                         % sources. For example, if there are 4 sources, drones can be divided into 4 groups to 
-                         % focus on different sources.
+n_groups = n_sources;      % Number of groups (or clusters) for the drones. Each group is associated with one of the 
+                           % sources. For example, if there are 4 sources, drones can be divided into 4 groups to 
+                           % focus on different sources.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
@@ -65,8 +65,6 @@ initial_positions = zeros(n_drones, 2);
 % The assignment is random but guarantees that if n_drones is equal to n_groups, each source gets one drone. 
 % If n_drones > n_groups, additional drones are randomly assigned to the existing sources. 
 % The resulting group indices are shuffled to randomize the order.
-
-% Step 1: Start by assigning drones to sources
 if n_drones >= n_groups
     % If there are enough or more drones than sources
     group_indices = (1:n_groups)';  % Assign each source one drone
@@ -80,9 +78,6 @@ else
     group_indices = (1:n_drones)'; 
 end
 
-% Step 2: Shuffle the assignments to make the order random
-group_indices = group_indices(randperm(n_drones));
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialize ARTVA
 artva = ARTVAs();
@@ -92,7 +87,7 @@ particles = cell(n_drones, 1);
 
 % Initialize Drones
 for i = 1:n_drones
-    particles{i} = Particle(velocity_scale, bounds, group_indices(i), i);  % Initialize particle
+    particles{i} = Particle(velocity_randomness, max_velocity, bounds, group_indices(i), i);  % Initialize particle
     initial_positions(i, :) = particles{i}.position;  % Store the 2D position (x, y) of each particle
 end
 
@@ -103,8 +98,8 @@ plotter = Plotter(p_sources, bounds, n_drones, group_indices, n_groups, initial_
 %                                        MAIN PARTICLE SWARM OPTIMIZATION LOOP                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for iter = 1:n_iterations
-    inertia = inertia_weight - (iter / n_iterations)^2;  % Much slower decrease over time
-    repulsion_factor = repulsion_factor * (1 - (iter / n_iterations)^2);  % Decrease repulsion over time
+    inertia = inertia_initial - (iter / n_iterations)^4;
+    %repulsion_factor = repulsiion_initial * (1 - (iter / n_iterations)^2);  % Decrease repulsion over time
     
     for i = 1:n_drones
         particle = particles{i};
@@ -123,7 +118,7 @@ for iter = 1:n_iterations
 
         % Update velocity with personal and group best
         particle = particle.update_velocity(group_best_positions(group_idx, :), inertia, ...
-            cognitive_factor, social_factor, max_velocity);       
+            cognitive_factor, social_factor);
 
         % Update particle position and apply boundary constraints
         particle = particle.update_position();
@@ -140,6 +135,7 @@ for iter = 1:n_iterations
 end
 
 % Final plot with group best positions
+
 plotter.plot_best(group_best_positions, group_indices);
 
 
