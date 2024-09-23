@@ -30,14 +30,16 @@ classdef Particle
         identifier          % Unique identifier for the particle, used to distinguish it from other particles
         velocity_randomness % Factor controlling the amount of randomness added to the particle's velocity updates
         max_velocity        % Maximum allowed speed for the particle to prevent overly large velocity updates
+        goal                % First goal they need to reach
 
     end
     
     methods
         % Constructor to initialize particle with position, velocity, and bounds
-        function obj = Particle(velocity_randomness, max_velocity, bounds, group_idx, identifier)
+        function obj = Particle(goal, velocity_randomness, max_velocity, bounds, group_idx, identifier)
             obj.max_velocity = max_velocity;
-            obj.position =  [bounds(1), bounds(1)];   % Initialize all drones at the lower bound [-100, -100].;
+            %obj.position =  [bounds(1), bounds(1)];   % Initialize all drones at the lower bound [-100, -100].;
+            obj.position = [0, 0];                     % Initialize all drones at the center
             obj.velocity = velocity_randomness * rand(1,2);
             if norm(obj.velocity) > obj.max_velocity
                 obj.velocity = (obj.velocity / norm(obj.velocity)) * obj.max_velocity;
@@ -48,6 +50,7 @@ classdef Particle
             obj.group_idx = group_idx;
             obj.identifier = identifier;
             obj.velocity_randomness = velocity_randomness;
+            obj.goal = goal;
             fprintf('Drone initialized at pos: [%1d, %1d] and vel:[%.1f, %.1f]  with group index: %d\n', obj.position(1), obj.position(2), obj.velocity(1), obj.velocity(2),obj.group_idx);
         end
 
