@@ -54,6 +54,8 @@ n_groups = n_sources;        % Number of groups (or clusters) for the drones. Ea
                              % sources. For example, if there are 4 sources, drones can be divided into 4 groups to 
                              % focus on different sources.
 
+communication_radius = 5;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -112,8 +114,8 @@ for i = 1:n_drones
         % Fourth quadrant (x negative, y negative)
         goal = [-max_distance / m, -max_distance];
     end
-    particles{i} = Particle(goal, velocity_randomness, max_velocity, bounds, group_indices(i), i);  % Initialize particle
-    initial_positions(i, :) = particles{i}.position; 
+    particles{i} = Particle(goal, velocity_randomness, max_velocity, bounds, group_indices(i), i, n_drones);  % Initialize particle
+    initial_positions(i, :) = particles{i}.position;
 end
 
 % Initialize the Plotter
@@ -136,10 +138,6 @@ for iter = 1:ceil(max_distance / max_velocity)
         % Update position (no randomness, no inertia, just move straight)
         particle = particle.update_position();  % Update based on velocity
         particles{i} = particle;
-        
-        % Debug: Display current position and goal
-        fprintf('Iteration %d, Drone %d: Position = [%.2f, %.2f], Goal = [%.2f, %.2f]\n', ...
-                iter, i, particle.position(1), particle.position(2), particle.goal(1), particle.goal(2));
     end
     % Update plot with current drone positions
     positions = zeros(n_drones, 2);  % Initialize a matrix to store positions
@@ -154,11 +152,6 @@ end
 %                                        MAIN PARTICLE SWARM OPTIMIZATION LOOP                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialize exclusion zones as an empty matrix to store the positions of discovered sources
-exclusion_zones = [];  % Will store positions of found sources
-
-% Set parameters for exclusion zone behavior
-exclusion_radius = 5;       % Distance around the source where the exclusion zone starts
-repulsion_strength = 100;     % Strength of repulsive force
 for iter = 1:n_iterations
     %inertia = inertia_initial - (iter / n_iterations)^4;
     inertia = inertia_initial;
@@ -167,22 +160,21 @@ for iter = 1:n_iterations
     for i = 1:n_drones
         particle = particles{i};
         group_idx = particle.group_idx;
-        %fprintf('Iteration: %d, Particle: %d, Group: %d, Position: [%.1f, %.1f]\n', ...
-        %    iter, particle.identifier, group_idx, particle.position(1), particle.position(2));  % Debug print       
-        
-        % Evaluate NSS value at the new position
-        particle = particle.evaluate_nss(@artva.superpositionNSS, p_sources);
 
-        % Update group best if necessary
-        if particle.nss_value > group_best_values(group_idx)
-            group_best_positions(group_idx, :) = particle.position;
-            group_best_values(group_idx) = particle.nss_value;
-        end
+        % Only update group best if the particle is not in an exclusion zone
+        if isempty(particle.shared_exclusion_zones) || ~particle.is_in_exclusion_zone
+            % Evaluate NSS value at the position
+            particle = particle.evaluate_nss(@artva.superpositionNSS, p_sources);
 
-        % Check if NSS value is greater than 500 (i.e., the drone has found a source)
-        if particle.nss_value > 500
-            % Add this source position to the exclusion zone
-            exclusion_zones = [exclusion_zones; group_best_positions(group_idx, :)];
+            % Update group best if necessary
+            if particle.nss_value > group_best_values(group_idx)
+                group_best_positions(group_idx, :) = particle.position;
+                group_best_values(group_idx) = particle.nss_value;
+            end
+        else
+            % If a particle moves out of an exclusion zone, reset the group best
+            fprintf('Drone %d moved out of an exclusion zone. Resetting group best for group %d.\n', particle.identifier, group_idx);
+            group_best_values(group_idx) = -Inf;  % Reset the group best value
         end
 
         % Update velocity with personal and group best
@@ -191,6 +183,34 @@ for iter = 1:n_iterations
 
         % Update particle position and apply boundary constraints
         particle = particle.update_position();
+
+        % Loop through other drones to check communication
+        for j = i+1:n_drones  % Start at i+1 to avoid double-checking
+            other_particle = particles{j};
+            % Check if particle and other_particle are within communication radius
+            if particle.can_I_communicate_with(other_particle, communication_radius)
+                %fprintf('Iteration %d: Drone %d and Drone %d are within the communication radius of %d units\n', ...
+                    %iter, particle.identifier, other_particle.identifier, communication_radius);
+                % Check if sharing has already happened
+                if ~particle.has_shared_matrix(j) && (particle.victim_found_flag || other_particle.victim_found_flag)
+                    % First case: particle has found a victim and shares its exclusion zone
+                    if particle.victim_found_flag
+                        particle = particle.share_exclusion_zones(other_particle);  % Share exclusion zones from particle to other_particle
+                    end
+                    % Second case: other_particle has found a victim and shares its exclusion zone
+                    if other_particle.victim_found_flag
+                        other_particle = other_particle.share_exclusion_zones(particle);  % Share exclusion zones from other_particle to particle
+                    end
+                    % Mark that sharing has been done for both drones
+                    particle.has_shared_matrix(j) = true;
+                    other_particle.has_shared_matrix(i) = true;
+                end
+            end
+        end
+
+        % After sharing, check if the drone is in an exclusion zone and move away if necessary
+        particle = particle.check_if_in_exclusion_zone();
+
         % Reassign the particles after the update
         particles{i} = particle;
     end
@@ -204,10 +224,9 @@ for iter = 1:n_iterations
 end
 
 % Final plot with group best positions
-
 plotter.plot_best(group_best_positions, group_indices);
 
-
+%{
 function intra_repulsion_force = calculate_intra_cluster_repulsion(positions, group_indices, repulsion_factor)
     n_drones = size(positions, 1);  % Number of drones
     intra_repulsion_force = zeros(n_drones, 2);  % Initialize the intra-cluster repulsion force for each drone
@@ -227,3 +246,4 @@ function intra_repulsion_force = calculate_intra_cluster_repulsion(positions, gr
         end
     end
 end
+%}

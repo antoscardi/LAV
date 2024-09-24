@@ -70,7 +70,7 @@ classdef Plotter < handle
             title(obj.ax, titleString);
             
             % Update the plot
-            pause(0.01);
+            pause(0.02);
             drawnow;
         end
         
