@@ -1,4 +1,5 @@
 clear; close all; clc;
+addpath("functions");
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                         PARTICLE SWARM OPTIMIZATION                                            %
 % This algorithm needs to ensure finding the number of sources if we have enough drones for each source          %
@@ -10,12 +11,12 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 4;           % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 8;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
-bounds = [-100, 100];    % Search space boundaries for drone positions. This defines the limits for the x and y 
+bounds = [-100, 100];      % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
                          % from (-100, -100) to (100, 100).
 
@@ -24,9 +25,9 @@ max_velocity = 1.5;      % Maximum allowable velocity for each drone (m/s). Limi
 
 % Source positions (the targets the drones need to find)
 p_sources = [20, 50;     % Coordinates of Source 1 (x, y).
-             -50, 80;    % Coordinates of Source 2 (x, y).
+             -50, 70;    % Coordinates of Source 2 (x, y).
              60, -30;    % Coordinates of Source 3 (x, y).
-             10, 90];    % Coordinates of Source 4 (x, y). These are the fixed positions the drones are searching 
+             -10, 30];   % Coordinates of Source 4 (x, y). These are the fixed positions the drones are searching 
                          % for in the search space.
 n_sources = size(p_sources, 1);
 
@@ -54,7 +55,7 @@ n_groups = n_sources;        % Number of groups (or clusters) for the drones. Ea
                              % sources. For example, if there are 4 sources, drones can be divided into 4 groups to 
                              % focus on different sources.
 
-communication_radius = 5;
+communication_radius = 5;    % Distance between two drones that enables communication with each other.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
@@ -62,70 +63,26 @@ communication_radius = 5;
 % Initialize group bests (one for each group)
 group_best_positions = zeros(n_groups, 2);     % Initialize group best positions as zero.
 group_best_values = -Inf * ones(n_groups, 1);  % Initialize group best values to a very low value (-Inf).
-initial_positions = zeros(n_drones, 2);
+positions = zeros(n_drones, 2);                % Initialize a matrix to store changing positions at each iteration.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The following lines ensures that each source (n_groups) gets at least one drone assigned from a pool of n_drones. 
-% The assignment is random but guarantees that if n_drones is equal to n_groups, each source gets one drone. 
-% If n_drones > n_groups, additional drones are randomly assigned to the existing sources. 
-% The resulting group indices are shuffled to randomize the order.
-if n_drones >= n_groups
-    % If there are enough or more drones than sources
-    group_indices = (1:n_groups)';  % Assign each source one drone
-    if n_drones > n_groups
-        % Randomly assign remaining drones if there are more drones than sources
-        additional_assignments = randi(n_groups, n_drones - n_groups, 1);  
-        group_indices = [group_indices; additional_assignments];  % Concatenate as column vectors
-    end
-else
-    % If there are fewer drones than sources, create indices that go from 1 to n_drones 
-    group_indices = (1:n_drones)'; 
-end
+% Initialize drones in different groups.
+group_indices = sort_drones_in_groups(n_drones, n_groups);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialize ARTVA
 artva = ARTVAs();
 
 % Initialize the particles array using a cell array
-particles = cell(n_drones, 1); 
-
-% Initialize Drones and their initial goal
-angles = zeros(1, n_drones);    % Array to store the angles of each drone
-omega = 360 / n_drones;         % Divide 360 degrees by the number of drones
-max_distance = 50;
-
-for i = 1:n_drones
-    % Calculate the angle for each drone in degrees
-    omega_i = omega * (i - 1);
-    angles(i) = omega_i;
-    % Calculate the slope for the drone's path based on the angle
-    m = tan(deg2rad(omega_i));
-    % Assign a goal for each drone based on the angle
-    if (omega_i > 315 && omega_i <= 360) || omega_i <= 45
-        % First and fourth quadrant (x positive, y positive/negative)
-        goal = [max_distance, m * max_distance];
-    elseif omega_i > 45 && omega_i <= 135
-        % Second quadrant (x positive, y positive)
-        goal = [max_distance / m, max_distance];
-    elseif omega_i > 135 && omega_i <= 225
-        % Third quadrant (x negative, y negative)
-        goal = [-max_distance, m * -max_distance];
-    elseif omega_i > 225 && omega_i <= 315
-        % Fourth quadrant (x negative, y negative)
-        goal = [-max_distance / m, -max_distance];
-    end
-    particles{i} = Particle(goal, velocity_randomness, max_velocity, bounds, group_indices(i), i, n_drones);  % Initialize particle
-    initial_positions(i, :) = particles{i}.position;
-end
+particles = init_drones(n_drones, bounds, group_indices, max_velocity, velocity_randomness); 
 
 % Initialize the Plotter
-plotter = Plotter(p_sources, bounds, n_drones, group_indices, n_groups, initial_positions);
+plotter = Plotter(p_sources, bounds, n_drones, group_indices);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                        EXPLORATION PHASE                                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % During this phase the drones move in straight lines, it can be implemented in the circle case or in the radial.
-for iter = 1:ceil(max_distance / max_velocity)
+% We choose the circle because it has been shown to be the best way to equally partition the space.
+for iter = 1:ceil(bounds(2)/2 / max_velocity)
     for i = 1:n_drones
         particle = particles{i};
 
@@ -136,26 +93,22 @@ for iter = 1:ceil(max_distance / max_velocity)
         particle.velocity = direction * max_velocity;
         
         % Update position (no randomness, no inertia, just move straight)
-        particle = particle.update_position();  % Update based on velocity
-        particles{i} = particle;
+        particle = particle.update_position();  
+
+        % Extract position of each particle
+        positions(i, :) = particles{i}.position;  
     end
     % Update plot with current drone positions
-    positions = zeros(n_drones, 2);  % Initialize a matrix to store positions
-    for i = 1:n_drones
-        positions(i, :) = particles{i}.position;  % Extract position of each particle
-    end
     plotter.draw(positions, iter, group_indices);
 end
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                        MAIN PARTICLE SWARM OPTIMIZATION LOOP                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialize exclusion zones as an empty matrix to store the positions of discovered sources
-for iter = 1:n_iterations
+for iter = iter:n_iterations
     %inertia = inertia_initial - (iter / n_iterations)^4;
     inertia = inertia_initial;
-    %repulsion_factor = repulsiion_initial * (1 - (iter / n_iterations)^2);  % Decrease repulsion over time
     
     for i = 1:n_drones
         particle = particles{i};
@@ -184,26 +137,31 @@ for iter = 1:n_iterations
         % Update particle position and apply boundary constraints
         particle = particle.update_position();
 
-        % Loop through other drones to check communication
+        % Loop through other drones
         for j = i+1:n_drones  % Start at i+1 to avoid double-checking
             other_particle = particles{j};
-            % Check if particle and other_particle are within communication radius
-            if particle.can_I_communicate_with(other_particle, communication_radius)
-                %fprintf('Iteration %d: Drone %d and Drone %d are within the communication radius of %d units\n', ...
-                    %iter, particle.identifier, other_particle.identifier, communication_radius);
-                % Check if sharing has already happened
-                if ~particle.has_shared_matrix(j) && (particle.victim_found_flag || other_particle.victim_found_flag)
-                    % First case: particle has found a victim and shares its exclusion zone
-                    if particle.victim_found_flag
-                        particle = particle.share_exclusion_zones(other_particle);  % Share exclusion zones from particle to other_particle
+            % The exclusion zones only apply to particles of different groups
+            if particle.group_idx ~= other_particle.group_idx
+                % Check if particle and other_particle are within communication radius
+                if particle.can_I_communicate_with(other_particle, communication_radius)
+                    %fprintf('Iteration %d: Drone %d and Drone %d are within the communication radius of %d units\n', ...
+                        %iter, particle.identifier, other_particle.identifier, communication_radius);
+                    % Check if sharing has already happened
+                    if ~particle.has_shared_matrix(j) && (particle.victim_found_flag || other_particle.victim_found_flag)
+                        % First case: particle has found a victim and shares its exclusion zone
+                        if particle.victim_found_flag
+                            plotter.plot_exclusion_zone(2*particle.exclusion_zone_radius, particle.my_exclusion_zone);
+                            particle = particle.share_exclusion_zones(other_particle);  % Share exclusion zones from particle to other_particle
+                        end
+                        % Second case: other_particle has found a victim and shares its exclusion zone
+                        if other_particle.victim_found_flag
+                            plotter.plot_exclusion_zone(2*other_particle.exclusion_zone_radius, other_particle.my_exclusion_zone)
+                            other_particle = other_particle.share_exclusion_zones(particle);  % Share exclusion zones from other_particle to particle
+                        end
+                        % Mark that sharing has been done for both drones
+                        particle.has_shared_matrix(j) = true;
+                        other_particle.has_shared_matrix(i) = true;
                     end
-                    % Second case: other_particle has found a victim and shares its exclusion zone
-                    if other_particle.victim_found_flag
-                        other_particle = other_particle.share_exclusion_zones(particle);  % Share exclusion zones from other_particle to particle
-                    end
-                    % Mark that sharing has been done for both drones
-                    particle.has_shared_matrix(j) = true;
-                    other_particle.has_shared_matrix(i) = true;
                 end
             end
         end
@@ -211,39 +169,13 @@ for iter = 1:n_iterations
         % After sharing, check if the drone is in an exclusion zone and move away if necessary
         particle = particle.check_if_in_exclusion_zone();
 
-        % Reassign the particles after the update
-        particles{i} = particle;
+        % Extract position of each particle
+        positions(i, :) = particles{i}.position;  
     end
-
     % Update plot with current drone positions
-    positions = zeros(n_drones, 2);  % Initialize a matrix to store positions
-    for i = 1:n_drones
-        positions(i, :) = particles{i}.position;  % Extract position of each particle
-    end
     plotter.draw(positions, iter, group_indices);
 end
 
 % Final plot with group best positions
 plotter.plot_best(group_best_positions, group_indices);
 
-%{
-function intra_repulsion_force = calculate_intra_cluster_repulsion(positions, group_indices, repulsion_factor)
-    n_drones = size(positions, 1);  % Number of drones
-    intra_repulsion_force = zeros(n_drones, 2);  % Initialize the intra-cluster repulsion force for each drone
-    
-    % Loop over each drone to calculate intra-cluster repulsion forces
-    for i = 1:n_drones
-        for j = 1:n_drones
-            if i ~= j && group_indices(i) == group_indices(j)  % Same group
-                distance = norm(positions(i, :) - positions(j, :));
-                if distance > 0
-                    % Repulsion force decreases with the square of the distance
-                    repulsion = repulsion_factor / distance^2;
-                    intra_repulsion_force(i, :) = intra_repulsion_force(i, :) + ...
-                                                  repulsion * (positions(i, :) - positions(j, :)) / distance;
-                end
-            end
-        end
-    end
-end
-%}

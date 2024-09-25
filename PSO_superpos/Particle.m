@@ -117,16 +117,19 @@ classdef Particle < handle
         % Share own exclusion zone info with another drone
         function obj = share_exclusion_zones(obj, other_particle)
             % Share this drone's own exclusion zone with the other drone
-            other_particle.shared_exclusion_zones = [other_particle.shared_exclusion_zones; obj.my_exclusion_zone];
+            other_particle.shared_exclusion_zones = unique([other_particle.shared_exclusion_zones; obj.my_exclusion_zone], 'rows');
             
-            % Remove duplicate exclusion zones (ensure unique rows)
-            other_particle.shared_exclusion_zones = unique(other_particle.shared_exclusion_zones, 'rows');
+            % Display the shared exclusion zone
             fprintf('Drone %d shared its exclusion zone: [%.1f, %.1f] with Drone %d\n', ...
-                     obj.identifier, obj.my_exclusion_zone(1), obj.my_exclusion_zone(2), other_particle.identifier);
-            fprintf('Drone %d now has the following shared exclusion zones: [%.1f, %.1f] \n', ...
-                     other_particle.identifier, other_particle.shared_exclusion_zones(1), other_particle.shared_exclusion_zones(2));
-            disp(other_particle.shared_exclusion_zones);
+                    obj.identifier, obj.my_exclusion_zone(1), obj.my_exclusion_zone(2), other_particle.identifier);
+            
+            % Display all shared exclusion zones in the other drone
+            fprintf('Drone %d now has the following shared exclusion zones: \n', other_particle.identifier);
+            for i = 1:size(other_particle.shared_exclusion_zones, 1)
+                fprintf('Zone %d centered in [%.1f, %.1f]\n', i, other_particle.shared_exclusion_zones(i, 1), other_particle.shared_exclusion_zones(i, 2));
+            end
         end
+
 
         % Function to check if the drone is in any shared exclusion zone (shared by others)
         function obj = check_if_in_exclusion_zone(obj)
@@ -168,7 +171,7 @@ classdef Particle < handle
             direction_away = direction_away / norm(direction_away);  % Normalize the direction vector
             
             % Update the position of the drone by moving it a small step away
-            step_size = 100;  % Set how far the drone should move per iteration
+            step_size = 80;  % Set how far the drone should move per iteration
             obj.position = obj.position + step_size * direction_away;
         end
     end
