@@ -11,7 +11,7 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 8;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 6;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
@@ -32,7 +32,7 @@ p_sources = [20, 50;     % Coordinates of Source 1 (x, y).
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
-inertia_initial = 1.01;     % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
+inertia_initial = 1.01;      % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
                              % inertia promotes exploration, while lower values promote faster convergence.
                              % Typical range: [1 - 1.4]
 
@@ -93,7 +93,7 @@ for iter = 1:ceil(bounds(2)/2 / max_velocity)
         particle.velocity = direction * max_velocity;
         
         % Update position (no randomness, no inertia, just move straight)
-        particle = particle.update_position();  
+        particle.update_position();  
 
         % Extract position of each particle
         positions(i, :) = particles{i}.position;  
@@ -114,28 +114,12 @@ for iter = iter:n_iterations
         particle = particles{i};
         group_idx = particle.group_idx;
 
-        % Only update group best if the particle is not in an exclusion zone
-        if isempty(particle.shared_exclusion_zones) || ~particle.is_in_exclusion_zone
-            % Evaluate NSS value at the position
-            particle = particle.evaluate_nss(@artva.superpositionNSS, p_sources);
-
-            % Update group best if necessary
-            if particle.nss_value > group_best_values(group_idx)
-                group_best_positions(group_idx, :) = particle.position;
-                group_best_values(group_idx) = particle.nss_value;
-            end
-        else
-            % If a particle moves out of an exclusion zone, reset the group best
-            fprintf('Drone %d moved out of an exclusion zone. Resetting group best for group %d.\n', particle.identifier, group_idx);
-            group_best_values(group_idx) = -Inf;  % Reset the group best value
-        end
-
         % Update velocity with personal and group best
-        particle = particle.update_velocity(group_best_positions(group_idx, :), inertia, ...
+        particle.update_velocity(group_best_positions(group_idx, :), inertia, ...
             cognitive_factor, social_factor);
 
         % Update particle position and apply boundary constraints
-        particle = particle.update_position();
+        particle.update_position();
 
         % Loop through other drones
         for j = i+1:n_drones  % Start at i+1 to avoid double-checking
@@ -144,19 +128,19 @@ for iter = iter:n_iterations
             if particle.group_idx ~= other_particle.group_idx
                 % Check if particle and other_particle are within communication radius
                 if particle.can_I_communicate_with(other_particle, communication_radius)
-                    %fprintf('Iteration %d: Drone %d and Drone %d are within the communication radius of %d units\n', ...
-                        %iter, particle.identifier, other_particle.identifier, communication_radius);
                     % Check if sharing has already happened
                     if ~particle.has_shared_matrix(j) && (particle.victim_found_flag || other_particle.victim_found_flag)
                         % First case: particle has found a victim and shares its exclusion zone
                         if particle.victim_found_flag
                             plotter.plot_exclusion_zone(2*particle.exclusion_zone_radius, particle.my_exclusion_zone);
-                            particle = particle.share_exclusion_zones(other_particle);  % Share exclusion zones from particle to other_particle
+                            % Share exclusion zones from particle to other_particle
+                            particle = particle.share_exclusion_zones(other_particle);  
                         end
                         % Second case: other_particle has found a victim and shares its exclusion zone
                         if other_particle.victim_found_flag
                             plotter.plot_exclusion_zone(2*other_particle.exclusion_zone_radius, other_particle.my_exclusion_zone)
-                            other_particle = other_particle.share_exclusion_zones(particle);  % Share exclusion zones from other_particle to particle
+                            % Share exclusion zones from other_particle to particle
+                            other_particle = other_particle.share_exclusion_zones(particle);  
                         end
                         % Mark that sharing has been done for both drones
                         particle.has_shared_matrix(j) = true;
@@ -167,7 +151,35 @@ for iter = iter:n_iterations
         end
 
         % After sharing, check if the drone is in an exclusion zone and move away if necessary
-        particle = particle.check_if_in_exclusion_zone();
+        [is_in_exclusion_zone, which_one] = particle.check_if_in_exclusion_zone();
+        if is_in_exclusion_zone
+            % Reset the group best
+            fprintf('Drone %d moved out of an exclusion zone. Resetting group best for group %d.\n', particle.identifier, group_idx);
+            % Move away from the exclusion zone
+            particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one,:));
+            % Introduce randomness to the new position
+            randomness_factor = rand(1, 2);  % Strong random boost to force exploration
+            particle.position = particle.position + randomness_factor;  % Apply random perturbation
+            % Reset personal best (P-best) to a far random position to avoid the exclusion zone
+            random_position_far = particle.position + 50 * (rand(1, 2));  % Set a far random position as new P-best
+            particle.p_best = random_position_far;
+            % Reset the group best
+            group_best_values(group_idx) = -Inf;
+            % Reset the NSS value
+            particle.nss_best_value = -Inf;   % Reset the best NSS value to a very low number
+            % Reset velocity to encourage exploration
+            particle.velocity = zeros(1, 2);  % Reset velocity for a fresh search
+            % Set low inertia 
+            inertia = 0.9;
+        else
+            % Evaluate NSS value at the position
+            particle.evaluate_nss(@artva.superpositionNSS, p_sources);
+            % Update group best if necessary
+            if particle.nss_value > group_best_values(group_idx)
+                group_best_positions(group_idx, :) = particle.position;
+                group_best_values(group_idx) = particle.nss_value;
+            end
+        end
 
         % Extract position of each particle
         positions(i, :) = particles{i}.position;  
