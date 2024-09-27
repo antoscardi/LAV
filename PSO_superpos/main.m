@@ -11,7 +11,7 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 8;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
@@ -25,9 +25,8 @@ max_velocity = 1.5;      % Maximum allowable velocity for each drone (m/s). Limi
 
 % Source fixed positions (the targets the drones need to find)
 p_sources = [ 20, 50;     % Coordinates of Source 1 (x, y).
-             -50, 70;     % Coordinates of Source 2 (x, y).
-              60,-30;     % Coordinates of Source 3 (x, y).
-             -10, 30 ];   % Coordinates of Source 4 (x, y).      
+              5, 70;
+              20, 52];     % Coordinates of Source 2 (x, y).   
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
@@ -43,7 +42,7 @@ social_factor = 1;           % Social factor (global learning coefficient), cont
                              % the swarm's global best-known position. Higher values increase the influence of the swarm.
                              % Typical range: [1.5 - 2.5], in our case the swarm is relative to the group.
 
-velocity_randomness = 0.5;   % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
+velocity_randomness = 0.2;   % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
                              % A higher value increases exploration by adding more variation to the drone's movement,while
                              % a lower value reduces randomness, promoting more predictable movement towards the target.
 
@@ -123,13 +122,19 @@ for iter = iter:n_iterations
                     if particle.victim_found_flag
                         plotter.plot_exclusion_zone(2*particle.exclusion_zone_radius, particle.my_exclusion_zone);
                         % Share exclusion zones from particle to other_particle
-                        particle = particle.share_exclusion_zones(other_particle);  
+                        particle = particle.share_exclusion_zones(other_particle);
+                        % Remove randomness and reduce max velocity
+                        particle.velocity_randomness = 0;
+                        particle.max_velocity = 0.5;
                     end
                     % Second case: other_particle has found a victim and shares its exclusion zone
                     if other_particle.victim_found_flag
                         plotter.plot_exclusion_zone(2*other_particle.exclusion_zone_radius, other_particle.my_exclusion_zone)
                         % Share exclusion zones from other_particle to particle
-                        other_particle = other_particle.share_exclusion_zones(particle);  
+                        other_particle = other_particle.share_exclusion_zones(particle);
+                        % Remove randomness
+                        other_particle.velocity_randomness = 0;
+                        other_particle.max_velocity = 0.5;
                     end
                     % Mark that sharing has been done for both drones
                     particle.has_shared_matrix(j) = true;

@@ -16,9 +16,9 @@ function compute_errors(p_sources, group_best_positions, max_error)
         if any(valid_estimates)
             [min_distance, ~] = min(distances(valid_estimates));
             error_distances(i) = min_distance;
-            fprintf('Source %d: Nearest estimate is %.2f meters away (within max error)\n', i, min_distance);
+            fprintf('Source %d: Nearest estimate is %.3f meters away (within max error)\n', i, min_distance);
         else
-            fprintf('Source %d: No valid estimate within %.2f meters\n', i, max_error);
+            fprintf('Source %d: No valid estimate within %.3f meters\n', i, max_error);
         end
     end
     
