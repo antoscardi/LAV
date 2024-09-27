@@ -11,7 +11,7 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 8;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
@@ -53,7 +53,7 @@ n_groups = n_sources;        % Number of groups (or clusters) for the drones. Ea
 
 communication_radius = 5;    % Distance between two drones that enables communication with each other.
 
-step_size = 40;              % Set how far the drone should move per iteration
+step_size = 40;              % Set how far the drone should move away in ONLY ONE ITERATION
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
@@ -165,6 +165,9 @@ for iter = iter:n_iterations
             fprintf('Drone %d moved out of an exclusion zone. Resetting group best for group %d.\n', particle.identifier, group_idx);
             % Move away from the exclusion zone
             particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one, :), step_size);
+            % Increase the iteration number according to the step_size
+            fprintf('Increasing iteration from %d to %d simulate freezing other drones.\n', iter, iter + step_size);
+            iter = iter + step_size; %#ok<FXSET>
             % Introduce randomness to the new position
             randomness_factor = 10*rand(1, 2);  % Strong random boost to force exploration
             particle.position = particle.position + randomness_factor;  % Apply random perturbation
