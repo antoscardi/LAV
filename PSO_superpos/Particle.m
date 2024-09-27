@@ -146,12 +146,11 @@ classdef Particle < handle
         end
 
         % Function to move the drone away from the exclusion zone
-        function obj = move_away_from_exclusion(obj, exclusion_zone)
+        function obj = move_away_from_exclusion(obj, exclusion_zone, step_size)
             % Calculate the direction away from the exclusion zone
             direction_away = obj.position - exclusion_zone;
             direction_away = direction_away / norm(direction_away);  % Normalize the direction vector
             % Update the position of the drone by moving it a small step away
-            step_size = 50;  % Set how far the drone should move per iteration
             obj.position = obj.position + step_size * direction_away;
         end
     end

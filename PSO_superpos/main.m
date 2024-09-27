@@ -11,7 +11,7 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 8;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
@@ -43,7 +43,7 @@ social_factor = 1;           % Social factor (global learning coefficient), cont
                              % the swarm's global best-known position. Higher values increase the influence of the swarm.
                              % Typical range: [1.5 - 2.5], in our case the swarm is relative to the group.
 
-velocity_randomness = 0.9;   % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
+velocity_randomness = 0.5;   % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
                              % A higher value increases exploration by adding more variation to the drone's movement,while
                              % a lower value reduces randomness, promoting more predictable movement towards the target.
 
@@ -52,6 +52,8 @@ n_groups = n_sources;        % Number of groups (or clusters) for the drones. Ea
                              % focus on different sources.
 
 communication_radius = 5;    % Distance between two drones that enables communication with each other.
+
+step_size = 40;              % Set how far the drone should move per iteration
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
@@ -81,17 +83,10 @@ plotter = Plotter(p_sources, bounds, n_drones, group_indices);
 for iter = 1:ceil(bounds(2)/2 / max_velocity)
     for i = 1:n_drones
         particle = particles{i};
-
         % Calculate direction to move in a straight line towards the goal
         direction = (particle.goal - particle.position) / norm(particle.goal - particle.position);
-        
-        % Set velocity to move towards the goal
-        particle.velocity = direction * max_velocity;
-        
-        % Update position (no randomness, no inertia, just move straight)
+        particle.velocity = direction * max_velocity; % Move at maximum velocity
         particle.update_position();  
-
-        % Extract position of each particle
         positions(i, :) = particles{i}.position;  
     end
     % Update plot with current drone positions
@@ -169,7 +164,7 @@ for iter = iter:n_iterations
             % Reset the group best
             fprintf('Drone %d moved out of an exclusion zone. Resetting group best for group %d.\n', particle.identifier, group_idx);
             % Move away from the exclusion zone
-            particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one, :));
+            particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one, :), step_size);
             % Introduce randomness to the new position
             randomness_factor = 10*rand(1, 2);  % Strong random boost to force exploration
             particle.position = particle.position + randomness_factor;  % Apply random perturbation
