@@ -32,7 +32,7 @@ for i = 1:n_points
         % Compute Normalized Source Strength (NSS)
         NSS1 = NormalizedSourceStrength(point_local1);
         NSS2 = NormalizedSourceStrength(point_local2);
-        %NSS1= 0;
+        %NSS1 = 0;
         
         % Sum of NSS values
         values(i,j) = NSS1 + NSS2;

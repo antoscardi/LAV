@@ -1,0 +1,452 @@
+\chapter{Electromagnetism}
+The ARTVA instrument in transmitter and receiver mode  is a magnetic dipole. In order to formulate a coherent mathematical model, it is necessary to report some results of electromagnetic theory. Firstly, we identify and name the fundamental electromagnetic physical quantities. 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lll}
+        \hline
+        Symbol & Description & Units \\
+        \hline
+        $\mathbf{E}$ & Electric field intensity & V/m \\
+        $\mathbf{D}$ & Electric displacement field & C/m$^2$ \\
+        $\mathbf{H}$ & Magnetic field intensity & A/m \\
+        $\mathbf{B}$ & Magnetic flux density & T \\
+        $\mathbf{J}$ & Current density & A/m$^2$ \\
+        $\mathbf{A}$ & Magnetic vector potential & V s/m\\
+        $\rho$ & Volume charge density & C/m$^3$ \\
+        $\epsilon$ & Permittivity of the medium & F/m \\
+        $\mu$ & Permeability of the medium & H/m \\
+        $c$ & Speed of light in vacuum & m/s \\
+        \hline
+    \end{tabular}
+    \caption{List of electromagnetic physical quantities and their descriptions.}
+    \label{tab:symbols}
+\end{table}
+
+\section{Maxwell's Equations}
+We postulate Maxwell's equations in a simple (linear, isotropic, and homogeneous) medium in phasor notation \ref{Phasor Notation}, which have been discovered experimentally \cite{book-magnetism}:
+\begin{align}
+\nabla \times \mathbf{E} &= -j\omega \mathbf{B} \label{eq:curl_E} \\
+\nabla \times \mathbf{H} &= \mathbf{J} + j\omega \epsilon \mathbf{E} \label{eq:curl_H} \\
+\nabla \cdot \mathbf{E} &= \frac{\rho}{\epsilon} \label{eq:E} \\
+\nabla \cdot {\mathbf{B}} &= 0 \label{eq:B}
+\end{align}
+
+In these equations, the space-coordinate arguments have been omitted for simplicity. The fact that the same notations are used for the phasors as are used for their corresponding time-dependent quantities should create little confusion because we will deal exclusively with sinusoidal vector fields.
+
+From Maxwell's equation \ref{eq:B} we know that the magnetic flux density \(\mathbf{B}\) is solenoidal (zero divergence).
+Then, \(\mathbf{B}\) can be expressed as the curl of another vector field using the Null Theorem \ref{eq:null}, obtaining \ref{eq:B}:
+\begin{equation}
+\mathbf{B} = \nabla \times \mathbf{A}
+\label{curlA}
+\end{equation}
+Also, \(\mathbf{B}\) relates to the magnetic field intensity \(\mathbf{H}\) through the permeability of the medium \(\mu\):
+\begin{equation}
+\mathbf{B} = \mu \mathbf{H}
+\label{eq:BH}
+\end{equation}
+
+Another useful form of Maxwell's first equation \ref{eq:curl_E} can be found by substituting \ref{curlA}:
+\begin{align}
+\nabla \times \mathbf{E} = - j \omega (\nabla \times \mathbf{A}) &= -\nabla \times j \omega \mathbf{A} \nonumber 
+\\[7pt]
+\nabla \times \left(\mathbf{E} + j \omega \mathbf{A}\right) &= 0 \nonumber
+\end{align}
+
+Since the sum of vector fields is itself a vector field, then being  \(\mathbf{E} +  j \omega \mathbf{A}\) a vector field, we can define a \textbf{scalar} field, the electric potential \( V \) such that:
+
+\begin{equation}
+\mathbf{E} + j \omega \mathbf{A} = -\nabla V
+\label{eq:V}
+\end{equation}
+
+Because if the curl of a vector field is zero, then it exists a scalar field whose gradient gives the vector field. 
+%%%% MANCA LA SECONDA IDENTITÀ CHE DIMOSTRA QUESTO %%%%%%%%
+
+\subsection{Conservation of Charge Principle}
+%https://web.mit.edu/sahughes/www/8.022/lec07.pdf
+The principle of conservation of charge states that the net charge within a closed system remains constant over time, meaning that no charge can be created nor destroyed \cite{book-magnetism}:
+\begin{equation}
+\nabla \cdot \mathbf{J} = -\frac{\partial \rho}{\partial t}
+\end{equation}
+
+The current density \(\mathbf{J}\) is defined as:
+\begin{equation}
+\mathbf{J} = N q \mathbf{u}
+\end{equation}
+where \(N\) is the number of charge carriers per unit volume, \(q\) is the charge of each carrier, and \(\mathbf{u}\) is the drift velocity of the charge carriers.
+
+Meaning that, if a current flows out of a volume, then the charge density inside the volume must decrease at a rate which equals the current.
+Where the current leaving the volume is the flux of the current density through surface S:
+\begin{equation}
+I = \oint_S \mathbf{J} \cdot d\mathbf{s}
+\label{eq:defI}
+\end{equation} 
+
+\section{Wave Equation for Magnetic Vector Potential }
+In order to determine the intensity if the magnetic field we first need to find an expression for the magnetic vector potential \(\mathbf{A}\), called the wave equation.
+Starting from Maxwell's equations we find the wave equation by substituting \ref{curlA} and \ref{eq:BH} in the second Maxwell equation \ref{eq:curl_H}:
+
+\[
+\nabla \times \nabla \times \mathbf{A} = \mu \mathbf{J} + j\omega\epsilon \mu \mathbf{E}
+\]
+
+Then we substitute \ref{eq:V} for $\mathbf{E}$ and use the Laplacian \ref{eq:laplacian} on the left side:
+
+\[
+\nabla (\nabla \cdot \mathbf{A}) - \nabla^2 \mathbf{A} = \mu \mathbf{J} + j\omega \epsilon \mu \left(-\nabla V - j \omega \mathbf{A}\right)
+\]
+
+The definition of a vector requires the specification of both its curl and its
+divergence. Although the curl of $\mathbf{A}$ is designated B in \ref{curlA}, we are still at liberty to choose its divergence to simplify the expression \cite{book-magnetism}:
+
+\[
+\nabla \cdot \mathbf{A} = -  
+ j \omega \epsilon \mu V
+\]
+
+Finally, rearranging the terms and substituting the square of $j$, we get:
+
+\[
+\nabla^2 \mathbf{A} + \omega^2 \epsilon \mu \mathbf{A} = -\mu \mathbf{J}
+\]
+
+This is the wave equation for the magnetic vector potential \(\mathbf{A}\):
+
+\begin{equation}
+    \nabla^2 \mathbf{A} - k^2 \mathbf{A} = -\mu \mathbf{J}
+    \label{eq:wave}
+\end{equation}
+
+where \(k = \omega \sqrt{\mu \epsilon}\) is the wave number, which characterizes the propagation of the electromagnetic wave in the medium.
+
+
+\subsection{Finding the Potential by Solving the Wave Equation}
+%https://radiance.ece.utoronto.ca/ece422/notes/04a-waveeqn.pdf
+Since both \(\mathbf{A}\) and \(\mathbf{J}\) are vector fields, the wave equation \ref{eq:wave} can be written for each component of \(\mathbf{A}\):
+\begin{equation}
+    \nabla^2 \begin{pmatrix} A_x \\ A_y \\ A_z \end{pmatrix} = k^2 \begin{pmatrix} A_x \\ A_y \\ A_z \end{pmatrix} - \mu \begin{pmatrix} J_x \\ J_y \\ J_z \end{pmatrix}
+    \label{eq:wavematrix}
+\end{equation}
+
+In order to solve \ref{eq:wavematrix} we can use the Green function for Poisson's equation \ref{eq:poisson} for each of the components when $k =  0 $ (the case of static fields).
+%and considering the same assumption made on the symmetry of \(\mathbf{A}\).
+Then, the solution is given by the formula:
+\begin{equation}
+\mathbf{A} = \frac{\mu}{4 \pi} \int_V \mathbf{J} \frac{e^{-jkr}}{r} dv
+    \label{eq:solA}
+\end{equation}
+by using the superposition principle and by finding the solution of the time-dependent differential equation.
+
+\section{Magnetic Dipole}
+%https://pleclair.ua.edu/ph126/Misc/Notes/mag_dipoles.pdf
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    % Draw the 3D coordinate system
+    \draw[axis] (0,0,0) -- (3,0,0) node[anchor=north east]{$z$};
+    \draw[axis] (0,0,0) -- (0,3,0) node[anchor=north west]{$x$};
+    \draw[axis] (0,0,0) -- (0,0,4) node[anchor=south]{$y$};
+    % Coordinates
+    \coordinate (O) at (0,0,0);
+    \coordinate (R) at (3,2,1);
+    % Line from p to b
+    \draw[thick] (1,0,0) -- (R) node[midway, below, yshift=-0.1cm] {$r_1$};
+    % Draw the point r
+    \fill (R) circle (2pt);
+    \node[above right] at (R) {$p$};
+     % Draw and label the angle theta
+    \draw (0,1) arc[start angle=90,end angle=58,,radius=2cm];
+    \node at (0.5,0.7) {$\theta$};
+    % Label in space called b
+    \node at (1,0,1.5) {$I$};
+    % Draw a circle in the xz-plane
+    \begin{scope}[canvas is xz plane at y=0]
+        \draw[thick, color=blue!80!black] (0,0) circle [radius=1];
+        \draw[-stealth, color=blue!80!black] (0,1) arc[start angle=90,end angle=45,radius=1];
+    \end{scope}
+     % Draw the line from origin to point r
+    \draw[thick] (O) -- (R) node[midway, above] {$r$};
+    \end{tikzpicture}
+    \caption{Magnetic dipole representation}
+    \label{fig:dipole}
+\end{figure}
+
+We have a small filament loop of radius \( b \), carrying an AC current \( I(t) = I \cos(\omega t) \) as shown in Figure \ref{fig:dipole}.
+If \( S \) is the cross-section area of the wire and \( dl \) a differential length, we have \( \mathbf{J} \perp \mathbf{s} \), the normal to the area and the volume:
+\[
+dv = S \, dl
+\]
+In order to determine the magnetic field intensity \(\mathbf{H}\) at a certain point in space \( p \), we need to compute the magnetic vector potential \(\mathbf{A}\) first \cite{book-magnetism}.
+Since the charges move only in the thin wire, they are located only in the wire region, then from the definition of current \ref{eq:defI}:
+\[
+I = S \, \mathbf{J}
+\]
+The volume integral in \ref{eq:solA}becomes:
+\[
+\int_V \mathbf{J} \, dv =  \int_V \mathbf{J} \, S \, dl
+\]
+Then, we substitute \ref{eq:defI} and change the integral type since it is now the sum over the length, so the formula becomes (the current must flow in a closed path):
+\begin{equation}
+    \mathbf{A} = \frac{\mu_0 I}{4\pi} \oint_C \frac{d\mathbf{l}}{r_1} e^{-j k r_1}
+    \label{sol_A_dipole}
+\end{equation}
+
+where $r_1$ is the distance between the point $p$ and the charges (source element) and $d\mathbf{l}$ is a vector tangent to the loop of diferential length $dl$.
+
+\subsubsection{Assumption} \label{Assumption}
+We can then simplify \ref{sol_A_dipole} by considering the radius $b$ to be small enough, such that $r_1 - r \approx 0$. Then by adding and subtracting $r$ from the power of the exponential:
+\[
+e^{-j k r_1} = e^{-j k (r_1 + r - r)} = e^{-j k r} \, e^{-j k (r_1 - r)}
+\]
+Then by using Taylor approximation on the second exponential ($ x = r_1 - r \approx 0$) we obtain:
+%\[
+%e^{x} \approx 1 + x + \frac{x^2}{2} + \cdots
+%\]
+\[
+e^{-j k r_1} = e^{-j k r}\, \left[ 1- j k (r_1 - r)\right]
+\]
+Then, we substitute this result in \ref{sol_A_dipole} and simplify:
+\[
+\begin{aligned}
+\mathbf{A} =& \frac{\mu_0 I}{4 \pi} e^{-j k r} \left[ 1 - j k (r_1 - r) \right] \oint_C \frac{d\mathbf{l}}{r_1} = \\
+=& \frac{\mu_0 I}{4 \pi} e^{-j k r} \left( \oint \frac{d\mathbf{l}}{r_1} - j k \oint (r_1 - r) \frac{d\mathbf{l}}{R_1} \right)
+\end{aligned}
+\]
+
+Since the integral of \(d\vec{l}\) over a closed loop is zero, because we have considered a small loop $b \rightarrow 0$:
+\[
+\oint_C d\ell = 2\pi b \quad \rightarrow \quad \oint_C d\ell \rightarrow 0
+\]
+Then we obtain:
+\begin{equation}
+\mathbf{A} = \frac{\mu_0 I}{4 \pi} e^{-j k r} \left[ \left(1 + j k r \right) \oint \frac{d\mathbf{l}}{r1}\right]
+\label{eq:sol_A_simp}
+\end{equation}
+
+\subsubsection{Assumption Quasi-Static Field/Near Field Zone}
+%https://phys.libretexts.org/Bookshelves/University_Physics/University_Physics_(OpenStax)/Book%3A_University_Physics_I_-_Mechanics_Sound_Oscillations_and_Waves_(OpenStax)/16%3A_Waves/16.03%3A_Mathematics_of_Waves
+If we consider a region near the magnetic dipole, we obtain quasi-static fields. We defined the wave number $k$ as:
+\begin{equation}
+k = \omega \sqrt{\mu \epsilon}
+    \label{eq:k}
+\end{equation}
+Electromagnetic waves propagate with velocity $u$ (speed of light in vacuum) \cite{book-magnetism}:
+\begin{equation}
+    u = \frac{1}{\sqrt{\mu \epsilon}}
+    \label{eq:u}
+\end{equation}
+Then, by inverting \ref{eq:u} and substituting in \ref{eq:k}, we can write $k$ as:
+\begin{equation}
+    k = \frac{\omega}{u}
+    \label{eq:k2}
+\end{equation}
+From wave theory $ f = \frac{\omega}{2\pi} $ and $\lambda = \frac{u}{f}$, we obtain another espression for $u$:
+\begin{equation}
+   u = \frac{\lambda \, \omega}{2 \, \pi} 
+\end{equation}
+\label{eq:u2}
+\noindent
+Therefore, we can substitute \ref{eq:u2} in \ref{eq:k2}:
+\begin{equation}
+    k = \frac{2 \pi}{\lambda}
+    \label{eq:k3}
+\end{equation}
+To simplify the expression for $\mathbf{A}$ \ref{sol_A_dipole}, we make the assumption that $ k \, r \ll 1 $, and if we substitute the found expression of $k$ \ref{eq:k3}:
+\[
+k \, r \ll 1 \implies \frac{2\pi r}{\lambda} \ll 1 \implies r \ll \frac{\lambda}{2\pi}
+\]
+This means that $r$ needs to be small in comparison to $\lambda$. If this is the case:
+\[
+e^{-j k r} \approx e^0 = 1
+\]
+We eliminate completely the time dependence and obtain the expression for $\mathbf{A}$:
+\begin{equation}
+    \mathbf{A} = \frac{\mu_0 I}{4\pi} \oint_C \frac{d\mathbf{l}}{r_1}
+    \label{A_approx}
+\end{equation}
+In the ARTVA case, the standard operating frequency is \( f = 475 \, \text{kHz} \) and the optimal range of the instrument is \( <80 \, \text{m} \). Then in the worst case, when \( r = 80 \, \text{m} \), we obtain the approximation \( k \, r = 0.79 \).
+
+\subsubsection{Symmetry}
+In the particular case of a magnetic dipole the magnetic vector potential $\mathbf{A}$ is symmetric with respect to the \(x\)-axis, therefore independent to the $\phi$ angle \ref{Spherical Coordinates}.
+This is true since we can choose freely the $z$-axis and $y$-axis orientation in space around the loop.
+Then we can choose the point $\mathbf{p}$ to lie on the $zx$-plane or the $yx$-plane, in both cases we will obtain that one of the two $d\mathbf{l}$ components $d\mathbf{l_z}$ and $d\mathbf{l_y}$ will cancel themselves out as we integrate over the loop.
+For example, if we consider the point to lie on the $yx$-plane, then take a point on the loop where $d\mathbf{l}$ is and its symmetric w.r.t. the $y$-axis, the component $d\mathbf{l_y}$ of the first will cancel itself out with the one of the second.
+\\
+In addition, we can write the length of a circumference as $l = r \, \alpha $, where $\alpha$ is the subtended angle by the length $l$ and $r$ the radius.
+In addition, we express $\mathbf{e_\phi}$ using the Cartesian basis:
+$$
+\mathbf{e_\phi} = - sin\phi \, \mathbf{e_y} + cos\phi \, \mathbf{e_z}
+$$
+Then, $d\mathbf{l}$ magnitude depends on the differential angle $d\phi$ and the radius $b$, and has the same direction of $\mathbf{e_\phi}$:
+\begin{equation}
+    d\mathbf{l} = b \, d\phi \, \mathbf{e_\phi} = b \, d\phi\left(- sin\phi \, \mathbf{e_y} + cos\phi \, \mathbf{e_z}\right)
+    \label{eq:dl}
+\end{equation}
+However, for every $d\mathbf{l}$ there is another symmetrically located differential length element on the other side of the $y$-axis that will contribute an equal amount to $\mathbf{A}$ in the $\mathbf{e_z}$ direction but will cancel the contribution of $d\mathbf{l}$ in the $\mathbf{e_y}$ direction. Then, since $\mathbf{e_z} = \mathbf{e_\phi}$ if point $P$ lies on the $yx$-plane, equation \ref{A_approx} can be written as:
+\begin{equation}
+\mathbf{A} = \mathbf{e_\phi} \frac{\mu I b}{4 \pi} \int_{0}^{2\pi}  \frac{\cos \phi}{r_1} \, d\phi
+    \label{eq:A_final}
+\end{equation}
+
+\begin{comment}
+Proof of symmetry 
+https://www.youtube.com/watch?v=SJtbeg_PZ30&t=129s
+\end{comment}
+
+\subsubsection{Computing the Integral in Spherical Coordinates}
+Firstly we find $r_1$ by applying the law of cosines on the triangle $OPP'$, Figure \ref{fig:dipole2}:
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    % Draw the 3D coordinate system
+    \draw[axis] (0,0,0) -- (4,0,0) node[anchor=north east]{$z$};
+    \draw[axis] (0,0,0) -- (0,4,0) node[anchor=north west]{$x$};
+    \draw[axis] (0,0,0) -- (0,0,5) node[anchor=south]{$y$};
+    % Coordinates
+    \coordinate (O) at (0,0,0);
+    \coordinate (R) at (0,4,4);
+    \coordinate (P') at (1.7,0,1.2);
+    % Line from p to b
+    \draw[thick] (P') -- (R) node[right, yshift=0.1cm] {};
+    % Draw the point riffiths-Introduction%20to%20Electrodynamics-Addison-Wesley
+    \fill (R) circle (2pt);
+    \fill (P') circle (2pt);
+    \node[above right] at (R) {$P$};
+    % Draw the angle theta between r and y-axis
+    \draw[->] (0,1.5,0) arc[start angle=90,end angle=115,radius=2cm];
+    \node at (-0.3,1.7,0) {$\theta$};
+    \draw[bend right,->]  (0,0,1) to node [auto] {} (0.7,0,0.5);
+    \node at (0.7,0.6,1) {$\beta$};
+    \draw[bend right,->]  (0.4,0,0.3) to node [auto] {} (0,0.5,0.5);
+    % Label in space called b
+    \node at (1.8,0,1.8) {$b$};
+    \node at (2.3,0,2) {$P'$};
+    \node at (0.7,0,1.2) {$\phi$};
+    % Draw a circle in the xz-plane
+    \begin{scope}[canvas is xz plane at y=0]
+        \draw[thick, color=blue!80!black] (0,0) circle [radius=2];
+    \end{scope}
+     % Draw the line from origin to point r
+    \draw[thick] (O) -- (R) node[midway, above right, yshift=0.4cm] {};
+    \draw[thick] (O) -- (P') node[midway, above right] {};
+    \end{tikzpicture}
+    \caption{Magnetic dipole representation with the $OPP' triangle$}
+    \label{fig:dipole2}
+\end{figure}
+
+We start with the equation for \( r_1 \):
+$$
+r_1^2 = r^2 + b^2 - 2 r b \cos\beta
+$$
+Since we are on the \( xy \)-plane, we can write the \( \mathbf{b} \) and \( \mathbf{r} \) vectors as:
+$$
+\mathbf{r} = r \sin \theta \, \mathbf{e_y} + r \cos \theta \, \mathbf{e_x}
+$$
+$$
+\mathbf{b} = b \cos \phi \, \mathbf{e_y} + b \sin \phi \, \mathbf{e_z}
+$$
+Then we find the angle \(\beta\) between \( \mathbf{r} \) and \( \mathbf{b} \):
+$$
+\cos \beta = \frac{\mathbf{b} \cdot \mathbf{r}}{r b} = \sin \theta \cos \phi
+$$
+We have obtained a formula for \( r_1 \):
+$$
+r_1 = \sqrt{r^2 + b^2 - 2 r b \sin \theta \cos \phi}
+$$
+Simplifying further, we get:
+$$
+r_1^2 = r^2 \left( 1 + \frac{b^2}{r^2} - 2\, \frac{ b}{r} \sin \theta \cos \phi \right)
+$$
+Using the same assumption as before, that the loop is very small with respect to \( r \) (i.e., \( b \ll r \) and therefore \( b^2 \ll r^2 \)), we can write:
+$$
+r_1 \approx r \left( 1 - 2 \, \frac{ b}{r} \, \sin \theta \cos \phi \right)^{1/2}
+$$
+Then we compute the inverse \( \frac{1}{r_1} \) and use the Taylor approximation to the first derivative, considering \( x = 2 \, \frac{ b }{r} \, \sin \theta \cos \phi \) which tends to zero, we obtain:
+\begin{equation}
+    \frac{1}{r_1} \approx \frac{1}{r} \left( 1 + \frac{b}{r} \sin \theta \cos \phi \right)
+    \label{eq:r_1}
+\end{equation}
+
+Now, substituting \ref{eq:r_1} in \ref{eq:A_final}, we can calculate the integral for \( \mathbf{A} \) over the entire loop:
+$$
+\mathbf{A} = \mathbf{e_\phi} \frac{\mu I b}{4 \pi} \int_{0}^{2\pi} \left( 1 + \frac{b}{r} \sin \theta \cos \phi \right) \cos \phi \, d\phi
+$$
+Since b, r and $\theta$ do not depend on $\phi$, the first integral is zero and the second one gives $\pi$:
+\begin{enumerate}[label=(\arabic*)]
+    \item 
+    \parbox{\textwidth}{
+    \[
+    \int_0^{2\pi} \cos \phi \, d\phi = \sin \phi \Big|_0^{2\pi} = 0
+    \]
+    }
+
+    \item 
+    \parbox{\textwidth}{
+    \[
+    \int_{0}^{2\pi} \cos^2 \phi \, d\phi = \int_{0}^{2\pi} \frac{1 + \cos(2\phi)}{2} \, d\phi = \frac{1}{2} \cdot 2\pi + \frac{1}{2} \cdot 0 = \pi
+    \]
+    }
+\end{enumerate}
+Therefore, we obtain:
+\begin{equation}
+    \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b^2}{4 \, r^2} \sin \theta
+    \label{eq:A_spher}
+\end{equation}
+
+\subsubsection{Magnetic Field Intensity $\mathbf{H}$}
+Finally, we can now obtain an expression in spherical coordinates of the magnetic field intensity $\mathbf{H}$, by first finding $\mathbf{B}$ using \ref{curlA} and then inverting \ref{eq:BH}.
+\\
+We compute the curl of $\mathbf{A}$ in spherical coordinates \ref{curl_spher}:
+
+\[
+\mathbf{B} = \nabla \times \mathbf{A} = \frac{1}{r^2 \sin \theta} \begin{vmatrix}
+    \mathbf{e_r} & \mathbf{e_\theta} r & \mathbf{e_\phi} r \sin \theta \\
+    \frac{\partial}{\partial r} & \frac{\partial}{\partial \theta} & \frac{\partial}{\partial \phi} \\
+    0 & 0 & r \sin \theta A_\phi
+\end{vmatrix} =
+\]
+\[
+= \frac{1}{r^2 \sin \theta} \left( \mathbf{e_r} \frac{\partial}{\partial \theta} (r \sin \theta A_\phi) - \mathbf{e_\theta} \frac{\partial}{\partial r} (r \sin \theta A_\phi) \right)
+\]
+where $A_\phi$ is the magnitude of the vector field found in \ref{eq:A_spher}, while $A_r$ and $A_\theta$ are zero since the potential has only the $\mathbf{e_\phi}$ direction. Substituting \ref{eq:A_spher}:
+\[
+\begin{aligned}
+    \mathbf{B}&= \frac{1}{r^2 \sin \theta} \frac{\mu b^2 I}{4 \pi} \left(\mathbf{e_r} \frac{2}{r} \cos \theta \sin \theta  + \mathbf{e_\theta} r \sin^2\theta \, r^{-2}\right) =
+    \\
+     &= \frac{\mu I b^2 }{4 \, r^3} \left( \mathbf{e_r} 2 \cos \theta + \mathbf{e_\theta} \sin \theta \right)
+\end{aligned}
+\]
+Then, by inverting equation \ref{eq:BH}, we obtain the final expression for $\mathbf{H}$:
+\begin{equation}
+    \mathbf{H} = \frac{ I b^2}{4 \, r^3} \left( \mathbf{e_r} 2 \cos \theta + \mathbf{e_\theta} \sin \theta \right)
+    \label{eq:H_spheric}
+\end{equation}
+which can also be expressed using the Cartesian unit vectors \((\mathbf{e}_x, \mathbf{e}_y, \mathbf{e}_z)\) by substituting \(\mathbf{e}_r\) with \ref{e_r} and \(\mathbf{e}_\theta\) with \ref{e_theta}:
+\[
+\mathbf{H} = \frac{I b^2}{4 \pi \, r^3} \left[ (2\cos^2\theta - \sin^2\theta) \mathbf{e}_x + 3\cos\theta \sin\theta \cos\phi \, \mathbf{e}_y + 3\cos\theta \sin\theta \sin\phi \, \mathbf{e}_z \right]
+\]
+or in vector form:
+\[
+\mathbf{H} = \frac{I b^2}{4 \, r^3} \begin{bmatrix}
+2\cos^2\theta - \sin^2\theta \\
+3\cos\theta \sin\theta \cos\phi \\
+3\cos\theta \sin\theta \sin\phi
+\end{bmatrix}
+\]
+We can finally find the expression for $\mathbf{H}$ using only Cartesian coordinates by inverting the equations in \ref{Conversion from Spherical to Cartesian Coordinates}:
+\[
+\mathbf{H} = \frac{I b^2}{4 \, r^5} \begin{bmatrix}
+2x^2 - y^2 - z^2 \\
+3xy \\
+3xz
+\end{bmatrix}
+\]
+which has been derived by exploiting the Pythagorean identity.
+
+
+
+
+
+
+
+

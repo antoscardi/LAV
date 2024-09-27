@@ -1,0 +1,157 @@
+% !TeX encoding = UTF-8
+% !TeX program = pdflatex
+% !TeX spellcheck = eng_ENG
+
+%Pubblico il seguente file per condividere con i miei compagni di corso la struttura da me configurata per la tesi in medicina e chirurgia al Sant'Andrea  
+
+%Qui tutto ciò che c’ è da saper su LaTeX: http://www.lorenzopantieri.net/LaTeX_files/ArteLaTeX.pdf 
+%Per scrivere la bibliografia puoi vedere il seguente link: https://www.guitex.org/home/images/doc/GuideGuIT/bibliografia.pdf
+
+\documentclass[a4paper, oneside]{sapthesis}
+
+%qui ci sono svariati pacchetti utili per far funzionare il programma
+\usepackage{microtype}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{imakeidx}
+\usepackage{subfigure}
+\usepackage[acronym]{glossaries}
+\usepackage{graphicx}
+\captionsetup{labelsep=quad}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{blindtext}
+
+\usepackage[linguistics]{forest} %per dare i diagrammi: https://texdoc.org/serve/forest/0
+
+\newcommand*{\belowrulesepcolor}[1]{% 
+  \noalign{% 
+  \kern-\belowrulesep \begingroup \color{#1}% 
+  \hrule height\belowrulesep \endgroup }%
+}
+\newcommand*{\aboverulesepcolor}[1]{% 
+  \noalign{%
+  \begingroup \color{#1}% 
+  \hrule height\aboverulesep \endgroup \kern-\aboverulesep }%
+}
+
+%\usepackage[sort]{natbib}
+%\bibliographystyle{plainyr-rev} %la bibiografia ordinata in ordine di data dalla più recente
+\usepackage{graphicx} % Required for inserting images
+\usepackage[
+backend=biber,
+style=ieee,
+sorting=ynt
+]{biblatex}
+\usepackage{subfiles}
+\usepackage{enumitem}
+
+\usepackage{tikz}
+\usepackage{comment}
+\usetikzlibrary{angles,quotes,intersections}
+
+%Styles
+\tikzset{axis/.style={thick,-latex}}
+\tikzset{vec/.style={thick,blue}}
+\tikzset{univec/.style={thick,red,-latex}}
+
+%Notation
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath, slashed}
+\usepackage{amsfonts}
+
+\addbibresource{bibliography.bib}
+%\setcitestyle{super,open={(},close={)}}
+
+\hypersetup{pdftitle={TITOLO TESI}, pdfauthor={Antonio Scardino}}
+\title{Localization of multiple avalanche victims by multiple UAVs}
+\author{Antonio Scardino}
+\IDnumber{2020613}
+\course{Laurea Magistrale in Artificial Intelligence and Robotics}
+\courseorganizer{Facoltà di Ingegneria dell'informazione, informatica e statistica}
+\AcademicYear{2023/2024}
+\advisor{Andrea Cristofaro PhD}
+\customadvisorlabel{Relatore}
+%\coadvisor{Dott.ssa Nome Cognome}
+%\customcoadvisorlabel{Correlatrice}
+%\director{Dott.  Nome Cognome}
+%\customdirectorlabel{Specializzando\\Responsabile della ricerca}
+\authoremail{scardino.2020613@studenti.uniroma1.it}
+\copyyear{2024}
+\thesistype{Tesi sperimentale retrospettiva monocentrica}
+\examdate{24 Gennaio 2024}
+\examiner{Prof. Tizio} 
+\examiner{Prof. Caio} 
+\examiner{Prof. Sempronio}  
+\examiner{Prof. ...}  
+\examiner{Prof. ...} 
+\examiner{Prof. ...}  
+\examiner{Prof. ...} 
+
+%In caso di titoli di section a 2 righe
+%\setlength{\headheight}{22.59052pt}
+%\addtolength{\topmargin}{-10.59052pt}
+
+\makeindex
+\makeglossaries
+\input{glossario}
+
+\includeonly{Cap_1,Cap_2,Cap_3,Cap_4,Cap_5}
+\newcommand{\Fig}[1]{[{\footnotesize \texttt{Fig.#1}}]}
+\newcommand{\citfig}[1]{\ap{\scriptsize\textrm{(\textit{F#1})}}}
+
+\begin{document}
+\frontmatter
+\maketitle
+\dedication{Dedicato a \\
+SCRIVI QUI LA DEDICA
+}
+
+\input{abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\phantomsection
+\addcontentsline{toc}{chapter}{Acronomi}
+\printglossary[type=\acronymtype]
+
+\mainmatter
+\include{Cap_1}
+\include{Cap_2}
+\include{Cap_3}
+\include{Cap_4}
+\include{Cap_5}
+
+\backmatter
+\cleardoublepage
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\glossaryname}
+\printglossary
+
+%\newpage
+%\phantomsection
+%\addcontentsline{toc}{chapter}{\indexname}
+%\printindex
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+
+
+\printbibliography
+\nocite{*} % to include references that were not cited
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{Figure}
+
+\input{ringraziamenti}
+
+\end{document}

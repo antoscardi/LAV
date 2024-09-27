@@ -219,7 +219,7 @@ classdef GradientofSum
                 lambda2 = lambdas(2);
                 lambda3 = lambdas(3);
                 
-                scaling_factor = 10^7;
+                scaling_factor = 1;
                 % Compute NSS using the given formula
                 NSS(i) = scaling_factor *sqrt(-lambda2^2 - lambda1 * lambda3);
             end

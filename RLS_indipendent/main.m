@@ -65,7 +65,7 @@ fields_array = cell(n_sources, 1);
 % 3D Case
 global R_matrices
 R_matrices = cell(n_sources, 1);
-n_points = 40;
+n_points = 100;
 space3D = Space('3D', 3, n_points);
 pitch = deg2rad(35); 
 for i = 1:n_sources
