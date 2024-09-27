@@ -11,7 +11,7 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 3;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
@@ -30,7 +30,7 @@ p_sources = [ 20, 50;     % Coordinates of Source 1 (x, y).
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
-inertia_initial = 1.01;      % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
+inertia = 1.02;              % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
                              % inertia promotes exploration, while lower values promote faster convergence.
                              % Typical range: [1 - 1.4]
 
@@ -54,6 +54,8 @@ communication_radius = 5;    % Distance between two drones that enables communic
 
 step_size = 40;              % Set how far the drone should move away in ONLY ONE ITERATION
 
+exclusion_zone_radius = 1; 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,7 +71,7 @@ group_indices = sort_drones_in_groups(n_drones, n_groups);
 artva = ARTVAs();
 
 % Initialize the particles array using a cell array
-particles = init_drones(n_drones, bounds, group_indices, max_velocity, velocity_randomness); 
+particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_indices, max_velocity, velocity_randomness); 
 
 % Initialize the Plotter
 plotter = Plotter(p_sources, bounds, n_drones, group_indices);
@@ -98,7 +100,6 @@ end
 % Initialize exclusion zones as an empty matrix to store the positions of discovered sources
 for iter = iter:n_iterations
     %inertia = inertia_initial - (iter / n_iterations)^4;
-    inertia = inertia_initial;
     
     for i = 1:n_drones
         particle = particles{i};

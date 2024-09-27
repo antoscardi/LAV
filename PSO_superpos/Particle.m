@@ -40,7 +40,7 @@ classdef Particle < handle
     
     methods
         % Constructor to initialize particle with position, velocity, and bounds
-        function obj = Particle(goal, velocity_randomness, max_velocity, bounds, group_idx, identifier, n_drones)
+        function obj = Particle(exclusion_zone_radius, goal, velocity_randomness, max_velocity, bounds, group_idx, identifier, n_drones)
             obj.max_velocity = max_velocity;
             %obj.position =  [bounds(1), bounds(1)];   % Initialize all drones at the lower bound [-100, -100].;
             obj.position = [0, 0];                     % Initialize all drones at the center
@@ -57,7 +57,7 @@ classdef Particle < handle
             obj.goal = goal;
             obj.victim_found_flag = false;
             obj.has_shared_matrix = false(n_drones, 1);
-            obj.exclusion_zone_radius = 1; % The NSS decreases as r^4 so after 2 meters is 0.125
+            obj.exclusion_zone_radius = exclusion_zone_radius; % The NSS decreases as r^4 so after 2 meters is 0.125
             fprintf('Drone initialized at pos: [%1d, %1d] and vel: [%.1f, %.1f]  with group index: %d and Goal :[%.1f, %.1f]\n', ...
                 obj.position(1), obj.position(2), obj.velocity(1), obj.velocity(2),obj.group_idx, obj.goal(1), obj.goal(2));
         end
