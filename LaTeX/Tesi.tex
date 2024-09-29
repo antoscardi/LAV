@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 % !TeX program = pdflatex
-% !TeX spellcheck = eng_ENG
+% !TeX spellcheck = it_IT
 
 %Pubblico il seguente file per condividere con i miei compagni di corso la struttura da me configurata per la tesi in medicina e chirurgia al Sant'Andrea  
 
@@ -11,7 +11,7 @@
 
 %qui ci sono svariati pacchetti utili per far funzionare il programma
 \usepackage{microtype}
-\usepackage[english]{babel}
+\usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{imakeidx}
 \usepackage{subfigure}
@@ -37,50 +37,24 @@
   \hrule height\aboverulesep \endgroup \kern-\aboverulesep }%
 }
 
-%\usepackage[sort]{natbib}
-%\bibliographystyle{plainyr-rev} %la bibiografia ordinata in ordine di data dalla più recente
-\usepackage{graphicx} % Required for inserting images
-\usepackage[
-backend=biber,
-style=ieee,
-sorting=ynt
-]{biblatex}
-\usepackage{subfiles}
-\usepackage{enumitem}
+\usepackage[sort]{natbib}
+\bibliographystyle{plainyr-rev} %la bibiografia ordinata in ordine di data dalla più recente
+\setcitestyle{super,open={(},close={)}}
 
-\usepackage{tikz}
-\usepackage{comment}
-\usetikzlibrary{angles,quotes,intersections}
-
-%Styles
-\tikzset{axis/.style={thick,-latex}}
-\tikzset{vec/.style={thick,blue}}
-\tikzset{univec/.style={thick,red,-latex}}
-
-%Notation
-\usepackage{physics}
-\usepackage{bm}
-\usepackage{tikz-3dplot}
-\usepackage{amsmath, slashed}
-\usepackage{amsfonts}
-
-\addbibresource{bibliography.bib}
-%\setcitestyle{super,open={(},close={)}}
-
-\hypersetup{pdftitle={TITOLO TESI}, pdfauthor={Antonio Scardino}}
-\title{Localization of multiple avalanche victims by multiple UAVs}
-\author{Antonio Scardino}
-\IDnumber{2020613}
-\course{Laurea Magistrale in Artificial Intelligence and Robotics}
-\courseorganizer{Facoltà di Ingegneria dell'informazione, informatica e statistica}
-\AcademicYear{2023/2024}
-\advisor{Andrea Cristofaro PhD}
-\customadvisorlabel{Relatore}
+\hypersetup{pdftitle={TITOLO TESI}, pdfauthor={Nome Cognome}}
+\title{TITOLO TESI}
+\author{Nome Cognome}
+\IDnumber{MATRICOLA}
+\course{Laurea Magistrale in Medicina e Chirurgia}
+\courseorganizer{Facoltà di Medicina e Psicologia}
+\AcademicYear{2022/2023}
+\advisor{Dott.\textsuperscript{ssa} Nome Cognome}
+\customadvisorlabel{Relatrice}
 %\coadvisor{Dott.ssa Nome Cognome}
 %\customcoadvisorlabel{Correlatrice}
 %\director{Dott.  Nome Cognome}
 %\customdirectorlabel{Specializzando\\Responsabile della ricerca}
-\authoremail{scardino.2020613@studenti.uniroma1.it}
+\authoremail{email autore}
 \copyyear{2024}
 \thesistype{Tesi sperimentale retrospettiva monocentrica}
 \examdate{24 Gennaio 2024}
@@ -143,10 +117,7 @@ SCRIVI QUI LA DEDICA
 \newpage
 \phantomsection
 \addcontentsline{toc}{chapter}{\bibname}
-
-
-\printbibliography
-\nocite{*} % to include references that were not cited
+\bibliography{bibiografia}
 
 \newpage
 \phantomsection
