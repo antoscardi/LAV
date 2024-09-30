@@ -77,7 +77,7 @@ classdef Plotter < handle
             obj.scatter_drones.YData = positions(:, 2);
             % Update the title
             title(obj.ax, sprintf('Iteration %d', iter));
-            pause(0.02)
+            pause(0.03)
             drawnow;
         end
 

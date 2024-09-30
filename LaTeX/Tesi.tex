@@ -1,46 +1,64 @@
 % !TeX encoding = UTF-8
 % !TeX program = pdflatex
-% !TeX spellcheck = it_IT
+% !TeX spellcheck = eng_ENG
 
-%Pubblico il seguente file per condividere con i miei compagni di corso la struttura da me configurata per la tesi in medicina e chirurgia al Sant'Andrea  
-
-%Qui tutto ciò che c’ è da saper su LaTeX: http://www.lorenzopantieri.net/LaTeX_files/ArteLaTeX.pdf 
-%Per scrivere la bibliografia puoi vedere il seguente link: https://www.guitex.org/home/images/doc/GuideGuIT/bibliografia.pdf
+%Pubblico il seguente file per condividere con i miei compagni di corso la struttura da me 
+%configurata per la tesi in medicina e chirurgia al Sant'Andrea  
 
 \documentclass[a4paper, oneside]{sapthesis}
 
-%qui ci sono svariati pacchetti utili per far funzionare il programma
+% Useful packages for functionality
 \usepackage{microtype}
-\usepackage[italian]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
 \usepackage{imakeidx}
-\usepackage{subfigure}
 \usepackage[acronym]{glossaries}
 \usepackage{graphicx}
-\captionsetup{labelsep=quad}
+\usepackage{caption} % Added missing caption package
+\captionsetup{labelsep=quad} 
 \usepackage{array}
 \usepackage{ragged2e}
 \usepackage[table]{xcolor}
 \usepackage{hyperref}
 \usepackage{blindtext}
 
-\usepackage[linguistics]{forest} %per dare i diagrammi: https://texdoc.org/serve/forest/0
+% Bibliography setup using biblatex and biber
+\usepackage[
+backend=biber,
+style=ieee, % You can change this style as per your preference
+sorting=ynt
+]{biblatex}
+\addbibresource{bibliography.bib} % Ensure the .bib file exists and is correct
 
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{tgtermes}
+\usetikzlibrary{angles,quotes,intersections}
+\usepackage{subcaption}
+\tikzset{axis/.style={thick,-latex}}
+\tikzset{vec/.style={thick,blue}}
+\tikzset{univec/.style={thick,red,-latex}}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath, slashed}
+\usepackage{amsfonts}
+\usepackage[linguistics]{forest} % Diagram package
+
+% Custom command fixes
 \newcommand*{\belowrulesepcolor}[1]{% 
   \noalign{% 
   \kern-\belowrulesep \begingroup \color{#1}% 
-  \hrule height\belowrulesep \endgroup }%
+  \hrule height\belowrulesep \endgroup \relax }%
 }
 \newcommand*{\aboverulesepcolor}[1]{% 
   \noalign{%
   \begingroup \color{#1}% 
-  \hrule height\aboverulesep \endgroup \kern-\aboverulesep }%
+  \hrule height\aboverulesep \endgroup \kern-\aboverulesep \relax }%
 }
 
-\usepackage[sort]{natbib}
-\bibliographystyle{plainyr-rev} %la bibiografia ordinata in ordine di data dalla più recente
-\setcitestyle{super,open={(},close={)}}
-
+% Metadata for PDF
 \hypersetup{pdftitle={TITOLO TESI}, pdfauthor={Nome Cognome}}
 \title{TITOLO TESI}
 \author{Nome Cognome}
@@ -50,30 +68,23 @@
 \AcademicYear{2022/2023}
 \advisor{Dott.\textsuperscript{ssa} Nome Cognome}
 \customadvisorlabel{Relatrice}
-%\coadvisor{Dott.ssa Nome Cognome}
-%\customcoadvisorlabel{Correlatrice}
-%\director{Dott.  Nome Cognome}
-%\customdirectorlabel{Specializzando\\Responsabile della ricerca}
 \authoremail{email autore}
 \copyyear{2024}
 \thesistype{Tesi sperimentale retrospettiva monocentrica}
 \examdate{24 Gennaio 2024}
+% You can reduce the number of examiners if the title page looks cluttered
 \examiner{Prof. Tizio} 
 \examiner{Prof. Caio} 
 \examiner{Prof. Sempronio}  
 \examiner{Prof. ...}  
 \examiner{Prof. ...} 
-\examiner{Prof. ...}  
-\examiner{Prof. ...} 
 
-%In caso di titoli di section a 2 righe
-%\setlength{\headheight}{22.59052pt}
-%\addtolength{\topmargin}{-10.59052pt}
-
+% Glossaries
 \makeindex
 \makeglossaries
 \input{glossario}
 
+% Content setup
 \includeonly{Cap_1,Cap_2,Cap_3,Cap_4,Cap_5}
 \newcommand{\Fig}[1]{[{\footnotesize \texttt{Fig.#1}}]}
 \newcommand{\citfig}[1]{\ap{\scriptsize\textrm{(\textit{F#1})}}}
@@ -81,9 +92,9 @@
 \begin{document}
 \frontmatter
 \maketitle
-\dedication{Dedicato a \\
-SCRIVI QUI LA DEDICA
-}
+%\dedication{Dedicato a \\
+%SCRIVI QUI LA DEDICA
+%}
 
 \input{abstract}
 \tableofcontents
@@ -91,7 +102,7 @@ SCRIVI QUI LA DEDICA
 \listoftables
 
 \phantomsection
-\addcontentsline{toc}{chapter}{Acronomi}
+\addcontentsline{toc}{chapter}{Acronimi}
 \printglossary[type=\acronymtype]
 
 \mainmatter
@@ -109,15 +120,11 @@ SCRIVI QUI LA DEDICA
 \addcontentsline{toc}{chapter}{\glossaryname}
 \printglossary
 
-%\newpage
-%\phantomsection
-%\addcontentsline{toc}{chapter}{\indexname}
-%\printindex
-
 \newpage
 \phantomsection
 \addcontentsline{toc}{chapter}{\bibname}
-\bibliography{bibiografia}
+%\nocite{*} % Uncomment to include uncited references
+\printbibliography % Prints the bibliography
 
 \newpage
 \phantomsection

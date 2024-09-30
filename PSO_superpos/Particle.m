@@ -69,8 +69,8 @@ classdef Particle < handle
                            cognitive * rand() * (obj.p_best - obj.position) + ...
                            social * rand() * (g_best_local - obj.position);
 
-            % Add random noise to velocity between [-1, 1]
-            obj.velocity = obj.velocity + obj.velocity_randomness * (2 * rand(1, 2) - 1);
+            % Add random noise to velocity 
+            obj.velocity = obj.velocity + obj.velocity_randomness * (2 * rand(1, 2) - 1) * norm(obj.velocity);
 
             % Cap velocity to max allowable speed
             if norm(obj.velocity) > obj.max_velocity
