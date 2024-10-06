@@ -36,11 +36,12 @@ classdef Particle < handle
         shared_exclusion_zones % Exclusion zones shared by other drones 
         has_shared_matrix      % A matrix to track if exclusion zones have been shared with other drones
         exclusion_zone_radius  % How big is the exclusion zone
+        inertia                % each particle has it s own inertia
     end
-    
+
     methods
         % Constructor to initialize particle with position, velocity, and bounds
-        function obj = Particle(exclusion_zone_radius, goal, velocity_randomness, max_velocity, bounds, group_idx, identifier, n_drones)
+        function obj = Particle(exclusion_zone_radius, goal, velocity_randomness, max_velocity, bounds, group_idx, identifier, n_drones, inertia)
             obj.max_velocity = max_velocity;
             %obj.position =  [bounds(1), bounds(1)];   % Initialize all drones at the lower bound [-100, -100].;
             obj.position = [0, 0];                     % Initialize all drones at the center
@@ -57,25 +58,28 @@ classdef Particle < handle
             obj.goal = goal;
             obj.victim_found_flag = false;
             obj.has_shared_matrix = false(n_drones, 1);
+            obj.inertia = inertia;
             obj.exclusion_zone_radius = exclusion_zone_radius; % The NSS decreases as r^4 so after 2 meters is 0.125
             fprintf('Drone initialized at pos: [%1d, %1d] and vel: [%.1f, %.1f]  with group index: %d and Goal :[%.1f, %.1f]\n', ...
                 obj.position(1), obj.position(2), obj.velocity(1), obj.velocity(2),obj.group_idx, obj.goal(1), obj.goal(2));
         end
 
         % Update the particle's velocity based on personal and global best
-        function obj = update_velocity(obj, g_best_local, inertia, cognitive, social)
+        function obj = update_velocity(obj, g_best_local, cognitive, social)
             % Personal and social components
-            obj.velocity = inertia * obj.velocity + ...
+            obj.velocity = obj.inertia * obj.velocity + ...
                            cognitive * rand() * (obj.p_best - obj.position) + ...
                            social * rand() * (g_best_local - obj.position);
-
+            %disp(obj.velocity)
             % Add random noise to velocity 
             obj.velocity = obj.velocity + obj.velocity_randomness * (2 * rand(1, 2) - 1) * norm(obj.velocity);
 
             % Cap velocity to max allowable speed
             if norm(obj.velocity) > obj.max_velocity
                 obj.velocity = (obj.velocity / norm(obj.velocity)) * obj.max_velocity;
-            end     
+            end
+            %fprintf('Drone %d has velocity [%.1f, %.1f]\n', ...
+            %        obj.identifier, obj.velocity(1), obj.velocity(2));     
         end
         
         % Update particle's position based on velocity and apply boundary conditions
@@ -93,7 +97,7 @@ classdef Particle < handle
                 obj.p_best = obj.position;
                 obj.nss_best_value = obj.nss_value;
             end
-            if obj.nss_value > 500 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
+            if obj.nss_value > 1000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
                 obj.victim_found_flag = true;
                 obj.my_exclusion_zone = obj.position;  % Add current position as my exclusion zone
                 fprintf('Drone %d has found a source at position [%.1f, %.1f]\n', ...
@@ -149,9 +153,19 @@ classdef Particle < handle
         function obj = move_away_from_exclusion(obj, exclusion_zone, step_size)
             % Calculate the direction away from the exclusion zone
             direction_away = obj.position - exclusion_zone;
-            direction_away = direction_away / norm(direction_away);  % Normalize the direction vector
-            % Update the position of the drone by moving it a small step away
-            obj.position = obj.position + step_size * direction_away;
+            direction_away_normalized = direction_away / norm(direction_away);  % Normalize the direction vector
+
+            % Print drone's current position, exclusion zone, direction vector before and after normalization in one line
+            fprintf('Drone Pos: [%.2f, %.2f], Exclusion Zone Pos: [%.2f, %.2f], Direction Vec (raw): [%.2f, %.2f], Direction Vec (norm): [%.2f, %.2f]\n', ...
+                obj.position(1), obj.position(2), ...
+                exclusion_zone(1), exclusion_zone(2), ...
+                direction_away(1), direction_away(2), ...
+                direction_away_normalized(1), direction_away_normalized(2));
+            % Update the position of the drone by moving it a small step away %IN OPPOSITE DIRECTION FROM WHERE YOU CAME FROM
+            obj.position = obj.position + step_size * -direction_away_normalized;
+            % Print the new position of the drone
+            fprintf('New Drone Position: [%.2f, %.2f]\n', obj.position(1), obj.position(2));
+            %error("stop")
         end
     end
 end

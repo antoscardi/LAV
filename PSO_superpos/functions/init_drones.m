@@ -1,4 +1,4 @@
-function particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_indices, max_velocity, velocity_randomness)
+function particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_indices, max_velocity, velocity_randomness, inertia)
     % This function sets up n_drones in a circular formation with assigned goals 
     % based on their angles in space. Each drone is initialized with a position, 
     % velocity, and group index. The drones are assigned a goal based on their 
@@ -44,7 +44,7 @@ function particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_
             end
             
             % Initialize particle with the computed goal and other parameters
-            particles{i} = Particle(exclusion_zone_radius,goal, velocity_randomness, max_velocity, bounds, group_indices(i), i, n_drones);  
+            particles{i} = Particle(exclusion_zone_radius, goal, velocity_randomness, max_velocity, bounds, group_indices(i), i, n_drones, inertia);  
         end
     end
     
