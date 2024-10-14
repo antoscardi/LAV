@@ -152,7 +152,7 @@ classdef Particle < handle
         % Function to move the drone away from the exclusion zone
         function obj = move_away_from_exclusion(obj, exclusion_zone, step_size)
             % Calculate the direction away from the exclusion zone
-            direction_away = obj.position - exclusion_zone;
+            direction_away = exclusion_zone - obj.position;
             direction_away_normalized = direction_away / norm(direction_away);  % Normalize the direction vector
 
             % Print drone's current position, exclusion zone, direction vector before and after normalization in one line
@@ -162,7 +162,7 @@ classdef Particle < handle
                 direction_away(1), direction_away(2), ...
                 direction_away_normalized(1), direction_away_normalized(2));
             % Update the position of the drone by moving it a small step away %IN OPPOSITE DIRECTION FROM WHERE YOU CAME FROM
-            obj.position = obj.position + step_size * -direction_away_normalized;
+            obj.position = obj.position + step_size * direction_away_normalized;
             % Print the new position of the drone
             fprintf('New Drone Position: [%.2f, %.2f]\n', obj.position(1), obj.position(2));
             %error("stop")

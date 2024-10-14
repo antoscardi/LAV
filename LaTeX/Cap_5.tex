@@ -66,7 +66,7 @@ particles in different groups based on the following logic (see Algorithm~\ref{a
 for the localization of multiple sources only when the number of drones is equal to or greater than 
 the number of sources.
 
-\subsection{Exploration phase}
+\section{Exploration phase}
 \par Unlike the modified PSO algorithm, in our implementation, the drones are not randomly initialized. 
 At the start of the simulation, all drones are located at the origin of the search space. 
 An Exploration Phase begins where the PSO algorithm is not yet employed. 
@@ -112,7 +112,7 @@ while $m$ is the slope of the trajectory calculated from the drone's angle.
 \end{figure}
 
 \section{Exploitation Phase}
-\section{Velocity Update}
+\subsection{Velocity Update}
 At each time step, the velocity update of the standard PSO algorithm is modified in order to favor the complete 
 exploration of the search space and to avoid premature convergence to local maxima, where a source is not present. 
 A uniform random noise is added to the velocity of each particle to achieve a \textit{persistence of excitation},
@@ -120,7 +120,7 @@ allowing every drone to explore new and different directions,
 as described in the following formula:
 \[
 \mathbf{v}_i = \mathbf{v}_i + \beta \cdot \mathbf{r} \cdot ||\mathbf{v}_i||
-\]
+\] \label{eq:persistence_of_excitation}
 where:
 \begin{itemize}
     \item \(\beta\) is an hyperparameter chosen in the [0,1] range.
@@ -133,63 +133,152 @@ to a maximum value \(v_{\text{max}}\):
 \[
 \mathbf{v}_i = 
 \begin{cases} 
-\mathbf{v}_{\text{max}}, & \text{if } ||\mathbf{v}_i|| \geq v_{\text{max}} \\
+v_{\text{max}} \cdot \frac{\mathbf{v}_i}{\|\mathbf{v}_i\|}, & \text{if } \|\mathbf{v}_i\| \geq v_{\text{max}} \\
 \mathbf{v}_i, & \text{otherwise}
 \end{cases}
+\] \label{eq:velocity_clamping}
+
+
+\subsection{Exclusion Zone Mechanism}
+An additional modification to the standard PSO algorithm 
+is the introduction of an exclusion zone mechanism.
+This mechanism prevents multiple drones from focusing 
+on the same source. It involves defining regions that 
+other particles should avoid, promoting better exploration 
+and reducing redundancy in source detection. The exclusion 
+zone mechanism involves several key parts:
+\begin{itemize}
+    \item \textbf{Detection}: A drone sets its exclusion zone 
+    when it identifies a source with a signal strength (NSS) 
+    exceeding a predefined threshold.
+    \item \textbf{Sharing}: The drone shares the position of 
+    its exclusion zone with neighboring drones.
+    \item \textbf{Checking}: Each drone continuously checks 
+    its position against all shared exclusion zones.
+    \item \textbf{Avoidance}: If a drone finds itself within 
+    a shared exclusion zone, it moves away from the zone 
+    following a calculated escape vector.
+\end{itemize}
+
+\subsubsection{Detection}
+Each drone establishes an exclusion zone when it detects a 
+source, meaning it has computed an NSS higher than a certain 
+threshold. The exclusion zone is defined as a circular area 
+centered around the position of the drone where the source 
+was detected. The radius of this zone is a fixed parameter, 
+chosen experimentally, which determines the \textit{resolution} 
+of the algorithm.
+
+\subsubsection{Sharing}
+Our algorithm favors a decentralized approach, which is useful 
+in scenarios where communication between drones is not always 
+possible or easy. A drone can communicate with another when 
+they are less than 5 meters apart (\(r_{\text{comm}}\)).
+When a drone identifies a source 
+and sets its exclusion zone, it shares the estimated position 
+of the source with the drones within the communication range. 
+Each drone maintains a list of exclusion zones that it has 
+received from others. This sharing process helps the swarm 
+avoid redundant exploration around already identified sources.
+
+\subsubsection{Avoidance}
+When a drone detects that it is within the radius of a shared 
+exclusion zone, it is programmed to move away from it. 
+The drone computes a new goal position where it needs to go, far from the 
+exclusion zone . After it reaches the goal, 
+the PSO algorithm resumes, searching for a new source 
+in a different area of the space.
+
+The goal position is calculated using the vector joining 
+the exclusion zone center \(\mathbf{c}\) and the current 
+position of the drone \(\mathbf{p}_{\text{in\_zone}}\), when the drone finds itself 
+in an exclusion zone. The formula is given by:
+
+\[
+\mathbf{d} = \mathbf{c} - \mathbf{p}_{\text{in\_zone}}
 \]
+\[
+\mathbf{p}_{\text{goal}} = \mathbf{p}_{\text{in\_zone}} + \alpha \frac{\mathbf{d}}{\|\mathbf{d}\|}
+\] \label{eq:move_away}
 
-\subsection{Exlusion Zones Mechanism}
+where:
+\begin{itemize}
+    \item \(\mathbf{d}\): Direction vector from the exclusion 
+    zone center to the drone's position.
+    \item \(\alpha\): Step size parameter, determining the 
+    distance the drone should travel away from the exclusion zone.
+    \item \(\mathbf{p}_{\text{goal}}\): Updated goal position of the drone.
+    \item \(\|\mathbf{d}\|\): Norm (magnitude) of the direction 
+    vector \(\mathbf{d}\), used to normalize the direction.
+\end{itemize}
+This calculation ensures that the drone moves directly away 
+from the exclusion zone and covers a distance proportional 
+to \(\alpha\). 
+\\
 
-\subsection{Complete Modified PSO}
+The exclusion zone mechanism allows the swarm 
+to adaptively adjust its search strategy based on the locations 
+of previously detected sources, leading to faster convergence 
+and improved accuracy in multi-source localization.
+Finally, we can present the complete modified PSO algorithm in 
+Algorithm \ref{alg:PSO}: 
 \begin{algorithm}
     \caption{Particle Swarm Optimization for Multi-Source Localization}\label{alg:PSO}
     \begin{algorithmic}[1]
-        \State Initialize group best positions $G_{\text{best}}$ and values $V_{\text{best}}$
-        \State Assign each drone to a group corresponding to one of the sources
+        \State \textbf{Initialize} drones' positions to the center of the search space.
+        \State \textbf{Initialize} group best positions \( G_{\text{best}} \) and values \(\textit{NSS}_{\text{best}}\).
+        \State \textbf{Assign} each drone to a group using function \ref{alg:sort_drones_in_groups}.
         
-        \For{each iteration $t = 1$ to $n\_iterations$}
-            \For{each drone $i$}
-                \State Update velocity:
-                \[
-                    v_i(t+1) = \omega v_i(t) + c_1 \cdot r_1 \cdot (p_{\text{best}} - p_i(t)) + c_2 \cdot r_2 \cdot (G_{\text{best}} - p_i(t))
-                \]
-                \State Limit the velocity to $v_{\text{max}}$
-                \State Update position:
-                \[
-                    p_i(t+1) = p_i(t) + v_i(t+1)
-                \]
-                \State Apply boundary conditions to keep $p_i(t+1)$ within $bounds$
+        \State \textbf{Exploration Phase}:
+        \State \textbf{Compute} exploration goals using function \ref{alg:exploration_goals}.
+        \For{each drone \( i \)}
+            \State \textbf{Do}: reach goal.
+        \EndFor
+
+        \State \textbf{Exploitation Phase}:
+        \For{each iteration \( t = 1 \) to \( n_{iters} \)}
+            \For{each drone \( i \)}
+                \State \textbf{Update} velocity using standard PSO formula as in Eq.\eqref{eq:velocity}.
+                \State \textbf{Apply} persistence of excitation as in Eq. \eqref{eq:persistence_of_excitation}.
+                \State \textbf{Limit} velocity to \( v_{\text{max}} \) as in Eq. \eqref{eq:velocity_clamping}.
+                \State \textbf{Update} position as in Eq. \eqref{eq:position}.
+                \State \textbf{Apply} boundary conditions to keep \(\mathbf{p}_i(t+1)\) within search bounds.
                 
-                \For{each other drone $j \neq i$}
-                    \If{$||p_i(t+1) - p_j(t+1)|| \leq r_{\text{comm}}$}
-                        \If{drone $i$ or $j$ has found a source}
-                            \State Share exclusion zones between drones
+                \For{each other drone \( j \neq i \)}
+                    \If{\(\|\mathbf{p}_i(t+1) - \mathbf{p}_j(t+1)\| \leq r_{\text{comm}}\)}
+                        \If{\(\text{NSS}_{i}\) or \(\text{NSS}_{j} > \text{threshold}\)}
+                            \State \textbf{Share} exclusion zones between drones \( i \) and \( j \).
                         \EndIf
                     \EndIf
                 \EndFor
                 
-                \State Check if drone $i$ is within an exclusion zone
-                \If{drone $i$ is in an exclusion zone}
-                    \If{drone $i$ is not alone in its group}
-                        \State Reassign drone $i$ to a new group
-                    \Else
-                        \State Move drone $i$ away from the exclusion zone
-                        \State Introduce randomness to position and reset personal best $p_{\text{best}}$
+                \State \textbf{Check} if drone \( i \) is within an exclusion zone.
+                \If{drone \( i \) is in an exclusion zone}
+                    \If{drone \( i \) is not alone in its group}
+                        \State \textbf{Reassign} drone \( i \) to a new group.
+                        \State \textbf{Initialize} \( G_{\text{best}} \) and \(\textit{NSS}_{\text{best}}\) of the new group.
                     \EndIf
+                    \State \textbf{Move} away from exclusion zone as in Eq. \eqref{eq:move_away}.
+                    \State \textbf{Reset} personal best \(\mathbf{p}_{\text{best}, i}\).
+                    \State \textbf{Set} drone \( i \) inertia \(\omega = 0\).
                 \Else
-                    \State Evaluate NSS at $p_i(t+1)$
-                    \If{current NSS $>$ personal best NSS}
-                        \State Update personal best $p_{\text{best}}$
+                    \State \textbf{Evaluate} NSS at \(\mathbf{p}_i(t+1)\).
+                    \If{current NSS \( > \) personal best NSS}
+                        \State \textbf{Update} personal best \(\mathbf{p}_{\text{best}, i}\).
                     \EndIf
-                    \If{current NSS $>$ group best NSS}
-                        \State Update group best $G_{\text{best}}$
+                    \If{current NSS \( > \) group best NSS}
+                        \State \textbf{Update} group best \( G_{\text{best}} \).
                     \EndIf
                 \EndIf
             \EndFor
         \EndFor
         
-        \State Return estimated source positions
+        \State \textbf{Return} \( G_{\text{best}} \).
     \end{algorithmic}
 \end{algorithm}
-
-    
+Note that the inertia of a drone that has found a source is set to zero (\(\omega = 0\)), increasing
+convergence speed.
+Throughout the process, each drone updates its personal 
+and group best positions based on newly evaluated NSS 
+values, like in the standard PSO algorithm. The final output is the set of best estimates 
+\( G_{\text{best}} \), composed of the best estimated position of a source by each group.

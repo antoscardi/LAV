@@ -8,9 +8,9 @@ Three Cartesian coordinate frames are defined as \cite{main} and shown in \ref{f
     \item Frame $t$ (transmitter ARTVA): denoted as $F_t = (O_t, x_t, y_t, z_t)$, is the body right-hand frame associated with the transmitter worn by the victim.
 \end{enumerate}
 For the sake of simplicity, we assume that the body frame of the drone coincides with $F_r$. 
-The position of $O_r$ relative to $O_t$ is indicated by the vector $\mathbf{p} \in \mathbb{R}^3$, with $\mathbf{p} = \mathbf{p}_r - \mathbf{p}_t$, 
+The position of $O_r$ relative to $O_t$ is indicated by the vector $\mathbf{p}_{tr} \in \mathbb{R}^3$, with $\mathbf{p}_{tr} = \mathbf{p}_r - \mathbf{p}_t$, 
 while the positions of $O_r$ and $O_t$ relative to $O_i$ are indicated, respectively, by the vectors $\mathbf{p}_r \in \mathbb{R}^3$ and $\mathbf{p}_t \in \mathbb{R}^3$.
-We use the apex $i$, $r$ or $t$ on the right of the vector to indicate in which frame the vector is expressed , e.g. $\mathbf{p}^r$. 
+We use the apex $i$, $r$ or $t$ on the left of the vector to indicate in which frame the vector is expressed , e.g. ${}^t p$. 
 If it is not specified, we assume the inertial frame.
 \begin{figure}
     \centering
@@ -23,12 +23,12 @@ If it is not specified, we assume the inertial frame.
     \draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$x_i$};
     % Point Pt1
     \coordinate (Pt1) at (5,0,5);
-    \draw[->, thick] (0,0,0) -- (Pt1) node[pos=0.5,anchor=east]{$\mathbf{p}_t^i$};      
+    \draw[->, thick] (0,0,0) -- (Pt1) node[pos=0.5,anchor=east]{${}^i \mathbf{p}_t$};      
     % Point tp
     \coordinate (p1) at (5,5,6);
-    \draw[->, thick] (5,0,5) -- (p1) node[pos=0.5,anchor=south]{$\stackrel{t}{\phantom{p}\bm{p}}$};      
+    \draw[->, thick] (5,0,5) -- (p1) node[pos=0.5,anchor=south]{${}^t \bm{p}_{tr}$};      
     % pr
-    \draw[->, thick] (0,0,0) -- (p1) node[pos=0.5,anchor=east]{$\mathbf{p}_r$};
+    \draw[->, thick] (0,0,0) -- (p1) node[pos=0.5,anchor=east]{${}^i \mathbf{p}_r$};
 
     \node at (p1) [anchor= south west] {$\mathbf{p}$};
     
@@ -90,8 +90,8 @@ and the approximated one $\frac{1}{a^2 }\cos^2 \theta + \frac{1}{b^2} \sin^2 \th
 \end{figure}
 
 Now we can express the magnitude using the Cartesian coordinates relative to the frame of the transmitter ARTVA $F_t$. 
-If we consider the point $\mathbf{p}^t$\[
-\mathbf{p}^t = \begin{pmatrix}
+If we consider the point ${}^t \mathbf{p}_{tr}$\[
+    {}^t \mathbf{p}_{tr} = \begin{pmatrix}
     x \\
     y \\
     z
@@ -137,8 +137,8 @@ In order to find the victim's position $\mathbf{p}_t$ with respect to the inerti
 Also from Figure \ref{fig:frames-1victim}, we can express the position of the receiver $\mathbf{p}_r$ in the inertial frame as the sum of the other two vectors:
 \[
 \begin{aligned}
-\mathbf{p}^i &= \mathbf{p}_t^i + \mathbf{p}^t \\
-\mathbf{p}^t &= R_t^i \, \mathbf{p}^t
+{}^i \mathbf{p}_r &= {}^i \mathbf{p}_t + {}^t \mathbf{p}_{tr} \\
+{}^t \mathbf{p}_{tr} &= R_t^i \,\, {}^i \mathbf{p}_{tr}
 \end{aligned}
 \]
 where $R_t^i$ is the rotation matrix that rotates axis $i$ to $t$ \cite{artva-gazebo}.
@@ -151,27 +151,27 @@ Also consider that from frame $i$ after a rotation $R_t^i$ we obtain the same or
 v1 is  coordinates of the point before the translation but after the rotation, the coordinate of the point wrt the inertial frame  i are v1^i = R p^{i2}
 \end{comment}
 
-From which we can find $\mathbf{p}_t$ by multiplying by $R^T$ since $R$ is orthogonal (orthogonal $R^T = R^{-1}$):
+From which we can find $\mathbf{p}_t$ by multiplying by ${R_t^i}^T$ since ${R_t^i}$ is orthogonal (${R_t^i}^T = {R_t^i}^{-1}$):
 
 \begin{equation}
-    \mathbf{p}^t = {R_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)
+    {}^t \mathbf{p}_{tr} = {R_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)
     \label{eq:pt}
 \end{equation}
 
-In addition, remembering how we defined the coordinates of $\mathbf{p}^t$, then from linear algebra:
+In addition, remembering how we defined the coordinates of ${}^t \mathbf{p}_{tr}$, then from linear algebra:
 \[
 \begin{aligned}
-x &= \mathbf{e}_x^T \mathbf{p}^t \\
-y &= \mathbf{e}_y^T \mathbf{p}^t \\
-x  &= \mathbf{e}_z^T \mathbf{p}^t
+x &= \mathbf{e}_x^T \, {}^t \mathbf{p}_{tr} \\
+y &= \mathbf{e}_y^T \, {}^t \mathbf{p}_{tr} \\
+x  &= \mathbf{e}_z^T  \, {}^t \mathbf{p}_{tr}
 \end{aligned}
 \]
 also,
 \[
-x^2 = x \cdot x = \left( \mathbf{e}_x^T \mathbf{p}^t \right)^T \cdot \, \left( \mathbf{e}_x^T \mathbf{p}^t \right)
+x^2 = x \cdot x = \left( \mathbf{e}_x^T \, {}^t \mathbf{p}_{tr} \right)^T \cdot \, \left( \mathbf{e}_x^T \, {}^t \mathbf{p}_{tr} \right)
 \]
 and the same is valid for the other two coordinates, we will omit the calculations for the other two from now on. 
-We can then substitute the expression we found for $\mathbf{p}^t$ \ref{eq:pt} and apply linear algebra properties of the transpose:
+We can then substitute the expression we found for ${}^t \mathbf{p}_{tr}$ \ref{eq:pt} and apply linear algebra properties of the transpose:
 $$(ABC)^T = C^T B^T A^T$$ to calculate the transpose of $\mathbf{e}_x^T {R_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)$:
 
 \[
