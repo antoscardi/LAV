@@ -5,10 +5,14 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Magnetic dipole representation}}{13}{figure.caption.20}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Magnetic dipole representation with the $OPP'$ triangle}}{16}{figure.caption.25}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Inertial frames in the single victim case}}{19}{figure.caption.27}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Polar plot of the actual function $\sqrt { 3 \cos ^2 \theta + 1} $ in blue and the approximated one $\frac {1}{a^2 }\cos ^2 \theta + \frac {1}{b^2} \sin ^2 \theta $ in orange.}}{20}{figure.caption.29}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Only 2 victims case}}{24}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Inertial frames in the single victim case}}{23}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Polar plot of the actual function $\sqrt { 3 \cos ^2 \theta + 1} $ in blue and the approximated one $\frac {1}{a^2 }\cos ^2 \theta + \frac {1}{b^2} \sin ^2 \theta $ in orange.}}{24}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Plot of the gradients $\frac {\partial H_i}{\partial i}$ where $i = x, y, z$ which are the componets of the gradient tensor $\mathbf {G}$ when computed analytically as in \ref {eq:G_analit}, in the case of a single source located at the center $(0,0)$ of the space when there are no rotations between the coordinates frames $F_i$, $F_r$, $F_t$.}}{28}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Plot of the NSS values computed at each point on the grid, which represent the signal received by the drones, in the case of a single source located at the center $(0,0)$ of the space when there are no rotations between the coordinates frames $F_i$, $F_r$, $F_t$..}}{29}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Plot of the gradients $\frac {\partial H_i}{\partial i}$ where $i = x, y, z$ when computed analytically after the position of the signle source is translated to $(2,2)$ and an introduction of the different roations, expressed using $\mathbf {R}^t_r$ and $\mathbf {R}_t^i$.}}{30}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Plot of the NSS after the position of the signle source is translated to $(2,2)$ and different roations are introduced, expressed using $\mathbf {R}^t_r$ and $\mathbf {R}_t^i$.}}{30}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Only 2 victims case}}{31}{figure.caption.36}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Radial exploration pattern for 5 drones at the end of the Exploration Phase.}}{32}{figure.caption.33}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Radial exploration pattern for 5 drones at the end of the Exploration Phase.}}{39}{figure.caption.37}%
 \addvspace {10\p@ }

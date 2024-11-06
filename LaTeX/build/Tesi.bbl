@@ -19,6 +19,42 @@
 
 \refsection{0}
   \datalist[entry]{ynt/global//global/global/global}
+    \entry{gradient_tensor_rotated}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=5956f7e9a9dfa68750e23a7a2c686060}{%
+           family={Pedersen},
+           familyi={P\bibinitperiod},
+           given={Laust},
+           giveni={L\bibinitperiod}}}%
+        {{hash=c5cf4ee5adc4230814f81d09e2fa2d1d}{%
+           family={Rasmussen},
+           familyi={R\bibinitperiod},
+           given={Thorkild},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{fullhash}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{fullhashraw}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{bibnamehash}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{authorbibnamehash}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{authornamehash}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{authorfullhash}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \strng{authorfullhashraw}{2fa0324c9a0aeb3ff9c4d217fdc4618d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Geophysics}
+      \field{month}{12}
+      \field{title}{The gradient tensor of potential field anomalies: Some implications on data collection and data processing of maps}
+      \field{volume}{55}
+      \field{year}{1990}
+      \field{pages}{1558\bibrangedash 1566}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1190/1.1442807
+      \endverb
+    \endentry
     \entry{survival}{article}{}{}
       \name{author}{3}{}{%
         {{hash=193a49793bce6b141b1b243ae54d4049}{%

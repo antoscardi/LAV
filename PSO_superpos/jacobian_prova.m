@@ -2,37 +2,37 @@ clear; close all; clc;
 
 % Define the number of sources and their positions (example with 3 sources)
 n_sources = 3;
-p_sources = [0.5, 0.5, 0]';% ...
+p_sources = [2, 2, 0]';% ...
 %             -2, -2, 0; ...
 %             4, 3, 0]'; % 3x3 matrix where each column is a source position
 
 % Create rotations (identity for simplicity in this example)
 R_array = cell(n_sources, 1);
-R_array{1} = rotationMatrix(0, 0, 0);
-R_array{2} = rotationMatrix(0, 0, 0);  
-R_array{3} = rotationMatrix(0, 0, 0);
+R_array{1} = rotationMatrix(70, 0, 0);
+R_array{2} = rotationMatrix(0, 90, 0);  
+R_array{3} = rotationMatrix(0, 0, 115);
 
-R_drones{1} = rotationMatrix(0, 0, 0);
-R_drones{2} = rotationMatrix(0, 0, 0);  
-R_drones{3} = rotationMatrix(0, 0, 0);
+R_drones{1} = rotationMatrix(170, 0, 0);
+R_drones{2} = rotationMatrix(0, 0, 30);  
+R_drones{3} = rotationMatrix(0, 50, 0);
 
 % Compute NSS at specified point, near a source
-point = [-2.4; -2.4; 0];
+point = [0.1; 0.1; 0];
 f = @(point) magnetic_field(point);
 J_numerical = computeJacobianNumerically(f, point, R_array, R_drones,  p_sources);  % Numerical
-checkSymmetry(J_numerical, 1, -2.4, -2.4, 0, 'numerical')
+checkSymmetry(J_numerical, 1, 0.1, 0.1, 0, 'numerical')
 disp(J_numerical)
 J_analytical = computeJacobianAnalytically(point, p_sources, R_array, R_drones);  % Analytical
 disp(J_analytical)
-checkSymmetry(J_analytical, 1, -2.4, -2.4, 0, 'analitycal')
+checkSymmetry(J_analytical, 1, 0.1, 0.1, 0, 'analitycal')
 nss_value_numerical = compute_nss(J_numerical);
 nss_value_analytical = compute_nss(J_analytical);
 disp(['NSS at the point using numerical Jacobian: ', num2str(nss_value_numerical)]);
 disp(['NSS at the point using analytical Jacobian: ', num2str(nss_value_analytical)]);
 
 % Define a grid of points in 3D space (e.g., x, y in [-5, 5] range, z = 1)
-[x, y] = meshgrid(linspace(-5, 5, 100), linspace(-5, 5, 100)); % Increased resolution
-z = 2; % Fixed drones to fly 5 meters above the ground
+[x, y] = meshgrid(linspace(-5, 5, 40), linspace(-5, 5, 40)); % Increased resolution
+z = 3; % Fixed drones to fly 5 meters above the ground
 
 % Store NSS values for each point on the grid
 nss_values = zeros(size(x));
@@ -45,16 +45,16 @@ for i = 1:numel(x)
     
     % Compute the Jacobian numerically
     J_numerical = computeJacobianNumerically(f, point, R_array, R_drones,  p_sources);
-    %checkSymmetry(J_numerical, i, x, y, z, 'numerical')
+    checkSymmetry(J_numerical, i, x, y, z, 'numerical')
     jacobians{i} = J_numerical;
     
     % Compute the Jacobian analytically
     J_analytical = computeJacobianAnalytically(point, p_sources, R_array, R_drones);
-    %checkSymmetry(J_analytical, i, x, y, z, 'analitycal')
+    checkSymmetry(J_analytical, i, x, y, z, 'analitycal')
     jacobians_analytical{i} = J_analytical;
     
     % Compute the NSS for the numerical Jacobian
-    nss_values(i) = compute_nss(J_numerical);
+    nss_values(i) = compute_nss(J_analytical);
 end
 
 % Plot the NSS values as a surface plot
@@ -169,15 +169,16 @@ function J = computeJacobianNumerically(f, global_point, R_array, R_drones,  p_s
             point_plus_local = point_local + perturbation;
             point_minus_local = point_local - perturbation;
             % Compute the field at the perturbed points for the current source
-            f_plus = f(point_plus_local);  % f(point + delta) for this source
+            f_plus = f(point_plus_local);   % f(point + delta) for this source
             f_minus = f(point_minus_local); % f(point - delta) for this source
             % Sum the contributions from the current source
-            f_plus_total = f_plus_total + R_drones{i} * f_plus;
-            f_minus_total = f_minus_total + R_drones{i} * f_minus;
+            f_plus_total = f_plus_total + f_plus;
+            f_minus_total = f_minus_total + f_minus;
         end
         % Compute the derivative using the total fields across all sources
         J(:, k) = (f_plus_total - f_minus_total) / (2 * delta);
     end
+    J = R_drones{i} * J * R_drones{i}.';
 end
 
 % Function to compute the Jacobian matrix analytically
@@ -188,7 +189,7 @@ function J = computeJacobianAnalytically(point, p_sources, R_array, R_drones)
     % Loop over each source to compute its contribution to the Jacobian
     for i = 1:n_sources
         % Compute the local point relative to the source
-        local_point = R_array{i}.' * (point - p_sources(:, i));
+        local_point = R_array{i}' * (point - p_sources(:, i));
         
         x = local_point(1);
         y = local_point(2);
@@ -214,7 +215,7 @@ function J = computeJacobianAnalytically(point, p_sources, R_array, R_drones)
                     dHz_dx, dHz_dy, dHz_dz];
 
         % Add the source's Jacobian to the total Jacobian
-        J = J + R_drones{i} * J_source;
+        J = J + R_drones{i}.' * J_source * R_drones{i};
     end
 end
 

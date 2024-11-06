@@ -114,7 +114,7 @@ After simplifications and further calculations, we obtain:
     \left| \mathbf{H} \right| = \frac{m}{4 \pi} \left(\frac{(ab)^2}{b^2 x^2 + a^2 (y^2 + z^2)}\right)^{3/2}
     \label{eq:H_mag_cart}
 \end{equation}
-where we call $I \, \pi \, b^2$ the magnetic moment $m$.
+where we call $I \, \pi \, b^2$ the magnetic moment $m$, as seen in \ref{eq:magnetic_moment}.
 Then, we can define $\eta$ as \cite{main}:
 \[ \eta = \left( \frac{m}{4 \pi \left| \mathbf{H} \right|} \right)^{2/3} \cdot \, (ab)^2 = \]
 by substituting \ref{eq:H_mag_cart}:
@@ -138,10 +138,10 @@ Also from Figure \ref{fig:frames-1victim}, we can express the position of the re
 \[
 \begin{aligned}
 {}^i \mathbf{p}_r &= {}^i \mathbf{p}_t + {}^t \mathbf{p}_{tr} \\
-{}^t \mathbf{p}_{tr} &= R_t^i \,\, {}^i \mathbf{p}_{tr}
+{}^t \mathbf{p}_{tr} &= \mathbf{R}_t^i \,\, {}^i \mathbf{p}_{tr}
 \end{aligned}
 \]
-where $R_t^i$ is the rotation matrix that rotates axis $i$ to $t$ \cite{artva-gazebo}.
+where $\mathbf{R}_t^i$ is the rotation matrix that rotates axis $i$ to $t$ \cite{artva-gazebo}.
 \begin{comment}
 The matrix $R_t^i$ is the matrix which lets us express the vector in frame $i$ using the coordinates of the vector in frame $t$.Since we are expressing in the columns the coordinates of the axis of $t$ w.r.t using the axis of $i$.
 Then if we have the coordinates of point $P$ with respect to frame i $\mathbf{P}$ 
@@ -151,10 +151,10 @@ Also consider that from frame $i$ after a rotation $R_t^i$ we obtain the same or
 v1 is  coordinates of the point before the translation but after the rotation, the coordinate of the point wrt the inertial frame  i are v1^i = R p^{i2}
 \end{comment}
 
-From which we can find $\mathbf{p}_t$ by multiplying by ${R_t^i}^T$ since ${R_t^i}$ is orthogonal (${R_t^i}^T = {R_t^i}^{-1}$):
+From which we can find $\mathbf{p}_t$ by multiplying by ${\mathbf{R}_t^i}^T$ since ${\mathbf{R}_t^i}$ is orthogonal (${\mathbf{R}_t^i}^T = {\mathbf{R}_t^i}^{-1}$):
 
 \begin{equation}
-    {}^t \mathbf{p}_{tr} = {R_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)
+    {}^t \mathbf{p}_{tr} = {\mathbf{R}_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)
     \label{eq:pt}
 \end{equation}
 
@@ -172,14 +172,14 @@ x^2 = x \cdot x = \left( \mathbf{e}_x^T \, {}^t \mathbf{p}_{tr} \right)^T \cdot 
 \]
 and the same is valid for the other two coordinates, we will omit the calculations for the other two from now on. 
 We can then substitute the expression we found for ${}^t \mathbf{p}_{tr}$ \ref{eq:pt} and apply linear algebra properties of the transpose:
-$$(ABC)^T = C^T B^T A^T$$ to calculate the transpose of $\mathbf{e}_x^T {R_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)$:
+$$(\mathbf{A}\mathbf{B}\mathbf{C})^T = \mathbf{C}^T \mathbf{B}^T \mathbf{A}^T$$ to calculate the transpose of $\mathbf{e}_x^T {\mathbf{R}_t^i}^T (\mathbf{p}_r - \mathbf{p}_t)$:
 
 \[
-(\mathbf{e}_x^T {R_t^i}^T (\mathbf{p}_r - \mathbf{p}_t))^T = (\mathbf{p}_r - \mathbf{p}_t)^T {R_t^i} \mathbf{e}_x
+(\mathbf{e}_x^T {\mathbf{R}_t^i}^T (\mathbf{p}_r - \mathbf{p}_t))^T = (\mathbf{p}_r - \mathbf{p}_t)^T {\mathbf{R}_t^i} \mathbf{e}_x
 \]
 The expression for $x^2$ then becomes:
 \begin{equation}
-    x^2 = \left(\mathbf{p}_r - \mathbf{p}_t\right)^T {R_t^i} \mathbf{e}_x \mathbf{e}_x^T {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right)
+    x^2 = \left(\mathbf{p}_r - \mathbf{p}_t\right)^T {\mathbf{R}_t^i} \mathbf{e}_x \mathbf{e}_x^T {\mathbf{R}_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right)
     \label{eq:x2}
 \end{equation}
 
@@ -205,53 +205,53 @@ and:
 Lastly we substitute the result found in \ref{eq:x2} in the expression of $\eta$ \ref{eq:eta}:
 \[
 \begin{aligned}
-    \eta &=  \ b^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^T R_t^i \mathbf{e}_x \mathbf{e}_x^T {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right) + \\
-    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^T R_t^i \mathbf{e}_y \mathbf{e}_y^T {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right) +\\
-    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^T R_t^i \mathbf{e}_z \mathbf{e}_z^T {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right) =
+    \eta &=  \ b^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^T \mathbf{R}_t^i \mathbf{e}_x \mathbf{e}_x^T {\mathbf{R}_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right) + \\
+    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^T \mathbf{R}_t^i \mathbf{e}_y \mathbf{e}_y^T {\mathbf{R}_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right) +\\
+    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^T \mathbf{R}_t^i \mathbf{e}_z \mathbf{e}_z^T {\mathbf{R}_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right) =
 \end{aligned}
 \]
 collect common terms,
 \[
-= \left(\mathbf{p}_r - \mathbf{p}_t\right)^T R_t^i \left( b^2 \mathbf{e}_x \mathbf{e}_x^T + a^2 \mathbf{e}_y \mathbf{e}_y^T + a^2 \mathbf{e}_z \mathbf{e}_z^T \right) {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right)=
+= \left(\mathbf{p}_r - \mathbf{p}_t\right)^T \mathbf{R}_t^i \left( b^2 \mathbf{e}_x \mathbf{e}_x^T + a^2 \mathbf{e}_y \mathbf{e}_y^T + a^2 \mathbf{e}_z \mathbf{e}_z^T \right) {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right)=
 \]
 \begin{equation}
-    = \left(\mathbf{p}_r - \mathbf{p}_t\right)^T R_t^i \, \text{diag}(b^2, a^2, a^2) {R_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right)
+    = \left(\mathbf{p}_r - \mathbf{p}_t\right)^T \mathbf{R}_t^i \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_t^i}^T \left(\mathbf{p}_r - \mathbf{p}_t\right)
     \label{eq:eta2}
 \end{equation}
 
-We call the \( R_t^i \, \text{diag}(b^2, a^2, a^2) {R_t^i}^T \) matrix $M$ and the diagonal matrix $\text{diag}(b^2, a^2, a^2)$ $D$.
+We call the \( \mathbf{R}_t^i \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_t^i}^T \) matrix $\mathbf{M}$ and the diagonal matrix $\text{diag}(b^2, a^2, a^2)$ $D$.
 
-\subsubsection{Symmetry of \( M \)}
+\subsubsection{Symmetry of \( \mathbf{M} \)}
 \textbf{Definition} \\
-A matrix \( M \in \mathbb{R}^{n \times n} \) is symmetric if and only if \( M = M^T \).
+A matrix \( \mathbf{M} \in \mathbb{R}^{n \times n} \) is symmetric if and only if \( \mathbf{M} = \mathbf{M}^T \).
 \\
 \textbf{Proof} \\
-We compute \( M^T \):
+We compute \( \mathbf{M}^T \):
 \[
-M^T = \left( R_t^i D {R_t^i}^T \right)^T = \left( {R_t^i}^T \right)^T D^T {R_t^i}^T = R_t^i D^T {R_t^i}^T
+    \mathbf{M}^T = \left( \mathbf{R}_t^i \mathbf{D} {\mathbf{R}_t^i}^T \right)^T = \left( {\mathbf{R}_t^i}^T \right)^T \mathbf{D}^T {\mathbf{R}_t^i}^T = \mathbf{R}_t^i \mathbf{D}^T {\mathbf{R}_t^i}^T
 \]
-Since \( D \) is a diagonal matrix, it is equal to its transpose $D^T = D$ :
+Since \( \mathbf{D} \) is a diagonal matrix, it is equal to its transpose $\mathbf{D}^T = \mathbf{D}$ :
 $$
-M^T =  R_t^i D {R_t^i}^T = M
+\mathbf{M}^T =  \mathbf{R}_t^i D {\mathbf{R}_t^i}^T = \mathbf{M}
 $$
 
 \subsubsection{Final expression for $\eta$}
 By applying the distributive property to \ref{eq:eta2} and since M is symmetric:
 \begin{equation}
-    \eta = \mathbf{p}_r^T M \mathbf{p}_r - \mathbf{p}_r^T M \mathbf{p}_t - \mathbf{p}_t^T M \mathbf{p}_r+ \mathbf{p}_t^T M \mathbf{p}_t
+    \eta = \mathbf{p}_r^T \mathbf{M} \mathbf{p}_r - \mathbf{p}_r^T \mathbf{M} \mathbf{p}_t - \mathbf{p}_t^T \mathbf{M} \mathbf{p}_r+ \mathbf{p}_t^T \mathbf{M} \mathbf{p}_t
     \label{eq:eta3}
 \end{equation}
 The vector $\mathbf{\hat{p}}_t$ gives an estimate of the true position $\mathbf{p}_t$ :
 \[
-\mathbf{\hat{p}}_t = M \mathbf{p}_t
+\mathbf{\hat{p}}_t = \mathbf{M} \mathbf{p}_t
 \]
 and since $M$ is symmetric:
 \[
-\mathbf{\hat{p}}_t^T =  \mathbf{p}_t^T M^T = \mathbf{p}_t^T M
+\mathbf{\hat{p}}_t^T =  \mathbf{p}_t^T \mathbf{M}^T = \mathbf{p}_t^T \mathbf{M}
 \]
 We substitute these expressions in \ref{eq:eta3} and use the definition of the scalar product:
 \[
-\eta = \mathbf{p}_r^T M \mathbf{p}_r - \mathbf{p}_r^T \mathbf{\hat{p}}_t - \mathbf{\hat{p}}_t^T \mathbf{p}_r+ \mathbf{p}_t^T M \mathbf{p}_r = \mathbf{p}_r^T M \mathbf{p}_r - 2 \mathbf{p}_r^T \mathbf{\hat{p}}_t + \mathbf{p}_t^T M \mathbf{p}_t
+\eta = \mathbf{p}_r^T \mathbf{M} \mathbf{p}_r - \mathbf{p}_r^T \mathbf{\hat{p}}_t - \mathbf{\hat{p}}_t^T \mathbf{p}_r+ \mathbf{p}_t^T \mathbf{M} \mathbf{p}_r = \mathbf{p}_r^T \mathbf{M} \mathbf{p}_r - 2 \mathbf{p}_r^T \mathbf{\hat{p}}_t + \mathbf{p}_t^T \mathbf{M} \mathbf{p}_t
 \]
 If we define the coordinates of $\mathbf{p}_r$ :
 \[
@@ -263,15 +263,15 @@ If we define the coordinates of $\mathbf{p}_r$ :
 \]
 and
 \[
-M = \begin{pmatrix}
+    \mathbf{M} = \begin{pmatrix}
     m_{11} & m_{12} & m_{13} \\
     m_{12} & m_{22} & m_{23} \\
     m_{13} & m_{23} & m_{33} \\
 \end{pmatrix}
 \]
-we can compute $\mathbf{p}_r^T M \mathbf{p}_r$:
+we can compute $\mathbf{p}_r^T \mathbf{M} \mathbf{p}_r$:
 \[
-\mathbf{p}_r^T M \mathbf{p}_r = 
+\mathbf{p}_r^T \mathbf{M} \mathbf{p}_r = 
 m_{11} \, x_r^2 \; + \; 2 \, m_{12} \, x_r \, y_r \; + \; 2 \, m_{13} \, z_r \, x_r \; + \;
 m_{22} \, y_r^2 \; + \; 2 \, m_{23} \, y_r \, z_r \; + \; m_{33} \, z_r^2
 \]
@@ -281,10 +281,161 @@ Then, we obtain a final expression for $\eta$ as in \cite{main}:
 \eta = & \ m_{11} \, x_r^2 + 2 \, m_{12} \, x_r \, y_r + 2 \, m_{13} \, z_r \, x_r \\
        & \ + m_{22} \, y_r^2 + 2 \, m_{23} \, y_r \, z_r + m_{33} \, z_r^2 \\
        & \ - 2 \, x_r \, x_t - 2 \, y_r \, y_t - 2 \, z_r \, z_t \\
-       & \ + \mathbf{p}_t^T M \mathbf{p}_t
+       & \ + \mathbf{p}_t^T \mathbf{M} \mathbf{p}_t
 \end{aligned}
 \label{eq:eta_final}
 \end{equation}
+
+\subsection{Finding the NSS}
+In the only one victim case, we can find the the NSS not only numerically but also
+analytically.
+Which means that since we have an expression of the magnetic field intensity $\mathbf{H}$
+in Cartesian coordinates \ref{eq:final_H}, we can compute the derivatives and therefore the
+gradient tensor $\mathbf{G}$ analytically as:
+\begin{equation}
+\mathbf{G} = \frac{1}{r^{5/2}}
+\scalebox{0.96}{$
+\begin{bmatrix}
+3 x (-2 x^2 + 3y^2 + 3z^2) & 3 y (-4 x^2 + y^2 + z^2) & 3 z (-4x^2 + y^2 + z^2) \\
+3 y (-4 x^2 + y^2 + z^2) & 3 x (x^2 - 4 y^2 + z^2) & -15 x y z \\
+3 z (-4 x^2 + y^2 + z^2) & -15 x y z & 3 x (x^2 + y^2 - 4 z^2)
+\end{bmatrix}
+$}
+\label{eq:G_analit}
+\end{equation}
+where $r$ is of course the distance, $r = \sqrt{x^2 +y^2 +z^2}$.
+
+Note once again the symmetry and traceless property of the gradient tensor 
+$\mathbf{G}$ is evident, when we compute it explicitly.
+Also note that for simplicity we computed the gradient using $\mathbf{H}$ and not $\mathbf{B}$,
+since they vary only by the constant permeability $\mu$. 
+We also omitted the constants $I$, $b$, since they don't depend on the coordinates $(x, y, z)$
+neither, and therefore do not influence the results.
+
+In Figure \ref{fig:gradients_single_anal}, we show the gradients for a single
+source centered at the origin of the space, when the inertial frame 
+$F_i$ coincides with the trasmitter (source) frame $F_t$ and also when there 
+is no rotation between these frames and the receiver frame $F_r$ of the drones. 
+In this way, we have that the magnetic field intensity ${}^t \mathbf{H} = {}^i \mathbf{H}$
+can be computed using the inertial coordinates, and also the
+NSS at any point in space coincides with the signal received by 
+any drone located at that point.
+The gradients are calculated on a grid of equally spaced points in the range $[-5, 5]$, when we fix the $z$ coordinates
+at 3 m, considering a reasonable flying height for the drones.
+We need to fix one coordinate in order to be able to plot 
+a function of 3 variables, but also because we assume the drones
+flying always at a fixed height, as it will be explained more in 
+depth lately.   
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/gradients_single_anal.jpg}
+\caption{Plot of the gradients $\frac{\partial H_i}{\partial i}$ where $i = x, y, z$
+which are the componets of the gradient tensor $\mathbf{G}$
+when computed analytically as in \ref{eq:G_analit}, in the case of a single source located
+at the center $(0,0)$ of the space when there are no rotations between the coordinates
+frames $F_i$, $F_r$, $F_t$.}
+\label{fig:gradients_single_anal}
+\end{figure}
+
+After having found the gradient tensor $\mathbf{G}$, we numerically
+compute its eigenvalues and we find the NSS using the definition \ref{eq:NSS}.
+In Figure \ref{fig:NSS_single_anal}, we plot the NSS distribution over the same grid,
+with the same $z$ value fixed.
+These values will be the signals received by the drones at their location
+in space in the multiple victims case, which will be explained more in depth in the following paragraph.
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{images/NSS_single_anal.jpg}
+\caption{Plot of the NSS values computed at each point on the grid, which
+represent the signal received by the drones, in the case of a single source located
+at the center $(0,0)$ of the space when there are no rotations between the coordinates
+frames $F_i$, $F_r$, $F_t$..}
+\label{fig:NSS_single_anal}
+\end{figure}
+
+Instead, let's consider the case when the source location is translated
+with respect to the inertial frame $F_i$ and the transmitter frame $F_t$ is rotated
+with respect to the inertial by a rotation $\mathbf{R}_t^i$, like in the previous 
+section.
+Furthermore, we also consider the rotation $\mathbf{R}^t_r$ between the transmitter frame and the receiver
+frame $F_r$.
+Then, we compute the coordinates of any point in space with respect to the
+transmitter frame as in \ref{eq:pt}.
+Using these coordinates we find the magnetic intensity vector ${}^t\mathbf{H}$,
+expressed in the trasmitter frame and compute the gradient tensor ${}^t \mathbf{G}$.
+Then, as we defined the $\mathbf{R}^i_t$ the matrix that rotates axis $i$ to $t$,
+we find the gradient tensor ${}^i \mathbf{G}$ by inverting equation \ref{eq:rotated_gradient_tensor}:
+\begin{equation}
+    {}^i \mathbf{G} = {\mathbf{R}_t^i}^T \, {}^t\mathbf{G} \, \mathbf{R}_t^i
+\end{equation}
+In Figure \ref{fig:gradients_rotated_single_anal}, we see how the gradients plots
+vary with respect to the gradients in Figure \ref{fig:gradients_single_anal},
+since the rotations introduce naturally a modification in the elettromagnetic field.
+However, in Figure \ref{fig:NSS_rotated_single_anal} it is also evident how the
+NSS distribution remains invariant under all the different rotations, and it is 
+just affected by the translation in the sense that the peak now is located
+at the new location of the source. 
+% MATRICI USATE PER LA ROTAZIONE
+%R_array{1} = rotationMatrix(70, 0, 0);
+%R_drones{1} = rotationMatrix(170, 0, 0);
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/gradients_rotated_single_anal.jpg}
+\caption{Plot of the gradients $\frac{\partial H_i}{\partial i}$ where $i = x, y, z$
+when computed analytically after the position of the signle source is translated to $(2,2)$ and an 
+introduction of the different roations, expressed using $\mathbf{R}^t_r$ and $\mathbf{R}_t^i$.}
+\label{fig:gradients_rotated_single_anal}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/NSS_rotated_single_anal.jpg}
+    \caption{Plot of the NSS after the position of the signle source is translated to $(2,2)$ and 
+    different roations are introduced, expressed using $\mathbf{R}^t_r$ and $\mathbf{R}_t^i$.}
+    \label{fig:NSS_rotated_single_anal}
+\end{figure}
+
+\noindent
+\\
+However, for the multiple victims case we cannot compute the gradient tensor 
+analytically and therefore we adopt a numerical approach.
+We simulate and simplify the way the authors of \cite{NSS_single_localization} use 
+a cubic structure measurement array composed of eight
+tri-axial magnetometers in order to obtain the magnetic
+field information and therefore compute the gradient tensor $\mathbf{G}$.
+Let's consider a small perturbation $\delta$ in order to apply the central difference
+method approximation.
+We perturb the magnetic field intensity $\mathbf{H}$ by every direction 
+
+The gradient of a 3D vector field \( \mathbf{f}(\mathbf{p}) \), where \( \mathbf{p} = (x, y, z) \), 
+can be numerically approximated using the central difference method. Let \( \delta \) be a small 
+perturbation applied to each coordinate direction. The partial derivative of \( \mathbf{f} \) with 
+respect to a coordinate \( p_k \) is given by:
+
+\[
+\frac{\partial \mathbf{f}}{\partial p_k} \approx \frac{\mathbf{f}(\mathbf{p} + \delta \mathbf{e}_k) 
+- \mathbf{f}(\mathbf{p} - \delta \mathbf{e}_k)}{2\delta},
+\]
+
+where \( \mathbf{e}_k \) denotes the unit vector in the \( k \)-th direction. The gradient matrix, 
+or Jacobian \( \mathbf{J} \), is constructed by repeating this process for each coordinate direction:
+
+This method, based on the Taylor series expansion, yields a second-order accurate estimate of 
+the gradient by approximating the derivative as a difference of function values at perturbed points.
+
+For a small perturbation \( \delta \), let \( \boldsymbol{\delta}_k \) be a vector with \( \delta \) in the \( k \)-th position. The perturbed points are:
+\[
+\mathbf{p}^{+}_k = \mathbf{p} + \boldsymbol{\delta}_k, \quad \mathbf{p}^{-}_k = \mathbf{p} - \boldsymbol{\delta}_k.
+\]
+
+The \( k \)-th column of \( \mathbf{J} \) is:
+\[
+\mathbf{J}_{:, k} = \frac{\mathbf{f}(\mathbf{p}^{+}_k) - \mathbf{f}(\mathbf{p}^{-}_k)}{2 \delta}.
+\]
+
+General Formula:
+\[
+\frac{\partial f_i}{\partial p_k} \approx \frac{f_i(\mathbf{p}^{+}_k) - f_i(\mathbf{p}^{-}_k)}{2 \delta}.
+\]
 
 
 \section{Multiple Victim Case}
@@ -401,3 +552,10 @@ Bringing the common terms to the left side and inverting all the fractions:
 & + 2 \, \cos \alpha \left( (b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2))(b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2)) \right)^{3/2}
 \end{aligned}
 \]
+
+
+SPIEGARE PERchE QUESTO È UNFEASIBLE
+
+
+
+\subsection{Finding the NSS}
