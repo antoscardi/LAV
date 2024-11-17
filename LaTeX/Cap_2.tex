@@ -894,6 +894,7 @@ Additionally, it is shown that the NSS is inversely proportional to the fourth p
 the distance between the computed point in space and the source \cite{NSS_single_localization}:
 \begin{equation}
 \text{NSS} = \frac{3 \mu_0 m}{4 \pi r^4}
+\label{eq:NSS_decay}
 \end{equation}
 From which it is also evident that it is a rotational invariant (since it dipends
 only on the distance $r$) and also that it does not depend on the direction of the magnetic
@@ -907,14 +908,15 @@ moment $\mathbf{m}$, only on its magnitude.
 \noindent
 Let's define the gradient operator $\nabla$ in any Cartesian  
 coordinate system $(x, y, z)$, given by 
-\[
+\begin{equation}
 \nabla = 
 \begin{bmatrix} 
 \frac{\partial}{\partial x} \\ 
 \frac{\partial}{\partial y} \\
 \frac{\partial}{\partial z}
 \end{bmatrix}
-\]
+\label{eq:nabla}
+\end{equation}
 as a column vector.
 
 \noindent
@@ -941,7 +943,7 @@ y' \\
 z'
 \end{bmatrix} 
 = 
-\mathbf{R}_z(\theta)
+\mathbf{R}_z\mkern-2mu(\theta)
 \begin{bmatrix} 
 x \\ 
 y \\
@@ -970,7 +972,7 @@ can be expressed in matrix form as:
 \begin{equation}
 \nabla' 
 = 
-\mathbf{R} \nabla
+\mathbf{R}_z\mkern-2mu(\theta) \, \nabla
 \label{eq:gradient_rotated}
 \end{equation}
 
@@ -989,7 +991,7 @@ Now, let \( \mathbf{B} \) be a 3D vector field exspressed as a column vector as 
 The components of the vector field after the rotation 
 are given by:
 \begin{equation}
-    \mathbf{B}' = \mathbf{R}_z(\theta) \mathbf{B}
+    \mathbf{B}' = \mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{B}
 \label{eq:vect_rotated}
 \end{equation}
 
@@ -997,31 +999,31 @@ are given by:
 Then, we can rewrite the definition of the gradient tensor \ref{eq:gradient},
 in matrix form \cite{gradient_tensor_rotated}:
 \[
-\mathbf{G} = \nabla \mathbf{B}^T
+\mathbf{G} = \nabla \mathbf{B}^\top
 \]
 Which becomes in the rotated coordinates $(x', y', z')$:
 \[
-\mathbf{G}' = \nabla' \mathbf{B}'^T
+\mathbf{G}' = \nabla' \mathbf{B}'^\top
 \]
 
 \noindent
 Thus, substituting \ref{eq:gradient_rotated} and \ref{eq:vect_rotated}
 into the expression for \( G' \), we obtain:
 \[
-\mathbf{G}' = \mathbf{R} \nabla \, (\mathbf{R} \mathbf{B})^T
+\mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \,  \nabla \, (\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{B})^\top
 \]
 
 \noindent
 Using the linear algebra property of the transpose of the product of two matrices:
 \[
-\mathbf{G}' = \mathbf{R} \nabla \, (\mathbf{B}^T \mathbf{R}^T)
+\mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \, \nabla \, (\mathbf{B}^\top {\mathbf{R}}^\top_z\mkern-3.5mu(\theta))
 \]
 
 \noindent
-Recognizing that \( \nabla \, \mathbf{B}^T \) is the original gradient 
+Recognizing that \( \nabla \, \mathbf{B}^\top \) is the original gradient 
 \( \mathbf{G} \), we finally obtain the same result as \cite{gradient_tensor_rotated}:
 \begin{equation}
-    \mathbf{G}' = \mathbf{R} \, \mathbf{G} \, \mathbf{R}^T
+    \mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta)
     \label{eq:rotated_gradient_tensor}
 \end{equation}
 
@@ -1034,15 +1036,16 @@ Under a coordinate rotation, the tensor \( \mathbf{G} \) transforms as shown in
 \eqref{eq:rotated_gradient_tensor}. Then, the characteristic equation for the rotated tensor is:
 \[
     \det(\mathbf{G}' - \lambda \mathbf{I}) = 
-    \det(\mathbf{R} \mathbf{G} \mathbf{R}^T - \lambda \mathbf{I})
+    \det(\mathbf{R}_z\mkern-2mu(\theta) \,  \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta) - \lambda \mathbf{I})
 \]
 
 \noindent
-Using Binet's Theorem and the property of orthogonal matrices \( \det\big(\mathbf{R}\big) = \det\big(\mathbf{R}^T\big) = 1 \):
-\[
-    \det\big(\mathbf{R} (\mathbf{G} - \lambda \mathbf{I}) \mathbf{R}^T\big) = 
-    \det\big(\mathbf{G} - \lambda \mathbf{I}\big)
-\]
+Using Binet's Theorem and the property of orthogonal matrices \( \det\mkern-2mu\big(\mathbf{R}\big) = \det\mkern-2mu\big(\mathbf{R}^\top\big) = 1 \):
+\begin{equation}
+    \det\mkern-2mu\big(\mathbf{R}_z\mkern-2mu(\theta) \, (\mathbf{G} - \lambda \mathbf{I}) \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta)\big) = 
+    \det\mkern-2mu\big(\mathbf{G} - \lambda \mathbf{I}\big)
+    \label{eq:rotational_invariance}
+\end{equation}
 
 \noindent 
 Consequently, the eigenvalues \( \lambda_{\text{min}} \), \( \lambda_{\text{med}} \), 
@@ -1063,9 +1066,9 @@ is also invariant under orthogonal transformations.
 This is agian due to the fact that the determinat of orthogonal matrices is 1 and thanks
 to Binet's Theorem:
 \[
-    \det\big(\mathbf{G}'\big) = \det\big(\mathbf{R} \mathbf{G} \mathbf{R}^T\big) = 
-    \det\big(\mathbf{R}\big) \det\big(\mathbf{G}\big) \det\big(\mathbf{R}^T\big) = 
-    \det\big(\mathbf{G}\big). 
+\det\mkern-3mu\big(\mathbf{G}'\big) = \det\mkern-3mu\big(\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-2mu(\theta)\big) = 
+\det\mkern-3mu\big(\mathbf{R}_z\mkern-2mu(\theta) \big) \det\mkern-3mu\big(\mathbf{G}\big) \det\mkern-3mu\big({\mathbf{R}}^\top_z\mkern-2mu(\theta)\big) = 
+\det\mkern-3mu\big(\mathbf{G}\big)
 \]
 
 \noindent

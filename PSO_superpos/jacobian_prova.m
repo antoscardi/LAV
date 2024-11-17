@@ -1,20 +1,20 @@
 clear; close all; clc;
 
 % Define the number of sources and their positions (example with 3 sources)
-n_sources = 3;
-p_sources = [2, 2, 0]';% ...
-%             -2, -2, 0; ...
-%             4, 3, 0]'; % 3x3 matrix where each column is a source position
+p_sources = [0, 0, 0; ...
+            -6, -6, 0; ...
+            7, 7, 0]';  %3x3 matrix where each column is a source position
+n_sources = size(p_sources, 2);
 
 % Create rotations (identity for simplicity in this example)
 R_array = cell(n_sources, 1);
-R_array{1} = rotationMatrix(70, 0, 0);
-R_array{2} = rotationMatrix(0, 90, 0);  
-R_array{3} = rotationMatrix(0, 0, 115);
+R_array{1} = rotationMatrix(130, 0, 0);
+R_array{2} = rotationMatrix(0, 50, 0);  
+R_array{3} = rotationMatrix(0, 0, 140);
 
-R_drones{1} = rotationMatrix(170, 0, 0);
-R_drones{2} = rotationMatrix(0, 0, 30);  
-R_drones{3} = rotationMatrix(0, 50, 0);
+R_drones{1} = rotationMatrix(90, 0, 0);
+R_drones{2} = rotationMatrix(0, 200, 0);  
+R_drones{3} = rotationMatrix(0, 0, 300);
 
 % Compute NSS at specified point, near a source
 point = [0.1; 0.1; 0];
@@ -31,8 +31,8 @@ disp(['NSS at the point using numerical Jacobian: ', num2str(nss_value_numerical
 disp(['NSS at the point using analytical Jacobian: ', num2str(nss_value_analytical)]);
 
 % Define a grid of points in 3D space (e.g., x, y in [-5, 5] range, z = 1)
-[x, y] = meshgrid(linspace(-5, 5, 40), linspace(-5, 5, 40)); % Increased resolution
-z = 3; % Fixed drones to fly 5 meters above the ground
+[x, y] = meshgrid(linspace(-10, 10, 50), linspace(-10, 10, 50)); % Increased resolution
+z = 3; % Fixed drones to fly 3 meters above the ground
 
 % Store NSS values for each point on the grid
 nss_values = zeros(size(x));
@@ -61,11 +61,14 @@ end
 figure('Name', 'NSS Distribution');
 surf(x, y, nss_values, 'EdgeColor', 'none');
 colorbar;
-xlabel('x');
-ylabel('y');
-zlabel('NSS');
-title('Normalized Source Strength (NSS) Distribution');
+xlabel('x', 'FontSize', 25);
+ylabel('y', 'FontSize', 25);
+zlabel('NSS', 'FontSize', 25);
+title('Normalized Source Strength (NSS) Distribution', 'FontSize', 55);
 view(3); % View from above for a heatmap-like appearance
+set(gca, 'FontSize', 25)
+colorbar_handle = colorbar; % Get the colorbar handle
+colorbar_handle.FontSize = 25; % Set font size for colorbar tick labels
 
 % Plot the numerical Jacobian components
 figure('Name', 'Numerical Jacobian Components');
@@ -151,6 +154,7 @@ function vector_field = magnetic_field(point)
     vector_field = [Hx; Hy; Hz];
 end
 
+%PROVA CHE FUNZIONA 
 function J = computeJacobianNumerically(f, global_point, R_array, R_drones,  p_sources)
     delta = 1e-5; % Small perturbation for numerical differentiation
     J = zeros(3, 3); % Initialize the Jacobian matrix
@@ -164,22 +168,54 @@ function J = computeJacobianNumerically(f, global_point, R_array, R_drones,  p_s
         % Loop over all sources
         for i = 1:size(p_sources, 2)
             % Compute the point in local coordinates for the current source
-            point_local = R_array{i}.' * (global_point - p_sources(:, i));
+            point_local = R_drones{i} * R_array{i}.' * (global_point - p_sources(:, i));
             % Apply the perturbation in the local frame
             point_plus_local = point_local + perturbation;
             point_minus_local = point_local - perturbation;
             % Compute the field at the perturbed points for the current source
-            f_plus = f(point_plus_local);   % f(point + delta) for this source
-            f_minus = f(point_minus_local); % f(point - delta) for this source
+            f_plus =  f(R_drones{i}.' * point_plus_local);  
+            f_minus = f(R_drones{i}.' * point_minus_local); 
             % Sum the contributions from the current source
-            f_plus_total = f_plus_total + f_plus;
-            f_minus_total = f_minus_total + f_minus;
+            f_plus_total = f_plus_total + R_drones{i} * f_plus;
+            f_minus_total = f_minus_total + R_drones{i} * f_minus;
         end
         % Compute the derivative using the total fields across all sources
         J(:, k) = (f_plus_total - f_minus_total) / (2 * delta);
     end
-    J = R_drones{i} * J * R_drones{i}.';
+    J = J.';
 end
+
+%VERA
+% function J = computeJacobianNumerically(f, global_point, R_array, R_drones,  p_sources)
+%     delta = 1e-5; % Small perturbation for numerical differentiation
+%     J = zeros(3, 3); % Initialize the Jacobian matrix
+%     % Loop over each direction (x, y, z) for perturbation
+%     for k = 1:3
+%         perturbation = zeros(3, 1);
+%         perturbation(k) = delta; % Apply perturbation in the local frame
+%         % Initialize the total fields at perturbed points
+%         f_plus_total = zeros(3, 1);
+%         f_minus_total = zeros(3, 1);
+%         % Loop over all sources
+%         for i = 1:size(p_sources, 2)
+%             % Compute the point in local coordinates for the current source
+%             point_local = R_array{i}.' * (global_point - p_sources(:, i));
+%             % Apply the perturbation in the local frame
+%             point_plus_local = point_local + perturbation;
+%             point_minus_local = point_local - perturbation;
+%             % Compute the field at the perturbed points for the current source
+%             f_plus =  f(point_plus_local);  
+%             f_minus = f(point_minus_local); 
+%             % Sum the contributions from the current source
+%             f_plus_total = f_plus_total + f_plus;
+%             f_minus_total = f_minus_total + f_minus;
+%         end
+%         % Compute the derivative using the total fields across all sources
+%         J(:, k) = (f_plus_total - f_minus_total) / (2 * delta);
+%     end
+%     J = J + R_drones{i} * J * R_drones{i}.';
+%     J = J.';
+% end
 
 % Function to compute the Jacobian matrix analytically
 function J = computeJacobianAnalytically(point, p_sources, R_array, R_drones)
@@ -210,12 +246,12 @@ function J = computeJacobianAnalytically(point, p_sources, R_array, R_drones)
         dHz_dz = 3 * z * (3 * x^2 + 3 * y^2 - 2 * z^2) / denominator;
         
         % Assemble the Jacobian for this source's contribution
-        J_source = [dHx_dx, dHx_dy, dHx_dz;
-                    dHy_dx, dHy_dy, dHy_dz;
-                    dHz_dx, dHz_dy, dHz_dz];
+        J_source = [dHx_dx, dHy_dx, dHz_dx;
+                    dHx_dy, dHy_dy, dHz_dy;
+                    dHx_dz, dHy_dz, dHz_dz];
 
         % Add the source's Jacobian to the total Jacobian
-        J = J + R_drones{i}.' * J_source * R_drones{i};
+        J = J + R_drones{i} * J_source * R_drones{i}.';
     end
 end
 
@@ -250,17 +286,20 @@ function plotJacobianComponent(jacobians, x, y, row, col, componentName)
     
     % Plot the component as a 3D surface
     surf(x, y, component);
-    title(['$', componentName, '$'], 'Interpreter', 'latex');
-    xlabel('x'); ylabel('y'); zlabel('Value');
+    title(['$', componentName, '$'], 'Interpreter', 'latex', 'FontSize', 55);
+    xlabel('x', 'FontSize', 18); ylabel('y', 'FontSize', 18); zlabel('', 'FontSize', 18);
     colorbar; % Add a colorbar for better understanding of values
+    colorbar_handle = colorbar; % Get the colorbar handle
+    colorbar_handle.FontSize = 18; % Set font size for colorbar tick labels
+    set(gca, 'FontSize', 16)
 end
 
 % Function to get the name of the Jacobian component in LaTeX format
 function name = getComponentName(row, col)
     % Define names for each component based on row and column using LaTeX formatting
-    components = {'\partial H_x / \partial x', '\partial H_x / \partial y', '\partial H_x / \partial z'; ...
-                  '\partial H_y / \partial x', '\partial H_y / \partial y', '\partial H_y / \partial z'; ...
-                  '\partial H_z / \partial x', '\partial H_z / \partial y', '\partial H_z / \partial z'};
+    components = {'\partial H_x / \partial x', '\partial H_y / \partial x', '\partial H_z / \partial x'; ...
+                  '\partial H_x / \partial y', '\partial H_y / \partial y', '\partial H_z / \partial y'; ...
+                  '\partial H_x / \partial z', '\partial H_y / \partial z', '\partial H_z / \partial z'};
     name = components{row, col};
 end
 

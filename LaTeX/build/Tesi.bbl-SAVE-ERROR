@@ -387,6 +387,41 @@
       \endverb
       \keyw{Unmanned aerial vehicles;Markov processes;Sensors;Hazards;Computational modeling;Wireless sensor networks;Optimization}
     \endentry
+    \entry{7}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=f019c1e7782ba7e024cf10d16463fcce}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Qiang},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=eaf8f939f63c113b097158efa92a215f}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Qing-Long},
+           giveni={Q\bibinithyphendelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{fullhash}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{fullhashraw}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{bibnamehash}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{authorbibnamehash}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{authornamehash}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{authorfullhash}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \strng{authorfullhashraw}{d9eafcb2ffbd7d33cf86b8c14eaf9be6}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{IECON 2011 - 37th Annual Conference of the IEEE Industrial Electronics Society}
+      \field{title}{Decision-making in a multi-robot system for odor source localization}
+      \field{year}{2011}
+      \field{pages}{74\bibrangedash 79}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/IECON.2011.6119291
+      \endverb
+      \keyw{Robot kinematics; Mathematical model; Trajectory; Position measurement; Time measurement; Multirobot systems}
+    \endentry
     \entry{NSS_analysis}{article}{}{}
       \name{author}{4}{}{%
         {{hash=bfc57e4c87b8e78019b38f4abb6badab}{%
@@ -1163,69 +1198,6 @@
       \verb https://api.semanticscholar.org/CorpusID:115873208
       \endverb
     \endentry
-    \entry{spacecraft}{article}{}{}
-      \name{author}{5}{}{%
-        {{hash=6f9a56a9303f15f4bfd17ffbc6e9e77b}{%
-           family={Xu},
-           familyi={X\bibinitperiod},
-           given={Chaoqun},
-           giveni={C\bibinitperiod}}}%
-        {{hash=d6199b632d275d42ac0a4dd7c488335a}{%
-           family={Yi},
-           familyi={Y\bibinitperiod},
-           given={Zhong},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=84195be6c508f8dda5c3e529606b3bdc}{%
-           family={Meng},
-           familyi={M\bibinitperiod},
-           given={Lifei},
-           giveni={L\bibinitperiod}}}%
-        {{hash=c9ffc23f3b57f588059c9f0173756b43}{%
-           family={Huang},
-           familyi={H\bibinitperiod},
-           given={Kui},
-           giveni={K\bibinitperiod}}}%
-        {{hash=c1b9712a5a7f680d41d624c9c076c405}{%
-           family={Dai},
-           familyi={D\bibinitperiod},
-           given={Jialong},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {IOP Publishing}%
-      }
-      \strng{namehash}{62bc2294574e603c0084c0d90c6f18ce}
-      \strng{fullhash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{fullhashraw}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{bibnamehash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{authorbibnamehash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{authornamehash}{62bc2294574e603c0084c0d90c6f18ce}
-      \strng{authorfullhash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{authorfullhashraw}{a2d952f765e7ad440713a10208eb9f6e}
-      \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Multi-magnetic source resolution in spacecraft has been a difficult problem in the field of magnetic survey. Detection technology of magnetic gradient tensor is available to the problem for its high resolution and precision. A spacecraft magnetic source model is established, and a multi-magnetic source model fitting method for spacecraft is presented. The principal invariants of the magnetic field gradient tensor are introduced to ascertain the number and horizontal location of the source, and the Euler equations are combined to complete the multi-magnetic source depth calculation, the best resolution is up to 0.012m, meeting the engineering requirements. The study opens up a new way of multi-magnetic source target detection in spacecraft.}
-      \field{journaltitle}{IOP Conference Series: Earth and Environmental Science}
-      \field{month}{2}
-      \field{number}{3}
-      \field{title}{Detection technology of multi-magnetic source in spacecraft based on magnetic field gradient tensor}
-      \field{volume}{237}
-      \field{year}{2019}
-      \field{pages}{032021}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1088/1755-1315/237/3/032021
-      \endverb
-      \verb{urlraw}
-      \verb https://dx.doi.org/10.1088/1755-1315/237/3/032021
-      \endverb
-      \verb{url}
-      \verb https://dx.doi.org/10.1088/1755-1315/237/3/032021
-      \endverb
-    \endentry
     \entry{multiple_in_spacecraft}{article}{}{}
       \name{author}{5}{}{%
         {{hash=6f9a56a9303f15f4bfd17ffbc6e9e77b}{%
@@ -1262,7 +1234,6 @@
       \strng{authornamehash}{62bc2294574e603c0084c0d90c6f18ce}
       \strng{authorfullhash}{a2d952f765e7ad440713a10208eb9f6e}
       \strng{authorfullhashraw}{a2d952f765e7ad440713a10208eb9f6e}
-      \field{extraname}{2}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
@@ -1892,6 +1863,8 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{27}
+  \missing{28}
 \endrefsection
 \endinput
 

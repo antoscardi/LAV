@@ -1,6 +1,82 @@
 \chapter{Implementation}
 \section{Introduction}
-Simulations have been done in MATLAB.
+\section{Simulation Details}
+The code was written in \textit{Matlab} and is structured into multiple sections and files, to increase the modularity and readability of the code while simplifying the debugging process at the same time. The code has the following main components: 
+
+\begin{itemize}
+    \item Setup and main loop of the simulation;
+    \item The drone and ARTVA classes;
+    \item The trajectory replanner;
+    \item The plotter (that shows graphically the simulation).
+\end{itemize}
+
+The main structure of the simulation is the following: we first perform a setup step in which we initialize the drones, the transmitting ARTVA and other useful variables and constants; then in an infinite loop we carry out all the computations that need to be performed at every time instant, such as moving the drones along their trajectories, estimating the position of the transmitting ARTVA and drawing on the screen the current state of the simulation; if some specific conditions are met we trigger the Replanner, whose job is to assign new goals to the drones; finally if we have successfully estimated the position of the transmitting ARTVA we stop the simulation. We will now discuss in more detail all the steps presented.
+
+The simulation starts with the initialization of many variables and constants that will be useful throughout the whole experiment, such as the time step of the simulator, the kind of trajectory the drones will have to follow, the number of drones, the current time instant, whether we are in the centralized or distributed case and so on.
+
+Then we move on to the setup step, in which we instantiate all the drones and assign them a goal as specified in the previous section about exploration strategies, then we instantiate the ARTVA by assigning it a random position inside the world region. In addition to that, we also initialize a Plotter class, whose job is to display the simulation on the screen in a separate window, but a more in-depth analysis of this component will be carried out in the following paragraph.
+
+Finally, we move on to the main loop in which we first move the drones and then perform the estimation algorithm, directly in the main loop if we are in the centralized case or by calling the drones’ subroutine if we are in the decentralized case. In the decentralized case we also perform the Average Consensus Filter estimation as already described in a previous paragraph.\\
+The next step is to check if we are satisfying the stopping criterium and in such case end the simulation: in the initialization phase we define a “threshold” value and a “control time” value so that if the estimations of the ARTVA do not move more than “threshold” meters for “control time” seconds, then we can exit the main loop and terminate. If the stopping criterium is not met, we instead need to display the next frame representing the simulation and to do so we need to pass to the Plotter class all the necessary pieces of information, such as the new positions of the drones, their updated estimations, and in the distributed case also the updated values of the ACF estimation. 
+
+\subsection{Drone and ARTVA classes}
+The simpler of the two classes is the ARTVA class, and its sole purpose is to store the position of the ARTVA itself and emit the signal received by a drone. To “emit” such a signal we use the \textit{getSignal()} function, which takes in input the position of the drone and returns a single floating-point value, that is the value of the signal perceived by the drone. To obtain such value we can use the same equation that the drones use to estimate the ARTVA, namely $y(p_k,\tau_k) = \phi^T(p_k)x(p_t)$.\\
+The only difference is that in this case $x(p_t)$ is a vector of known constants that is populated as follows: 
+\begin{itemize}
+    \item $\bar{m}_{11} = \bar{m}_{22} = \bar{m}_{33} = 1$
+    \item $\bar{m}_{12} = \bar{m}_{13} = \bar{m}_{23} = 0$
+    \item $\bar{p}_t = p_t$ is now the real vector of the ARTVA position and not its estimated value
+    \item $\rho = p^T_tp_t$
+\end{itemize}
+
+The drone class is instead more complex since it has to oversee both the drone’s movement and the drone’s distributed estimation tasks. Moreover, like the ARTVA class, the drone class is used to store some useful properties such as the drone’s position, state, goal and distributed estimation variables (when needed). 
+
+Relatively to the movement task, the two most important functions are \textit{setGoal()}, that allows to specify a point in space that the drone should reach, and \textit{move()}, that allows to move the drone in small steps following either a bang-coast-bang or a bang-bang velocity profile, depending on whether the distance from the objective is big enough to allow for a coasting phase. 
+
+Relatively to the distributed estimation task, the three most important functions are \textit{sync()}, that retrieves the information from nearby drones, \textit{estimate()}, that performs the actual distributed estimation algorithm, and \textit{ace()}, that implements the Average Consensus Filter. As a sidenote, in the estimation algorithm we used the pseudo-inverse in order to calculate $S^{-1}$.
+
+\begin{comment}
+To invert the matrix we used the pseudo-inverse, since choosing a value of $\beta = 0.999$ made the S matrix singular, and hence non-invertible.
+The update of the estimation is performed by the code: \\
+
+$\texttt{est\textunderscore X = est\textunderscore X + pinv(est\textunderscore S)*(est\textunderscore H*(est\textunderscore Y - est\textunderscore H.'*est\textunderscore X));}$\\
+$\texttt{est\textunderscore S = est\textunderscore beta*est\textunderscore S + est\textunderscore H * est\textunderscore H.’;}$\\
+
+Where:
+\begin{itemize}
+    \item \texttt{est\textunderscore beta} is $\beta$;
+    \item \textit{pinv()} is the \textit{Matlab} function used to calculate $S^{-1}$.
+\end{itemize}
+\end{comment}
+
+\subsection{Replanner}
+The Replanner is a single function that manages the trajectory re-planning whenever all the drones have reached their objective. Its behavior depends on the kind of trajectory type chosen, but the main idea is to wait for all the drones to reach their first objective, which is the one that makes the drones explore the space, and then make them converge to the estimated point.\\ 
+While converging to the estimated point, the space is explored further and once the drones reach their goal, a new, refined value for the estimated point is available. So once all the drones converge to their first estimated point, the Replanner sets the new, refined value as their new goal and this “looping” behavior continues until the stopping criterion of the simulation is met. 
+
+\subsection{Plotter}
+The Plotter class is the component that is responsible for the visualization of the simulation in real time: to do so, it opens a separate window at the beginning of the simulation and efficiently displays the simulation inside it. Since the draw calls of the Plotter can be the real bottleneck in the main loop of the simulation, we carefully optimized the code relative to this task so that redrawing the scene only updates the parts that changed between subsequent time-steps and everything else is kept as is.\\
+It should be noted that the simulation waits a defined time-step at each loop, from which all the computational time is subtracted, so to have faster simulations. However, this does not affect the time used to comment the results or for other calculations used in the algorithm, which remains the actual time it takes the drones to converge. 
+
+After this optimization, we managed to make the Plotter run fast enough that the simulation seems effectively in real time (since the draw calls do not run in a separate thread and therefore are blocking calls).\\
+The Plotter displays:
+
+\begin{itemize}
+    \item The lines determining either the vertical lanes or the circular sectors, depending on the trajectory; 
+    \item The drones, each with their own unique color to make them distinguishable;
+    \item The position of the real ARTVA; 
+    \item The position of the single estimation of the ARTVA, if in the centralized estimation mode; 
+    \item The position of the multiple estimations of the ARTVA, each with the same color of the corresponding drone, if in the decentralized estimation mode; 
+    \item The position of the multiple ACF estimations, each with the same color of the corresponding drone, if in the decentralized estimation mode. 
+\end{itemize}
+On a side-note, it should also be noted that the Plotter class is designed to adapt its behavior at run-time depending on the number of drones, trajectory chosen and mode of estimation.
+
+\subsection{Stopping Criterium}
+The stopping criterium was implemented right after the estimation of the ARTVA position and works in the following way: the values of those estimates are saved and used to check when the algorithm is not updating them significantly anymore. To do so, we first choose a number of time instants k representing how long the algorithm should "remain stable enough" to assess its convergence. Then we implemented a list named \textit{check} that contains k binary variables all initialized to 1: the idea is that if $check[i] = 0, \forall i \in [0,k-1]$, then in the last k time instants the estimations "did not change significantly", thus we converged to a reasonable solution and we can stop the simulation.
+
+In the centralized case, the $check[i]$ value is set to 0 when the difference between the estimate at time \textit{i} and the estimate at time \textit{i-1} falls below a threshold decided in advance. This is the way in which we encode the fact that the current estimation "did not change significantly". If that is not the case, the variable remains 1.\\
+When the \textit{check} array variable contains only 0 values, the algorithm terminates. However, an additional check is performed in this case: it is verified whether the difference between the current estimate and the estimate obtained k time instants ago falls below the threshold. This ensures that not only the estimates remained relatively stable during the control time period (i.e., subsequent changes were smaller than the threshold), but that the cumulative change was small enough to make it pointless for the algorithm to continue.
+
+In the distributed scenario, the stopping criterium remains fundamentally unchanged. However, the chosen estimate value is based on the mean estimated by the last drone through the ACF estimation. Thanks to the high precision of the ACF performance (with differences in the order of millimeters), it is possible to select arbitrarily any drone. This selected drone then signals all others to stop the search, as the goal has been accurately estimated. We opted for the final drone rather than any other one, as in the "\textit{linear}" case the last drone covers the greatest distance, which improves its estimation performance. In the other two cases, though, the choice was irrelevant because there were no drones outperforming the others, since they all tend to travel more or less the same amount of space.
 \section{Particle Swarm Optimization}
 The PSO\footnote{PSO stands for Particle Swarm Optimization.} algorithm was first introduced in 1995 
 \cite{PSO_original}, and it has since proven to be a powerful tool for solving various optimization problems. 

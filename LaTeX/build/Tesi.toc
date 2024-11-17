@@ -3,7 +3,7 @@
 \contentsline {paragraph}{Obbiettivi}{ii}{section*.2}%
 \contentsline {paragraph}{Metodi}{ii}{section*.3}%
 \contentsline {paragraph}{Risultati}{ii}{section*.4}%
-\contentsline {chapter}{Acronimi}{vi}{section*.9}%
+\contentsline {chapter}{Acronimi}{vii}{section*.9}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Previous Works}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}The ARTVA}{2}{section.1.2}%
@@ -49,25 +49,40 @@
 \contentsline {section}{\numberline {3.1}Single Victim Case}{23}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Magnitude of Magnetic Field Intensity H}{24}{subsection.3.1.1}%
 \contentsline {subsubsection}{Approximation}{24}{section*.28}%
-\contentsline {subsection}{\numberline {3.1.2}Finding the ARTVA position}{25}{subsection.3.1.2}%
-\contentsline {subsubsection}{Symmetry of \( \mathbf {M} \)}{26}{section*.30}%
+\contentsline {subsection}{\numberline {3.1.2}Finding the ARTVA position}{26}{subsection.3.1.2}%
+\contentsline {subsubsection}{Symmetry of \( \mathbf {M} \)}{27}{section*.30}%
 \contentsline {subsubsection}{Final expression for $\eta $}{27}{section*.31}%
-\contentsline {subsection}{\numberline {3.1.3}Finding the NSS}{27}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Multiple Victim Case}{31}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Total Magnitude }{32}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Finding the NSS}{32}{subsection.3.2.2}%
-\contentsline {chapter}{\numberline {4}Literature Review}{33}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Implementation}{36}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction}{36}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Particle Swarm Optimization}{36}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Exploration phase}{37}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Exploitation Phase}{38}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Velocity Update}{38}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Exclusion Zone Mechanism}{39}{subsection.5.4.2}%
-\contentsline {subsubsection}{Detection}{40}{section*.38}%
-\contentsline {subsubsection}{Sharing}{40}{section*.39}%
-\contentsline {subsubsection}{Avoidance}{40}{section*.40}%
-\contentsline {chapter}{Glossary}{43}{section*.41}%
-\contentsline {chapter}{Bibliography}{44}{section*.42}%
-\contentsline {section}{Figure}{48}{section*.44}%
-\contentsline {chapter}{Ringraziamenti}{48}{chapter*.45}%
+\contentsline {subsubsection}{Final Model}{28}{section*.32}%
+\contentsline {subsection}{\numberline {3.1.3}Recursive Least Square}{29}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Average Consensus Filter}{30}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Normalized Source Strength}{30}{subsection.3.1.5}%
+\contentsline {subsubsection}{Analitycal method}{31}{section*.33}%
+\contentsline {subsubsection}{Central difference method}{32}{section*.38}%
+\contentsline {section}{\numberline {3.2}Multiple Victims Case}{38}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Total Magnitude}{39}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Normalized Source Strength}{40}{subsection.3.2.2}%
+\contentsline {subsubsection}{Analitycal method}{40}{section*.43}%
+\contentsline {subsubsection}{Numerical method}{43}{section*.48}%
+\contentsline {subsection}{\numberline {3.2.3}Final Model}{43}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Particle Swarm Optimization}{46}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Control}{46}{subsection.3.2.5}%
+\contentsline {chapter}{\numberline {4}Literature Review}{47}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Implementation}{50}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{50}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Simulation Details}{50}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Drone and ARTVA classes}{51}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Replanner}{52}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Plotter}{52}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Stopping Criterium}{53}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Particle Swarm Optimization}{53}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Exploration phase}{54}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Exploitation Phase}{55}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Velocity Update}{55}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Exclusion Zone Mechanism}{56}{subsection.5.5.2}%
+\contentsline {subsubsection}{Detection}{57}{section*.54}%
+\contentsline {subsubsection}{Sharing}{57}{section*.55}%
+\contentsline {subsubsection}{Avoidance}{57}{section*.56}%
+\contentsline {chapter}{Glossary}{60}{section*.57}%
+\contentsline {chapter}{Bibliography}{61}{section*.58}%
+\contentsline {section}{Figure}{65}{section*.60}%
+\contentsline {chapter}{Ringraziamenti}{65}{chapter*.61}%
