@@ -684,9 +684,9 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmbsy10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmr.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmb.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT ./Cap_2.tex
 INPUT ./Cap_2.tex
@@ -787,12 +787,6 @@ OUTPUT build/Cap_4.aux
 INPUT ./Cap_4.tex
 INPUT ./Cap_4.tex
 INPUT Cap_4.tex
-INPUT ./Cap_5.tex
-INPUT ./Cap_5.tex
-OUTPUT build/Cap_5.aux
-INPUT ./Cap_5.tex
-INPUT ./Cap_5.tex
-INPUT Cap_5.tex
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -806,6 +800,12 @@ INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
+INPUT ./Cap_5.tex
+INPUT ./Cap_5.tex
+OUTPUT build/Cap_5.aux
+INPUT ./Cap_5.tex
+INPUT ./Cap_5.tex
+INPUT Cap_5.tex
 INPUT build/Tesi.gls
 INPUT build/Tesi.gls
 INPUT build/Tesi.gls

@@ -303,6 +303,57 @@
       \endverb
       \keyw{Simultaneous localization and mapping; Magnetic field measurement; Magnetic sensors; Antenna measurements; Snow; Motion estimation; Motion measurement; Gaussian processes; Filters}
     \endentry
+    \entry{PSO_acustic}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=bc6c6f66f139beef784a50d9f1485019}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ed9538ed4b9225dbab9f5e1e442a86e6}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Wen-tian},
+           giveni={W\bibinithyphendelim t\bibinitperiod}}}%
+        {{hash=a83eea5ff82c82f18c23ee7469186536}{%
+           family={Liang},
+           familyi={L\bibinitperiod},
+           given={Yan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9870eab5474af10b9e1c954f997f6bd0}{%
+           family={Pan},
+           familyi={P\bibinitperiod},
+           given={Quan},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=ed3b3cc4f62f1a2a8c0739c0b0cb967a}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Yong-mei},
+           giveni={Y\bibinithyphendelim m\bibinitperiod}}}%
+      }
+      \strng{namehash}{412b864aa3b1e9ea4dc53d3c2421cf2c}
+      \strng{fullhash}{f551bdcc69841fb65cd4ae8bc4c501b3}
+      \strng{fullhashraw}{f551bdcc69841fb65cd4ae8bc4c501b3}
+      \strng{bibnamehash}{f551bdcc69841fb65cd4ae8bc4c501b3}
+      \strng{authorbibnamehash}{f551bdcc69841fb65cd4ae8bc4c501b3}
+      \strng{authornamehash}{412b864aa3b1e9ea4dc53d3c2421cf2c}
+      \strng{authorfullhash}{f551bdcc69841fb65cd4ae8bc4c501b3}
+      \strng{authorfullhashraw}{f551bdcc69841fb65cd4ae8bc4c501b3}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2010 8th World Congress on Intelligent Control and Automation}
+      \field{title}{A novel PSO based acoustic source localization algorithm in Wireless Sensor Network}
+      \field{year}{2010}
+      \field{pages}{820\bibrangedash 825}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/WCICA.2010.5554104
+      \endverb
+      \keyw{Wireless sensor networks;Maximum likelihood estimation;Particle swarm optimization;Automation;Position measurement;Surveillance;Heuristic algorithms;Acoustic;Source Localization;Particle Swarm Optimization;Wireless Sensor Network}
+    \endentry
     \entry{book-robotics}{book}{}{}
       \name{author}{4}{}{%
         {{hash=a7bf4f019e53a717fdb65fbeb0a0f904}{%
@@ -787,6 +838,56 @@
       \verb https://books.google.it/books?id=J9ygBwAAQBAJ
       \endverb
     \endentry
+    \entry{12}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=9b3f2d487505aaac965d701470080bd3}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jianhua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=37363bba021da08768eab989a7fa0797}{%
+           family={Gong},
+           familyi={G\bibinitperiod},
+           given={Dunwei},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2c81656c924858824dfb10d50423b77a}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yong},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{b29f5fac1ca52f65def08530156e5157}
+      \strng{fullhash}{d9452411bec9b009a239ddaacaa48fdf}
+      \strng{fullhashraw}{d9452411bec9b009a239ddaacaa48fdf}
+      \strng{bibnamehash}{d9452411bec9b009a239ddaacaa48fdf}
+      \strng{authorbibnamehash}{d9452411bec9b009a239ddaacaa48fdf}
+      \strng{authornamehash}{b29f5fac1ca52f65def08530156e5157}
+      \strng{authorfullhash}{d9452411bec9b009a239ddaacaa48fdf}
+      \strng{authorfullhashraw}{d9452411bec9b009a239ddaacaa48fdf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Aiming at the problem of multiple odor sources localization, a multi-robot cooperation method based on niching particle swarm optimization is presented in this study. In this method, a robot is regarded as a particle, particles located at a neighbor form a niche, and different niches are employed to localize different odor sources synchronously. In order to localize more odor sources, the size of each niche is dynamically adjusted based on the aggregation degree of its elements. A niche merging strategy, based on the similarity of optimal particles found by niches, is proposed to prevent particles repeatedly searching for the same region. In addition, some real conditions such as the sampling/recovery time of a sensor and the velocity limit of a robot are considered when updating the position of a particle. Finally, the proposed method is applied to various scenarios of localizing multiple odor sources, and the experimental results confirm its effectiveness.}
+      \field{issn}{0925-2312}
+      \field{journaltitle}{Neurocomputing}
+      \field{note}{Contains Special issue articles: Advances in Pattern Recognition Applications and Methods}
+      \field{title}{A niching PSO-based multi-robot cooperation method for localizing odor sources}
+      \field{volume}{123}
+      \field{year}{2014}
+      \field{pages}{308\bibrangedash 317}
+      \range{pages}{10}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.neucom.2013.07.025
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231213007698
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231213007698
+      \endverb
+      \keyw{Odor source,Multi-robot,Particle swarm optimization,Niche}
+    \endentry
     \entry{sr}{article}{}{}
       \name{author}{4}{}{%
         {{hash=544552ba2f4c01268e1b7cb203a4aa90}{%
@@ -911,6 +1012,102 @@
       \verb{url}
       \verb https://api.semanticscholar.org/CorpusID:110028936
       \endverb
+    \endentry
+    \entry{PSO_another2}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=41eba4ab2090f24c8ec4654bd1f6a3f7}{%
+           family={Lynn},
+           familyi={L\bibinitperiod},
+           given={Nandar},
+           giveni={N\bibinitperiod}}}%
+        {{hash=d94afbc27d84d6e232201b6f0b6938ca}{%
+           family={Suganthan},
+           familyi={S\bibinitperiod},
+           given={Ponnuthurai\bibnamedelima Nagaratnam},
+           giveni={P\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{d02db577568501dcb1d2665793635ed1}
+      \strng{fullhash}{d02db577568501dcb1d2665793635ed1}
+      \strng{fullhashraw}{d02db577568501dcb1d2665793635ed1}
+      \strng{bibnamehash}{d02db577568501dcb1d2665793635ed1}
+      \strng{authorbibnamehash}{d02db577568501dcb1d2665793635ed1}
+      \strng{authornamehash}{d02db577568501dcb1d2665793635ed1}
+      \strng{authorfullhash}{d02db577568501dcb1d2665793635ed1}
+      \strng{authorfullhashraw}{d02db577568501dcb1d2665793635ed1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents a comprehensive learning particle swarm optimization algorithm with enhanced exploration and exploitation, named as “heterogeneous comprehensive learning particle swarm optimization” (HCLPSO). In this algorithm, the swarm population is divided into two subpopulations. Each subpopulation is assigned to focus solely on either exploration or exploitation. Comprehensive learning (CL) strategy is used to generate the exemplars for both subpopulations. In the exploration-subpopulation, the exemplars are generated by using personal best experiences of the particles in the exploration-subpopulation itself. In the exploitation-subpopulation, the personal best experiences of the entire swarm population are used to generate the exemplars. As the exploration-subpopulation does not learn from any particles in the exploitation-subpopulation, the diversity in the exploration-subpopulation can be retained even if the exploitation-subpopulation converges prematurely. The heterogeneous comprehensive learning particle swarm optimization algorithm is tested on shifted and rotated benchmark problems and compared with other recent particle swarm optimization algorithms to demonstrate superior performance of the proposed algorithm over other particle swarm optimization variants.}
+      \field{issn}{2210-6502}
+      \field{journaltitle}{Swarm and Evolutionary Computation}
+      \field{title}{Heterogeneous comprehensive learning particle swarm optimization with enhanced exploration and exploitation}
+      \field{volume}{24}
+      \field{year}{2015}
+      \field{pages}{11\bibrangedash 24}
+      \range{pages}{14}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.swevo.2015.05.002
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2210650215000401
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2210650215000401
+      \endverb
+      \keyw{Comprehensive learning (CL),Exploration,Exploitation,Particle swarm optimization (PSO),Heterogeneous}
+    \endentry
+    \entry{3}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=2071895214a856ef644a1a1297c07dc0}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Rui},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f4d5d6954b5de238c84b3c9b67c9ad13}{%
+           family={Kalivarapu},
+           familyi={K\bibinitperiod},
+           given={Vijay},
+           giveni={V\bibinitperiod}}}%
+        {{hash=f0e2ccb5856a55d028222413f33f0772}{%
+           family={Winer},
+           familyi={W\bibinitperiod},
+           given={Eliot},
+           giveni={E\bibinitperiod}}}%
+        {{hash=df96390d48828a9b4a3b358ef4c32681}{%
+           family={Oliver},
+           familyi={O\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b305d7135d7a725084c9ea77a410ac93}{%
+           family={Bhattacharya},
+           familyi={B\bibinitperiod},
+           given={Sourabh},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3acc2446402cc91074dcdc177e6a581e}
+      \strng{fullhash}{371b1cc47aabf288029f1141ef342607}
+      \strng{fullhashraw}{371b1cc47aabf288029f1141ef342607}
+      \strng{bibnamehash}{371b1cc47aabf288029f1141ef342607}
+      \strng{authorbibnamehash}{371b1cc47aabf288029f1141ef342607}
+      \strng{authornamehash}{3acc2446402cc91074dcdc177e6a581e}
+      \strng{authorfullhash}{371b1cc47aabf288029f1141ef342607}
+      \strng{authorfullhashraw}{371b1cc47aabf288029f1141ef342607}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Automation Science and Engineering}
+      \field{number}{3}
+      \field{title}{Particle Swarm Optimization-Based Source Seeking}
+      \field{volume}{12}
+      \field{year}{2015}
+      \field{pages}{865\bibrangedash 875}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/TASE.2015.2441746
+      \endverb
+      \keyw{Robot sensing systems; Particle swarm optimization; Mathematical model; Electromagnetics; Collision avoidance; Noise measurement; PSO; source seeking; swarm robots}
     \endentry
     \entry{sr3}{inproceedings}{}{}
       \name{author}{6}{}{%
@@ -1163,7 +1360,7 @@
       \verb https://api.semanticscholar.org/CorpusID:115873208
       \endverb
     \endentry
-    \entry{spacecraft}{article}{}{}
+    \entry{multiple_spacecraft}{article}{}{}
       \name{author}{5}{}{%
         {{hash=6f9a56a9303f15f4bfd17ffbc6e9e77b}{%
            family={Xu},
@@ -1202,7 +1399,6 @@
       \strng{authornamehash}{62bc2294574e603c0084c0d90c6f18ce}
       \strng{authorfullhash}{a2d952f765e7ad440713a10208eb9f6e}
       \strng{authorfullhashraw}{a2d952f765e7ad440713a10208eb9f6e}
-      \field{extraname}{1}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
@@ -1224,58 +1420,6 @@
       \endverb
       \verb{url}
       \verb https://dx.doi.org/10.1088/1755-1315/237/3/032021
-      \endverb
-    \endentry
-    \entry{multiple_in_spacecraft}{article}{}{}
-      \name{author}{5}{}{%
-        {{hash=6f9a56a9303f15f4bfd17ffbc6e9e77b}{%
-           family={Xu},
-           familyi={X\bibinitperiod},
-           given={Chaoqun},
-           giveni={C\bibinitperiod}}}%
-        {{hash=d6199b632d275d42ac0a4dd7c488335a}{%
-           family={Yi},
-           familyi={Y\bibinitperiod},
-           given={Zhong},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=84195be6c508f8dda5c3e529606b3bdc}{%
-           family={Meng},
-           familyi={M\bibinitperiod},
-           given={Lifei},
-           giveni={L\bibinitperiod}}}%
-        {{hash=c9ffc23f3b57f588059c9f0173756b43}{%
-           family={Huang},
-           familyi={H\bibinitperiod},
-           given={Kui},
-           giveni={K\bibinitperiod}}}%
-        {{hash=c1b9712a5a7f680d41d624c9c076c405}{%
-           family={Dai},
-           familyi={D\bibinitperiod},
-           given={Jialong},
-           giveni={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{62bc2294574e603c0084c0d90c6f18ce}
-      \strng{fullhash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{fullhashraw}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{bibnamehash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{authorbibnamehash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{authornamehash}{62bc2294574e603c0084c0d90c6f18ce}
-      \strng{authorfullhash}{a2d952f765e7ad440713a10208eb9f6e}
-      \strng{authorfullhashraw}{a2d952f765e7ad440713a10208eb9f6e}
-      \field{extraname}{2}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IOP Conference Series: Earth and Environmental Science}
-      \field{month}{03}
-      \field{title}{Detection technology of multi-magnetic source in spacecraft based on magnetic field gradient tensor}
-      \field{volume}{237}
-      \field{year}{2019}
-      \field{pages}{032021}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1088/1755-1315/237/3/032021
       \endverb
     \endentry
     \entry{artva-gazebo}{inproceedings}{}{}
@@ -1742,7 +1886,7 @@
       \strng{authornamehash}{8fbe3aaa6b78b6c87828544aa9bae3c1}
       \strng{authorfullhash}{c5461964c4c01859af416ceb69888569}
       \strng{authorfullhashraw}{c5461964c4c01859af416ceb69888569}
-      \field{extraname}{1}
+      \field{extraname}{2}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
@@ -1763,6 +1907,55 @@
       \verb{url}
       \verb https://www.mdpi.com/2072-4292/14/23/6088
       \endverb
+    \endentry
+    \entry{PSO_another}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=3a48ab36d454ca6696e7b6e644842fbe}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Xu},
+           giveni={X\bibinitperiod}}}%
+        {{hash=7e7b83e8c425ac68fd9401f9db9a0e7a}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Hongru},
+           giveni={H\bibinitperiod}}}%
+        {{hash=d13554c5135e8b5ae2726c7f4e3e5259}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Youhe},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{53ccb1a312d2a2044917c79449f6d2fc}
+      \strng{fullhash}{94d11b4d445d7091c30d381295a230f9}
+      \strng{fullhashraw}{94d11b4d445d7091c30d381295a230f9}
+      \strng{bibnamehash}{94d11b4d445d7091c30d381295a230f9}
+      \strng{authorbibnamehash}{94d11b4d445d7091c30d381295a230f9}
+      \strng{authornamehash}{53ccb1a312d2a2044917c79449f6d2fc}
+      \strng{authorfullhash}{94d11b4d445d7091c30d381295a230f9}
+      \strng{authorfullhashraw}{94d11b4d445d7091c30d381295a230f9}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Particle swarm optimization (PSO) is a simple and efficient optimization method that has been used in many fields. However, PSO has some flaws including premature convergence and poor population diversity. To solve these problems of PSO, an adaptive dynamic multi-swarm particle swarm optimization with stagnation detection and spatial exclusion (ADPSO) is proposed. The newly proposed ADPSO is based on a dynamic multi-swarm PSO framework that cooperates with stagnation detection mechanism (SDM) and spatial exclusion strategy (SES). Firstly, the whole population is divided into multiple equal sub-swarms, which can be regrouped during evolution. The best particle of each sub-swarm, lbest, is used to evaluate the evolutionary state of each sub-swarm. If the lbest cannot improve its solution continuously without reaching the regroup period, the SDM will be triggered. In this case, a vitality particle is generated to help the stagnant sub-swarm to search for promising areas again. To keep the population diversity, the vitality particle is constructed according to the excellent historical information of all particles in the whole population. Secondly, to enhance the diversity of the population, the SES is proposed to avoid premature adsorption of all sub-swarms. Finally, the effect of ADPSO is evaluated using CEC2013, CEC2017 and four engineering optimization problems. The results shows that the proposed ADPSO is suitable for solving most optimization problems, and ADPSO has better results compared to the state-of-the-art PSO variants (i.e., MSCPSO, HCDMPS) and other popular evolutionary algorithms.}
+      \field{issn}{0952-1976}
+      \field{journaltitle}{Engineering Applications of Artificial Intelligence}
+      \field{title}{An adaptive dynamic multi-swarm particle swarm optimization with stagnation detection and spatial exclusion for solving continuous optimization problems}
+      \field{volume}{123}
+      \field{year}{2023}
+      \field{pages}{106215}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.engappai.2023.106215
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0952197623003998
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0952197623003998
+      \endverb
+      \keyw{Particle swarm optimization,Stagnation detection,Spatial exclusion,Multiple swarms}
     \endentry
     \entry{manual}{manual}{}{}
       \list{organization}{1}{%
@@ -1812,7 +2005,7 @@
       \strng{authornamehash}{8fbe3aaa6b78b6c87828544aa9bae3c1}
       \strng{authorfullhash}{9a5c12d109a846d96943d610c06cb76e}
       \strng{authorfullhashraw}{9a5c12d109a846d96943d610c06cb76e}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
@@ -1892,6 +2085,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{spacecraft}
 \endrefsection
 \endinput
 

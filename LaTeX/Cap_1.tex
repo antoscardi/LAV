@@ -1,8 +1,6 @@
 \chapter{Introduction}
 \label{intro}
 
-METTERE PREVIOUS WORKS SU NSS APPLICATO A QUESTO E SU PSO, O QUI 
-O APPLICATO ALLE DIVERSE SEZIONI, COME ERA STATO FATTO
 \section{Previous Works}
 In the context of S\&R\footnote{S\&R stands for Search and Rescue.} operations, 
 the support of robots has become more and more extensive in recent years 
@@ -60,6 +58,157 @@ mathematical/algorithmic framework for solving the localization problem of not
 just one, but \textit{multiple avalanche victims}, using \textit{multiple 
 decentralized} agents (UAVs). This approach aims to reduce computational 
 complexity without sacrificing accuracy and convergence time.
+
+\subsection{Magnetic Dipole Localization}
+In the context of a single magnetic source, numerous studies have focused 
+on the localization task; in \cite{single_closed_formula_position} 
+a straightforward closed-form solution is found by leveraging the analytical 
+expressions of the magnetic field vector and the magnetic gradient tensor, 
+regardless of the singularity of the magnetic gradient tensor matrix.
+
+In the field of TMI\footnote{TMI stands for Total Magnetic Intensity} 
+gradiend surveys, the acquisition of magnetic gradinet tensor data 
+has seen significant advancements.
+In \cite{NSS_analysis2}, new methods have been 
+developed for inverting gradient tensor surveys, 
+for a number of elementary, but useful, models. 
+These include point pole, line 
+of poles, point dipole (sphere), line of dipoles (horizontal cylinder), thin and thick 
+dipping sheets, sloping step, and contact models.
+A key insight is the use of eigenvalues and associated eigenvectors of the magnetic
+tensor to obtain the NSS \footnote{NSS stands for Normalized Source Strength.},
+which is a particularly useful rotational invariant that peaks 
+directly over 2D sources, and it is independent of magnetization 
+direction.
+
+The NSS has been employed not only in geological applications, but also in the  
+the detection, location, and classification of magnetic objects, such as naval 
+mines, UXO, shipwrecks, archaeological artifacts, and buried drums \cite{NSS_analysis2}.
+
+In \cite{NSS_formula_important}, the authors use the spatial relation between the 
+magnetic target and observation points derived from the NSS for accurately locating 
+a magnetic target, achieving nearly error-free results in the absence of noise.
+
+In addition, methods that use the NSS for magnetic sources localization, for different models
+and dimensions is done in \cite{NSS_single_different_dimensions}. 
+
+In \cite{NSS_single_localization}, a key aspect of the NSS is identified by the fact
+that it is only dependent on the distance between the source and target position;
+since an analytical expression of the magnetic gradient tensor and a closed-form 
+localization formula are derived.
+
+In \cite{NSS_analysis} as well, it is stressed that the NSS is proportional 
+to a constant normalized by the distance between observation and source. 
+It is independent of magnetization direction and satisfies Euler’s homogeneity equation, 
+this allows the authors to use Euler deconvolution of the NSS to estimate source location.  
+
+\noindent
+\\
+Instead, the more specific multi-magnetic source localization task 
+has been a difficult problem and different strategies have been conducted.
+
+In recent years, many studies have performed an in-depth analysis on rotational 
+invariants of the magnetic gradient tensor, such as \cite{multiple_plots} and 
+\cite{multiple_real_plots_invariants}.
+In the latter, a new method, named NED\footnote{NED stands for NEw Edge Detection} 
+has been proposed, which is free from geomagnetic interference and provides 
+abundant information, and it is compared with other methods such as the tilt angle 
+(ratio of vertical to horizontal magnetic field components),
+theta map, etc.
+
+In this context of detecting and localizing multiple dipole-like 
+magnetic sources, the authors of \cite{multiple_DE_NSS_big_matrix} 
+use the magnetic gradient tensor data:
+the tilt angle is used to determine the number of sources, 
+while the rotational-invariant NSS is used to estimate the horizontal coordinates. 
+Then, they employ the DE algorithm estimates the locations and moments of the sources.
+
+Lastly, the authors of \cite{multiple_spacecraft} use 
+the principal invariants of the magnetic field gradient tensor
+to determine the number and horizontal location of the magnetic sources, 
+while Euler equations are used to compute the sources's depth.
+
+In our work, between all the different indicators in literature,
+we chose to employ the NSS in order to estimate the 
+horizontal coordinates of the avalanche victims, 
+since it is rotationally invariant and completely isotropic 
+around the magnetic dipole.
+We are not interested in estimating the burial depth of the victims,
+even if \cite{not_import_formula_z} use a closed loop formula to find z,
+it cannot be applied to the multiple sources case.
+
+
+\subsection{Particle Swarm Optimization}
+In this context of simultaneous localization of multiple magnetic 
+dipole sources, like in this real world application \cite{real_application}; 
+different algorithms have been employed.
+For instance, in \cite{DetectionMultiplMagnetiDipoleSources}, the authors
+use a non-linear optimization method based on the Levenberg–Marquardt algorithm
+to solve the problem, without the prior knowledge of the number of 
+dipoles in the 3-D detection region.
+
+In this work, we propose the use of the PSO\footnote{PSO stands for Particle Swarm Optimization.} 
+algorithm as a mean to solve the multiple-sources localization task, 
+which can be considered a continous multi-modal optimization problem.
+
+The PSO\footnote{PSO stands for Particle Swarm Optimization.} algorithm 
+was first introduced in 1995 \cite{PSO_original}, and it has since proven to be 
+a simple but powerful tool for solving various optimization problems\cite{PSO_IMPORTANT},
+among a lot of EAs \footnote{EA stands for Evolutionary Algorithm.}.
+It has been used to solve various practical applications like simultaneous
+localization of multiple odor souces \cite{12}, as well as decetion of acoustic 
+\cite{PSO_acustic}, thermal, or chemical/biological signals \cite{3}.
+In the standard PSO algorithm \cite{PSO_original}, a population of particles is 
+randomly initialized to represent potential candidate solutions for the optimization problem. 
+Each particle relies on two important pieces of information: its individual 
+best, referred to as \textit{pbest}, and the global best across the entire population, 
+referred to as \textit{gbest}. These two values guide the search direction of all particles over the search space. 
+The evaluation of the \textit{pbest} for each particle and the \textit{gbest} for 
+the entire population is determined by the function that needs to be optimized.
+
+However, when addressing continuous optimization problems with numerous local optima, 
+classical optimization algorithms often require strict conditions 
+and extensive computation times \cite{PSO_another}.
+For this reason, the authors of  \cite{PSO_IMPORTANT} introduced a modified PSO algorithm 
+where the original population is divided into multiple subpopulations, 
+according to the order of particles.
+The best particle within each subpopulation is recorded and then 
+used into the velocity updating formula to replace 
+the original global best particle of thge entire population.
+This strategy, based on the idea of multiple subpopulations, 
+enables the algorithm to find several optima, including both
+the global and local solutions, thanks to these distinct best particles
+in each group.
+
+Both in the standard PSO \cite{PSO_original} and the multi-swarm modification \cite{PSO_IMPORTANT}
+common limitations are the premature convergence of the algorithm 
+and its tendency to become trapped in some local optima.
+Instead in \cite{PSO_another}, the authors overcome these issue,
+including the one of poor population diversity. 
+They introduce a modification to \cite{PSO_IMPORTANT}, it is called 
+ADPSO\footnote{ADPSO stands for Adaptive Dynamic Multi-Swarm Particle Swarm Optimization.}, 
+and includes features for stagnation detection and spatial exclusion to mitigate these challenges. 
+The dynamic division of the population into sub-swarms, 
+coupled with a regrouping mechanism, avoids stagnation during the optimization process. 
+Stagnant sub-swarms are rejuvenated with a new generate particle, 
+called the vitality particle, constructed from the historical information of the entire population. 
+This approach maintains diversity and prevents sub-swarms from converging prematurely.
+
+The authors of \cite{PSO_another2} focus their attention to the 
+exploration and exploitaion aspects of the PSO algorithm, instead.
+They enhance exploration and exploitation in a modified system,
+named HCLPSO \footnote{HCLPSO stands for Heterogeneous Comprehensive 
+Learning Particle Swarm Optimization.}, which divides the population 
+into only two sub-swarms, one dedicated to exploitation and 
+one dedicated to exploration. 
+In the exploration-subpopulation, the solutions are generated by using the personal 
+best experiences of the particles in the exploration-subpopulation itself. 
+In the exploitation-subpopulation, the personal best experiences of the
+entire swarm population are used to generate the solutions. 
+In this way, since the exploration-subpopulation does not
+learn from any particles in the other subpopulation, 
+diversity is mantained in the exploration-subpopulation even when the 
+exploitation-subpopulation converges prematurely.
 
 \section{The ARTVA}
 The ARTVA technology is composed of two different and easy switchable modalities: 
