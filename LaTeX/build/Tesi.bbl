@@ -1265,41 +1265,6 @@
       \endverb
       \keyw{Magnetic gradient tensor,Modified tilt angle,Normalized source strength,Multi-dipoles discrimination}
     \endentry
-    \entry{5}{inproceedings}{}{}
-      \name{author}{2}{}{%
-        {{hash=ae3813617d0958077c6cbc46d15d35e3}{%
-           family={Sakurama},
-           familyi={S\bibinitperiod},
-           given={Kazunori},
-           giveni={K\bibinitperiod}}}%
-        {{hash=143cf0535dbd91f15b06260037cd7809}{%
-           family={Nishida},
-           familyi={N\bibinitperiod},
-           given={Shin-ichiro},
-           giveni={S\bibinithyphendelim i\bibinitperiod}}}%
-      }
-      \strng{namehash}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{fullhash}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{fullhashraw}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{bibnamehash}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{authorbibnamehash}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{authornamehash}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{authorfullhash}{29159b286251d58006f7ebe7bd8d4e7d}
-      \strng{authorfullhashraw}{29159b286251d58006f7ebe7bd8d4e7d}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{2016 American Control Conference (ACC)}
-      \field{title}{Source seeking by distributed swarm robots with sample variance control}
-      \field{year}{2016}
-      \field{pages}{2484\bibrangedash 2487}
-      \range{pages}{4}
-      \verb{doi}
-      \verb 10.1109/ACC.2016.7525289
-      \endverb
-      \keyw{Robots; Collision avoidance; Lagrangian functions; Estimation; Decentralized control; Optimization; Nickel}
-    \endentry
     \entry{sr0}{article}{}{}
       \name{author}{6}{}{%
         {{hash=5b903e923f6f354b667398d8f148692c}{%
@@ -1845,6 +1810,51 @@
       \endverb
       \keyw{Magnetic moments;Magnetic separation;Magnetometers;Magnetic resonance;Tensors;Magnetostatics;Estimation;Differential evolution (DE) algorithm;magnetic gradient tensor data;normalized source strength (NSS)}
     \endentry
+    \entry{PSO_for_communication}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=8e9fb26786e3a2a9e1197d9d7aac61be}{%
+           family={Duong\bibnamedelimb Thi\bibnamedelima Thuy},
+           familyi={D\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Ngan},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0dba669914f535bebb20dd40ef80df0f}{%
+           family={Nam\bibnamedelima Bui},
+           familyi={N\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Duy},
+           giveni={D\bibinitperiod}}}%
+        {{hash=580ffd7e38309aea1e6345cc2b25cb48}{%
+           family={Duong\bibnamedelima Phung},
+           familyi={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Manh},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6efa4801b5485b1597f57e5bb755d139}{%
+           family={Pham\bibnamedelima Duy},
+           familyi={P\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Hung},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{1e6b7de9fe826b52616b1a583b5cd378}
+      \strng{fullhash}{76742879ba02438db07949e90269f6d5}
+      \strng{fullhashraw}{76742879ba02438db07949e90269f6d5}
+      \strng{bibnamehash}{76742879ba02438db07949e90269f6d5}
+      \strng{authorbibnamehash}{76742879ba02438db07949e90269f6d5}
+      \strng{authornamehash}{1e6b7de9fe826b52616b1a583b5cd378}
+      \strng{authorfullhash}{76742879ba02438db07949e90269f6d5}
+      \strng{authorfullhashraw}{76742879ba02438db07949e90269f6d5}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2022 11th International Conference on Control, Automation and Information Sciences (ICCAIS)}
+      \field{title}{Deployment of UAVs for Optimal Multihop Ad-hoc Networks Using Particle Swarm Optimization and Behavior-based Control}
+      \field{year}{2022}
+      \field{pages}{304\bibrangedash 309}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICCAIS56082.2022.9990164
+      \endverb
+      \keyw{Navigation;Spread spectrum communication;Autonomous aerial vehicles;Ad hoc networks;Real-time systems;Data models;Behavioral sciences;Unmanned aerial vehicles (UAVs);search and rescue;particle swarm optimization (PSO);behavior control}
+    \endentry
     \entry{NSS_formula_important}{article}{}{}
       \name{author}{6}{}{%
         {{hash=456ce7d182cb8782d69d7433d456c179}{%
@@ -1907,6 +1917,58 @@
       \verb{url}
       \verb https://www.mdpi.com/2072-4292/14/23/6088
       \endverb
+    \endentry
+    \entry{PSO_for_path_planning}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=01318750d1cc1580f0ccc6311682efac}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Zhenhua},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=f2a7b98b13b320c54ff20a3e2ca15966}{%
+           family={Si},
+           familyi={S\bibinitperiod},
+           given={Zhijie},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=c13ba7ccac16e66bc28bca7c9fe32b95}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xiaobo},
+           giveni={X\bibinitperiod}}}%
+        {{hash=50e578209e59a4d498fdb91091525255}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c09ffce8bcc845c548836c3433b8701b}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Houbing},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{1f859cff2da474c5e8323d6f3c63fc6a}
+      \strng{fullhash}{ef73a85323a55618ae5d58812043c7ed}
+      \strng{fullhashraw}{ef73a85323a55618ae5d58812043c7ed}
+      \strng{bibnamehash}{ef73a85323a55618ae5d58812043c7ed}
+      \strng{authorbibnamehash}{ef73a85323a55618ae5d58812043c7ed}
+      \strng{authornamehash}{1f859cff2da474c5e8323d6f3c63fc6a}
+      \strng{authorfullhash}{ef73a85323a55618ae5d58812043c7ed}
+      \strng{authorfullhashraw}{ef73a85323a55618ae5d58812043c7ed}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Internet of Things Journal}
+      \field{number}{22}
+      \field{title}{A Novel Hybrid Particle Swarm Optimization Algorithm for Path Planning of UAVs}
+      \field{volume}{9}
+      \field{year}{2022}
+      \field{pages}{22547\bibrangedash 22558}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/JIOT.2022.3182798
+      \endverb
+      \keyw{Heuristic algorithms;Path planning;Optimization;Planning;Convergence;Three-dimensional displays;Mathematical models;Hybrid algorithm;particle swarm optimization (PSO);path planning;unmanned aerial vehicle (UAV)}
     \endentry
     \entry{PSO_another}{article}{}{}
       \name{author}{3}{}{%
@@ -2085,7 +2147,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{spacecraft}
 \endrefsection
 \endinput
 

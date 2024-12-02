@@ -51,6 +51,13 @@ The position of $O_r$ relative to $O_t$ is indicated by the vector $\mathbf{p}_{
 while the positions of $O_r$ and $O_t$ relative to $O_g$ are indicated, respectively, by the vectors $\mathbf{p}_r \in \mathbb{R}^3$ and $\mathbf{p}_t \in \mathbb{R}^3$.
 We use the apex $g$, $r$ or $t$ on the left of the vector to indicate in which frame the vector is expressed , e.g. ${}^t p$. 
 If it is not specified, we assume the global (inertial) frame.
+We denote the \textit{special orthogonal group} of order three as \( \textit{SO}(3) \), 
+which is the set of all \( 3 \times 3 \) orthogonal matrices with determinant equal to one:
+\[
+\textit{SO}(3) = \{ \mathbf{R} \in \mathbb{R}^{3 \times 3} \mid \mathbf{R}^\top \mathbf{R} = \mathbf{I}, \, \det(\mathbf{R}) = 1 \}
+\]
+Therefore, we indicate with \( \mathbf{R}_t^g \in \textit{SO}(3) \) a rotation matrix that rotates 
+frame \( t \) into frame \( g \).
 
 \noindent
 As mentioned in the Introduction \ref{intro}, the ARTVA instrument can be equipped with three antennas aligned along 
@@ -164,7 +171,7 @@ Also from Figure \ref{fig:frames-1victim}, we can express the position of the re
 {}^t \mathbf{p}_{tr} &= \mathbf{R}_t^g \,\, {}^g \mathbf{p}_{tr}
 \end{aligned}
 \]
-where $\mathbf{R}_t^g$ is the rotation matrix that rotates axis $g$ to $t$ \cite{artva-gazebo}.
+where $\mathbf{R}_t^g$ is the rotation matrix that rotates frame $g$ to $t$ \cite{artva-gazebo}.
 \begin{comment}
 The matrix $R_t^i$ is the matrix which lets us express the vector in frame $i$ using the coordinates of the vector in frame $t$.Since we are expressing in the columns the coordinates of the axis of $t$ w.r.t using the axis of $i$.
 Then if we have the coordinates of point $P$ with respect to frame i $\mathbf{P}$ 
@@ -367,7 +374,7 @@ In the final model of the single-victim case, we consider one victim to
 which it is attached an ARTVA transmitter and \( m \in \mathbb{N} \) receivers, 
 each rigidly attached to each drone. 
 We define the position of the $k$-th drone at sample time \( \tau_i \) with \( \mathbf{p}_{r_k}(\tau_i) \in \mathbb{R}^3 \) 
-where \( k, i \in \mathbb{N} \) and \( k = 1, \ldots, n \).
+where \( k, i \in \mathbb{N} \) and \( k = 1, \ldots, m \).
 
 \noindent
 As described in \cite{similar-main} and as seen in the previous sections, 
@@ -606,7 +613,7 @@ ${}^r \mathbf{H}$, and then compute directly its relative gradient tensor using 
 numerical approximation.
 We simulate and simplify the way the authors of \cite{NSS_single_localization} use 
 a cubic structure measurement array composed of eight
-tri-axial magnetometers in order to obtain the magnetic
+TAMs\footnote{TAM stands for Tri-Axial Magnetometer} in order to obtain the magnetic
 field information and then compute the gradient tensor ${}^r \mathbf{G}$.
 
 \noindent
@@ -813,14 +820,14 @@ ${}^{t_i} \mathbf{p}_{{t_i}r}$ is denoted by ${}^{t_i} \mathbf{p}$, for semplici
 and the position of the $i$-th source in the global frame is denoted by 
 $\mathbf{p}_{t_i}$.
 The relative orientation of frames $F_{t_1}, F_{t_2}, \dots, F_{t_n}$ with respect to 
-the reference frame $F_i$ are denoted with $R^g_{t_i}$.
+the reference frame $F_i$ are denoted with $\mathbf{R}^g_{t_i} \in \textit{SO}(3)$.
 Instead the rotation matrices that describe the orientation between the receiver
-frame and the multiple trasmitters are defined as $R^{t_i}_r$.
+frame and the multiple trasmitters are defined as $\mathbf{R}^{t_i}_r \in \textit{SO}(3)$.
 
 Then, considering the receiver drone positioned at point $\mathbf{p}$ in space, the superposition
 of all the electromagnetic fields can be expressed 
 as the sum of the magnetic field intensity vectors \(\mathbf{H}_n\), 
-when projected in the receiver frame $F_r$, as in \cite{spacecraft}:
+when projected in the receiver frame $F_r$, as in \cite{multiple_spacecraft}:
 \begin{equation}
     {}^r \mathbf{H}_{\text{tot}} = 
     {}^r \mathbf{H}_1 + {}^r \mathbf{H}_2 + \cdots + {}^r \mathbf{H}_n 
@@ -843,9 +850,10 @@ Furthermore, we use the same homogeneous transformation as in the single victims
     \label{eq:pt_multi}  
 \end{equation}
 which is again inverted:
-\[
-{}^{t_i} \mathbf{p} = {R^g_{t_i}}^\top \, \left( \mathbf{p}_r - \mathbf{p}_{t_i} \right)
-\]
+\begin{equation}
+    {}^{t_i} \mathbf{p} = {R^g_{t_i}}^\top \, \left( \mathbf{p}_r - \mathbf{p}_{t_i} \right)
+    \label{eq:pt_transmitter}
+\end{equation}
 In Figure \ref{fig:frames-2victim}, for clarity, we represent all the frames described before, 
 in the case of only two victims.
  
@@ -957,20 +965,20 @@ we will describe the general procedure when different orientations
 are presentbetween the different reference frames $F_g$, $F_r$, and $F_{t_i}$.
 
 Firstly, for each different $i$-th source we express the point at which the NSS needs to be obtained
-in the transmitter reference frame $F_t$, in the same way as Eq.\ref{eq:pt_multi}.
+in the transmitter reference frame $F_{t_i}$, in the same way as Eq.\ref{eq:pt_multi}.
 
 Secondly, we use the analytical expression in Eq.\ref{eq:G_analit}, to compute the gradient tensor 
-in the transmitter frame ${}^t \mathbf{G}_i$, of the $i$-th source.
-Then we transform ${}^t \mathbf{G}_i$ in ${}^r \mathbf{G}_i$, the gradient expressed in the receiver frame using Eq.\ref{eq:rotated_gradient_tensor}.
+in the transmitter frame ${}^{t_i} \mathbf{G}_i$, of the $i$-th source.
+Then we transform ${}^{t_i} \mathbf{G}_i$ in ${}^r \mathbf{G}_i$, the gradient expressed in the receiver frame using Eq.\ref{eq:rotated_gradient_tensor}.
 
 Finally, we find ${}^r \mathbf{G}_{\text{tot}}$, the total gradient tensor by summing all the gradient tensors
 relative to the different suorces in the common receiver frame:
 \begin{align}
 {}^r \mathbf{G}_{\text{tot}} &= 
-\mathbf{R}^{t_1}_r  \, {}^t\mathbf{G}_1({}^{t_1} \mathbf{p}) \, {\mathbf{R}^{t_1}_r}\mkern-2mu^\top + \dots + \mathbf{R}^{t_n}_r  \, {}^t\mathbf{G}_n({}^{t_n} \mathbf{p}) \, {\mathbf{R}^{t_n}_r}\mkern-2mu^\top \nonumber = \\
+\mathbf{R}^{t_1}_r  \, {}^{t_1}\mathbf{G}_1({}^{t_1} \mathbf{p}) \, {\mathbf{R}^{t_1}_r}\mkern-2mu^\top + \dots + \mathbf{R}^{t_n}_r  \, {}^{t_n}\mathbf{G}_n({}^{t_n} \mathbf{p}) \, {\mathbf{R}^{t_n}_r}\mkern-2mu^\top \nonumber = \\
 &= 
-\mathbf{R}^{t_1}_r  \, {}^t\mathbf{G}_1({R^g_{t_1}}\mkern-4mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1})) \, {\mathbf{R}^{t_1}_r}\mkern-3mu^\top + 
-\cdots + \mathbf{R}^{t_n}_r   {}^t\mathbf{G}_n({R^g_{t_1}}\mkern-3mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1}))  {\mathbf{R}^{t_n}_r}\mkern-3mu^\top
+\mathbf{R}^{t_1}_r  \, {}^{t_1}\mathbf{G}_1({R^g_{t_1}}\mkern-4mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1})) \, {\mathbf{R}^{t_1}_r}\mkern-3mu^\top + 
+\cdots + \mathbf{R}^{t_n}_r   {}^{t_n}\mathbf{G}_n({R^g_{t_1}}\mkern-3mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1}))  {\mathbf{R}^{t_n}_r}\mkern-3mu^\top
 \label{eq:G_tot}
 \end{align}
 Note that we sum the gradient matrices, rather than summing the 
@@ -1133,27 +1141,433 @@ single or multiple victims.
 
 
 \subsection{Final Model}
-We will now detail the precise passages of how we compute in the final model.
-FORME MEGLIO SE SCEGLIAMO NUMERICAL NON SO MAGARI CHIEDERE AL PROF
-Since there is no effective difference between the two methods we will use the more theoretical
-one (analytical) in the simulations,for clarity and simplicity.
+In the final model of the multiple-victims scenario, we consider an ARTVA transmitter attached 
+to each $i$-th victim among the $n \in \mathbb{N}$ victims, where \( i = 1, \ldots, n \).
+In addition, we employ a swarm of $m \in \mathbb{N}$ UAVs to locate the position
+of at least $m$ victims if $m \min n$, otherwise to localize them all.
+We assume the position of the $j$-th drone, \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) ,
+to be known at every sample time \( \tau_k \), where \( k, j \in \mathbb{N} \) 
+and \( j = 1, \ldots, m \).
+We also consider each UAV to be equipped, with an ARTVA receiver, or any other 
+instrument capable of detecting the electromagnetic field at different points,
+like the TAMs in \cite{NSS_single_localization}.
+Since ARTVAs are the most commonly used instruments we compute the NSS using the
+analytical method, but we note that the numerical method could be employed
+in the precence of any other suitable equipment.
 
-Also, the drones in the multiple victims case should be equipped with an instrument able to receive the 
-total magnetic field and compute the gradient tensor matrix like the one used in \ref{tri axial etx },
-and therefore no more the ARTVA instrument, while the victims continue to be equipped with the same instruments.
-se fosse stato nel caso di una singloa vittima si poteva calcolare il gardiente analiticamente usando solo 
-la posizione del drone (ij assenza di rotazioni), invece nel caso multi vittime non si ha un espressione 
-esplicita quindi simuliamo il caso reale usando il caso numerico avendo a disposizione appunto uno strumento
-che riesce a ottenere info sul campo elettromagnetico in piu punti.
+Knowing the position of the $j$-th drone $\mathbf{p}_{r}(\tau_k)$, 
+we compute the NSS using the analytical expression of the gradient tensor, which depends
+only on the position of the receiver drone in the transmitter frame
+${}^{t_i} \mathbf{p}(\tau_k)$.
+From Eq. \ref{eq:pt_multi} we express the position of each $j$-th drone
+in the relative trasmitter frame $F_{t_i}$ of each $i$-th source:
+\begin{equation}
+    {}^{t_i} \mathbf{p}(\tau_k) = {R^g_{t_i}}^\top \, \left( \mathbf{p}_{r}(\tau_k) - \mathbf{p}_{t_i}(\tau_k) \right)
+\end{equation}
+Then, we compute the gradient tensor matrix relative to a single source 
+${}^{t_i} \mathbf{G}_i({}^{t_i} \mathbf{p})$ using the analytical expression in \ref{eq:G_analit}:
+\begin{equation}
+    {}^{t_i} \mathbf{G}_i = \frac{1}{r_i^{5/2}}
+    \scalebox{0.90}{$
+    \begin{bmatrix}
+    3 x_i (-2 x_i^2 + 3y_i^2 + 3z_i^2) & 3 y_i (-4 x_i^2 + y_i^2 + z_i^2) & 3 z_i (-4x_i^2 + y_i^2 + z_i^2) \\
+    3 y_i (-4 x_i^2 + y_i^2 + z_i^2) & 3 x_i (x_i^2 - 4 y_i^2 + z_i^2) & -15 x_i y_i z_i \\
+    3 z_i (-4 x_i^2 + y_i^2 + z_i^2) & -15 x_i y_i z_i & 3 x_i (x_i^2 + y_i^2 - 4 z_i^2)
+    \end{bmatrix}
+    $}
+\end{equation}
+where $r_i$ is the distance between the $i$-th source and the receiver position 
+$\mathbf{p}_{r}(\tau_k)$ and  $(x_i, y_i, z_i)$ are the coordinates 
+relative to ${}^{t_i} \mathbf{p}(\tau_k)$.
+
+\noindent
+\\
+Subsequently, we sum all the gradient tensors rotated in the common receiver frame $F_{r}$
+to obtain ${}^{r} \mathbf{G}_{\text{tot}} ({}^{t_1} \mathbf{p}, \dots {}^{t_n} \mathbf{p})$, in the same way as Eq. \ref{eq:G_tot}.
+
+Finally, we conpute the eigenvalues of total gradient 
+tensor to find the NSS relative to all sources using Eq.\ref{eq:NSS},
+ at each time step \( \tau_k \):
+\begin{equation}
+    \text{NSS}_\text{tot}(\tau_k) = \sqrt{{\lambda_{\text{tot}_2}}^2 - \lambda_{\text{tot}_1} \lambda_{\text{tot}_3}}
+    \label{eq:NSS_multi_final}
+\end{equation}
+where $\lambda_{\text{tot}_1}$, $\lambda_{\text{tot}_2}$ and $\lambda_{\text{tot}_3}$
+are the ordered (from min to max) eigenvalues relative to the total magnetic gradient tensor.
+
+\noindent
+\\
+Therefore, we model the intensity of the signal received by each UAV using the NSS
+as an output funcion of the form \( y_j : \mathbb{R}^3 
+\times \mathbb{R} \rightarrow \mathbb{R} \):
+\begin{equation}
+y_j(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k) = \mathbf{\Phi}(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k) + 
+w_t(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k)
+\label{eq:received_signal}
+\end{equation}
+where $\mathbf{\Phi}(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k)$ is the NSS
+relative to each $j$-th receiver and 
+and \( w : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \) 
+represents the measurement noise related to the electromagnetic interference,
+defined in \ref{eq:H_rotated_noise}.
+
+\subsection{MY ALGORITHM NAME}
+In this work, we present MY ALGORITHM NAME, a modification of the PSO
+which....
+
+\subsubsection{Particle Swarm Oprimization}
+The PSO algorithm is an intelligent population-based stochastic optimization technique 
+that simulates the behavior of a natural biological swarm. 
+As already mentioned, each “particle” represents a potential solution in the search space
+and it updates its velocity and position based on the historical best positions 
+of both the individual and the entire population.
+ 
+\noindent
+\\
+We asssume that $m$ seeker drones act as $m$ particles moving in the search-space, 
+like in \cite{3}; therefore we denote the position of each particle as the $j$-th UAV
+$\mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^2$, at the $\tau_k$ iteration.
+\noindent
+\\
+\textbf{Assumption}
+\\
+We make the assumption that the UAVs fly at a constant height; therefore we can
+simplify the control task on the 2D plane.
+Furthermore, in the standard PSO algorithm \cite{PSO_original}, the particles are randomly 
+initialized within the search-space. In contrast, our model assumes that the UAVs 
+start from the center of the space.
+
+The value of the function to be optimized, usually
+called the cost function, is evaluated at the position of the particle at 
+each time step $\tau_k$ and it is modeled using the signal 
+received by the receiver UAVs at its current location
+\( y_j : \mathbb{R}^2 
+\times \mathbb{R} \rightarrow \mathbb{R} \), expressed in 
+Eq.\ref{eq:received_signal}.
+
+The multiple-source seeking task is performed on a search-space $\Omega$ 
+where the multiple victims are located, 
+defined as the solution space where the $y_j$ funtion is maximized.
+\[
+\Omega = (x, y, z) \, \text{s.t.} \,
+\begin{cases}
+    X_{\min} \leq x \leq X_{\max}, \\
+    Y_{\min} \leq y \leq Y_{\max}, \\
+    Z_{\min} \leq z \leq Z_{\max}
+\end{cases}
+\]
+where $X_{\min}$, $X_{\max}$, $Y_{\min}$, and $Y_{\min}$ denote the horizontal
+boundaries. and $Z_{\min}$ and $Z_{\max}$ denote the ground level and
+the highest limit.
+\noindent
+\\
+\textbf{Assumption}
+\\
+We limit the search-space to the 2D plane as well, as we are not interested
+in determining the burial depth of the victims, 
+which would need the emplyment of different a
+invariant from the NSS.
+Instead, we fix the $z$ coordinate to the ground level for all the victims;
+while we assume a constant flying height of 3m for the UAVs, as already mentioned.
+
+\noindent
+\\
+The standard PSO algorithm iterative update of each particle's velocity
+(Eq.~\ref{eq:model_velocity}) and position (Eq.~\ref{eq:model_position})
+in the search-space to improve its solution:
+\begin{align}
+    \mathbf{v}_{j}(\tau_k+1) &= \omega \mathbf{v}_{j}(\tau_k) 
+    + c_1 r_1 \big(\mathbf{pbest}_{j}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\big) + \notag \\
+    &\quad + c_2 r_2 \big(\mathbf{gbest}(\tau_k) - \mathbf{p}_{j}(\tau_k)\big) \label{eq:model_velocity} \\
+    \mathbf{p}_{r_j}(\tau_k + 1) &= \mathbf{p}_{r_j}(\tau_k) + \mathbf{v}_{j}(\tau_k+1) \label{eq:model_position}
+\end{align}
+where $\mathbf{pbest}_j$ represents the $j$-th particle's individual best position vector  
+, $\mathbf{gbest}$ the global best position vector, $\omega$ is the inertia weight,
+$c_1$ and $c_2$ are positive constants, and $r_1, r_2 \sim \textit{U}(0,1)$ are random variables 
+uniformly distributed over the interval $[0, 1]$.
+
+A best previous position is where a particle obtains the 
+maximum value of the output function in its search
+history.
+In \ref{eq:model_velocity}, velocity $\mathbf{v}_{j}(\tau_k+1)$ 
+consists of three terms: the effect of drone’s previous velocity, 
+effect of its best known position and effect of global best
+known position.
+While the inertia weight is critical in balancing global and local search. 
+A larger inertia weight facilitates global exploration while a smaller one
+facilitates local exploitation.
+
+In the standard PSO algorithm, there is only one global best particle, 
+which means that only one optimal solution can be found. This limitation 
+poses a challenge when dealing with our problem, where we are looking for multiple sources, 
+and therefore, multiple local and global optima exist. To address this challenge, 
+we employ the same strategy of the modified version of the PSO algorithm \cite{PSO_IMPORTANT}. 
+In this modification, the swarm is divided into $M$ subpopulations, each tasked with exploring 
+different regions of the search space. Following this idea, the \textit{gbest} is referred to as 
+the best particle of each subpopulation, not as the global best particle in the whole population. 
+This means that these $M$ best particles are separately able to catch different optima, 
+at most $M$ optima.
+
+\noindent
+\\
+In addition, we perform further modifications to the PSO algorithm,
+we introduce physical constraints as already done in \cite{3} and 
+an exclusion zone mechanism.
+
+Firstly, the UAVs are confined to the 
+search-space and secondly their velocity is 
+capped to a max value to avoid speed "explosion", \cite{3}.
+
+The constraints are formulated as follows:
+\[
+\begin{cases}
+    \mathbf{p}_{r_j}(\tau_k + 1) = \mathbf{p}_\text{lim}, & \text{if } \mathbf{p}_{r_j}(\tau_k) \notin \Omega, \\
+    \mathbf{v}_j(\tau_k + 1) = v_{\text{max}} \frac{\mathbf{v}_j(\tau_k)}{\|\mathbf{v}_j(\tau_k)\|}, & \text{if } \|\mathbf{v}_j(\tau_k)\| > v_{\text{max}}.
+\end{cases}
+\]
+where \( \mathbf{p}_\text{lim} \) is the nearest point on the boundaries of the search space \( \Omega \), 
+and \( v_{\text{max}} \) denotes the maximum allowed step length.
+
+\noindent
+This means that:
+\begin{itemize}
+    \item If the UAV exits the search space limits (i.e., \( \mathbf{p}_{r_j}(\tau_k+1) \notin \Omega \)), 
+    its position is corrected to the nearest boundary point of \( \Omega \) 
+    in the next iteration.
+    \item If the magnitude of the velocity \( \|\mathbf{v}_j(\tau_k + 1)\| \) 
+    exceeds the maximum allowable speed \( v_{\text{max}} \), 
+    then the velocity is scaled down to \( v_{\text{max}} \), 
+    while maintaining the same direction.
+\end{itemize}
+
+\subsection{Exclusion Zone Mechanism}
+In order to avoid clustering around the same source 
+and to ensure that the swarm does not converge only 
+on a few sources, we introduce an exclusion zone mechanism. 
+This strategy enforces additional positional constraints 
+on the drones by leveraging the fact that each drone 
+knows its current position in the search space.
+
+\noindent
+\\
+A drone \( j \) defines an exclusion zone when it detects a source 
+with a signal strength, the NSS, greater than a predefined threshold 
+\( \text{NSS}_{\text{thresh}} \). The exclusion zone is represented 
+as a circular region, centered around the position of the drone, defined by:
+\[
+\mathcal{E}_j = \{ \mathbf{p} \in \mathbb{R}^3 \mid \|\mathbf{p} - \mathbf{c}_j\| 
+\leq r_{\text{excl}} \},
+\]
+where:
+\begin{itemize}
+    \item \( \mathbf{c}_j \) is the center of the exclusion zone, 
+    corresponding to the position of the drone when the source 
+    is detected (\( \mathbf{p}_{r_j}(\tau_k) \)).
+    \item \( r_{\text{excl}} \) is the radius of the exclusion zone, 
+    chosen experimentally.
+\end{itemize}
+
+\noindent
+\\
+Instead, a drone \( j \) shares the center \( \mathbf{c}_j \) and radius 
+\( r_{\text{excl}} \) of its exclusion zone with neighboring drones 
+if they are within the communication range \( r_{\text{comm}} \). 
+A neighboring UAV \( l \) receives the exclusion zone when:
+\[
+\|\mathbf{p}_{r_l}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\| \leq r_{\text{comm}}.
+\]
+Each drone maintains a list of shared exclusion zones 
+\( \mathcal{E}_\text{shared} \), which is defined as:
+\[
+\mathcal{E}_\text{shared} = \{\mathcal{E}_1, \mathcal{E}_2, \dots, \mathcal{E}_k\}
+\]
+which is an unordered and incomplete set of 
+where the union is over all exclusion zones shared by neighboring drones.
+
+\paragraph{Checking}
+Each drone continuously checks whether its current position 
+\( \mathbf{p}_{r_j}(\tau_k) \) lies within any shared exclusion zone. 
+This is verified by:
+\[
+\mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_\text{shared}.
+\]
+
+\paragraph{Avoidance}
+If a drone \( j \) finds itself within a shared exclusion zone at time \( \tau_k \), 
+it computes a new goal position \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \) 
+to escape the zone. The avoidance mechanism follows these steps:
+
+\[
+\mathbf{d}_j(\tau_k) = \mathbf{c}_j(\tau_k) - \mathbf{p}_{r_j}(\tau_k),
+\]
+where \( \mathbf{d}_j(\tau_k) \) is the direction vector pointing away 
+from the exclusion zone center \( \mathbf{c}_j(\tau_k) \), and 
+\( \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_j(\tau_k) \).
+
+The goal position for the drone in the next iteration is then calculated as:
+\[
+\mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) = \mathbf{p}_{r_j}(\tau_k) 
++ \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|},
+\]
+where:
+\begin{itemize}
+    \item \( \alpha \): Step size parameter that determines 
+    the distance the drone moves away from the exclusion zone.
+    \item \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \): The computed 
+    goal position outside the exclusion zone.
+    \item \( \|\mathbf{d}_j(\tau_k)\| \): Norm (magnitude) of the direction 
+    vector \( \mathbf{d}_j(\tau_k) \), which is used for normalization.
+\end{itemize}
+
+Once the drone reaches \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \), 
+it resumes the PSO algorithm, continuing to search for new sources. 
+This mechanism ensures the drone moves directly away from the 
+exclusion zone while covering a distance proportional to \( \alpha \).
 
 
-\subsection{Particle Swarm Optimization}
-In the context of search and rescue (S\&R) missions, the number of available 
-UAVs is typically limited (ranging from 1 to 10 \cite{5}), and the search area 
-usually spans only a few thousand square meters. Therefore, it is reasonable to 
-assume the presence of a communication network with a static topology, allowing 
-for the implementation of a centralized estimation algorithm.
+\subsubsection{Communication Topology}
+
+\subsubsection{Metrics}
+--- we terminate when the value is greater than a threshold
+
+in \cite{3}
+qui si parla di standard PSO chiamato SPSO
+The swarm size is determined by , where is the
+dimension of the search space. Standard value of the parameters
+are as follows:
 
 
+To evaluate the seeking time and energy consumption, we define
+. Thus, provides a measure on
+the total “time” to complete a search since it is proportional to
+search time based on the assumption that all seekers have equal
+speed. The actual time cannot be computed in simulations due to
+the lack of the concept of speed, but serves the same
+purpose.
+In addition, we also count the number of iterations ,
+measure the total distance traveled by all robots 
 
-\subsection{Control}
+
+\section{UAV Dynamics}
+Each Uav folows this dynamics
+Assuming the receiver frame coincides with the body frame, as in \cite{similar-main}, 
+the UAV is modeled as a quadrotor. Its dynamics are described using Newton's 
+second law for both translational and rotational motion. The motion is expressed 
+in terms of the inertial frame \( F_i \) and the body frame \( F_b \).
+
+---
+
+\subsection{Translational Dynamics}
+
+The position of the UAV's center of gravity is represented by \( \mathbf{p} \in \mathbb{R}^3 \), 
+expressed in the inertial frame \( F_i \). Its derivative, \( \dot{\mathbf{p}} \), denotes the linear velocity.
+
+Using Newton's second law, the translational dynamics are:
+\[
+M \frac{\mathrm{d}^2 \mathbf{p}}{\mathrm{d} t^2} = \mathbf{F}_{\text{tot}},
+\]
+where:
+\begin{itemize}
+    \item \( M \): UAV mass.
+    \item \( \mathbf{F}_{\text{total}} \): Total force acting on the UAV.
+\end{itemize}
+
+The total force in the inertial frame \( F_i \) includes:
+\begin{itemize}
+    \item \textbf{Thrust Force \( \mathbf{f}_\text{thrust} \):}
+    \[
+    \mathbf{f}_\text{thrust} = -u_f \mathbf{R}_b^i \mathbf{e}_3,
+    \]
+    where:
+    \begin{itemize}
+        \item \( u_f \geq 0 \): Control force aligned with the body \( z \)-axis.
+        \item \( \mathbf{e}_3 = [0, 0, 1]^\top \): Unit vector along the \( z \)-axis.
+        \item \( \mathbf{R}_b^i \in \text{SO}(3) \): Rotation matrix mapping vectors from \( F_b \) to \( F_i \).
+    \end{itemize}
+    \item \textbf{Gravitational Force \( \mathbf{f}_g \):}
+    \[
+    \mathbf{f}_g = M g \mathbf{e}_3,
+    \]
+    where \( g \) is the gravitational constant.
+    \item \textbf{Disturbance Forces \( \mathbf{d}_f \):}
+    \[
+    \mathbf{d}_f = \begin{bmatrix} d_{f,x} \\ d_{f,y} \\ d_{f,z} \end{bmatrix},
+    \]
+    representing external forces such as wind and drag.
+\end{itemize}
+
+The translational dynamics in the inertial frame are:
+\[
+M \ddot{\mathbf{p}} = -u_f \mathbf{R}_b^i \mathbf{e}_3 + M g \mathbf{e}_3 + \mathbf{d}_f.
+\]
+
+---
+
+\subsubsection{Rotational Dynamics}
+
+The angular velocity \( \boldsymbol{\omega} \in \mathbb{R}^3 \) is expressed in the body frame \( F_b \). 
+Newton's second law for rotational motion gives:
+\[
+\mathbf{J} \dot{\boldsymbol{\omega}} = \boldsymbol{\tau} - \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}),
+\]
+where:
+\begin{itemize}
+    \item \( \mathbf{J} \in \mathbb{R}^{3 \times 3} \): Inertia matrix of the UAV, symmetric and positive definite (\( \mathbf{J} = \mathbf{J}^\top > 0 \)).
+    \item \( \boldsymbol{\tau} \in \mathbb{R}^3 \): Control torque vector.
+    \item \( \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) \): Coriolis torque.
+\end{itemize}
+
+The rotation matrix \( \mathbf{R}_b^i \in \text{SO}(3) \) evolves as:
+\[
+\dot{\mathbf{R}}_b^i = \mathbf{R}_b^i \mathbf{S}(\boldsymbol{\omega}),
+\]
+where \( \mathbf{S}(\boldsymbol{\omega}) \) is the skew-symmetric matrix:
+\[
+\mathbf{S}(\boldsymbol{\omega}) = 
+\begin{bmatrix} 
+0 & -\omega_z & \omega_y \\ 
+\omega_z & 0 & -\omega_x \\ 
+-\omega_y & \omega_x & 0 
+\end{bmatrix}.
+\]
+
+---
+
+\subsubsection{Full Dynamics in the Inertial Frame}
+
+Combining translational and rotational dynamics, the UAV's motion in the inertial frame \( F_i \) is:
+\[
+M \ddot{\mathbf{p}} = \mathbf{R}_b^i \begin{bmatrix} 0 \\ 0 \\ -u_f \end{bmatrix} + M g \mathbf{e}_3 + \mathbf{d}_f,
+\]
+\[
+\mathbf{J} \dot{\boldsymbol{\omega}} = \boldsymbol{\tau} - \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}),
+\]
+where the inputs \( u_f \) (thrust) and \( \boldsymbol{\tau} \) (torques) are used for control purposes.
+
+The orientation matrix \( \mathbf{R}_b^i \) evolves as:
+\[
+\dot{\mathbf{R}}_b^i = \mathbf{R}_b^i \mathbf{S}(\boldsymbol{\omega}).
+\]
+
+---
+
+\subsubsection{Additional Notes on Rotation Matrices}
+
+The rotation matrix \( \mathbf{R}(t) \) satisfies the orthogonality condition:
+\[
+\mathbf{R}(t) \mathbf{R}^\top(t) = \mathbf{I}.
+\]
+Its time derivative \( \dot{\mathbf{R}}(t) \) obeys:
+\[
+\dot{\mathbf{R}}(t) \mathbf{R}^\top(t) + \mathbf{R}(t) \dot{\mathbf{R}}^\top(t) = 0.
+\]
+
+This ensures that the skew-symmetric matrix \( \mathbf{S}(\boldsymbol{\omega}) \) represents angular velocity in the body frame:
+\[
+\mathbf{S}(\boldsymbol{\omega}) \mathbf{R}(t) = \dot{\mathbf{R}}(t).
+\]
+
+
+\section{Control}
+the purpose of this work is not to control the attitude (orientation), 
+but the position and velocity

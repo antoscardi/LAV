@@ -79,6 +79,34 @@ When the \textit{check} array variable contains only 0 values, the algorithm ter
 In the distributed scenario, the stopping criterium remains fundamentally unchanged. However, the chosen estimate value is based on the mean estimated by the last drone through the ACF estimation. Thanks to the high precision of the ACF performance (with differences in the order of millimeters), it is possible to select arbitrarily any drone. This selected drone then signals all others to stop the search, as the goal has been accurately estimated. We opted for the final drone rather than any other one, as in the "\textit{linear}" case the last drone covers the greatest distance, which improves its estimation performance. In the other two cases, though, the choice was irrelevant because there were no drones outperforming the others, since they all tend to travel more or less the same amount of space.
 
 \section{Particle Swarm Optimization}
+QUELLI DELLO SPAZIO METTONO LO PSEUDOCODICE DI QUESTA PARTE,
+MAGARI METTERE NELL IMPLEMENTATION.
+Algorithm 2: Update of the Global Historical Optimal
+Solution
+1 Sort by fitness value: After updating the individual history of
+particles, each particle in the population is sorted from smallest to
+largest in terms of fitness Fit(pt
+i
+);
+Set gt+1
+temp = p1
+t
+;
+2 if Fit (gt+1
+temp) > Fit (gt
+) do:
+if p > rand (0, 1), (Get p using Eq. (17)) do:
+Update the global optimal solution, gt+1 = pt
+n;
+else gt+1 = gt
+;
+end if
+3 else gt+1 = gt+1
+temp;
+end
+4 Return gt+1
+
+
 \par In our implementation, each particle corresponds to an individual drone 
 within the swarm, and the velocity and position of each drone are updated in 
 accordance with the aforementioned standard PSO algorithm. Let $\mathbf{p}_i \in \mathbb{R}^2$ 
@@ -235,7 +263,8 @@ threshold. The exclusion zone is defined as a circular area
 centered around the position of the drone where the source 
 was detected. The radius of this zone is a fixed parameter, 
 chosen experimentally, which determines the \textit{resolution} 
-of the algorithm.
+of the algorithm. The exclusion zone is mantained until the end 
+of the simulation.
 
 \subsubsection{Sharing}
 Our algorithm favors a decentralized approach, which is useful 

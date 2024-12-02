@@ -700,6 +700,8 @@ OUTPUT build/Cap_3.aux
 INPUT ./Cap_3.tex
 INPUT ./Cap_3.tex
 INPUT Cap_3.tex
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
 INPUT ./images/polar_plot.png
 INPUT ./images/polar_plot.png
 INPUT ./images/polar_plot.png
@@ -781,6 +783,8 @@ INPUT ./images/NSS_rotated_multi_num.jpg
 INPUT ./images/NSS_rotated_multi_num.jpg
 INPUT ./images/NSS_rotated_multi_num.jpg
 INPUT ./images/NSS_rotated_multi_num.jpg
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmb.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmb.tfm
 INPUT ./Cap_4.tex
 INPUT ./Cap_4.tex
 OUTPUT build/Cap_4.aux
@@ -798,8 +802,6 @@ INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
 INPUT ./Cap_5.tex
 INPUT ./Cap_5.tex
 OUTPUT build/Cap_5.aux
