@@ -14,36 +14,63 @@ N_steps = T_sim / dt;       % Total number of steps
 time = 0:dt:T_sim;          % Simulation time (s)
 
 % Parameters for circular trajectory
-radius = 5;        % Radius of the circular motion
-cx = -radius;      % X-coordinate of the center
-cy = 0;            % Y-coordinate of the center
-cz = 5;            % Z-coordinate of the center
+% radius = 5;        % Radius of the circular motion
+% cx = -radius;      % X-coordinate of the center
+% cy = 0;            % Y-coordinate of the center
+% cz = 5;            % Z-coordinate of the center
 
 % Desired position function
-desired_position = @(t) [cx + radius * cos(0.5 * t); ...
-                         cy + radius * sin(0.5* t); ...
-                         cz];
+% desired_position = @(t) [cx + radius * cos(0.5 * t); ...
+%                          cy + radius * sin(0.5* t); ...
+%                          cz];
 
-% Desired velocity function
-desired_velocity = @(t) [-radius * 0.5 * sin(0.5 * t); ...
-                          radius * 0.5 * cos(0.5 * t); ...
-                          0];  
+% % Desired velocity function
+% desired_velocity = @(t) [-radius * 0.5 * sin(0.5 * t); ...
+%                           radius * 0.5 * cos(0.5 * t); ...
+%                           0];  
 
-desired_acceleration = @(t) [-radius * 0.5^2 * cos(0.5 * t); ...
-                             -radius * 0.5^2 * sin(0.5 * t); ...
-                             0];
+% desired_acceleration = @(t) [-radius * 0.5^2 * cos(0.5 * t); ...
+%                              -radius * 0.5^2 * sin(0.5 * t); ...
+%                              0];
+
+% Parameters
+z_max = 5;      % Maximum altitude
+k = 0.5;        % Smoothness factor for exponential rise
+v = 2;          % Constant velocity in x-y plane
+angle = pi/4;   % Angle of projection in x-y plane (45 degrees)
+
+% Define desired position as a function of time
+desired_position = @(t) [
+    v * t * cos(angle);                     % x(t): Linear motion in x
+    v * t * sin(angle);                     % y(t): Linear motion in y
+    z_max * (1 - exp(-k * t))               % z(t): Smooth rise
+];
+
+% Define desired velocity as a function of time
+desired_velocity = @(t) [
+    v * cos(angle);                         % x velocity
+    v * sin(angle);                         % y velocity
+    z_max * k * exp(-k * t)                 % z velocity
+];
+
+% Define desired acceleration as a function of time
+desired_acceleration = @(t) [
+    0;                                      % x acceleration
+    0;                                      % y acceleration
+    -z_max * k^2 * exp(-k * t)              % z acceleration
+];
 
 % Initial states
 x = zeros(12, 1); % Initialize state vector
 x(1:3) = desired_position(0); % Initial position
-x(4:6) = desired_velocity(0); % Initial velocity
+x(4:6) = [0 0 0]'; % Initial velocity
 x(7:9) = [0 0 0]'; % Initial roll, pitch, yaw
 x(10:12) = [0 0 0]'; % Initial angular velocity
 
 % Controller gains
-kxp = 0.3; kxd = 0.54;
-kyp = 0.4; kyd = 0.6;
-kzp = 1; kzd = 1;
+kxp = 0.1; kxd = 0.5;
+kyp = 0.1; kyd = 0.54;
+kzp = 1; kzd = 2.5;
 kp_phi = 2;  kd_phi = 2.5;
 kp_theta = 2;  kd_theta = 2.5;
 kp_psi = 2;  kd_psi = 4;
@@ -157,9 +184,9 @@ function [input_torques, input_force] = control_laws(t, state, ...
     Fy = (m / max(1e-6, input_force)) * (kyp * ey + kyd * ey_dot + desired_acc(2));    
 
     % Compute desired roll (phi) and pitch (theta) from thrust direction
-    phi_d = asin(max(-1, min(1, Fx * sin(psi) - Fy * cos(psi))));
-    theta_d = asin(max(-1, min(1, (Fx * cos(psi) + Fy * sin(psi)) / max(1e-6, cos(phi_d)))));    
-    psi_d = atan2(desired_vel(2), desired_vel(1));  % Desired yaw based on velocity (AGGIUNTO , NON C'E NELLA VENDIT)
+    phi_d = asin(Fx * sin(psi) - Fy * cos(psi));
+    theta_d = asin(Fx * cos(psi) + Fy * sin(psi)) / max(1e-6, cos(phi_d));    
+    psi_d = atan2(desired_vel(2), desired_vel(1));  % Desired yaw based on velocity (AGGIUNTO, NON C'E NELLA VENDIT)
 
     % Compute torques for attitude control
     tau_phi = Ix * (kp_phi * (phi_d - phi) + kd_phi * (-phi_dot));
@@ -179,15 +206,15 @@ function figure_handle = init_plot(time, desired_position)
     ylabel('Y (m)');
     zlabel('Z (m)');
     view(45, 30);
-    axis([-15 15 -15 15 0 10]); % Set axis limits
+    %axis([-5 5 -0 50 0 5]); % Set axis limits
 
     % Plot inertial frame (always visible)
     quiver3(0, 0, 0, 2, 0, 0, 'r', 'LineWidth', 2); % X-axis (red)
     quiver3(0, 0, 0, 0, 2, 0, 'g', 'LineWidth', 2); % Y-axis (green)
-    quiver3(0, 0, 0, 0, 0, 2, 'b', 'LineWidth', 2); % Z-axis (blue)
+    quiver3(0, 0, 0, 0, 0, 0.5, 'b', 'LineWidth', 2); % Z-axis (blue)
     text(2, 0, 0, 'X_i', 'Color', 'r');
     text(0, 2, 0, 'Y_i', 'Color', 'g');
-    text(0, 0, 2, 'Z_i', 'Color', 'b');
+    text(0, 0, 0.8, 'Z_i', 'Color', 'b');
 
     % Plot desired trajectory
     t_full = time; % Time vector for the full trajectory
@@ -209,10 +236,9 @@ function body_frame_handles = plot_drone(body_origin, R, t)
     triangle_inertial = (R * triangle_body')' + body_origin';
 
     % Plot UAV body frame
-    scale = 1.5; % Scale for body frame axes
-    body_x = body_origin + scale *  R(:, 1); % X-axis of body frame
-    body_y = body_origin + scale *  R(:, 2); % Y-axis of body frame
-    body_z = body_origin + R(:, 3); % Z-axis of body frame
+    body_x = body_origin +  1.5 *  R(:, 1); % X-axis of body frame
+    body_y = body_origin + 1.5 *  R(:, 2); % Y-axis of body frame
+    body_z = body_origin + 0.5 * R(:, 3); % Z-axis of body frame
 
     % Body frame axes
     body_frame_handles = [
@@ -274,6 +300,7 @@ function plot_results(time, desired_position, state_history)
     xlabel('X (m)'); ylabel('Y (m)'); zlabel('Z (m)');
     legend('Actual Trajectory', 'Desired Trajectory');
     title('3D Trajectory Comparison');
+    %axis([-5 5 -0 50 0 5]); % Set axis limits
     grid on;
 
     % X, Y, Z Plots

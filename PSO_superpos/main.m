@@ -20,7 +20,7 @@ bounds = [-100, 100];    % Search space boundaries for drone positions. This def
                          % coordinates within which the drones can move. Example: drones can move in a square area 
                          % from (-100, -100) to (100, 100).
 
-max_velocity = 2;      % Maximum allowable velocity for each drone (m/s). Limits how fast a drone can move within 
+max_velocity = 2;       % Maximum allowable velocity for each drone (m/s). Limits how fast a drone can move within 
                          % the search space, preventing overshooting the target.
 
 % Source fixed positions (the targets the drones need to find)
