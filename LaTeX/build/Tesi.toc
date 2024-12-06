@@ -54,10 +54,10 @@
 \contentsline {subsection}{\numberline {3.1.2}Finding the ARTVA position}{28}{subsection.3.1.2}%
 \contentsline {subsubsection}{Symmetry of \( \mathbf {M} \)}{29}{section*.30}%
 \contentsline {subsubsection}{Final expression for $\eta $}{29}{section*.31}%
-\contentsline {subsubsection}{Final Model}{30}{section*.32}%
+\contentsline {subsubsection}{Final Model}{31}{section*.32}%
 \contentsline {subsection}{\numberline {3.1.3}Recursive Least Square}{31}{subsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.1.4}Average Consensus Filter}{32}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}Normalized Source Strength}{32}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.5}Normalized Source Strength}{33}{subsection.3.1.5}%
 \contentsline {subsubsection}{Analitycal method}{33}{section*.33}%
 \contentsline {subsubsection}{Central difference method}{34}{section*.38}%
 \contentsline {section}{\numberline {3.2}Multiple Victims Case}{40}{section.3.2}%
@@ -65,37 +65,27 @@
 \contentsline {subsection}{\numberline {3.2.2}Normalized Source Strength}{42}{subsection.3.2.2}%
 \contentsline {subsubsection}{Analitycal method}{42}{section*.43}%
 \contentsline {subsubsection}{Numerical method}{45}{section*.48}%
-\contentsline {subsection}{\numberline {3.2.3}Final Model}{48}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}MY ALGORITHM NAME}{48}{subsection.3.2.4}%
-\contentsline {subsubsection}{Particle Swarm Oprimization}{49}{section*.53}%
+\contentsline {subsection}{\numberline {3.2.3}Final Model}{45}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Modified Particle Swarm Optimization with Exlusion Zones}{48}{subsection.3.2.4}%
+\contentsline {subsubsection}{Particle Swarm Oprimization}{48}{section*.53}%
 \contentsline {subsection}{\numberline {3.2.5}Exclusion Zone Mechanism}{50}{subsection.3.2.5}%
 \contentsline {paragraph}{Checking}{51}{section*.54}%
 \contentsline {paragraph}{Avoidance}{51}{section*.55}%
-\contentsline {subsubsection}{Communication Topology}{51}{section*.56}%
-\contentsline {subsubsection}{Metrics}{51}{section*.57}%
-\contentsline {section}{\numberline {3.3}UAV Dynamics}{52}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Translational Dynamics}{52}{subsection.3.3.1}%
-\contentsline {subsubsection}{Rotational Dynamics}{53}{section*.58}%
-\contentsline {subsubsection}{Full Dynamics in the Inertial Frame}{53}{section*.59}%
-\contentsline {subsubsection}{Additional Notes on Rotation Matrices}{54}{section*.60}%
-\contentsline {section}{\numberline {3.4}Control}{54}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Implementation}{55}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{55}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Simulation Details}{55}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Drone and ARTVA classes}{56}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Replanner}{57}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Plotter}{57}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Stopping Criterium}{58}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Particle Swarm Optimization}{58}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Exploration phase}{59}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Exploitation Phase}{60}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Velocity Update}{60}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Exclusion Zone Mechanism}{61}{subsection.4.5.2}%
-\contentsline {subsubsection}{Detection}{62}{section*.62}%
-\contentsline {subsubsection}{Sharing}{62}{section*.63}%
-\contentsline {subsubsection}{Avoidance}{62}{section*.64}%
-\contentsline {chapter}{\numberline {5}Experiments}{65}{chapter.5}%
-\contentsline {chapter}{Glossary}{66}{section*.65}%
-\contentsline {chapter}{Bibliography}{67}{section*.66}%
-\contentsline {section}{Figure}{72}{section*.68}%
-\contentsline {chapter}{Ringraziamenti}{72}{chapter*.69}%
+\contentsline {chapter}{\numberline {4}Control}{52}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Notations}{52}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Complete Quadrotor Dynamics}{55}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Translational Dynamics}{55}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Rotational Dynamics}{56}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Final Complete Quadrotor Dynamics}{57}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Simplified Dynamics}{58}{section.4.3}%
+\contentsline {section}{\numberline {4.4}PD Control}{59}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Altitude Hold}{59}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Position Control}{60}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Results}{61}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Geometric Control}{61}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Altitude}{61}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Position}{61}{subsection.4.5.2}%
+\contentsline {chapter}{Glossary}{64}{section*.64}%
+\contentsline {chapter}{Bibliography}{65}{section*.65}%
+\contentsline {section}{Figure}{70}{section*.67}%
+\contentsline {chapter}{Ringraziamenti}{70}{chapter*.68}%

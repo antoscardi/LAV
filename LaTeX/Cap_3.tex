@@ -46,7 +46,14 @@ Three Cartesian coordinate frames are defined as \cite{main} and shown in \ref{f
     \item Frame $r$ (receiver ARTVA): denoted as $F_r = (O_r, x_r, y_r, z_r)$, is the body right-hand frame associated with the receiver installed on the drone.
     \item Frame $t$ (transmitter ARTVA): denoted as $F_t = (O_t, x_t, y_t, z_t)$, is the body right-hand frame associated with the transmitter worn by the victim.
 \end{enumerate}
-For the sake of simplicity, we assume that the body frame of the drone coincides with $F_r$. 
+
+\noindent
+\textbf{Assumption}
+\\
+We assume that the receiver frame $F_r$, relative to the ARTVA
+instrument coincides with the fixed right-hand body frame $F_b$, for sake of semplicity
+as in \cite{similar-main}.
+
 The position of $O_r$ relative to $O_t$ is indicated by the vector $\mathbf{p}_{tr} \in \mathbb{R}^3$, with $\mathbf{p}_{tr} = \mathbf{p}_r - \mathbf{p}_t$, 
 while the positions of $O_r$ and $O_t$ relative to $O_g$ are indicated, respectively, by the vectors $\mathbf{p}_r \in \mathbb{R}^3$ and $\mathbf{p}_t \in \mathbb{R}^3$.
 We use the apex $g$, $r$ or $t$ on the left of the vector to indicate in which frame the vector is expressed , e.g. ${}^t p$. 
@@ -56,8 +63,16 @@ which is the set of all \( 3 \times 3 \) orthogonal matrices with determinant eq
 \[
 \textit{SO}(3) = \{ \mathbf{R} \in \mathbb{R}^{3 \times 3} \mid \mathbf{R}^\top \mathbf{R} = \mathbf{I}, \, \det(\mathbf{R}) = 1 \}
 \]
-Therefore, we indicate with \( \mathbf{R}_t^g \in \textit{SO}(3) \) a rotation matrix that rotates 
-frame \( t \) into frame \( g \).
+Therefore, we indicate with \( \mathbf{R}^g_t \in \textit{SO}(3) \) the rotation matrix of frame $F_t$ with respect to frame $F_g$,
+it rotates frame \( g \) into frame \( t \) and transforms vectors described in $t$ to $g$, as in \cite{book-robotics}.
+\begin{comment}
+    The matrix $R_t^i$ is the matrix which lets us express the vector in frame $i$ using the coordinates of the vector in frame $t$.Since we are expressing in the columns the coordinates of the axis of $t$ w.r.t using the axis of $i$.
+    Then if we have the coordinates of point $P$ with respect to frame i $\mathbf{P}$ 
+    (and if we know the rotation that goes from frame $i$ to frame $t$ (which also means we know the orientation and coordinates of the axis of frame $t$ with respect to those of frame $i$ $(R_t^i$ notation of Soper/this Chapman book), 
+    we can find the coordinates at point $P$ w.r.t frame i which is $\mathbf{P}$.
+    Also consider that from frame $i$ after a rotation $R_t^i$ we obtain the same orientation of frame $t$ which is just translated by the $\mathbf{P}_R$ vector.
+    v1 is  coordinates of the point before the translation but after the rotation, the coordinate of the point wrt the inertial frame  i are v1^i = R p^{i2}
+\end{comment}
 
 \noindent
 As mentioned in the Introduction \ref{intro}, the ARTVA instrument can be equipped with three antennas aligned along 
@@ -71,7 +86,7 @@ The electromagnetic field measured by the receiver, defined as  \( {}^r \mathbf{
 is given by the projection of vector field \( {}^t\mathbf{H} \) onto the \( F_r \) frame, 
 corrupted by some sensor noise:
 \begin{equation}
-    {}^r\mathbf{H} =  \mathbf{R}^t_r \, {}^t\mathbf{H} + {}^r\mathbf{W}(t)
+    {}^r\mathbf{H} =  \mathbf{R}^r_t \, {}^t\mathbf{H} + {}^r\mathbf{W}(t)
     \label{eq:H_rotated_noise}
 \end{equation}
 where \( {}^r\mathbf{W}(t) : \mathbb{R} \rightarrow \mathbb{R}^3 \) represents the 
@@ -168,23 +183,15 @@ Also from Figure \ref{fig:frames-1victim}, we can express the position of the re
 \[
 \begin{aligned}
 {}^g \mathbf{p}_r &= {}^g \mathbf{p}_t + {}^t \mathbf{p}_{tr} \\
-{}^t \mathbf{p}_{tr} &= \mathbf{R}_t^g \,\, {}^g \mathbf{p}_{tr}
+{}^t \mathbf{p}_{tr} &= \mathbf{R}_g^t \,\, {}^g \mathbf{p}_{tr}
 \end{aligned}
 \]
-where $\mathbf{R}_t^g$ is the rotation matrix that rotates frame $g$ to $t$ \cite{artva-gazebo}.
-\begin{comment}
-The matrix $R_t^i$ is the matrix which lets us express the vector in frame $i$ using the coordinates of the vector in frame $t$.Since we are expressing in the columns the coordinates of the axis of $t$ w.r.t using the axis of $i$.
-Then if we have the coordinates of point $P$ with respect to frame i $\mathbf{P}$ 
-(and if we know the rotation that goes from frame $i$ to frame $t$ (which also means we know the orientation and coordinates of the axis of frame $t$ with respect to those of frame $i$ $(R_t^i$ notation of Soper/this Chapman book), 
-we can find the coordinates at point $P$ w.r.t frame i which is $\mathbf{P}$.
-Also consider that from frame $i$ after a rotation $R_t^i$ we obtain the same orientation of frame $t$ which is just translated by the $\mathbf{P}_R$ vector.
-v1 is  coordinates of the point before the translation but after the rotation, the coordinate of the point wrt the inertial frame  i are v1^i = R p^{i2}
-\end{comment}
+where $\mathbf{R}_g^t$ is the rotation matrix that rotates frame $t$ to $g$.
 
-From which we can find $\mathbf{p}_t$ by multiplying by ${\mathbf{R}_t^g}^\top$ since ${\mathbf{R}_t^g}$ is orthogonal (${\mathbf{R}_t^g}^\top = {\mathbf{R}_t^g}^{-1}$):
+From which we can find $\mathbf{p}_t$ by multiplying by ${\mathbf{R}_g^t}^\top$ since ${\mathbf{R}_g^t}$ is orthogonal (${\mathbf{R}_g^t}^\top = {\mathbf{R}_g^t}^{-1}$):
 
 \begin{equation}
-    {}^t \mathbf{p}_{tr} = {\mathbf{R}_t^g}^\top (\mathbf{p}_r - \mathbf{p}_t)
+    {}^t \mathbf{p}_{tr} = {\mathbf{R}_g^t}^\top (\mathbf{p}_r - \mathbf{p}_t)
     \label{eq:pt}
 \end{equation}
 
@@ -202,14 +209,14 @@ x^2 = x \cdot x = \left( \mathbf{e}_x^\top \, {}^t \mathbf{p}_{tr} \right)^\top 
 \]
 and the same is valid for the other two coordinates, we will omit the calculations for the other two from now on. 
 We can then substitute the expression we found for ${}^t \mathbf{p}_{tr}$ \ref{eq:pt} and apply linear algebra properties of the transpose:
-$$(\mathbf{A}\mathbf{B}\mathbf{C})^\top = \mathbf{C}^\top \mathbf{B}^\top \mathbf{A}^\top$$ to calculate the transpose of $\mathbf{e}_x^\top {\mathbf{R}_t^g}^\top (\mathbf{p}_r - \mathbf{p}_t)$:
+$$(\mathbf{A}\mathbf{B}\mathbf{C})^\top = \mathbf{C}^\top \mathbf{B}^\top \mathbf{A}^\top$$ to calculate the transpose of $\mathbf{e}_x^\top {\mathbf{R}_g^t}^\top (\mathbf{p}_r - \mathbf{p}_t)$:
 
 \[
-(\mathbf{e}_x^\top {\mathbf{R}_t^g}^\top (\mathbf{p}_r - \mathbf{p}_t))^\top = (\mathbf{p}_r - \mathbf{p}_t)^\top {\mathbf{R}_t^g} \mathbf{e}_x
+(\mathbf{e}_x^\top {\mathbf{R}_g^t}^\top (\mathbf{p}_r - \mathbf{p}_t))^\top = (\mathbf{p}_r - \mathbf{p}_t)^\top {\mathbf{R}_g^t} \mathbf{e}_x
 \]
 The expression for $x^2$ then becomes:
 \begin{equation}
-    x^2 = \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top {\mathbf{R}_t^g} \mathbf{e}_x \mathbf{e}_x^\top {\mathbf{R}_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)
+    x^2 = \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top {\mathbf{R}_g^t} \mathbf{e}_x \mathbf{e}_x^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)
     \label{eq:x2}
 \end{equation}
 
@@ -235,21 +242,21 @@ and:
 Lastly we substitute the result found in \ref{eq:x2} in the expression of $\eta$ \ref{eq:eta}:
 \[
 \begin{aligned}
-    \eta &=  \ b^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_t^g \mathbf{e}_x \mathbf{e}_x^\top {\mathbf{R}_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) + \\
-    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_t^g \mathbf{e}_y \mathbf{e}_y^\top {\mathbf{R}_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) +\\
-    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_t^g \mathbf{e}_z \mathbf{e}_z^\top {\mathbf{R}_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) =
+    \eta &=  \ b^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \mathbf{e}_x \mathbf{e}_x^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) + \\
+    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \mathbf{e}_y \mathbf{e}_y^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) +\\
+    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \mathbf{e}_z \mathbf{e}_z^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) =
 \end{aligned}
 \]
 collect common terms,
 \[
-= \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_t^g \left( b^2 \mathbf{e}_x \mathbf{e}_x^\top + a^2 \mathbf{e}_y \mathbf{e}_y^\top + a^2 \mathbf{e}_z \mathbf{e}_z^\top \right) {R_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)=
+= \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \left( b^2 \mathbf{e}_x \mathbf{e}_x^\top + a^2 \mathbf{e}_y \mathbf{e}_y^\top + a^2 \mathbf{e}_z \mathbf{e}_z^\top \right) {R_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)=
 \]
 \begin{equation}
-    = \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_t^g \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)
+    = \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)
     \label{eq:eta2}
 \end{equation}
 
-We call the \( \mathbf{R}_t^g \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_t^g}^\top \) matrix $\mathbf{M}$ and the diagonal matrix $\text{diag}(b^2, a^2, a^2)$ $D$.
+We call the \( \mathbf{R}_g^t \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_g^t}^\top \) matrix $\mathbf{M}$ and the diagonal matrix $\text{diag}(b^2, a^2, a^2)$ $D$.
 
 \subsubsection{Symmetry of \( \mathbf{M} \)}
 \textbf{Definition} \\
@@ -258,11 +265,11 @@ A matrix \( \mathbf{M} \in \mathbb{R}^{n \times n} \) is symmetric if and only i
 \textbf{Proof} \\
 We compute \( \mathbf{M}^\top \):
 \[
-    \mathbf{M}^\top = \left( \mathbf{R}_t^g \mathbf{D} {\mathbf{R}_t^g}^\top \right)^\top = \left( {\mathbf{R}_t^g}^\top \right)^\top \mathbf{D}^\top {\mathbf{R}_t^g}^\top = \mathbf{R}_t^g \mathbf{D}^\top {\mathbf{R}_t^g}^\top
+    \mathbf{M}^\top = \left( \mathbf{R}_g^t \mathbf{D} {\mathbf{R}_g^t}^\top \right)^\top = \left( {\mathbf{R}_g^t}^\top \right)^\top \mathbf{D}^\top {\mathbf{R}_g^t}^\top = \mathbf{R}_g^t \mathbf{D}^\top {\mathbf{R}_g^t}^\top
 \]
 Since \( \mathbf{D} \) is a diagonal matrix, it is equal to its transpose $\mathbf{D}^\top = \mathbf{D}$ :
 $$
-\mathbf{M}^\top =  \mathbf{R}_t^g D {\mathbf{R}_t^g}^\top = \mathbf{M}
+\mathbf{M}^\top =  \mathbf{R}_g^t D {\mathbf{R}_g^t}^\top = \mathbf{M}
 $$
 
 \subsubsection{Final expression for $\eta$}
@@ -365,7 +372,7 @@ Then $\eta$ exspressed in a compact vector form is:
 Afterward, we leverage the $\eta$ signal (function of the ARTVA output
 of Eq. \ref{eq:H_rotated_noise}) to estimate the
 the transmitter’s position \( \mathbf{p}_t \), which corresponds to the victim's location. 
-We omit the estimation of the transmitter orientation \( \mathbf{R}^g_t \),
+We omit the estimation of the transmitter orientation \( \mathbf{R}_g^t \),
 since it is not critical in either the single-victim or multiple-victim cases.
 
 \subsubsection{Final Model}
@@ -392,7 +399,7 @@ mismatch introduced by the approximation.
 Note that $w$ is realted to the EMI defined in \ref{eq:H_rotated_noise}, as demonstrated in \cite{similar-main}.
 
 \subsection{Recursive Least Square}
-VA SPIEGATO MEGLIO COME SI FA RLS DECENTRALIZZATO? VA CITATO L RLS NON SONO RIUSCITO A TROVARLO
+%VA SPIEGATO MEGLIO COME SI FA RLS DECENTRALIZZATO? VA CITATO L RLS NON SONO RIUSCITO A TROVARLO
 We propose a decentralized estimation algorithm to address our task of localizing avalanche 
 victims. A decentralized approach offers several advantages over a centralized one, particularly 
 in scenarios characterized by limited computational resources and large-scale deployments. 
@@ -555,10 +562,10 @@ frames $F_g$, $F_r$, $F_t$..}
 
 Instead, let's consider the case when the source location is translated
 with respect to the global frame $F_g$ and the transmitter frame $F_t$ is rotated
-with respect to the same one by a rotation $\mathbf{R}_t^g$, like in the previous 
+with respect to the same one by a rotation $\mathbf{R}_g^t$, like in the previous 
 section.
-Furthermore, we also consider the rotation $\mathbf{R}^t_r$ between the transmitter frame and the receiver
-frame $F_r$.
+Furthermore, we also consider the rotation matrix $\mathbf{R}^r_t$ of the transmitter frame $F_t$ 
+with respect to the receiver frame $F_r$.
 Then, we compute the coordinates of any point in space with respect to the
 transmitter frame as in \ref{eq:pt}.
 Using these coordinates we find the magnetic intensity vector ${}^t\mathbf{H}$,
@@ -567,13 +574,13 @@ The magnetic field read by the receiver, denoted by ${}^r\mathbf{H}$, is given b
 of vector ${}^t\mathbf{H}$ onto the $F_r$ frame, as in Eq.\ref{eq:H_rotated_noise} but without considering
 the noise for the moment:
 \begin{equation}
-    {}^r\mathbf{H} = \mathbf{R}^t_r \, {}^t\mathbf{H}
+    {}^r\mathbf{H} = \mathbf{R}^r_t \, {}^t\mathbf{H}
     \label{eq:H_receiver}
 \end{equation}
 Therefore, we apply Eq. \ref{eq:rotated_gradient_tensor} to find the gradient tensor
 in the receiver frame, which represents the signal obtained in a real world scenario:
 \begin{equation}
-    {}^r \mathbf{G} = \mathbf{R}^t_r \, {}^t\mathbf{G} \, {\mathbf{R}^t_r}^\top
+    {}^r \mathbf{G} = \mathbf{R}^r_t \, {}^t\mathbf{G} \, {\mathbf{R}^r_t}^\top
     \label{eq:G_rotated}
 \end{equation}
 In Figure \ref{fig:gradients_rotated_single_anal}, we see how the gradients plots
@@ -593,14 +600,14 @@ at the new location of the source.
 \includegraphics[width=1.4\textwidth]{images/gradients_rotated_single_anal.jpg}
 \caption{Plot of the gradient tensor $\mathbf{G}$ elements
 when computed analytically after the position of the signle source is translated to $(2,2,0)$ and an 
-introduction of the different roations, expressed using $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+introduction of the different rotations, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_t^g$.}
 \label{fig:gradients_rotated_single_anal}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{images/NSS_rotated_single_anal.jpg}
     \caption{Plot of the NSS computed analytically after the position of the signle source is translated to $(2,2,0)$ and 
-    different roations are introduced, expressed using $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+    different roations are introduced, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_t^g$.}
     \label{fig:NSS_rotated_single_anal}
 \end{figure}
 
@@ -693,9 +700,9 @@ rototranslations of the coordinate frames and that the NSS value also remains in
 In particular, we apply the following transformations to each point $\mathbf{p}$ in space:
 firstly we express $\mathbf{p}$ in the transmitter frame using \ref{eq:pt}, which we denoted as 
 ${}^t \mathbf{p}_{tr}$.
-Then we apply rotation $\mathbf{R}^t_r$ to obtain the point expressed in the receiver coordinates:
+Then we apply rotation $\mathbf{R}^r_t$ to obtain the point expressed in the receiver coordinates:
 \begin{equation}
-   {}^r \mathbf{p}_{tr}  = \mathbf{R}^t_r \, {}^t \mathbf{p}_{tr}
+   {}^r \mathbf{p}_{tr}  = \mathbf{R}^r_t \, {}^t \mathbf{p}_{tr}
    \label{eq:p__in_receiver}
 \end{equation}
 Now, we perturb ${}^r \mathbf{p}_{tr}$ by $\delta$ positively and negatively, in the receiver frame:
@@ -707,7 +714,7 @@ Now, we perturb ${}^r \mathbf{p}_{tr}$ by $\delta$ positively and negatively, in
 \quad \text{where } j \in \{ x_r, y_r, z_r \} \, \text{relative to the coordinate frame } F_r.
 \]
 We find the perturbed magnetic field intensity in the transmitter frame using Eq. \ref{eq:final_H}:
-${}^t \mathbf{H} ( {\mathbf{R}^t_r}^\top ({}^r \mathbf{p}_{tr} \pm \delta \mathbf{e}_j) )$.
+${}^t \mathbf{H} ( {\mathbf{R}^r_t}^\top ({}^r \mathbf{p}_{tr} \pm \delta \mathbf{e}_j) )$.
 Therefore, we are now able to find the perturbed magnetic field intensity in the receiver frame
 ${}^r \mathbf{H}$ and apply the central difference approximation 
 \ref{eq:G_num} to compute the gradient tensor in the receiver reference frame 
@@ -715,8 +722,8 @@ ${}^r \mathbf{G}$:
 \begin{equation}
     \frac{\partial \mathbf{H}}{\partial q_j} = 
     \frac{
-    \mathbf{R}^t_r \, {}^t \mathbf{H} ( {\mathbf{R}^t_r}^\top ({}^r \mathbf{p}_{tr} + \delta \mathbf{e}_j) )
-    - \mathbf{R}^t_r \, {}^t \mathbf{H} ( {\mathbf{R}^t_r}^\top ({}^r \mathbf{p}_{tr} - \delta \mathbf{e}_j) )}
+    \mathbf{R}^r_t \, {}^t \mathbf{H} ( {\mathbf{R}^r_t}^\top ({}^r \mathbf{p}_{tr} + \delta \mathbf{e}_j) )
+    - \mathbf{R}^r_t \, {}^t \mathbf{H} ( {\mathbf{R}^r_t}^\top ({}^r \mathbf{p}_{tr} - \delta \mathbf{e}_j) )}
     {2 \delta}
 \end{equation}
 where $j \in \{ x_r, y_r, z_r \}$ as before.
@@ -732,14 +739,14 @@ with Eq. \ref{eq:NSS}.
 \includegraphics[width=1.4\textwidth]{images/gradients_rotated_single_num.jpg}
 \caption{Plot of the gradient tensor ${}^r \mathbf{G}$ elements
 when computed numerically after the position of the single source is translated to $(2,2,0)$ and an 
-introduction of the different rotations, expressed using $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+introduction of the different rotations, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
 \label{fig:gradients_rotated_single_num}
 \end{figure}
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{images/NSS_rotated_single_num.jpg}
 \caption{Plot of the NSS computed numerically, after the position of the signle source is translated to $(2,2,0)$ and 
-different roations are introduced, expressed using $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+different roations are introduced, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
 \label{fig:NSS_rotated_single_num}
 \end{figure}
 
@@ -820,9 +827,9 @@ ${}^{t_i} \mathbf{p}_{{t_i}r}$ is denoted by ${}^{t_i} \mathbf{p}$, for semplici
 and the position of the $i$-th source in the global frame is denoted by 
 $\mathbf{p}_{t_i}$.
 The relative orientation of frames $F_{t_1}, F_{t_2}, \dots, F_{t_n}$ with respect to 
-the reference frame $F_i$ are denoted with $\mathbf{R}^g_{t_i} \in \textit{SO}(3)$.
-Instead the rotation matrices that describe the orientation between the receiver
-frame and the multiple trasmitters are defined as $\mathbf{R}^{t_i}_r \in \textit{SO}(3)$.
+the reference frame $F_g$ are denoted with $\mathbf{R}^g_{t_i} \in \textit{SO}(3)$.
+Instead the rotation matrix of the $i$-th transmitter frame $F_{t_i}$ with respect to the receiver
+frame $F_r$ is written as $\mathbf{R}^r_{t_i} \in \textit{SO}(3)$.
 
 Then, considering the receiver drone positioned at point $\mathbf{p}$ in space, the superposition
 of all the electromagnetic fields can be expressed 
@@ -836,7 +843,7 @@ when projected in the receiver frame $F_r$, as in \cite{multiple_spacecraft}:
 Therefore, since the receiver is rotated with respect to each transmitter, we can rewrite it as:
 \begin{equation}
     {}^r \mathbf{H}_{\text{tot}} = 
-    R^{t_1}_r \, {}^{t_1} \mathbf{H}_1({}^{t_1} \mathbf{p}) + R^{t_2}_r \, {}^{t_2} \mathbf{H}_2({}^{t_2} \mathbf{p}) + \cdots + R^{t_n}_r \, {}^{t_n} \mathbf{H}_n({}^{t_n} \mathbf{p})
+    \mathbf{R}^r_{t_1} \, {}^{t_1} \mathbf{H}_1({}^{t_1} \mathbf{p}) + \mathbf{R}^r_{t_2} \, {}^{t_2} \mathbf{H}_2({}^{t_2} \mathbf{p}) + \cdots + \mathbf{R}^r_{t_n} \, {}^{t_n} \mathbf{H}_n({}^{t_n} \mathbf{p})
 \label{eq:sum_H_rotated}
 \end{equation}
 Remembering Eq.\ref{eq:H_spheric}, we can express each single magnetic field intensity vector generated
@@ -846,12 +853,12 @@ by the \(i\)-th magnetic source as:
 \]
 Furthermore, we use the same homogeneous transformation as in the single victims case, Eq.\ref{eq:pt}:
 \begin{equation}
-    \mathbf{p}_{t_i} + R^g_{t_i} \, {}^{t_i} \mathbf{p} = \mathbf{p}_r
+    \mathbf{p}_{t_i} + \mathbf{R}^g_{t_i} \, {}^{t_i} \mathbf{p} = \mathbf{p}_r
     \label{eq:pt_multi}  
 \end{equation}
 which is again inverted:
 \begin{equation}
-    {}^{t_i} \mathbf{p} = {R^g_{t_i}}^\top \, \left( \mathbf{p}_r - \mathbf{p}_{t_i} \right)
+    {}^{t_i} \mathbf{p} = {\mathbf{R}^g_{t_i}}^\top \, \left( \mathbf{p}_r - \mathbf{p}_{t_i} \right)
     \label{eq:pt_transmitter}
 \end{equation}
 In Figure \ref{fig:frames-2victim}, for clarity, we represent all the frames described before, 
@@ -878,9 +885,9 @@ Supposing only one source, the projection of the electromagnetic field intensity
 and it is related to ${}^t \mathbf{H}$ in Eq.\ref{eq:H_receiver}; then 
 using simple linear algebra definitions we can write:
 \begin{equation}
-\|{}^r\mathbf{H}\|^2 = \|\mathbf{R}^t_r \, {}^t\mathbf{H}\|^2 = 
-(\mathbf{R}^t_r \, {}^t\mathbf{H}) \cdot (\mathbf{R}^t_r \, {}^t\mathbf{H}) = 
-{}^t\mathbf{H}^\top \, {\mathbf{R}^t_r}\mkern-2mu^\top \, \mathbf{R}^t_r \, {}^t\mathbf{H} = 
+\|{}^r\mathbf{H}\|^2 = \|\mathbf{R}^r_t \, {}^t\mathbf{H}\|^2 = 
+(\mathbf{R}^r_t \, {}^t\mathbf{H}) \cdot (\mathbf{R}^t_r \, {}^t\mathbf{H}) = 
+{}^t\mathbf{H}^\top \, {\mathbf{R}^r_t}\mkern-2mu^\top \, \mathbf{R}^r_t \, {}^t\mathbf{H} = 
 {}^t\mathbf{H}^\top \, {}^t\mathbf{H} = \|{}^t\mathbf{H}\|^2
 \label{eq:magnitude_invariant}
 \end{equation}
@@ -902,7 +909,7 @@ To use the approximation in Eq. \ref{eq:approx}, we need to express the vector f
 in the transmitter reference frame:
 \begin{align*}
 \|\mathbf{H}_{\text{tot}}\|^2 = 
-&\ \|\mathbf{R}^{t_1}_r \, {}^t \mathbf{H}_1\|^2 + \|\mathbf{R}^{t_2}_r \, {}^t \mathbf{H}_2\|^2  + 2 \, \|\mathbf{R}^{t_1}_r \, {}^t \mathbf{H}_1\| \, \|\mathbf{R}^{t_2}_r \, {}^t \mathbf{H}_2\| \cos \alpha \\
+&\ \|\mathbf{R}^r_{t_1} \, {}^t_1 \mathbf{H}_1\|^2 + \|\mathbf{R}^r_{t_2} \, {}^t_2 \mathbf{H}_2\|^2  + 2 \, \|\mathbf{R}^r_{t_1} \, {}^t_1 \mathbf{H}_1\| \, \|\mathbf{R}^r_{t_2} \, {}^t_2 \mathbf{H}_2\| \cos \alpha \\
 = &\ \|{}^t \mathbf{H}_1\|^2 + \|{}^t \mathbf{H}_2\|^2 + 2 \, \|{}^t \mathbf{H}_1\| \, \|{}^t \mathbf{H}_2\| \cos \alpha.
 \end{align*}
 
@@ -962,7 +969,7 @@ in which three victims are positioned at \((0, 0, 0)\), \((-6, -6, 0)\), and \((
 \subsubsection{Analitycal method}
 The analytical method in the multiple-victims case is similar to the single-victims one;
 we will describe the general procedure when different orientations
-are presentbetween the different reference frames $F_g$, $F_r$, and $F_{t_i}$.
+are present between the different reference frames $F_g$, $F_r$, and $F_{t_i}$.
 
 Firstly, for each different $i$-th source we express the point at which the NSS needs to be obtained
 in the transmitter reference frame $F_{t_i}$, in the same way as Eq.\ref{eq:pt_multi}.
@@ -975,10 +982,10 @@ Finally, we find ${}^r \mathbf{G}_{\text{tot}}$, the total gradient tensor by su
 relative to the different suorces in the common receiver frame:
 \begin{align}
 {}^r \mathbf{G}_{\text{tot}} &= 
-\mathbf{R}^{t_1}_r  \, {}^{t_1}\mathbf{G}_1({}^{t_1} \mathbf{p}) \, {\mathbf{R}^{t_1}_r}\mkern-2mu^\top + \dots + \mathbf{R}^{t_n}_r  \, {}^{t_n}\mathbf{G}_n({}^{t_n} \mathbf{p}) \, {\mathbf{R}^{t_n}_r}\mkern-2mu^\top \nonumber = \\
+\mathbf{R}^r_{t_1}  \, {}^{t_1}\mathbf{G}_1({}^{t_1} \mathbf{p}) \, {\mathbf{R}^r_{t_1}}\mkern-2mu^\top + \dots + \mathbf{R}^r_{t_n}  \, {}^{t_n}\mathbf{G}_n({}^{t_n} \mathbf{p}) \, {\mathbf{R}^r_{t_n}}\mkern-2mu^\top \nonumber = \\
 &= 
-\mathbf{R}^{t_1}_r  \, {}^{t_1}\mathbf{G}_1({R^g_{t_1}}\mkern-4mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1})) \, {\mathbf{R}^{t_1}_r}\mkern-3mu^\top + 
-\cdots + \mathbf{R}^{t_n}_r   {}^{t_n}\mathbf{G}_n({R^g_{t_1}}\mkern-3mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1}))  {\mathbf{R}^{t_n}_r}\mkern-3mu^\top
+\mathbf{R}^r_{t_1}  \, {}^{t_1}\mathbf{G}_1({R^g_{t_1}}\mkern-4mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1})) \, {\mathbf{R}^r_{t_1}}\mkern-3mu^\top + 
+\cdots + \mathbf{R}^r_{t_n}   {}^{t_n}\mathbf{G}_n({R^g_{t_1}}\mkern-3mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1}))  {\mathbf{R}^r_{t_n}}\mkern-3mu^\top
 \label{eq:G_tot}
 \end{align}
 Note that we sum the gradient matrices, rather than summing the 
@@ -1012,7 +1019,7 @@ between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
 \includegraphics[width=1.4\textwidth]{images/gradients_rotated_multi_anal.jpg}
 \caption{Plot of the gradient tensor ${}^r \mathbf{G}_{\text{tot}}$ elements
 when computed analytically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$. }
+with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$. }
 \label{fig:gradients_rotated_multi_anal}
 \end{figure}
 
@@ -1021,7 +1028,7 @@ with rotations $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$. }
 \centering
 \includegraphics[width=0.8\textwidth]{images/NSS_rotated_multi_anal.jpg}
 \caption{Plot of the NSS computed analytically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
 \label{fig:NSS_rotated_multi_anal}
 \end{figure}
 
@@ -1040,7 +1047,7 @@ are present between the different reference frames $F_g$, $F_r$, and $F_{t_i}$.
 We procede in the same way as in the analytical method: for each different $i$-th source we express the 
 point at which the $k$-th UAV is localized,
 in the transmitter reference frame $F_t$, Eq.\ref{eq:pt_multi}.
-Then we apply rotation $\mathbf{R}^{t_i}_r$ to obtain the point expressed 
+Then we apply rotation $\mathbf{R}^r_{t_i}$ to obtain the point expressed 
 in the receiver coordinates, which we denote by ${}^r \mathbf{p}_{t_ir}$, similarly to Eq.\ref{eq:p__in_receiver}.
 So that we can perturb ${}^r \mathbf{p}_{t_ir}$ by $\delta$, along each direction $j$ of the 
 receiver coordinates $(x_r, y_r, z_r)$:
@@ -1052,12 +1059,12 @@ receiver coordinates $(x_r, y_r, z_r)$:
 \quad \text{where } j \in \{ x_r, y_r, z_r \} \, \text{relative to the coordinate frame } F_r.
 \]
 Then, to obtain the perturbed magnetic field intensity and so use Eq.\ref{eq:final_H}, we need to 
-revert the last transformation and therefore we transpose the rotation matrix $\mathbf{R}^{t_i}_r$ to 
+revert the last transformation and therefore we transpose the rotation matrix $\mathbf{R}^r_{t_i}$ to 
 obtain the reverse transformation:
 \[
 \begin{cases}
-    {}^{t_i} \mathbf{p}^+ = {\mathbf{R}^{t_i}_r}^\top \, ({}^r \mathbf{p}_{t_ir} + \delta \mathbf{e}_j) \\
-    {}^{t_i} \mathbf{p}^- =  {\mathbf{R}^{t_i}_r}^\top \, ({}^r \mathbf{p}_{t_ir} - \delta \mathbf{e}_j) \\
+    {}^{t_i} \mathbf{p}^+ = {\mathbf{R}^r_{t_i}}^\top \, ({}^r \mathbf{p}_{t_ir} + \delta \mathbf{e}_j) \\
+    {}^{t_i} \mathbf{p}^- =  {\mathbf{R}^r_{t_i}}^\top \, ({}^r \mathbf{p}_{t_ir} - \delta \mathbf{e}_j) \\
 \end{cases}
 \]
 We now have computed the perturbed magnetic field intensity vector in the transmitter frame 
@@ -1118,7 +1125,7 @@ between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
 \includegraphics[width=1.4\textwidth]{images/gradients_rotated_multi_num.jpg}
 \caption{Plot of the gradient tensor ${}^r \mathbf{G}_{\text{tot}}$ elements
 when computed numerically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
 \label{fig:gradients_rotated_multi_num}
 \end{figure}
 
@@ -1127,7 +1134,7 @@ with rotations $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
 \centering
 \includegraphics[width=0.8\textwidth]{images/NSS_rotated_multi_num.jpg}
 \caption{Plot of the NSS computed numerically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^t_r$ and $\mathbf{R}_t^g$.}
+with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
 \label{fig:NSS_rotated_multi_num}
 \end{figure} 
 
@@ -1211,9 +1218,7 @@ and \( w : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \)
 represents the measurement noise related to the electromagnetic interference,
 defined in \ref{eq:H_rotated_noise}.
 
-\subsection{MY ALGORITHM NAME}
-In this work, we present MY ALGORITHM NAME, a modification of the PSO
-which....
+\subsection{Modified Particle Swarm Optimization with Exlusion Zones}
 
 \subsubsection{Particle Swarm Oprimization}
 The PSO algorithm is an intelligent population-based stochastic optimization technique 
@@ -1226,21 +1231,23 @@ of both the individual and the entire population.
 \\
 We asssume that $m$ seeker drones act as $m$ particles moving in the search-space, 
 like in \cite{3}; therefore we denote the position of each particle as the $j$-th UAV
-$\mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^2$, at the $\tau_k$ iteration.
+$\mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^2$, at the $\tau_k$ time step.
 \noindent
 \\
 \textbf{Assumption}
 \\
 We make the assumption that the UAVs fly at a constant height; therefore we can
-simplify the control task on the 2D plane.
+simplify the search task on the 2D plane.
 Furthermore, in the standard PSO algorithm \cite{PSO_original}, the particles are randomly 
 initialized within the search-space. In contrast, our model assumes that the UAVs 
-start from the center of the space.
+start from the center of the space, they then move in the search space 
+uniformly and once they reach the desired position the PSO algorithm
+effectively start, as will be explanied morein detail later.
 
 The value of the function to be optimized, usually
 called the cost function, is evaluated at the position of the particle at 
 each time step $\tau_k$ and it is modeled using the signal 
-received by the receiver UAVs at its current location
+received by the receiver UAV at its current location
 \( y_j : \mathbb{R}^2 
 \times \mathbb{R} \rightarrow \mathbb{R} \), expressed in 
 Eq.\ref{eq:received_signal}.
@@ -1257,24 +1264,33 @@ defined as the solution space where the $y_j$ funtion is maximized.
 \end{cases}
 \]
 where $X_{\min}$, $X_{\max}$, $Y_{\min}$, and $Y_{\min}$ denote the horizontal
-boundaries. and $Z_{\min}$ and $Z_{\max}$ denote the ground level and
-the highest limit.
+boundaries and $Z_{\min}$, $Z_{\max}$ denote the ground level and
+the highest limit respectively.
 \noindent
 \\
 \textbf{Assumption}
 \\
 We limit the search-space to the 2D plane as well, as we are not interested
 in determining the burial depth of the victims, 
-which would need the emplyment of different a
+which would need the emplyment of a different 
 invariant from the NSS.
 Instead, we fix the $z$ coordinate to the ground level for all the victims;
 while we assume a constant flying height of 3m for the UAVs, as already mentioned.
+Therefore, the search space becomes:
+\[
+\Omega = (x, y, z) \, \text{s.t.} \,
+\begin{cases}
+    X_{\min} \leq x \leq X_{\max}, \\
+    Y_{\min} \leq y \leq Y_{\max}, \\
+    z = Z_{\text{fixed}}
+\end{cases}
+\]
 
 \noindent
 \\
 The standard PSO algorithm iterative update of each particle's velocity
 (Eq.~\ref{eq:model_velocity}) and position (Eq.~\ref{eq:model_position})
-in the search-space to improve its solution:
+in the search-space to improve its solution is defined as:
 \begin{align}
     \mathbf{v}_{j}(\tau_k+1) &= \omega \mathbf{v}_{j}(\tau_k) 
     + c_1 r_1 \big(\mathbf{pbest}_{j}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\big) + \notag \\
@@ -1333,7 +1349,7 @@ This means that:
 \begin{itemize}
     \item If the UAV exits the search space limits (i.e., \( \mathbf{p}_{r_j}(\tau_k+1) \notin \Omega \)), 
     its position is corrected to the nearest boundary point of \( \Omega \) 
-    in the next iteration.
+    in the next time step.
     \item If the magnitude of the velocity \( \|\mathbf{v}_j(\tau_k + 1)\| \) 
     exceeds the maximum allowable speed \( v_{\text{max}} \), 
     then the velocity is scaled down to \( v_{\text{max}} \), 
@@ -1403,171 +1419,46 @@ to escape the zone. The avoidance mechanism follows these steps:
 where \( \mathbf{d}_j(\tau_k) \) is the direction vector pointing away 
 from the exclusion zone center \( \mathbf{c}_j(\tau_k) \), and 
 \( \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_j(\tau_k) \).
-
-The goal position for the drone in the next iteration is then calculated as:
+\noindent\\
+The goal position the drone needs to reach in the next time steps is then calculated as:
 \[
-\mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) = \mathbf{p}_{r_j}(\tau_k) 
+\mathbf{p}_{r_j}^{\text{goal}} = \mathbf{p}_{r_j}(\tau_k) 
 + \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|},
 \]
 where:
 \begin{itemize}
     \item \( \alpha \): Step size parameter that determines 
     the distance the drone moves away from the exclusion zone.
-    \item \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \): The computed 
+    \item \( \mathbf{p}_{r_j}^{\text{goal}} \): The computed 
     goal position outside the exclusion zone.
     \item \( \|\mathbf{d}_j(\tau_k)\| \): Norm (magnitude) of the direction 
     vector \( \mathbf{d}_j(\tau_k) \), which is used for normalization.
 \end{itemize}
 
-Once the drone reaches \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \), 
+Once the drone reaches \( \mathbf{p}_{r_j}^{\text{goal}} \), 
 it resumes the PSO algorithm, continuing to search for new sources. 
 This mechanism ensures the drone moves directly away from the 
 exclusion zone while covering a distance proportional to \( \alpha \).
 
 
-\subsubsection{Communication Topology}
+% \subsection{Communication Topology}
 
-\subsubsection{Metrics}
---- we terminate when the value is greater than a threshold
+% \subsection{Metrics}
+% --- we terminate when the value is greater than a threshold
 
-in \cite{3}
-qui si parla di standard PSO chiamato SPSO
-The swarm size is determined by , where is the
-dimension of the search space. Standard value of the parameters
-are as follows:
-
-
-To evaluate the seeking time and energy consumption, we define
-. Thus, provides a measure on
-the total “time” to complete a search since it is proportional to
-search time based on the assumption that all seekers have equal
-speed. The actual time cannot be computed in simulations due to
-the lack of the concept of speed, but serves the same
-purpose.
-In addition, we also count the number of iterations ,
-measure the total distance traveled by all robots 
+% in \cite{3}
+% qui si parla di standard PSO chiamato SPSO
+% The swarm size is determined by , where is the
+% dimension of the search space. Standard value of the parameters
+% are as follows:
 
 
-\section{UAV Dynamics}
-Each Uav folows this dynamics
-Assuming the receiver frame coincides with the body frame, as in \cite{similar-main}, 
-the UAV is modeled as a quadrotor. Its dynamics are described using Newton's 
-second law for both translational and rotational motion. The motion is expressed 
-in terms of the inertial frame \( F_i \) and the body frame \( F_b \).
-
----
-
-\subsection{Translational Dynamics}
-
-The position of the UAV's center of gravity is represented by \( \mathbf{p} \in \mathbb{R}^3 \), 
-expressed in the inertial frame \( F_i \). Its derivative, \( \dot{\mathbf{p}} \), denotes the linear velocity.
-
-Using Newton's second law, the translational dynamics are:
-\[
-M \frac{\mathrm{d}^2 \mathbf{p}}{\mathrm{d} t^2} = \mathbf{F}_{\text{tot}},
-\]
-where:
-\begin{itemize}
-    \item \( M \): UAV mass.
-    \item \( \mathbf{F}_{\text{total}} \): Total force acting on the UAV.
-\end{itemize}
-
-The total force in the inertial frame \( F_i \) includes:
-\begin{itemize}
-    \item \textbf{Thrust Force \( \mathbf{f}_\text{thrust} \):}
-    \[
-    \mathbf{f}_\text{thrust} = -u_f \mathbf{R}_b^i \mathbf{e}_3,
-    \]
-    where:
-    \begin{itemize}
-        \item \( u_f \geq 0 \): Control force aligned with the body \( z \)-axis.
-        \item \( \mathbf{e}_3 = [0, 0, 1]^\top \): Unit vector along the \( z \)-axis.
-        \item \( \mathbf{R}_b^i \in \text{SO}(3) \): Rotation matrix mapping vectors from \( F_b \) to \( F_i \).
-    \end{itemize}
-    \item \textbf{Gravitational Force \( \mathbf{f}_g \):}
-    \[
-    \mathbf{f}_g = M g \mathbf{e}_3,
-    \]
-    where \( g \) is the gravitational constant.
-    \item \textbf{Disturbance Forces \( \mathbf{d}_f \):}
-    \[
-    \mathbf{d}_f = \begin{bmatrix} d_{f,x} \\ d_{f,y} \\ d_{f,z} \end{bmatrix},
-    \]
-    representing external forces such as wind and drag.
-\end{itemize}
-
-The translational dynamics in the inertial frame are:
-\[
-M \ddot{\mathbf{p}} = -u_f \mathbf{R}_b^i \mathbf{e}_3 + M g \mathbf{e}_3 + \mathbf{d}_f.
-\]
-
----
-
-\subsubsection{Rotational Dynamics}
-
-The angular velocity \( \boldsymbol{\omega} \in \mathbb{R}^3 \) is expressed in the body frame \( F_b \). 
-Newton's second law for rotational motion gives:
-\[
-\mathbf{J} \dot{\boldsymbol{\omega}} = \boldsymbol{\tau} - \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}),
-\]
-where:
-\begin{itemize}
-    \item \( \mathbf{J} \in \mathbb{R}^{3 \times 3} \): Inertia matrix of the UAV, symmetric and positive definite (\( \mathbf{J} = \mathbf{J}^\top > 0 \)).
-    \item \( \boldsymbol{\tau} \in \mathbb{R}^3 \): Control torque vector.
-    \item \( \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}) \): Coriolis torque.
-\end{itemize}
-
-The rotation matrix \( \mathbf{R}_b^i \in \text{SO}(3) \) evolves as:
-\[
-\dot{\mathbf{R}}_b^i = \mathbf{R}_b^i \mathbf{S}(\boldsymbol{\omega}),
-\]
-where \( \mathbf{S}(\boldsymbol{\omega}) \) is the skew-symmetric matrix:
-\[
-\mathbf{S}(\boldsymbol{\omega}) = 
-\begin{bmatrix} 
-0 & -\omega_z & \omega_y \\ 
-\omega_z & 0 & -\omega_x \\ 
--\omega_y & \omega_x & 0 
-\end{bmatrix}.
-\]
-
----
-
-\subsubsection{Full Dynamics in the Inertial Frame}
-
-Combining translational and rotational dynamics, the UAV's motion in the inertial frame \( F_i \) is:
-\[
-M \ddot{\mathbf{p}} = \mathbf{R}_b^i \begin{bmatrix} 0 \\ 0 \\ -u_f \end{bmatrix} + M g \mathbf{e}_3 + \mathbf{d}_f,
-\]
-\[
-\mathbf{J} \dot{\boldsymbol{\omega}} = \boldsymbol{\tau} - \boldsymbol{\omega} \times (\mathbf{J} \boldsymbol{\omega}),
-\]
-where the inputs \( u_f \) (thrust) and \( \boldsymbol{\tau} \) (torques) are used for control purposes.
-
-The orientation matrix \( \mathbf{R}_b^i \) evolves as:
-\[
-\dot{\mathbf{R}}_b^i = \mathbf{R}_b^i \mathbf{S}(\boldsymbol{\omega}).
-\]
-
----
-
-\subsubsection{Additional Notes on Rotation Matrices}
-
-The rotation matrix \( \mathbf{R}(t) \) satisfies the orthogonality condition:
-\[
-\mathbf{R}(t) \mathbf{R}^\top(t) = \mathbf{I}.
-\]
-Its time derivative \( \dot{\mathbf{R}}(t) \) obeys:
-\[
-\dot{\mathbf{R}}(t) \mathbf{R}^\top(t) + \mathbf{R}(t) \dot{\mathbf{R}}^\top(t) = 0.
-\]
-
-This ensures that the skew-symmetric matrix \( \mathbf{S}(\boldsymbol{\omega}) \) represents angular velocity in the body frame:
-\[
-\mathbf{S}(\boldsymbol{\omega}) \mathbf{R}(t) = \dot{\mathbf{R}}(t).
-\]
-
-
-\section{Control}
-the purpose of this work is not to control the attitude (orientation), 
-but the position and velocity
+% To evaluate the seeking time and energy consumption, we define
+% . Thus, provides a measure on
+% the total “time” to complete a search since it is proportional to
+% search time based on the assumption that all seekers have equal
+% speed. The actual time cannot be computed in simulations due to
+% the lack of the concept of speed, but serves the same
+% purpose.
+% In addition, we also count the number of iterations ,
+% measure the total distance traveled by all robots.

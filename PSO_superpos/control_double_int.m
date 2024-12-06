@@ -258,7 +258,7 @@ end
 
 function R = rotation_matrix(phi, theta, psi)
     % Compute the rotation matrix R from Euler angles (phi, theta, psi)
-    % Standard case: Body frame's z-axis points downwards.
+    % Standard case: Body frame's z-axis points upwards.
 
     % Rotation about z-axis (yaw)
     Rz = [cos(psi), -sin(psi), 0;

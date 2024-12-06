@@ -132,6 +132,47 @@
       \endverb
       \keyw{Particle swarm optimization;Birds;Educational institutions;Marine animals;Testing;Humans;Genetic algorithms;Optimization methods;Artificial neural networks;Performance evaluation}
     \endentry
+    \entry{simplified_model}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=ee57c0d64cdb835d6ced5d6a2e7705fa}{%
+           family={Altug},
+           familyi={A\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=6319df73c3ebb0d532b8fc3e155d7ce7}{%
+           family={Ostrowski},
+           familyi={O\bibinitperiod},
+           given={J.P.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=557ac8b0d5f2ea79ae1c98d25604636a}{%
+           family={Mahony},
+           familyi={M\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d2fdc8bf1e71809f08629c8d7c32abc}
+      \strng{fullhash}{2b8645277db10d3a08a9ee1bee4d8bd0}
+      \strng{fullhashraw}{2b8645277db10d3a08a9ee1bee4d8bd0}
+      \strng{bibnamehash}{2b8645277db10d3a08a9ee1bee4d8bd0}
+      \strng{authorbibnamehash}{2b8645277db10d3a08a9ee1bee4d8bd0}
+      \strng{authornamehash}{2d2fdc8bf1e71809f08629c8d7c32abc}
+      \strng{authorfullhash}{2b8645277db10d3a08a9ee1bee4d8bd0}
+      \strng{authorfullhashraw}{2b8645277db10d3a08a9ee1bee4d8bd0}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings 2002 IEEE International Conference on Robotics and Automation (Cat. No.02CH37292)}
+      \field{title}{Control of a quadrotor helicopter using visual feedback}
+      \field{volume}{1}
+      \field{year}{2002}
+      \field{pages}{72\bibrangedash 77 vol.1}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1109/ROBOT.2002.1013341
+      \endverb
+      \keyw{Helicopters;Unmanned aerial vehicles;Linear feedback control systems;Surveillance;Inspection;Aircraft;Vehicle dynamics;Equations;Motion control;Remotely operated vehicles}
+    \endentry
     \entry{real_application}{article}{}{}
       \name{author}{6}{}{%
         {{hash=8837500abae4a4a4646780fca48fa68c}{%
@@ -302,6 +343,35 @@
       \verb 10.1109/IROS.2006.282247
       \endverb
       \keyw{Simultaneous localization and mapping; Magnetic field measurement; Magnetic sensors; Antenna measurements; Snow; Motion estimation; Motion measurement; Gaussian processes; Filters}
+    \endentry
+    \entry{quadrotor_modeling_control_book}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=31202dc567c14cdad27077b94672f7ea}{%
+           family={Beard},
+           familyi={B\bibinitperiod},
+           given={Randal\bibnamedelima W.},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{31202dc567c14cdad27077b94672f7ea}
+      \strng{fullhash}{31202dc567c14cdad27077b94672f7ea}
+      \strng{fullhashraw}{31202dc567c14cdad27077b94672f7ea}
+      \strng{bibnamehash}{31202dc567c14cdad27077b94672f7ea}
+      \strng{authorbibnamehash}{31202dc567c14cdad27077b94672f7ea}
+      \strng{authornamehash}{31202dc567c14cdad27077b94672f7ea}
+      \strng{authorfullhash}{31202dc567c14cdad27077b94672f7ea}
+      \strng{authorfullhashraw}{31202dc567c14cdad27077b94672f7ea}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Quadrotor Dynamics and Control}
+      \field{year}{2008}
+      \verb{urlraw}
+      \verb https://api.semanticscholar.org/CorpusID:195351003
+      \endverb
+      \verb{url}
+      \verb https://api.semanticscholar.org/CorpusID:195351003
+      \endverb
     \endentry
     \entry{PSO_acustic}{inproceedings}{}{}
       \name{author}{5}{}{%
@@ -556,6 +626,48 @@
       \verb{doi}
       \verb 10.1071/EG12020
       \endverb
+    \endentry
+    \entry{model_quadrotor}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=523f1624940e07366b63a96872ddb4be}{%
+           family={Mahony},
+           familyi={M\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3c2a6a0658f1ad90e7d4a83eef9c3841}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Vijay},
+           giveni={V\bibinitperiod}}}%
+        {{hash=c0e503339314930d140b67b5e7c55c3e}{%
+           family={Corke},
+           familyi={C\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fc15c0964834184114b646ecf061c77}
+      \strng{fullhash}{c72b6af88df31e595e84c356067cc6a4}
+      \strng{fullhashraw}{c72b6af88df31e595e84c356067cc6a4}
+      \strng{bibnamehash}{c72b6af88df31e595e84c356067cc6a4}
+      \strng{authorbibnamehash}{c72b6af88df31e595e84c356067cc6a4}
+      \strng{authornamehash}{5fc15c0964834184114b646ecf061c77}
+      \strng{authorfullhash}{c72b6af88df31e595e84c356067cc6a4}
+      \strng{authorfullhashraw}{c72b6af88df31e595e84c356067cc6a4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Robotics \& Automation Magazine}
+      \field{number}{3}
+      \field{title}{Multirotor Aerial Vehicles: Modeling, Estimation, and Control of Quadrotor}
+      \field{volume}{19}
+      \field{year}{2012}
+      \field{pages}{20\bibrangedash 32}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1109/MRA.2012.2206474
+      \endverb
+      \keyw{Aircraft manufacture;Modeling;Aerodynamics;Estimation;Blades;Atmospheric modeling;Rotors;Tutorials}
     \endentry
     \entry{sherpa}{inproceedings}{}{}
       \name{author}{16}{}{%
@@ -1265,6 +1377,53 @@
       \endverb
       \keyw{Magnetic gradient tensor,Modified tilt angle,Normalized source strength,Multi-dipoles discrimination}
     \endentry
+    \entry{control_quadrotor_main}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=8d0f0b08ffb919fbf9425708b8a88611}{%
+           family={Naldi},
+           familyi={N\bibinitperiod},
+           given={Roberto},
+           giveni={R\bibinitperiod}}}%
+        {{hash=80431db3f5ee6328b23fa55fa7b207a1}{%
+           family={Furci},
+           familyi={F\bibinitperiod},
+           given={Michele},
+           giveni={M\bibinitperiod}}}%
+        {{hash=651d4b90af46406fa8b0be92dc654127}{%
+           family={Sanfelice},
+           familyi={S\bibinitperiod},
+           given={Ricardo\bibnamedelima G.},
+           giveni={R\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=15bec5c2adf995a16a0702db008c5b3e}{%
+           family={Marconi},
+           familyi={M\bibinitperiod},
+           given={Lorenzo},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{a40eb0204285491eb332f0c2fd5452cb}
+      \strng{fullhash}{b38a50218e4b350ed22efe748325a986}
+      \strng{fullhashraw}{b38a50218e4b350ed22efe748325a986}
+      \strng{bibnamehash}{b38a50218e4b350ed22efe748325a986}
+      \strng{authorbibnamehash}{b38a50218e4b350ed22efe748325a986}
+      \strng{authornamehash}{a40eb0204285491eb332f0c2fd5452cb}
+      \strng{authorfullhash}{b38a50218e4b350ed22efe748325a986}
+      \strng{authorfullhashraw}{b38a50218e4b350ed22efe748325a986}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Automatic Control}
+      \field{number}{1}
+      \field{title}{Robust Global Trajectory Tracking for Underactuated VTOL Aerial Vehicles Using Inner-Outer Loop Control Paradigms}
+      \field{volume}{62}
+      \field{year}{2017}
+      \field{pages}{97\bibrangedash 112}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1109/TAC.2016.2557967
+      \endverb
+      \keyw{Vehicles;Attitude control;Vehicle dynamics;Aerodynamics;Quaternions;Robustness;Stability analysis;Aerial robotics;hybrid control;interconnected systems;nonlinear control;robust control}
+    \endentry
     \entry{sr0}{article}{}{}
       \name{author}{6}{}{%
         {{hash=5b903e923f6f354b667398d8f148692c}{%
@@ -1386,47 +1545,6 @@
       \verb{url}
       \verb https://dx.doi.org/10.1088/1755-1315/237/3/032021
       \endverb
-    \endentry
-    \entry{artva-gazebo}{inproceedings}{}{}
-      \name{author}{3}{}{%
-        {{hash=26f06a571b4062656792d975fa9ddd47}{%
-           family={Cacace},
-           familyi={C\bibinitperiod},
-           given={Jonathan},
-           giveni={J\bibinitperiod}}}%
-        {{hash=e5ee5a3a80e0f7da45212b4692a497e6}{%
-           family={Mimmo},
-           familyi={M\bibinitperiod},
-           given={Nicola},
-           giveni={N\bibinitperiod}}}%
-        {{hash=15bec5c2adf995a16a0702db008c5b3e}{%
-           family={Marconi},
-           familyi={M\bibinitperiod},
-           given={Lorenzo},
-           giveni={L\bibinitperiod}}}%
-      }
-      \strng{namehash}{9cd99e17bc737683a6d39f4c74a1e9a2}
-      \strng{fullhash}{889da739dc07d6fe8e0718ca20da461b}
-      \strng{fullhashraw}{889da739dc07d6fe8e0718ca20da461b}
-      \strng{bibnamehash}{889da739dc07d6fe8e0718ca20da461b}
-      \strng{authorbibnamehash}{889da739dc07d6fe8e0718ca20da461b}
-      \strng{authornamehash}{9cd99e17bc737683a6d39f4c74a1e9a2}
-      \strng{authorfullhash}{889da739dc07d6fe8e0718ca20da461b}
-      \strng{authorfullhashraw}{889da739dc07d6fe8e0718ca20da461b}
-      \field{extraname}{3}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{2020 IEEE International Conference on Robotics and Automation (ICRA)}
-      \field{title}{A ROS Gazebo plugin to simulate ARVA sensors}
-      \field{year}{2020}
-      \field{pages}{7233\bibrangedash 7239}
-      \range{pages}{7}
-      \verb{doi}
-      \verb 10.1109/ICRA40945.2020.9196914
-      \endverb
-      \keyw{Receivers;Transmitters;Sensors;Electromagnetics;Antennas;Robots;Unmanned aerial vehicles}
     \endentry
     \entry{DetectionMultiplMagnetiDipoleSources}{article}{}{}
       \name{author}{4}{}{%
@@ -1969,6 +2087,33 @@
       \verb 10.1109/JIOT.2022.3182798
       \endverb
       \keyw{Heuristic algorithms;Path planning;Optimization;Planning;Convergence;Three-dimensional displays;Mathematical models;Hybrid algorithm;particle swarm optimization (PSO);path planning;unmanned aerial vehicle (UAV)}
+    \endentry
+    \entry{ENU}{unknown}{}{}
+      \name{author}{1}{}{%
+        {{hash=11093eae0463a2f5e2857120c256fc3c}{%
+           family={Rochford},
+           familyi={R\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{fullhash}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{fullhashraw}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{bibnamehash}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{authorbibnamehash}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{authornamehash}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{authorfullhash}{11093eae0463a2f5e2857120c256fc3c}
+      \strng{authorfullhashraw}{11093eae0463a2f5e2857120c256fc3c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{07}
+      \field{title}{Transformation of Covariance Matrices for Counter Unmanned Aircraft System Applications}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.13140/RG.2.2.29019.54565
+      \endverb
     \endentry
     \entry{PSO_another}{article}{}{}
       \name{author}{3}{}{%
