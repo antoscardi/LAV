@@ -72,11 +72,11 @@ classdef Plotter < handle
         end
         
         % Update the drone plot with new positions
-        function draw(obj, positions, iter)
+        function draw(obj, positions, iter, time)
             obj.scatter_drones.XData = positions(:, 1);
             obj.scatter_drones.YData = positions(:, 2);
             % Update the title
-            title(obj.ax, sprintf('Iteration %d', iter));
+            title(obj.ax, sprintf('Iteration: %d, Real Time: %.1fs', iter, time));
             pause(0.04)
             drawnow;
         end
