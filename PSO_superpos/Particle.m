@@ -37,6 +37,7 @@ classdef Particle < handle
         has_shared_matrix      % A matrix to track if exclusion zones have been shared with other drones
         exclusion_zone_radius  % How big is the exclusion zone
         inertia                % each particle has it s own inertia
+        controller             % each particle is controlled by a controller
     end
 
     methods
@@ -60,6 +61,7 @@ classdef Particle < handle
             obj.has_shared_matrix = false(n_drones, 1);
             obj.inertia = inertia;
             obj.exclusion_zone_radius = exclusion_zone_radius; % The NSS decreases as r^4 so after 2 meters is 0.125
+            obj.controller = Controller();  % Initialize the controller
             fprintf('Drone initialized at pos: [%1d, %1d] and vel: [%.1f, %.1f]  with group index: %d and Goal :[%.1f, %.1f]\n', ...
                 obj.position(1), obj.position(2), obj.velocity(1), obj.velocity(2),obj.group_idx, obj.goal(1), obj.goal(2));
         end
@@ -84,10 +86,31 @@ classdef Particle < handle
         
         % Update particle's position based on velocity and apply boundary conditions
         function obj = update_position(obj)
-            obj.position = obj.position + obj.velocity;
+            z = 0;
+            vz = 0; dt = 1;
+            
+            state = [obj.position, z, obj.velocity, vz, 0,0,0,0,0,0];
+            
+            %PSO UPDATE
+            desired_position = [obj.position + obj.velocity , 0];
+            desired_velocity = [obj.velocity , 0];
+            desired_acceleration = [0, 0, 0];
+
+            % Controller inputs
+            [input_torques, input_force] = obj.controller.control_laws(state, desired_position, desired_velocity, ...
+            desired_acceleration);
+
+            % Use the controller to compute the state derivative (new state)
+            state_dot = obj.controller.simplified_model(dt, state, input_force, input_torques);
+
+            % Update the state
+            state = state + dt * state_dot;
+            obj.position = state(1:2);  % Extract new position
+            obj.velocity = state(4:5);  % Extract new velocity
+            
             % Enforce boundaries
             obj.position(1) = max(min(obj.position(1), obj.bounds(2)), obj.bounds(1));
-            obj.position(2) = max(min(obj.position(2), obj.bounds(2)), obj.bounds(1));
+            obj.position(2) = max(min(obj.position(2), obj.bounds(2)), obj.bounds(1));     
         end
         
         % Evaluate NSS value at the current position and update personal best if needed
@@ -96,8 +119,8 @@ classdef Particle < handle
             if obj.nss_value > obj.nss_best_value
                 obj.p_best = obj.position;
                 obj.nss_best_value = obj.nss_value;
-                fprintf('Drone %d has received an NSS signal of  %.1f.\n', ...
-                    obj.identifier, obj.nss_best_value);
+                %fprintf('Drone %d has received an NSS signal of  %.1f.\n', ...
+                %    obj.identifier, obj.nss_best_value);
             end
             if obj.nss_value > 10000000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
                 obj.victim_found_flag = true;

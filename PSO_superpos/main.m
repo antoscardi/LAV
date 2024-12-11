@@ -8,15 +8,13 @@ addpath("functions");
 seed = 42;
 rng(seed)
 
-
-%%% TO DO: METTERE I DRONI NEGLI STESSI GRUPPI VICINI ALL INIZIO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 300;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 400;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-80, 80];    % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
@@ -26,8 +24,8 @@ max_velocity = 2;        % Maximum allowable velocity for each drone (m/s). Limi
                          % the search space, preventing overshooting the target.
 
 % Source fixed positions (the targets the drones need to find)
-% AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTRo 
-%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];    % n drones 4 randomness 0.5 ex zone 1
+% AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
+%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];   % n drones 4 randomness 0.5 ex zone 1
 %p_sources = [ 20, 50; 5, 70; 20, 57];              % n drone 3 randomness 0.1  (reduce rand or they will get stuck in the other exclusion zone)
 %p_sources = [ 20, 50; 20, 51];                     % 1 m apart, ex zone 0.5 m, n drones 2 doesn t work with any randomness
 %p_sources = [ 16, 50; 18, 46; 20, 52; 22, 48];     % 2 m apart, n drones 4, randomness 0.2 ex zone 1
@@ -58,7 +56,7 @@ velocity_randomness = 0.6;   % Factor between 0 and 1 that controls the amount o
 
 communication_radius = 5;    % Distance between two drones that enables communication with each other.
 
-step_size = 110;  %ERA 40     % Set how far the drone should move away in ONLY ONE ITERATION
+step_size = 90;  %ERA 40    % Set how far the drone should move away in ONLY ONE ITERATION
 
 exclusion_zone_radius = 2; 
 
