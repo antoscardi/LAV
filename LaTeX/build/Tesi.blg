@@ -1,15 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'build/Tesi.blg'
-[50] biber:340> INFO - === ven dic  6, 2024, 12:28:57
-[60] Biber.pm:420> INFO - Reading 'build/Tesi.bcf'
-[119] Biber.pm:994> INFO - Found 49 citekeys in bib section 0
-[129] Biber.pm:4463> INFO - Processing section 0
-[136] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[140] bibtex.pm:1713> INFO - LaTeX decoding ...
-[197] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
-[547] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[547] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[547] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[547] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[593] bbl.pm:676> INFO - Writing 'build/Tesi.bbl' with encoding 'UTF-8'
-[611] bbl.pm:779> INFO - Output to build/Tesi.bbl
+[62] biber:340> INFO - === mar dic 10, 2024, 07:51:28
+[77] Biber.pm:420> INFO - Reading 'build/Tesi.bcf'
+[156] Biber.pm:994> INFO - Found 49 citekeys in bib section 0
+[167] Biber.pm:4463> INFO - Processing section 0
+[178] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[183] bibtex.pm:1713> INFO - LaTeX decoding ...
+[290] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
+[743] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[744] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[744] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[744] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[802] bbl.pm:676> INFO - Writing 'build/Tesi.bbl' with encoding 'UTF-8'
+[827] bbl.pm:779> INFO - Output to build/Tesi.bbl

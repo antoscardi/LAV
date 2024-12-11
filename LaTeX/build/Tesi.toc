@@ -67,7 +67,7 @@
 \contentsline {subsubsection}{Numerical method}{45}{section*.48}%
 \contentsline {subsection}{\numberline {3.2.3}Final Model}{45}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Modified Particle Swarm Optimization with Exlusion Zones}{48}{subsection.3.2.4}%
-\contentsline {subsubsection}{Particle Swarm Oprimization}{48}{section*.53}%
+\contentsline {subsubsection}{Particle Swarm Oprimization}{49}{section*.53}%
 \contentsline {subsection}{\numberline {3.2.5}Exclusion Zone Mechanism}{50}{subsection.3.2.5}%
 \contentsline {paragraph}{Checking}{51}{section*.54}%
 \contentsline {paragraph}{Avoidance}{51}{section*.55}%

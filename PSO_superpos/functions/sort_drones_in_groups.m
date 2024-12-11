@@ -16,6 +16,8 @@ function [group_indices, n_groups] = sort_drones_in_groups(n_drones, n_sources)
                 % Randomly assign remaining drones to groups
                 additional_assignments = randi(n_sources, n_drones - n_sources, 1);
                 group_indices = [group_indices; additional_assignments];  % Concatenate assignments
+                % Step 4: Sort to ensure grouping order
+                group_indices = sort(group_indices);
             end
         else
             % If there are fewer drones than groups, assign drones only to a subset of groups

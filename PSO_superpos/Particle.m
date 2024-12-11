@@ -96,8 +96,10 @@ classdef Particle < handle
             if obj.nss_value > obj.nss_best_value
                 obj.p_best = obj.position;
                 obj.nss_best_value = obj.nss_value;
+                fprintf('Drone %d has received an NSS signal of  %.1f.\n', ...
+                    obj.identifier, obj.nss_best_value);
             end
-            if obj.nss_value > 1000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
+            if obj.nss_value > 10000000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
                 obj.victim_found_flag = true;
                 obj.my_exclusion_zone = obj.position;  % Add current position as my exclusion zone
                 fprintf('Drone %d has found a source at position [%.1f, %.1f]\n', ...
