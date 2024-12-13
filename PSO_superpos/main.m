@@ -25,11 +25,12 @@ max_velocity = 2;        % Maximum allowable velocity for each drone (m/s). Limi
 
 % Source fixed positions (the targets the drones need to find)
 % AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
-%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];   % n drones 4 randomness 0.5 ex zone 1
+% QUANDO TROVANO VITTIMA INERTIA VIENE RIDOTTA A 0.5
+p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];   % n drones 4 randomness 0.5 ex zone 1
 %p_sources = [ 20, 50; 5, 70; 20, 57];              % n drone 3 randomness 0.1  (reduce rand or they will get stuck in the other exclusion zone)
 %p_sources = [ 20, 50; 20, 51];                     % 1 m apart, ex zone 0.5 m, n drones 2 doesn t work with any randomness
 %p_sources = [ 16, 50; 18, 46; 20, 52; 22, 48];     % 2 m apart, n drones 4, randomness 0.2 ex zone 1
-p_sources = [ -70, -70; 70, 70; -70, 70; 70, -70];  % far away 4 drones, randomness 0.2, ex zone 1   
+%p_sources = [ -70, -70; 70, 70; -70, 70; 70, -70];  % far away 4 drones, randomness 0.2, ex zone 1   
 
 n_sources = size(p_sources, 1);
 
@@ -125,16 +126,12 @@ for iter = iter:n_iterations
                         plotter.plot_exclusion_zone(particle.exclusion_zone_radius, particle.my_exclusion_zone);
                         % Share exclusion zones from particle to other_particle
                         particle = particle.share_exclusion_zones(other_particle);
-                        % Remove randomness and reduce max velocity
-                        particle.inertia = 0;
                     end
                     % Second case: other_particle has found a victim and shares its exclusion zone
                     if other_particle.victim_found_flag
                         plotter.plot_exclusion_zone(other_particle.exclusion_zone_radius, other_particle.my_exclusion_zone)
                         % Share exclusion zones from other_particle to particle
                         other_particle = other_particle.share_exclusion_zones(particle);
-                        % Remove randomness
-                        other_particle.inertia = 0;
                     end
                     % Mark that sharing has been done for both drones
                     particle.has_shared_matrix(j) = true;

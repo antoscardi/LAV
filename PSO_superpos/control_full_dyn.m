@@ -1,244 +1,326 @@
+% PID Controller of Simplified Quadrotor Model
 clear; close all; clc;
+% Model Parmeters
+global Ix Iy Iz g m J 
+m = 4;                                   % Mass of the drone (kg)
+g = 9.81;                                % Gravity (m/s^2)
+Ix = 0.5; Iy = 0.5; Iz = 0.9; 
+J = diag([Ix, Iy, Iz]);
+
+% Time parameters
+dt = 0.04;                  % Time step (s)
+T_sim = 25;                 % Simulation time (s)
+N_steps = T_sim / dt;       % Total number of steps
+time = 0:dt:T_sim;          % Simulation time (s)
+
+% Parameters for circular trajectory
+% radius = 5;        % Radius of the circular motion
+% cx = -radius;      % X-coordinate of the center
+% cy = 0;            % Y-coordinate of the center
+% cz = 5;            % Z-coordinate of the center
+
+% Desired position function
+% desired_position = @(t) [cx + radius * cos(0.5 * t); ...
+%                          cy + radius * sin(0.5* t); ...
+%                          cz];
+
+% % Desired velocity function
+% desired_velocity = @(t) [-radius * 0.5 * sin(0.5 * t); ...
+%                           radius * 0.5 * cos(0.5 * t); ...
+%                           0];  
+
+% desired_acceleration = @(t) [-radius * 0.5^2 * cos(0.5 * t); ...
+%                              -radius * 0.5^2 * sin(0.5 * t); ...
+%                              0];
 
 % Parameters
-global Ix Iy Iz g m J o
-mass = 1;                                                       % Mass of the drone (kg)
-g = 9.81;                                                       % Gravity (m/s^2)
-Ix = 0.0820; Iy = 0.0845; Iz = 0.1377; J = diag([Ix, Iy, Iz]);  % Inertia matrix (kg·m^2)
-T = 3;                                                          % (Planning) period T
-m = 4.34;
-o = 2 * pi / T;                                                 % Frequency for circular trajectory
+z_max = 5;      % Maximum altitude
+k = 0.5;        % Smoothness factor for exponential rise
+v = 2;          % Constant velocity in x-y plane
+angle = pi/4;   % Angle of projection in x-y plane (45 degrees)
 
-% Controller gains
-global c0 c1 c2 c3
-c3 = 4.8;    % Damping term for higher stability
-c2 = 10.8;   % Proportional term for fast tracking
-c1 = 11.2;  % Higher-order term to prevent oscillations
-c0 = 4;  % Integral term for steady-state accuracy
+% Define desired position as a function of time
+desired_position = @(t) [
+    v * t * cos(angle);                     % x(t): Linear motion in x
+    v * t * sin(angle);                     % y(t): Linear motion in y
+    z_max * (1 - exp(-k * t))               % z(t): Smooth rise
+];
 
-% Simulation setup
-dt = 0.01; % Time step
-Tspan = 0:dt:10; % Simulation time
-N = length(Tspan); % Number of steps
+% Define desired velocity as a function of time
+desired_velocity = @(t) [
+    v * cos(angle);                         % x velocity
+    v * sin(angle);                         % y velocity
+    z_max * k * exp(-k * t)                 % z velocity
+];
+
+% Define desired acceleration as a function of time
+desired_acceleration = @(t) [
+    0;                                      % x acceleration
+    0;                                      % y acceleration
+    -z_max * k^2 * exp(-k * t)              % z acceleration
+];
 
 % Initial states
-state = zeros(14, 1);     % Initialize state vector
-state(1:3) = [0 0 0]';    % Initial position
-state(4:6) = [0 0 0]';    % Initial velocity
-state(7:9) = [0 0 0]';    % Initial roll, pitch, yaw
-state(10:12) = [0 0 0]';  % Initial angular velocity
-state(13) = 0.1;          % Initial force
-state(14) = 0;            % Initial force derivative
+x = zeros(12, 1); % Initialize state vector
+x(1:3) = desired_position(0); % Initial position
+x(4:6) = [0 0 0]'; % Initial velocity
+x(7:9) = [0 0 0]'; % Initial roll, pitch, yaw
+x(10:12) = [0 0 0]'; % Initial angular velocity
 
-% Trajectory setup
-xd = cos(o * Tspan);
-yd = sin(o * Tspan);
-zd = zeros(size(Tspan)); % Flat trajectory for simplicity
-yawd = zeros(size(Tspan));
+% Controller gains
+kxp = 0.1; kxd = 0.5;
+kyp = 0.1; kyd = 0.54;
+kzp = 1; kzd = 2.5;
+kp_phi = 2;  kd_phi = 2.5;
+kp_theta = 2;  kd_theta = 2.5;
+kp_psi = 2;  kd_psi = 4;
+gains = [kxp  kxd;
+         kyp  kyd;
+         kzp  kzd;
+         kp_phi  kd_phi;
+         kp_theta  kd_theta;
+         kp_psi  kd_psi];
 
-% Storage for results
-states = zeros(14, N);
+% Store results for plotting
+state_history = zeros(12, N_steps);
+time_history = zeros(1, N_steps);
 
-% Online simulation loop
-for k = 1:N
-    t = Tspan(k);
+% Initialize figure
+figure_handle = init_plot(time, desired_position);
 
-    % Save state for analysis
-    states(:, k) = state;
+% Initialize handles
+body_frame_handles = [];
 
-    % Linear controller
-    v = linear_controller(t, state);
+% Simulation loop
+for k = 1:length(time)
+    t = time(k);
 
-    % Dynamic compensator
-    utilde = dynamic_compensator(state, v);
+    % Check if figure is closed
+    if ~isvalid(figure_handle)
+        disp('Simulation stopped by user.');
+        clf; cla; close;
+        break;
+    end
 
-    % Extract forces and moments
-    u = [state(13); utilde(2:4)];
+    % --- CONTROL STEP ---
+    [input_torques, input_force] = control_laws(t, x, desired_position, desired_velocity, desired_acceleration, gains);
+    
+    % --- STATE UPDATE ---
+    x_dot = full_model(dt, x, input_force, input_torques);
+    x = x + x_dot * dt;
 
-    % Update states using quadrotor dynamics
-    dquadrotor_model = quadrotor_model(state, u);
-
-    % Combine all derivatives
-    dzeta = [state(14); utilde(1)]; 
-    dstate = [dquadrotor_model; dzeta];
-
-    % Euler integration for online update
-    state = state + dt * dstate;
+    % Store state and time
+    state_history(:, k) = x;
+    time_history(k) = t;
+                                                   
+    % --- Plot Drone and Frames ---
+    % If body frame handles exist, delete them to update the plot
+    if ~isempty(body_frame_handles)
+        delete(body_frame_handles);
+    end
+    R = rotation_matrix(x(7), x(8), x(9));
+    body_frame_handles = plot_drone(x(1:3), R, t);
 end
 
 % Extract results
-x = states(1, :);
-y = states(2, :);
-z = states(3, :);
-yaw = states(9, :);
+plot_results(time, desired_position, state_history);
 
-% Plot results
-figure(1); plot(Tspan, x, Tspan, xd); legend('x', 'x_d'); xlabel('t [sec]'); ylabel('x [m]'); title('Position: x(t) and x_d(t)');
-figure(2); plot(Tspan, y, Tspan, yd); legend('y', 'y_d'); xlabel('t [sec]'); ylabel('y [m]'); title('Position: y(t) and y_d(t)');
-figure(3); plot(Tspan, z, Tspan, zd); legend('z', 'z_d'); xlabel('t [sec]'); ylabel('z [m]'); title('Position: z(t) and z_d(t)');
-figure(4); plot(Tspan, yaw, Tspan, yawd); legend('yaw', 'yaw_d'); xlabel('t [sec]'); ylabel('yaw [rad]'); title('Yaw: yaw(t) and yaw_d(t)');
+function x_dot = full_model(dt, state, F, input_torques)
+    global Ix Iy Iz g m  
+    v = state(4:6); phi = state(7); theta = state(8); psi = state(9);
+    p = state(10); q = state(11); r = state(12);
+    
+    % --- TRANSLATIONAL DYNAMICS ---
+    vx_dot =  F / m * (cos(phi)*sin(theta)*cos(psi)+sin(phi)*sin(psi));
+    vy_dot =  F / m * (cos(phi)*sin(theta)*sin(psi)-sin(phi)*cos(psi));
+    vz_dot =  F / m * (cos(phi)*cos(theta)) - g;
 
-% Functions remain unchanged: quadrotor_model, linear_controller, dynamic_compensator
+    % --- ROTATIONAL DYNAMICS ---
+    % Assuming small angles rpy_dot = omegaand R = R_dot
+    p_dot = input_torques(1) + q*r*(Iy-Iz)/Ix + input_torques(1)/Ix;
+    q_dot = input_torques(2) + p*r*(Iz-Ix)/Iy + input_torques(2)/Iy;
+    r_dot = input_torques(3) + p*q*(Ix-Iy)/Iz + input_torques(3)/Iz;
+    phi_dot = p + sin(phi) * tan(theta) *q + cos(phi) * tan(theta) *r;
+    theta_dot = cos(phi) * q - sin(phi)* r;
+    psi_dot = sin(phi) * sec(theta) * q + cos(phi) * sec(theta) * r;
+    
+    x_dot = [v; vx_dot; vy_dot; vz_dot; phi_dot; theta_dot; psi_dot; p_dot; q_dot; r_dot];
 
-function dquadrotor_model = quadrotor_model(state, u)
-    %% Initializing variables
-    v = state(4:6); phi = state(7); theta = state(8); psi = state(9); omega = state(10:12);
-    global m g J
-    cphi = cos(phi); sphi = sin(phi); ctheta = cos(theta); stheta = sin(theta); cpsi = cos(psi); spsi = sin(psi); ttheta = tan(theta);
-    f = u(1); M = u(2:4);
-
-    %% Velocity
-    dv = -f / m * [cphi * stheta * cpsi + sphi * spsi;
-                   cphi * stheta * spsi - sphi * cpsi;
-                   cphi * ctheta];
-    dv(3) = dv(3) + g;
-
-    %% RPY
-    drpy = [omega(1) + sphi * ttheta * omega(2) + cphi * ttheta * omega(3);
-            cphi * omega(2) - sphi * omega(3);
-            sphi / ctheta * omega(2) + cphi / ctheta * omega(3)];
-
-    %% Angular velocity
-    domega = inv(J)\(M - cross(omega, J * omega));
-
-    %% Output
-    dquadrotor_model = [v; dv; drpy; domega];
 end
 
+function [input_torques, input_force] = control_laws(t, state, ...
+    desired_position, desired_velocity, desired_acceleration, gains)
+    global g m Ix Iy Iz 
+    kxp = gains(1,1);  kxd = gains(1,2);
+    kyp = gains(2,1);  kyd = gains(2,2);
+    kzp = gains(3,1);  kzd = gains(3,2);
+    kp_phi = gains(4,1);  kd_phi = gains(4,2);
+    kp_theta = gains(5,1);  kd_theta = gains(5,2);
+    kp_psi = gains(6,1);  kd_psi = gains(6,2);
+    % States
+    position = state(1:3);
+    velocity = state(4:6);
+    phi = state(7); theta = state(8); psi = state(9);
+    phi_dot = state(10); theta_dot = state(11); psi_dot = state(12);
 
-function out = full_dynamics_ode(t,state)
+    % --- Desired Trajectory ---
+    desired_pos = desired_position(t); % Desired position
+    desired_vel = desired_velocity(t); % Desired velocity
+    desired_acc = desired_acceleration(t); % Desired acceleration
 
-    %% linear controller
-    v = linear_controller(t,state);
-    
-    %% dynamic compensator
-    utilde = dynamic_compensator(state,v);
-    dzeta = [state(14);utilde(1)];
-    
-    %% quadrotor
-    u = [state(13);utilde(2:4)];
-    dquadrotor_model = quadrotor_model(state,u);
-    
-    % ode output
-    out = [dquadrotor_model;dzeta];
-    
+    % --- Position Control (Outer Loop) ---
+    % Compute position and velocity errors
+    pos_error = desired_pos - position;  % Position error
+    vel_error = desired_vel - velocity;  % Velocity error
+    ex = pos_error(1); ey = pos_error(2); ez = pos_error(3);
+    ex_dot = vel_error(1); ey_dot = vel_error(2); ez_dot = vel_error(3);
+
+    % HEIGHT CONTROL
+    input_force = m/(max(1e-6, (cos(phi) * cos(theta)))) * (g + kzp * ez + kzd * ez_dot);  % Altitude control (z)
+    if input_force < 0 || isnan(input_force)
+        error('Invalid input_force value: %f', input_force);
     end
 
+    % POSITION CONTROL via PD
+    % Compute desired thrust direction
+    Fx = (m / max(1e-6, input_force)) * (kxp * ex + kxd * ex_dot + desired_acc(1));
+    Fy = (m / max(1e-6, input_force)) * (kyp * ey + kyd * ey_dot + desired_acc(2));    
 
-function v = linear_controller(t, state)
-    %% initializing variables 
-    x = state(1:3); x_dot = state(4:6);
-    phi = state(7); theta = state(8); psi = state(9);
-    p = state(10); q = state(11); r = state(12);
-    omega = state(10:12);
-    f = state(13); f_dot = state(14);
-    
-    global m g J
-    cphi = cos(phi); sphi = sin(phi); ctheta = cos(theta); stheta = sin(theta); cpsi = cos(psi); spsi = sin(psi); ttheta = tan(theta);
-    Jinv = inv(J);
-    J1X = Jinv(1,:); J2X = Jinv(2,:); J3X = Jinv(3,:);
-    cross_omega_Jomega = cross(omega,J*omega);
-    
-    global c0 c1 c2 c3 o
+    % Compute desired roll (phi) and pitch (theta) from thrust direction
+    phi_d = asin(Fx * sin(psi) - Fy * cos(psi));
+    theta_d = asin(Fx * cos(psi) + Fy * sin(psi)) / max(1e-6, cos(phi_d));    
+    psi_d = atan2(desired_vel(2), desired_vel(1));  % Desired yaw based on velocity (AGGIUNTO, NON C'E NELLA VENDIT)
 
-    %%%%%%%%%%%%%%%%%%% circumference %%%%%%%%%%%%%%%%%
-    xd      = [cos(o*t)         sin(o*t)        0           ]';
-    xd_dot  = [-o*sin(o*t)      o*cos(o*t)      0           ]';
-    xd_2dot = [-o^2*cos(o*t)    -o^2*sin(o*t)   0           ]';
-    xd_3dot = [o^3*sin(o*t)     -o^3*cos(o*t)   0           ]';
-    xd_4dot = [o^4*cos(o*t)     o^4*sin(o*t)    0           ]';
-    yawd        = 0;
-    yawd_dot    = 0;
-    yawd_2dot   = 0;
-    
-    % %%%Just Go high%%%%%%%%%%%%%%%
-    % xd= [0         0        3]';
-    % xd_dot= [0         0        0]';
-    % xd_2dot= [0         0        0]';
-    % xd_3dot= [0         0        0]';
-    % xd_4dot= [0         0        0]';
-    % yawd        = 0;
-    % yawd_dot    = 0;
-    % yawd_2dot   = 0;
-    
-    %% time derivative of rpy
-    phi_dot = p+sphi*ttheta*q+cphi*ttheta*r;
-    theta_dot = cphi*q-sphi*r;
-    psi_dot = sphi/ctheta*q+cphi/ctheta*r;
-    
-    %% computing derivatives
-    
-    x_2dot = -f/m*[ cpsi*stheta*cphi+spsi*sphi;
-                    spsi*stheta*cphi-sphi*cpsi;
-                    ctheta*cphi] + [0 0 g]';
-    
-    x_3dot = -f/m*[-sphi*stheta*cpsi*phi_dot+cphi*ctheta*cpsi*theta_dot-cphi*stheta*spsi*psi_dot+...
-                    cphi*spsi*phi_dot + sphi*cpsi*psi_dot;
-                    -sphi*stheta*spsi*phi_dot+cphi*ctheta*spsi*theta_dot+cphi*stheta*cpsi*psi_dot+...
-                    -cphi*cpsi*phi_dot+sphi*spsi*psi_dot;
-                    -sphi*ctheta*phi_dot-cphi*stheta*theta_dot]+...
-             -f_dot/m*[cpsi*stheta*sphi+sphi*spsi;
-                       cphi*stheta*spsi-sphi*cpsi;
-                       ctheta*cphi];
-    
-    yaw = psi;
-    yaw_dot = psi_dot;
-    
-    %% errors
-    e0 = xd-x;
-    e1 = xd_dot-x_dot;
-    e2 = xd_2dot-x_2dot;
-    e3 = xd_3dot-x_3dot;
-    
-    e1yaw   = yawd_dot-yaw_dot;
-    e0yaw   = yawd-yaw;
-    
-    %% output control law
-    vx = xd_4dot + c3*e3 + c2*e2 + c1*e1 + c0*e0;
-    vyaw = yawd_2dot + c1*e1yaw + c0*e0yaw; 
-    v = [vx;vyaw];
-    
+    % Compute torques for attitude control
+    tau_phi = Ix * (kp_phi * (phi_d - phi) + kd_phi * (-phi_dot));
+    tau_theta = Iy * (kp_theta * (theta_d - theta) + kd_theta * (-theta_dot));
+    tau_psi = Iz * (kp_psi * (psi_d - psi) + kd_psi * (-psi_dot));
+
+    % Combine torques into a vector
+    input_torques = [tau_phi; tau_theta; tau_psi];
 end
 
 
-function utilde = dynamic_compensator(state,v)
+function figure_handle = init_plot(time, desired_position)
+    figure_handle = figure('Name', 'Drone Trajectory Simulation with Frames');
+    hold on;
+    grid on;
+    xlabel('X (m)');
+    ylabel('Y (m)');
+    zlabel('Z (m)');
+    view(45, 30);
+    %axis([-5 5 -0 50 0 5]); % Set axis limits
 
-    %% initializing variables
-    
-    phi = state(7); theta = state(8); psi = state(9);
-    phidot = state(10); thetadot = state(11); psidot = state(12);
-    
-    global m g J
-    Ix = J(1,1); Iy = J(2,2); Iz = J(3,3);
-    
-    T = state(13);
-    Tdot = state(14);
-    
-    %% Regular state feedback
-    sph=sin(phi);cph=cos(phi);st=sin(theta);ct=cos(theta);sps=sin(psi);cps=cos(psi); 
-    
-    Jinv = [-m*(sph*sps+cph*cps*st)        m*(cps*sph-cph*sps*st)         -m*cph*ct       0;
-             -m*Ix/T*(cph*sps-cps*sph*st)   m*Ix/T*(cph*cps+sph*sps*st)   m*Ix/T*ct*sph   Ix*st;
-             -m*Iy/T*cps*ct/cph             -m*Iy/T*ct*sps/cph            m*Iy/T*st/cph   -Iy*ct*tan(phi);
-             0                              0                             0               Iz              ];         
-    
-    l1 = -2*Tdot/m*((cps*sph-sps*st*cph)*psidot+(cps*ct*cph)*thetadot+(sps*cph-cps*st*sph)*phidot)-...
-         T/m*((-sps*sph*psidot+cps*cph*phidot-cps*st*cph*psidot-sps*ct*cph*thetadot+sps*st*sph*psidot)*psidot+...
-         (-sps*ct*cph*psidot-cps*st*cph*thetadot-cps*ct*sph*phidot)*thetadot+...
-         (cps*cph*psidot-sps*sph*phidot+sps*st*sph*psidot-cps*ct*sph*thetadot-cps*st*cph*phidot)*phidot);
-     
-    l2 = -2*Tdot/m*((cps*st*cph+sph*sps)*psidot+(sps*ct*cph)*thetadot+(-sps*st*sph-cph*cps)*phidot)-...
-         T/m*((-sps*st*cph*psidot+cps*ct*cph*thetadot-cps*st*sph*phidot+cph*sps*phidot+sph*cps*psidot)*psidot+...
-         (cps*ct*cph*psidot-sps*st*cph*thetadot-sps*ct*sph*phidot)*thetadot+...
-         (-cps*st*sph*psidot-sps*ct*sph*thetadot-sps*st*cph*phidot+sph*cps*phidot+cph*sps*psidot)*phidot);
-     
-    l3 = -2*Tdot/m*(-st*cph*thetadot-ct*sph*phidot)-...
-         T/m*((-ct*cph*thetadot+st*sph*phidot)*thetadot+(st*sph*thetadot-ct*cph*phidot)*phidot);
-     
-    l4 = 0;
-    
-    l = [l1 l2 l3 l4]';
-    
-    utilde = Jinv*(-l+v);
-       
+    % Plot inertial frame (always visible)
+    quiver3(0, 0, 0, 2, 0, 0, 'r', 'LineWidth', 2); % X-axis (red)
+    quiver3(0, 0, 0, 0, 2, 0, 'g', 'LineWidth', 2); % Y-axis (green)
+    quiver3(0, 0, 0, 0, 0, 0.5, 'b', 'LineWidth', 2); % Z-axis (blue)
+    text(2, 0, 0, 'X_i', 'Color', 'r');
+    text(0, 2, 0, 'Y_i', 'Color', 'g');
+    text(0, 0, 0.8, 'Z_i', 'Color', 'b');
+
+    % Plot desired trajectory
+    t_full = time; % Time vector for the full trajectory
+    desired_trajectory = arrayfun(@(t) desired_position(t), t_full, 'UniformOutput', false); % Compute trajectory points
+    desired_trajectory = cell2mat(desired_trajectory); % Convert cell array to matrix
+    plot3(desired_trajectory(1, :), desired_trajectory(2, :), desired_trajectory(3, :), 'k--', 'LineWidth', 1.5); % Plot trajectory
 end
+
+function body_frame_handles = plot_drone(body_origin, R, t)
+    % Define the isosceles triangle in the body frame (relative to its center)
+    triangle_body = [
+        1.6, 0, 0;   % Tip of the triangle (pointing forward)
+        -0.8, -0.4, 0; % Left base corner
+        -0.8, 0.4, 0;  % Right base corner
+        1.6, 0, 0;   % Close the triangle
+    ];
+
+    % Isosceles triangle marker for the drone
+    triangle_inertial = (R * triangle_body')' + body_origin';
+
+    % Plot UAV body frame
+    body_x = body_origin +  1.5 *  R(:, 1); % X-axis of body frame
+    body_y = body_origin + 1.5 *  R(:, 2); % Y-axis of body frame
+    body_z = body_origin + 0.5 * R(:, 3); % Z-axis of body frame
+
+    % Body frame axes
+    body_frame_handles = [
+        quiver3(body_origin(1), body_origin(2), body_origin(3), body_x(1)-body_origin(1), ...
+                body_x(2)-body_origin(2), body_x(3)-body_origin(3), 'r', 'LineWidth', 1.5); % X-axis
+        quiver3(body_origin(1), body_origin(2), body_origin(3), body_y(1)-body_origin(1), ...
+                body_y(2)-body_origin(2), body_y(3)-body_origin(3), 'g', 'LineWidth', 1.5); % Y-axis
+        quiver3(body_origin(1), body_origin(2), body_origin(3), body_z(1)-body_origin(1), ...
+                body_z(2)-body_origin(2), body_z(3)-body_origin(3), 'b', 'LineWidth', 1.5); % Z-axis
+        fill3(triangle_inertial(:, 1), triangle_inertial(:, 2), triangle_inertial(:, 3), 'b') % Triangle
+    ];
+    % Update plot title and view
+    title(sprintf('Drone Trajectory Simulation with Frames - Time: %.2f s', t));
+    pause(0.01);
+end
+
+
+function R = rotation_matrix(phi, theta, psi)
+    % Compute the rotation matrix R from Euler angles (phi, theta, psi)
+    % Standard case: Body frame's z-axis points upwards.
+
+    % Rotation about z-axis (yaw)
+    Rz = [cos(psi), -sin(psi), 0;
+          sin(psi),  cos(psi), 0;
+                0,        0, 1];
+
+    % Rotation about y-axis (pitch)
+    Ry = [cos(theta),  0, sin(theta);
+                  0,  1,         0;
+         -sin(theta), 0, cos(theta)];
+
+    % Rotation about x-axis (roll)
+    Rx = [1,        0,         0;
+          0, cos(phi), -sin(phi);
+          0, sin(phi),  cos(phi)];
+
+    % Final rotation matrix
+    R = Rz * Ry * Rx;
+end
+
+
+function plot_results(time, desired_position, state_history)
+    % Extract data from state history
+    x_hist = state_history(1, :);
+    y_hist = state_history(2, :);
+    z_hist = state_history(3, :);
+    
+    % Generate desired trajectory over time
+    desired_traj = arrayfun(@(t) desired_position(t), time, 'UniformOutput', false);
+    desired_traj = cell2mat(desired_traj);
+    xd = desired_traj(1, :);
+    yd = desired_traj(2, :);
+    zd = desired_traj(3, :);
+
+    % 3D Trajectory Plot
+    figure;
+    plot3(x_hist, y_hist, z_hist, 'b', 'LineWidth', 1.5); hold on;
+    plot3(xd, yd, zd, 'r--', 'LineWidth', 1.5);
+    xlabel('X (m)'); ylabel('Y (m)'); zlabel('Z (m)');
+    legend('Actual Trajectory', 'Desired Trajectory');
+    title('3D Trajectory Comparison');
+    %axis([-5 5 -0 50 0 5]); % Set axis limits
+    grid on;
+
+    % X, Y, Z Plots
+    plot_single_dimension(time, x_hist, xd, 'X', 'X Position');
+    plot_single_dimension(time, y_hist, yd, 'Y', 'Y Position');
+    plot_single_dimension(time, z_hist, zd, 'Z', 'Z Position');
+end
+
+function plot_single_dimension(time, actual, desired, label, title_str)
+    % Single dimension plot for X, Y, or Z
+    figure;
+    plot(time, actual, 'b', 'LineWidth', 1.5); hold on;
+    plot(time, desired, 'r--', 'LineWidth', 1.5);
+    xlabel('Time (s)'); ylabel([label, ' (m)']);
+    legend(['Actual ', label], ['Desired ', label]);
+    title(title_str);
+    grid on;
+end
+
+

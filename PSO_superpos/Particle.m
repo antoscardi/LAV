@@ -96,7 +96,7 @@ classdef Particle < handle
             desired_acceleration);
 
             % Use the controller to compute the state derivative (new state)
-            state_dot = obj.controller.simplified_model(dt, state, input_force, input_torques);   
+            state_dot = obj.controller.quadrotor_full_dynamics(dt, state, input_force, input_torques);   
         end
         
         % Evaluate NSS value at the current position and update personal best if needed
@@ -110,6 +110,8 @@ classdef Particle < handle
             end
             if obj.nss_value > 10000000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
                 obj.victim_found_flag = true;
+                % Remove inertia
+                obj.inertia = 0.5;
                 obj.my_exclusion_zone = obj.position;  % Add current position as my exclusion zone
                 fprintf('Drone %d has found a source at position [%.1f, %.1f]\n', ...
                     obj.identifier, obj.position(1), obj.position(2));

@@ -23,29 +23,25 @@ classdef Controller < handle
             obj.J = diag([obj.Ix, obj.Iy, obj.Iz]);
         end
 
-        function x_dot = simplified_model(obj, dt, state, F, input_torques)
-            % Simplified drone dynamics model
-
-            % Extract state variables
-            v = state(4:6); 
-            phi = state(7); 
-            theta = state(8); 
-            psi = state(9); 
-            omega = state(10:12);
-
+        function x_dot = quadrotor_full_dynamics(obj, dt, state, F, input_torques)
+            v = state(4:6); phi = state(7); theta = state(8); psi = state(9);
+            p = state(10); q = state(11); r = state(12);
+            
             % --- TRANSLATIONAL DYNAMICS ---
             vx_dot =  F / obj.m * (cos(phi)*sin(theta)*cos(psi)+sin(phi)*sin(psi));
             vy_dot =  F / obj.m * (cos(phi)*sin(theta)*sin(psi)-sin(phi)*cos(psi));
             vz_dot =  F / obj.m * (cos(phi)*cos(theta)) - obj.g;
-
+        
             % --- ROTATIONAL DYNAMICS ---
-            p_dot = input_torques(1) / obj.Ix;
-            q_dot = input_torques(2) / obj.Iy;
-            r_dot = input_torques(3) / obj.Iz;
-            rpy_dot = omega;
-
-            % State derivative
-            x_dot = [v, vx_dot, vy_dot, vz_dot, rpy_dot, p_dot, q_dot, r_dot];
+            % Assuming small angles rpy_dot = omegaand R = R_dot
+            p_dot = input_torques(1) + q*r*(obj.Iy-obj.Iz)/obj.Ix + input_torques(1)/obj.Ix;
+            q_dot = input_torques(2) + p*r*(obj.Iz-obj.Ix)/obj.Iy + input_torques(2)/obj.Iy;
+            r_dot = input_torques(3) + p*q*(obj.Ix-obj.Iy)/obj.Iz + input_torques(3)/obj.Iz;
+            phi_dot = p + sin(phi) * tan(theta) *q + cos(phi) * tan(theta) *r;
+            theta_dot = cos(phi) * q - sin(phi)* r;
+            psi_dot = sin(phi) * sec(theta) * q + cos(phi) * sec(theta) * r;
+            
+            x_dot = [v, vx_dot, vy_dot, vz_dot, phi_dot, theta_dot, psi_dot, p_dot, q_dot, r_dot];
         end
 
         function [input_torques, input_force] = control_laws(obj, state, desired_position, desired_velocity, desired_acceleration)
