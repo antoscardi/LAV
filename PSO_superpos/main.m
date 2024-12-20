@@ -14,7 +14,7 @@ rng(seed)
 n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 200;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 310;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-80, 80];    % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
@@ -55,11 +55,11 @@ velocity_randomness = 0.6;   % Factor between 0 and 1 that controls the amount o
                              % sources. For example, if there are 4 sources, drones can be divided into 4 groups to 
                              % focus on different sources.
 
-communication_radius = 5;    % Distance between two drones that enables communication with each other.
+communication_radius = 10;    % Distance between two drones that enables communication with each other.
 
 step_size = 90;  %ERA 40     % Set how far the drone should move away in ONLY ONE ITERATION
 
-exclusion_zone_radius = 2;
+exclusion_zone_radius = 3;
 
 dt = 0.04;                     % Time step for simulation dynamics
 iteration_duration = 1;        % PSO ITERATION DURATION
@@ -238,7 +238,6 @@ for iter = iter:n_iterations
         % Update particle position and velocity
         particle.position = state(1:2);  % Extract new position
         particle.velocity = state(4:5);  % Extract new velocity
-        
         obj.rpy = state(7:9);
         obj.pqr = state(10:12);
 

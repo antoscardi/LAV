@@ -19,7 +19,7 @@ classdef ARTVAs
         % Constructor to initialize scaling factor C
         function obj = ARTVAs(C)
             if nargin < 1
-                obj.C = 10000000;  % It was 100 before
+                obj.C = 100000000;  % It was 100 before
             else
                 obj.C = C;
             end
