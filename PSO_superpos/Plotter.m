@@ -10,6 +10,9 @@ classdef Plotter < handle
         legend_entries
         plot_handles
         n_groups
+        font_labels = 18;
+        font_title = 20;
+        font_legend = 17;
     end
     
     methods
@@ -27,12 +30,13 @@ classdef Plotter < handle
             obj.bounds = bounds;
             obj.n_groups = max(group_indices);
             obj.colors = linspecer(obj.n_groups, 'qualitative');
-            obj.scatter_sources = scatter(p_sources(:, 1), p_sources(:, 2), 300, 'red', '*');
+            obj.scatter_sources = scatter(p_sources(:, 1), p_sources(:, 2), 300, 'red', '*', 'DisplayName', 'Sources');
             obj.ax = gca;
             obj.ax.XLim = [bounds(1), bounds(2)];
             obj.ax.YLim = [bounds(1), bounds(2)];
-            xlabel('x'); ylabel('y');
-            title('', 'FontSize', 15);
+            xlabel('x [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+            ylabel('y [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+            title('', 'FontSize', obj.font_title, 'Interpreter', 'latex');
             grid on; grid minor;
             obj.plot_circle_lines(n_drones);
         end
@@ -76,8 +80,9 @@ classdef Plotter < handle
             obj.scatter_drones.XData = positions(:, 1);
             obj.scatter_drones.YData = positions(:, 2);
             % Update the title
-            title(obj.ax, sprintf('Iteration: %d, Real Time: %.1fs', iter, time));
-            pause(0.04)
+            title(obj.ax, sprintf('Iteration: %d, Simulation Time: %.1f s', iter, time), ...
+                'Interpreter', 'latex', 'FontSize', obj.font_title);
+            pause(0.04);
             drawnow;
         end
 
@@ -109,7 +114,8 @@ classdef Plotter < handle
                 obj.plot_handles{i} = scatter(NaN, NaN, 70, obj.colors(unique_groups(i), :), 'filled');
                 obj.legend_entries{i} = sprintf('Drone(s) in Group %d', unique_groups(i));
             end
-            legend([obj.scatter_sources, [obj.plot_handles{:}]], 'Sources', obj.legend_entries{:}, 'FontSize', 12, 'Location', 'northeastoutside');
+            legend([obj.scatter_sources, [obj.plot_handles{:}]], 'Sources', obj.legend_entries{:}, ...
+                'FontSize', obj.font_legend, 'Location', 'northeastoutside', 'Interpreter', 'latex');
         end
 
         % Final plot to show best positions with corresponding group colors
@@ -119,8 +125,31 @@ classdef Plotter < handle
                 obj.plot_handles{i} = scatter(g_best_local(i, 1), g_best_local(i, 2), 350, obj.colors(group_indices(i), :), '*');
                 obj.legend_entries{i} = sprintf('Best Estimate (Group %d)', group_indices(i));
             end
-            legend([obj.scatter_sources, [obj.plot_handles{:}]], 'Sources', obj.legend_entries{:});
-            title('Final Drone Positions and Group-Based Best Estimates', 'FontSize', 15);
+            legend([obj.scatter_sources, [obj.plot_handles{:}]], 'Sources', obj.legend_entries{:}, ...
+                'FontSize', obj.font_legend, 'Interpreter', 'latex');
+            title('Final Drone Positions and Group-Based Best Estimates', 'FontSize', obj.font_title, 'Interpreter', 'latex');
+            hold off;
+        end
+
+        % Method to plot trajectories
+        function plot_trajectories(obj, trajectories, valid_steps, n_drones)
+            hold on;
+            % Plot trajectories for all drones
+            for i = 1:n_drones
+                % Extract valid trajectory for the current drone
+                drone_trajectory = squeeze(trajectories(i, 1:valid_steps(i), :)); % Only valid rows
+                
+                % Plot the trajectory
+                plot(drone_trajectory(:, 1), drone_trajectory(:, 2), '-', 'LineWidth', 2, ...
+                        'DisplayName', sprintf('Trajectory Drone %d', i), 'Color', obj.drone_colors(i, :));
+            end
+            
+            % Add labels, title, and legend
+            xlabel('x [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+            ylabel('y [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+            title('Drone Trajectories During PSO', 'FontSize', obj.font_title, 'Interpreter', 'latex');
+            legend('FontSize', obj.font_legend, 'Location', 'northeastoutside', 'Interpreter', 'latex');
+            grid on;
             hold off;
         end
     end

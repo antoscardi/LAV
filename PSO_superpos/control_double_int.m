@@ -45,7 +45,7 @@ m = 0.4;                                  % Mass of the drone (kg)
 Ix =  3.8278e-3; Iy = 3.8278e-3; Iz = 7.1345e-3;
 l = 0.205;                                 % Length arms (m), distance from center to propellers
 c_t =  6.354e-4;                            % Force/Thrust coefficient
-c_d = 0.048;                             % Torque coefficient (DRAG/MOMENT)
+c_d = 0.048;                               % Torque coefficient (DRAG/MOMENT)
   
 %%--------------------------------
 g = 9.81;                                 % Gravity (m/s^2)

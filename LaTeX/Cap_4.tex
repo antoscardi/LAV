@@ -671,6 +671,43 @@ applied to trajectory tracking during the first positioning
     \label{fig:pid_z}
 \end{figure}
 
-\section{Geometric Control}
-\subsection{Altitude}
-\subsection{Position}
+\section{PID Control applied to PSO}
+The algorithm integrates the Particle Swarm Optimization (PSO) 
+framework with the dynamic motion control of drones to achieve source localization. 
+At each iteration of the PSO algorithm, the drones update their velocities and positions 
+based on their personal best positions $\mathbf{p}_i^{\text{best}}$, the group best position 
+$\mathbf{g}_i^{\text{best}}$, and additional stochastic perturbations. 
+The velocity update for each drone is governed by:
+
+\begin{align}
+    \mathbf{v}_i^{(t+1)} &= \omega \mathbf{v}_i^{(t)} + c_1 r_1 (\mathbf{p}_i^{\text{best}} - \mathbf{x}_i^{(t)}) + c_2 r_2 (\mathbf{g}_i^{\text{best}} - \mathbf{x}_i^{(t)}),
+\end{align}
+
+where $\omega$ is the inertia weight, $c_1$ and $c_2$ are the cognitive and social factors, 
+respectively, and $r_1$ and $r_2$ are uniformly distributed random numbers in $[0,1]$. 
+Using the updated velocity $\mathbf{v}_i^{(t+1)}$, the new position $\mathbf{x}_i^{(t+1)}$ of each drone is computed as:
+
+\begin{align}
+    \mathbf{x}_i^{(t+1)} &= \mathbf{x}_i^{(t)} + \mathbf{v}_i^{(t+1)}.
+\end{align}
+
+After computing these updates, the drones execute a one-second movement phase, 
+during which they follow the updated velocity vector $\mathbf{v}_i^{(t+1)}$. 
+This motion is simulated through a control dynamics model using a time step $\Delta t$. 
+The control dynamics ensure realistic drone motion by considering physical constraints such as acceleration and boundary conditions. 
+The drone’s state $\mathbf{s}_i$ is updated iteratively:
+
+\begin{align}
+    \dot{\mathbf{s}}_i &= f(\mathbf{s}_i, \mathbf{v}_i, \Delta t),
+\end{align}
+
+where $f$ models the system dynamics, including position, velocity, and angular rates. 
+During this period, the drones operate independently of the PSO loop, allowing them to 
+interact with the environment, detect sources, and avoid exclusion zones. This motion phase ensures that
+the drones can explore their updated positions in the search space effectively.
+
+At the end of the motion phase, the drones re-enter the PSO loop to evaluate their current positions 
+based on the Normalized Source Strength (NSS) function. The best positions are updated if the current 
+NSS value exceeds previous records. This iterative alternation between PSO updates and independent drone 
+control enables the swarm to balance global exploration and local exploitation, 
+ensuring efficient source localization.

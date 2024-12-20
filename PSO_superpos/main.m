@@ -14,7 +14,7 @@ rng(seed)
 n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 350;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 200;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-80, 80];    % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
@@ -43,7 +43,7 @@ cognitive_factor = 2.05;     % Cognitive factor (personal learning coefficient),
                              % to its own best-known position. Higher values make drones focus on their personal best.
                              % Typical range: [1.5 - 2.5]
 
-social_factor = 2;           % Social factor (global learning coefficient), controls how much a drone is influenced by 
+social_factor = 1.5;           % Social factor (global learning coefficient), controls how much a drone is influenced by 
                              % the swarm's global best-known position. Higher values increase the influence of the swarm.
                              % Typical range: [1.5 - 2.5], in our case the swarm is relative to the group.
 
@@ -61,9 +61,8 @@ step_size = 90;  %ERA 40     % Set how far the drone should move away in ONLY ON
 
 exclusion_zone_radius = 2;
 
-iteration_duration = 1;    % Duration of each iteration in seconds, menaing each second the PSO updates the pos and vel
-dt = 0.02;                    % Time step for simulation dynamics
-
+dt = 0.04;                     % Time step for simulation dynamics
+iteration_duration = 1;        % PSO ITERATION DURATION
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
@@ -85,6 +84,13 @@ particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_indices, 
 % Initialize the Plotter
 plotter = Plotter(p_sources, bounds, n_drones, group_indices);
 
+% Initialize a 3D matrix to store trajectories
+% Dimensions: [n_drones, n_iterations * (iteration_duration / dt), 2]
+% Assuming equal time steps for all drones
+% Preallocate trajectory data and a step counter for each drone
+trajectories = nan(n_drones, n_iterations * (iteration_duration / dt), 2);
+valid_steps = zeros(n_drones, 1); % Track valid steps for each drone
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                        EXPLORATION PHASE                                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,10 +102,11 @@ for iter = 1:ceil(bounds(2)/2 / max_velocity)
         % Calculate direction to move in a straight line towards the goal
         direction = (particle.goal - particle.position) / norm(particle.goal - particle.position);
         particle.velocity = direction * max_velocity; % Move at maximum velocity
-        particle.position = particle.position + particle.velocity * iteration_duration;  
+        particle.position = particle.position + particle.velocity;  
         positions(i, :) = particles{i}.position;
     end
     % Update plot with current drone positions
+    iteration_duration  = norm(max_velocity) / max_velocity;
     time = (iter - 1) * iteration_duration;
     plotter.draw(positions, iter, time);
 end
@@ -107,6 +114,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                        MAIN PARTICLE SWARM OPTIMIZATION LOOP                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+step_counter = 1; % Counter to track time steps across iterations
 % Initialize exclusion zones as an empty matrix to store the positions of discovered sources
 for iter = iter:n_iterations
     
@@ -206,18 +214,33 @@ for iter = iter:n_iterations
         z = 0;
         vz = 0;
         state = [particle.position, z, particle.velocity, vz, particle.rpy, particle.pqr];
+        % ITERATION DURATION IS THE PSO time step
+        iteration_duration = 1; 
         for t = 0:dt:iteration_duration
+            % Update state
             state_dot = particle.update_position(dt, state, desired_position, desired_velocity, desired_acceleration);
-            % Update the state
             state = state + dt * state_dot;
+            % Enforce boundaries
+            if state(1) < particle.bounds(1) || state(1) > particle.bounds(2) || ...
+               state(2) < particle.bounds(1) || state(2) > particle.bounds(2)
+                % Clamp the position to the bounds
+                state(1) = max(min(state(1), particle.bounds(2)), particle.bounds(1));
+                state(2) = max(min(state(2), particle.bounds(2)), particle.bounds(1));
+                break; % Exit the loop as the particle hits the boundary
+            end
+            % Store the position in the trajectories matrix
+            valid_steps(i) = valid_steps(i) + 1;
+            trajectories(i, valid_steps(i), :) = state(1:2);
+            % Increment the step counter
+            step_counter = step_counter + 1;
         end
+        
+        % Update particle position and velocity
         particle.position = state(1:2);  % Extract new position
         particle.velocity = state(4:5);  % Extract new velocity
+        
         obj.rpy = state(7:9);
         obj.pqr = state(10:12);
-        % Enforce boundaries
-        particle.position(1) = max(min(particle.position(1), particle.bounds(2)), particle.bounds(1));
-        particle.position(2) = max(min(particle.position(2), particle.bounds(2)), particle.bounds(1));
 
         % Extract position of each particle
         positions(i, :) = particles{i}.position;  
@@ -234,3 +257,5 @@ plotter.plot_best(group_best_positions, group_indices);
 max_error = 10;
 compute_errors(p_sources, group_best_positions, max_error)
 
+% Plot trajectories for all drones
+plotter.plot_trajectories(trajectories, valid_steps, n_drones);

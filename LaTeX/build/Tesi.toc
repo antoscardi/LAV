@@ -82,9 +82,7 @@
 \contentsline {subsection}{\numberline {4.4.1}Altitude Hold}{59}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Position Control}{60}{subsection.4.4.2}%
 \contentsline {subsection}{\numberline {4.4.3}Results}{61}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Geometric Control}{61}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Altitude}{61}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Position}{61}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.5}PID Control applied to PSO}{61}{section.4.5}%
 \contentsline {chapter}{Glossary}{64}{section*.64}%
 \contentsline {chapter}{Bibliography}{65}{section*.65}%
 \contentsline {section}{Figure}{70}{section*.67}%

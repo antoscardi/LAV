@@ -2,12 +2,14 @@ classdef Controller < handle
     % Drone controller class
     properties
         % Drone parameters
-        m = 4;                                   % Mass of the drone (kg)
-        g = 9.81;                                % Gravity (m/s^2)
-        Ix = 0.5; 
-        Iy = 0.5; 
-        Iz = 0.9; 
-        J;                                       % Inertia matrix
+        m = 0.4;                                   % Mass of the drone (kg)                         
+        Ix =  3.8278e-3; Iy = 3.8278e-3; Iz = 7.1345e-3;
+        l = 0.205;                                 % Length arms (m), distance from center to propellers
+        c_t =  6.354e-4;                            % Force/Thrust coefficient
+        c_d = 0.048;                               % Torque coefficient (DRAG/MOMENT)
+        J;                                         % Inertia matrix
+        g = 9.81;                                 % Gravity (m/s^2)
+        c;  
         % Controller gains
         kxp = 0.1; kxd = 0.5;
         kyp = 0.1; kyd = 0.54;
@@ -21,6 +23,7 @@ classdef Controller < handle
         function obj = Controller()
             % Constructor to initialize properties
             obj.J = diag([obj.Ix, obj.Iy, obj.Iz]);
+            obj.c = obj.c_d/obj.c_t;  
         end
 
         function x_dot = quadrotor_full_dynamics(obj, dt, state, F, input_torques)
@@ -33,10 +36,9 @@ classdef Controller < handle
             vz_dot =  F / obj.m * (cos(phi)*cos(theta)) - obj.g;
         
             % --- ROTATIONAL DYNAMICS ---
-            % Assuming small angles rpy_dot = omegaand R = R_dot
-            p_dot = input_torques(1) + q*r*(obj.Iy-obj.Iz)/obj.Ix + input_torques(1)/obj.Ix;
-            q_dot = input_torques(2) + p*r*(obj.Iz-obj.Ix)/obj.Iy + input_torques(2)/obj.Iy;
-            r_dot = input_torques(3) + p*q*(obj.Ix-obj.Iy)/obj.Iz + input_torques(3)/obj.Iz;
+            p_dot = q*r*(obj.Iy-obj.Iz)/obj.Ix + input_torques(1)/obj.Ix;
+            q_dot = p*r*(obj.Iz-obj.Ix)/obj.Iy + input_torques(2)/obj.Iy;
+            r_dot = p*q*(obj.Ix-obj.Iy)/obj.Iz + input_torques(3)/obj.Iz;
             phi_dot = p + sin(phi) * tan(theta) *q + cos(phi) * tan(theta) *r;
             theta_dot = cos(phi) * q - sin(phi)* r;
             psi_dot = sin(phi) * sec(theta) * q + cos(phi) * sec(theta) * r;
@@ -92,6 +94,24 @@ classdef Controller < handle
 
             % Combine torques into a vector
             input_torques = [tau_phi; tau_theta; tau_psi];
+        end
+
+        function rotor_velocities = compute_rotor_velocities(F, torques) 
+            % Solve for rotor speeds squared
+            A = obj.c_t * [
+                1, 1, 1, 1;              % Total thrust
+                0, -obj.l, 0, obj.l;             % Roll torque
+                obj.l, 0, -obj.l, 0;             % Pitch torque
+                -obj.c, +obj.c, -obj.c, +obj.c;            % Yaw torque
+            ];
+            b_vector = [F; torques];
+            rotor_velocities = sqrt(A \ b_vector);
+        
+            % Ensure no negative rotor speeds
+            if any(rotor_velocities < 0)
+                disp(rotor_velocities)
+                error("Negative speed")
+            end
         end
     end
 end
