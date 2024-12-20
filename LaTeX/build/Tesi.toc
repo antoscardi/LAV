@@ -81,9 +81,10 @@
 \contentsline {section}{\numberline {4.4}PD Control}{59}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Altitude Hold}{59}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Position Control}{60}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Results}{61}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}PID Control applied to PSO}{61}{section.4.5}%
-\contentsline {chapter}{Glossary}{64}{section*.64}%
-\contentsline {chapter}{Bibliography}{65}{section*.65}%
-\contentsline {section}{Figure}{70}{section*.67}%
-\contentsline {chapter}{Ringraziamenti}{70}{chapter*.68}%
+\contentsline {subsection}{\numberline {4.4.3}Rotor Velocities}{61}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Results}{62}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5}PID Control applied to PSO}{62}{section.4.5}%
+\contentsline {chapter}{Glossary}{66}{section*.65}%
+\contentsline {chapter}{Bibliography}{67}{section*.66}%
+\contentsline {section}{Figure}{72}{section*.68}%
+\contentsline {chapter}{Ringraziamenti}{72}{chapter*.69}%

@@ -634,6 +634,149 @@ Where $K_{p_\phi}$, $K_{d_\phi}$, $K_{p_\theta}$, $K_{d_\theta}$, $K_{p_\psi}$, 
 represent the proportional and derivative gains for roll, pitch, and yaw, respectively. 
 While the input force was defined earlier in Eq.\ref{eq:true_input}.
 
+\subsection{Rotor Velocities}
+\tikzset
+{%
+  pics/cylinder/.style n args={3}{% #1 = radius, #2 = height, #3 = angle
+    code={%
+      \draw[pic actions] (135:#1) arc (135:315:#1) --++ (0,0,#2) arc (315:135:#1) -- cycle;
+      \draw[pic actions] (0,0,#2) circle (#1);
+      \foreach\z in {0,1}
+      {
+        \begin{scope}[canvas is xy plane at z=\z*\h]
+          \coordinate (-cen\z) at       (0,0);
+          \coordinate (-ESE\z) at    (-#3:#1);
+          \coordinate (-ENE\z) at     (#3:#1);
+          \coordinate (-NNE\z) at  (90-#3:#1);
+          \coordinate (-NNW\z) at  (90+#3:#1);
+          \coordinate (-WNW\z) at (180-#3:#1);
+          \coordinate (-WSW\z) at (180+#3:#1);
+          \coordinate (-SSW\z) at (270-#3:#1);
+          \coordinate (-SSE\z) at (270+#3:#1);
+        \end{scope}
+      }
+    }},
+}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[isometric view,line cap=round,line join=round]
+    % dimensions
+    \def\l{3.7}    % boom length
+    \def\R{0.7}    % body radius
+    \def\r{0.15} % motor radius
+    \def\h{0.2}  % boom and body height
+    \pgfmathsetmacro\A{asin(\r*sin(45)/\R)}
+    % paths to situate the coordinates
+    \foreach[count=\i]\j in {E,N,W,S}
+      \pic[draw=none] (\j) at (90*\i-90:\l) {cylinder={\r}{\h}{45}};
+    \pic[draw=none] (O) {cylinder={\R}{\h}{\A}};
+    % rotations
+    \foreach \i/\j in {1/1, 2/-1, 3/1, 4/-1}
+    {
+      \draw[dashed] (90*\i:\l) + (0,0,-\h) --++ (0,0,-7*\h);
+      \begin{scope}[shift={(180-90*\i:\l)},canvas is xy plane at z=-4*\h,x=\j cm]
+        \draw[-latex] (.4,0) arc (0:270:0.4) node [right, xshift=1mm] {$\omega_\i$};
+      \end{scope}
+    }
+    % motors
+    \foreach\i in {E,N,W,S}
+      \pic[fill=gray!90,shift={(0,0,-\h)}] at (\i-cen0) {cylinder={\r}{2*\h}{45}};
+    % boom, east
+    \draw[fill=gray] (E-SSW1) arc (225:135:\r) -- (O-ENE1) arc (\A:-\A:\R) -- cycle;
+    \draw[fill=gray] (E-SSW1) -- (E-SSW0) -- (O-ESE0) -- (O-ESE1) -- cycle;
+    % boom, north
+    \draw[fill=gray] (N-SSE1) arc (315:225:\r) -- (O-NNW1) arc (90+\A:90-\A:\R) -- cycle;
+    \draw[fill=gray] (N-SSW1) -- (N-SSW0) -- (O-NNW0) -- (O-NNW1) -- cycle;
+    % frame
+    \pic[fill=gray] {cylinder={\R}{\h}{\A}};
+    % boom, west
+    \draw[fill=gray] (W-NNE1) arc (45:-45:\r) -- (O-WSW1) arc (180+\A:180-\A:\R) -- cycle;
+    \draw[fill=gray] (W-SSE1) -- (W-SSE0) -- (O-WSW0) -- (O-WSW1) -- cycle;
+    % boom, south
+    \draw[fill=gray] (S-NNW1) arc (135:45:\r) -- (O-SSE1) arc (270+\A:270-\A:\R) -- cycle;
+    \draw[fill=gray] (S-NNW1) -- (S-NNW0) -- (O-SSW0) -- (O-SSW1) -- cycle;
+    % Propellers with alternating red and yellow colors
+    \foreach[count=\i]\j in {140,10,60,15}
+    {
+      \begin{scope}[shift={(90*\i-90:\l)},rotate around z=\j,canvas is xy plane at z=\h,scale=1.5]
+        % Alternate colors: red for odd i, yellow for even i
+        \ifodd\i
+          \def\propColor{ocra} % Odd -> Red
+        \else
+          \def\propColor{orange} % Even -> Yellow
+        \fi
+        \draw[fill=\propColor] 
+            (0,0) sin  (0.5,0.1) cos  (1,0) sin  (0.5,-0.1) cos (0,0)
+                  sin (-0.5,0.1) cos (-1,0) sin (-0.5,-0.1) cos (0,0);
+        \fill (0,0) circle (0.05);
+      \end{scope}
+    }
+    \foreach\i in {1,2,3,4}
+    \draw[thick, -latex] (-90*\i+180:\l) + (0,0,2*\h) --++ (0,0,6*\h) node [right] {$T_\i$};
+    % axes
+    \draw[ultra thick, green, -latex] (0,0,\h) --++ (0,0,2)  node [above] {$z_r$};
+    \draw[ultra thick,blue,-latex] (0,0,\h) --++ (1.5,0,0) node [yshift=3mm] {\strut$y_r$};
+    \draw[ultra thick,red,-latex] (0,0,\h) --++ (0,1.5,0) node [yshift=3mm] {\strut$x_r$};
+    \draw[dashed] (O-cen1) --++ (-8,-4,0) coordinate (O');
+    % ENU Coordinate System
+    \draw[ultra thick,blue,-latex] (O') --++ (1,0,0) node [right] {$E$};   % East (E)
+    \draw[ultra thick,red,-latex] (O') --++ (0,1,0) node [above] {$N$};   % North (N)
+    \draw[ultra thick,green,-latex] (O') --++ (0,0,1) node [above left] {$U$}; % Up (U)
+    \fill (O') circle (2pt) node [below] {$O$};
+    \end{tikzpicture}
+    \caption{Quadrotor model }
+\end{figure}
+The relationship between the rotor speeds and the resulting forces and torques in a quadrotor can be expressed in a matrix form. Each of the four rotors generates a thrust force proportional to the square of its angular velocity, \( \omega_i \), where \( i = 1, \dots, 4 \). The total thrust \( F_z \) and the torques \( \tau_\phi \) (roll), \( \tau_\theta \) (pitch), and \( \tau_\psi \) (yaw) are related to the individual rotor thrusts by:
+
+\[
+\begin{bmatrix}
+T \\
+\tau_\phi \\
+\tau_\theta \\
+\tau_\psi
+\end{bmatrix}
+=
+\mathbf{A}
+\begin{bmatrix}
+\omega_1^2 \\
+\omega_2^2 \\
+\omega_3^2 \\
+\omega_4^2
+\end{bmatrix},
+\quad \text{where} \quad
+\mathbf{A} =
+\begin{bmatrix}
+c_f & c_f & c_f & c_f \\
+0 & -c_f \cdot l & 0 & c_f \cdot l \\
+-c_f \cdot l & 0 & c_f \cdot l & 0 \\
+-c_m & c_m & -c_m & c_m
+\end{bmatrix}.
+\]
+
+Here, \( c_f \) is the thrust coefficient, \( l \) is the distance from the center of the quadrotor to each rotor, and \( c_m \) is the moment coefficient, representing aerodynamic drag. The first row of the matrix represents the total thrust generated by all rotors, while the subsequent rows correspond to the torques generated around the roll, pitch, and yaw axes due to the differential thrust and drag produced by the rotors.
+
+To compute the rotor velocities \( \omega_i^2 \), the matrix \( \mathbf{A} \) must be invertible. The invertibility of \( \mathbf{A} \) depends on the fact that the four rotors are non-redundant and linearly independent in terms of their contribution to the forces and torques. If \( \mathbf{A} \) is invertible, the rotor thrusts can be determined as follows:
+
+\[
+\begin{bmatrix}
+\omega_1^2 \\
+\omega_2^2 \\
+\omega_3^2 \\
+\omega_4^2
+\end{bmatrix}
+=
+\mathbf{A}^{-1}
+\begin{bmatrix}
+T \\
+\tau_\phi \\
+\tau_\theta \\
+\tau_\psi
+\end{bmatrix}.
+\]
+
+The rotor velocities \( \omega_i \) can then be obtained by taking the square root of the computed \( \omega_i^2 \) values. This formulation ensures that the forces and torques required for control can be achieved by adjusting the individual rotor speeds.
+
+
 \subsection{Results}
 The results of PID control with the simplified model \eqref{eq:simplified_model}
 applied to trajectory tracking during the first positioning 
