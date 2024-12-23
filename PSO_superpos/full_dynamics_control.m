@@ -14,12 +14,14 @@ title_font_size = 20;
 label_font_size = 17;
 legend_font_size = 18;
 % Create a VideoWriter object with high-quality settings
-global v
-video_filename = 'figures/quadrotor_simulation.mp4';
-video = VideoWriter('figures/quadrotor_simulation', 'Uncompressed AVI');
 dt = 0.04;                  % Time step (s)
-video.FrameRate = 1 / dt; % Match simulation time step
-open(video);
+do_video = false;
+if do_video
+    video_filename = 'figures/quadrotor_simulation.mp4';
+    video = VideoWriter('figures/quadrotor_simulation', 'Uncompressed AVI');
+    video.FrameRate = 1 / dt; % Match simulation time step
+    open(video);
+end
 % Model Parmeters
 global Ix Iy Iz g m J l c_t c rotor_speed_max rotor_speed_min radius
 %% ---- SMALL QUADROTOR ref:https://hal.science/hal-02491491/document
@@ -61,52 +63,51 @@ T_sim = 25;                 % Simulation time 25 (s)
 N_steps = T_sim / dt;       % Total number of steps
 time = 0:dt:T_sim;          % Simulation time (s)
 
-% Parameters for circular trajectory
-% radius = 5;        % Radius of the circular motion
-% cx = -radius;      % X-coordinate of the center
-% cy = 0;            % Y-coordinate of the center
-% cz = 5;            % Z-coordinate of the center
+% % Parameters for circular trajectory
+%  rad = 5;        % Radius of the circular motion
+%  cx = -radius;      % X-coordinate of the center
+%  cy = 0;            % Y-coordinate of the center
+%  cz = 5;            % Z-coordinate of the center
 
-% Desired position function
-% desired_position = @(t) [cx + radius * cos(0.5 * t); ...
-%                          cy + radius * sin(0.5* t); ...
-%                          cz];
-
+% % Desired position function
+%  desired_position = @(t) [cx + rad * cos(0.5 * t); ...
+%                           cy + rad * sin(0.5* t); ...
+%                           cz];
 % % Desired velocity function
-% desired_velocity = @(t) [-radius * 0.5 * sin(0.5 * t); ...
-%                           radius * 0.5 * cos(0.5 * t); ...
-%                           0];  
+%  desired_velocity = @(t) [-rad * 0.5 * sin(0.5 * t); ...
+%                            rad * 0.5 * cos(0.5 * t); ...
+%                            0];  
 
-% desired_acceleration = @(t) [-radius * 0.5^2 * cos(0.5 * t); ...
-%                              -radius * 0.5^2 * sin(0.5 * t); ...
-%                              0];
+% desired_acceleration = @(t) [-rad * 0.5^2 * cos(0.5 * t); ...
+%                               -rad * 0.5^2 * sin(0.5 * t); ...
+%                               0];
 
-% Parameters
-z_max = 5;      % Maximum altitude
-k = 0.5;        % Smoothness factor for exponential rise
-v = 2;          % Constant velocity in x-y plane
-angle = pi/4;   % Angle of projection in x-y plane (45 degrees)
+ % Parameters
+ z_max = 5;      % Maximum altitude
+ k = 0.5;        % Smoothness factor for exponential rise
+ v = 2;          % Constant velocity in x-y plane
+ angle = pi/4;   % Angle of projection in x-y plane (45 degrees)
 
-% Define desired position as a function of time
-desired_position = @(t) [
-    v * t * cos(angle);                     % x(t): Linear motion in x
-    v * t * sin(angle);                     % y(t): Linear motion in y
-    z_max * (1 - exp(-k * t))               % z(t): Smooth rise
-];
+ % Define desired position as a function of time
+ desired_position = @(t) [
+     v * t * cos(angle);                     % x(t): Linear motion in x
+     v * t * sin(angle);                     % y(t): Linear motion in y
+     z_max * (1 - exp(-k * t))               % z(t): Smooth rise
+ ];
 
-% Define desired velocity as a function of time
-desired_velocity = @(t) [
-    v * cos(angle);                         % x velocity
-    v * sin(angle);                         % y velocity
-    z_max * k * exp(-k * t)                 % z velocity
-];
+ % Define desired velocity as a function of time
+ desired_velocity = @(t) [
+     v * cos(angle);                         % x velocity
+     v * sin(angle);                         % y velocity
+     z_max * k * exp(-k * t)                 % z velocity
+ ];
 
-% Define desired acceleration as a function of time
-desired_acceleration = @(t) [
-    0;                                      % x acceleration
-    0;                                      % y acceleration
-    -z_max * k^2 * exp(-k * t)              % z acceleration
-];
+ % Define desired acceleration as a function of time
+ desired_acceleration = @(t) [
+     0;                                      % x acceleration
+     0;                                      % y acceleration
+     -z_max * k^2 * exp(-k * t)              % z acceleration
+ ];
 
 % Initial states
 x = zeros(12, 1); % Initialize state vector
@@ -133,6 +134,7 @@ gains = [kxp  kxd;
 state_history = zeros(12, N_steps);
 time_history = zeros(1, N_steps);
 rotor_velocities_history = zeros(4, N_steps);
+rotor_forces_history = zeros(4, N_steps);
 
 % Initialize figure
 figure_handle = init_plot(time, desired_position);
@@ -161,11 +163,13 @@ for k = 1:length(time)
 
     % Compute rotor velocities
     rotor_velocities = compute_rotor_velocities(input_force, input_torques);
+    rotor_forces = compute_rotor_forces(rotor_velocities);
 
     % Store state and time
     state_history(:, k) = x;
     time_history(k) = t;
     rotor_velocities_history(:, k) = rotor_velocities;
+    rotor_forces_history(:,k) = rotor_forces;
                                                    
     % --- Plot Drone and Frames ---
     % If body frame handles exist, delete them to update the plot
@@ -174,16 +178,20 @@ for k = 1:length(time)
     end
     R = rotation_matrix(x(7), x(8), x(9));
     body_frame_handles = plot_drone(x(1:3), R, t);
-    frame = getframe(figure_handle); % Capture high-resolution frame
-    frame_resized = imresize(frame.cdata, [995, 1910]);
-    writeVideo(video, frame_resized);
+    if do_video
+        frame = getframe(figure_handle); % Capture high-resolution frame
+        frame_resized = imresize(frame.cdata, [995, 1910]);
+        writeVideo(video, frame_resized);
+    end
 end
 
-close(video);
-disp(['High-quality video saved as ', video_filename]);
+if do_video
+    close(video);
+    disp(['High-quality video saved as ', video_filename]);
+end
 
 % Extract results
-plot_results(time, desired_position, state_history, rotor_velocities_history);
+plot_results(time, desired_position, state_history, rotor_velocities_history, rotor_forces_history);
 % Save all other plots generated in the simulation
 saveas(figure(2), 'figures/plot_2.png');
 saveas(figure(3), 'figures/plot_3.png');
@@ -282,6 +290,18 @@ function rotor_velocities = compute_rotor_velocities(F, torques)
     if any(rotor_velocities < 0)
         disp(rotor_velocities)
         error("Negative speed")
+    end
+end
+
+function rotor_forces = compute_rotor_forces(rotor_velocities)
+    global c_t
+    
+    rotor_forces = rotor_velocities.^2/c_t;
+
+    % Ensure no negative rotor speeds
+    if any(rotor_forces < 0)
+        disp(rotor_forces)
+        error("Negative force")
     end
 end
 
@@ -399,7 +419,7 @@ function R = rotation_matrix(phi, theta, psi)
     R = Rz * Ry * Rx;
 end
 
-function plot_results(time, desired_position, state_history, rotor_velocities_history)
+function plot_results(time, desired_position, state_history, rotor_velocities_history, rotor_forces_history)
     global rotor_speed_max rotor_speed_min title_font_size label_font_size legend_font_size
     global red green blue orange
     % Extract data from state history
@@ -444,6 +464,19 @@ function plot_results(time, desired_position, state_history, rotor_velocities_hi
     ylabel('$\omega_i$ [rad/s]', 'Interpreter', 'latex', 'FontSize', label_font_size);
     legend({'$\omega_1(t)$', '$\omega_2(t)$', '$\omega_3(t)$', '$\omega_4(t)$'}, 'Interpreter', 'latex', 'FontSize', legend_font_size);
     title('Rotor velocities $\omega_i(t)$', 'Interpreter', 'latex', 'FontSize', title_font_size);
+    grid on;
+
+    % Rotor forces
+    figure;
+    set(gcf,'paperposition',[0 0 8 5],'papersize',[8 5])
+    plot(time, rotor_forces_history(1, :), 'Color', red, 'LineWidth', 1.5); hold on;
+    plot(time, rotor_forces_history(2, :), 'Color', orange,'LineWidth', 1.5);
+    plot(time, rotor_forces_history(3, :), 'Color', blue,'LineWidth', 1.5);
+    plot(time, rotor_forces_history(4, :), 'Color', green, 'LineWidth', 1.5);
+    xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', label_font_size);
+    ylabel('$F_i$ [N]', 'Interpreter', 'latex', 'FontSize', label_font_size);
+    legend({'$F_1(t)$', '$F_2(t)$', '$F_3(t)$', '$F_4(t)$'}, 'Interpreter', 'latex', 'FontSize', legend_font_size);
+    title('Rotor velocities $F_i(t)$', 'Interpreter', 'latex', 'FontSize', title_font_size);
     grid on;
 end
 

@@ -254,8 +254,6 @@ We obtain the same expression of the inertial frame in the body frame.
 Since the position of the UAV's center of gravity is represented by \( \mathbf{p}_r \in \mathbb{R}^3 \), 
 expressed in the inertial frame \( F_g \), we denote its time derivative as \( \dot{\mathbf{p}}_r \) and 
 the linear acceleration as \( \ddot{\mathbf{p}}_r \).
-%VANNO MESSE LE COSE DELLE FORCE, COME SI TROVANO LE VELOCITÀ DEI MOTORI E 
-%TUTTE QUESTE ALTRE COSE?
 %%%%%%%%%%%%%% QUI C E COME CI SI ARRIVA
 % Applying Newton's second law in the body frame, the translational dynamics are expressed as:
 % \[
@@ -301,8 +299,7 @@ Finally, \( \mathbf{d}_f \) represents the disturbance forces, accounting for ex
 aerodynamic drag and wind disturbances \cite{control_quadrotor_main}.
 
 
-\subsection{Rotational Dynamics}
-%MANCA COME SI OTTENGONO LE TORQUES DAI MOTORI 
+\subsection{Rotational Dynamics} 
 Newton-Euler's second law describes the variation in time of the angular momentum of a rigid body $\mathbf{L}$ 
 in terms of the inertial reference frame, \cite{quadrotor_modeling_control_book}, \cite{book-robotics}:
 \begin{equation}
@@ -519,11 +516,13 @@ This simplified model reduces the complexity of the quadrotor dynamics,
 making it adapt to be controlled by simple control strategies such as 
 PID\footnote{PID stands for Proportional-Integral-Derivative} control.
 
-%FIND CITATIONS FOR THE CONTROL PART 
-%AND PLOT THE BLOCK DIAGRAM
 \section{PD Control}
+\label{sec:PID_control}
 In this section, we implement a PID controller 
-based on the simplified model from Section~\ref{eq:simplified_model}. 
+based on the simplified model from Section~\ref{eq:simplified_model},
+but we aslo apply it to the full quadrotor dynamics described in Eqs.\ref{eq:final_model_more},
+to evaluate its effectiveness in a real world scenario.
+
 The primal objective is to regulate the altitude $z$ and the 
 horizontal positions \( x \) and \( y \) of the quadrotor along a 
 specified trajectory $\mathbf{x}_d(t) \in \mathbb{R}^3$.
@@ -542,8 +541,11 @@ between the actual position $p_r(t)$ f the $j$-th UAV and the desired trajectory
         z_d(t) - p_{r_z}(t)
     \end{bmatrix}
 \]
+In Figure\ref{fig:control_traj_tracking}, we define the block
+diagram which shows the hierarchical PID control of the full 
+quadrotor dynamics.
 
-\subsection{Altitude Hold}
+\subsection{Position Control}
 Focusing firstly on the altitude $z$,
 we drive the error esponentially to zero by controlling the acceleration
 vector of the quadrotors $\ddot{z}_r$ as in \cite{simplified_model} to satisfy:
@@ -574,10 +576,51 @@ T = \frac{M}{\cos\theta \cos\phi} \, \left( g + K_{p_z} e_z + K_{d_z} \dot{e}_z 
 %Since we do not need any vertical acceleration we specify $\ddot{z}_d = 0$, questo dillo nell implementazione.
 %nell implementazione dire che la traiettoria scelat è una TRAIETTORIA ESPONENZIALE 
 
-\subsection{Position Control}
-The control strategy we have adopted is hierarchical since we have given priority to the 
-altitude control to determine the desired input thrust; only after we determine this quantity
+\begin{figure}
+    \resizebox{\textwidth}{!}{
+    \centering
+    \begin{tikzpicture}[font=\sffamily, thick, node distance=2cm]
+        % Nodes
+        \node[draw, fill=orange!50, text centered, minimum width=3cm, minimum height=1.5cm] (attitude) {Attitude Control};
+        \node[draw, fill=ocra!50, text centered, minimum width=3cm, minimum height=1.5cm, 
+        below right=1cm and -0.25cm of attitude] (position) {Position Control};
+        \node[draw=black, line width=2pt, inner sep=0pt, anchor=center, minimum width=3cm, minimum height=2.5cm] 
+        at ($(attitude) + (8cm, -0.25cm)$) (drone) {
+        \includegraphics[height=2.5cm, width=3cm]{images/quad_model.png}};
+        % Arrows
+        % Attitude to Drone
+        \draw[-stealth] (attitude.east) -- ([yshift=0.25cm] drone.west) 
+            node[midway, above] {$\tau_\varphi, \tau_\vartheta, \tau_\psi$};
+        % Position to Attitude
+        \draw[-stealth] (position.west) -| (attitude.south) 
+            node[near end, left] {$\varphi_d, \vartheta_d, \psi_d$};
+        % Feedback loop from Drone to Attitude
+        \draw[-stealth] ([xshift=1cm] drone.east) 
+        -- ++(0,1.5cm) % Move up by 1 unit (cm by default in TikZ)
+        -- ([yshift=0.5cm] attitude.north) % Move left towards attitude.north with a shift
+        -- (attitude.north); % Move down to the exact attitude.north position
+        % Incorrect arrow corrected: Drone east side to itself
+        \draw (drone.east) -- ++(1cm, 0)
+        node[right] {$\mathbf{e}$};
+        % Feedback loop from Drone to Position
+        \draw[-stealth] ([xshift=1cm] drone.east) |- ([yshift=0.25cm]position.east);
+        % Position to Drone (Thrust, shifted down)
+        \draw[-stealth] (position.north) |- ([yshift=-0.25cm] drone.west) 
+            node[midway, below right] {$T$};
+        % Position Control Outputs to its East Side
+        \draw[-stealth] ([xshift=3cm, yshift=-0.25cm] position.east) -- ([yshift=-0.25cm] position.east)
+            node[midway, below] {$\mathbf{x}_d, \mathbf{v}_d, \mathbf{a}_d$};    
+    \end{tikzpicture}}
+    \caption{Block diagram of the PID control for trajectory tracking}
+    \label{fig:control_traj_tracking}
+\end{figure}
+
+The control strategy we have adopted is hierarchical \cite{model_quadrotor}
+since we have given priority to the 
+altitude and horizontal positions control to determine the desired input thrust;
+only after we determine this quantity
 we define in cascade the control torques $\tau\theta, \tau\phi, \tau\psi$.
+
 As before we want the position error to esponentially converge to zero,
 therefore we desire:
 \begin{equation}
@@ -598,7 +641,7 @@ We substitute the desired angles and obtain:
     \frac{M}{T} \ddot{y}_r &= \sin\psi \sin\theta \cos\phi - \cos\psi \sin\phi \label{eq:T_y}
     \end{align}
 \end{subequations}
-
+\subsection{Attitude Control}
 \noindent
 After performing algebraic and trigonometric manipulations, we derive expressions for the desired roll and pitch angles:
 \begin{equation}
@@ -726,8 +769,32 @@ While the input force was defined earlier in Eq.\ref{eq:true_input}.
     \end{tikzpicture}
     \caption{Quadrotor model }
 \end{figure}
-The relationship between the rotor speeds and the resulting forces and torques in a quadrotor can be expressed in a matrix form. Each of the four rotors generates a thrust force proportional to the square of its angular velocity, \( \omega_i \), where \( i = 1, \dots, 4 \). The total thrust \( F_z \) and the torques \( \tau_\phi \) (roll), \( \tau_\theta \) (pitch), and \( \tau_\psi \) (yaw) are related to the individual rotor thrusts by:
+The configuration chosen for the drone to determine the 
+relationship between the rotor speeds and the torques 
+and thrust vector is the standard "+" configuration, 
+as in \cite{figura_bella_drone, model_quadrotor, 
+quadrotor_modeling_control_book, backstepping_control, geometric_control}. 
+In particular, we define and align the first rotor with the \( x_r \) 
+axis of the body/receiver frame, while the rotor aligned with the \( y_r \) 
+axis is defined as the second rotor, and we continue counting clockwise,
+as seen in Figure \ref{fig:rotor_velocities}.
 
+Each rotor generates a thrust \( T_i \), where \( i = 1, \dots, 4 \), 
+which depends proportionally on the square of the rotor's angular velocity \( \omega_i^2 \). 
+Then, the total thrust is simply the sum of the thrusts generated by each individual rotor. 
+On the other hand, the four spinning rotors create a yaw rotation (drag effect), 
+which depends on whether their rotation is clockwise or counterclockwise. 
+This is because the torque generated by each rotor acts in the opposite 
+direction to the propeller's motion (angular speed).
+While the pitch and roll rotations depend on the arms length $l$ and the
+two forces generated by the rotors on the two arms perpendicular to the respective 
+rotation axis direction.
+
+Each rotor’s torque and thrust force depend on the drag 
+coefficient \( c_d \in \mathbb{R}_\geq \) and the thrust coefficient 
+\( c_t \in \mathbb{R}_\geq \) \cite{geometric_control}, which are parameters influenced by the 
+geometry and size of the rotors and can be determined experimentally 
+during static tests.
 \[
 \begin{bmatrix}
 T \\
@@ -736,28 +803,35 @@ T \\
 \tau_\psi
 \end{bmatrix}
 =
-\mathbf{A}
+\begin{bmatrix}
+    c_t & c_t & c_t & c_t \\
+    0 & -c_t \cdot l & 0 & c_t \cdot l \\
+    c_t \cdot l & 0 & -c_t \cdot l & 0 \\
+    -c_d & c_d & -c_d & c_d
+\end{bmatrix}
 \begin{bmatrix}
 \omega_1^2 \\
 \omega_2^2 \\
 \omega_3^2 \\
 \omega_4^2
-\end{bmatrix},
-\quad \text{where} \quad
-\mathbf{A} =
+\end{bmatrix}
+= 
+\mathbf{A}
 \begin{bmatrix}
-c_f & c_f & c_f & c_f \\
-0 & -c_f \cdot l & 0 & c_f \cdot l \\
--c_f \cdot l & 0 & c_f \cdot l & 0 \\
--c_m & c_m & -c_m & c_m
-\end{bmatrix}.
+    \omega_1^2 \\
+    \omega_2^2 \\
+    \omega_3^2 \\
+    \omega_4^2
+\end{bmatrix}
 \]
-
-Here, \( c_f \) is the thrust coefficient, \( l \) is the distance from the center of the quadrotor to each rotor, and \( c_m \) is the moment coefficient, representing aerodynamic drag. The first row of the matrix represents the total thrust generated by all rotors, while the subsequent rows correspond to the torques generated around the roll, pitch, and yaw axes due to the differential thrust and drag produced by the rotors.
-
-To compute the rotor velocities \( \omega_i^2 \), the matrix \( \mathbf{A} \) must be invertible. The invertibility of \( \mathbf{A} \) depends on the fact that the four rotors are non-redundant and linearly independent in terms of their contribution to the forces and torques. If \( \mathbf{A} \) is invertible, the rotor thrusts can be determined as follows:
-
-\[
+As already stated, the drone is an underactuated system, 
+meaning that the 4 controllable inputs (the \( \omega_i \) angular velocities) are 
+fewer than the 6 DOF\footnote{DOF stands for Degrees of Freedom} the drone's movement has. 
+In order to determine the rotor velocities \( \omega_i^2 \), 
+the matrix \( \mathbf{A} \) must be invertible.
+Matrix \( \mathbf{A} \) is invertible when \( c_t, c_d, l \neq 0 \), which is always true. 
+Therefore, the matrix is always invertible as:
+\begin{equation}
 \begin{bmatrix}
 \omega_1^2 \\
 \omega_2^2 \\
@@ -771,86 +845,110 @@ T \\
 \tau_\phi \\
 \tau_\theta \\
 \tau_\psi
-\end{bmatrix}.
-\]
-
-The rotor velocities \( \omega_i \) can then be obtained by taking the square root of the computed \( \omega_i^2 \) values. This formulation ensures that the forces and torques required for control can be achieved by adjusting the individual rotor speeds.
-
-
-\subsection{Results}
-The results of PID control with the simplified model \eqref{eq:simplified_model}
-applied to trajectory tracking during the first positioning 
-(exploration) phase of the algorithm, are shown in  Figures
-\ref{fig:pid_sim}, \ref{fig:pd_traj_comparison}, \ref{fig:pid_x},
-\ref{fig:pid_y}, \ref{fig:pid_z}.
-\begin{figure}[h!]
-    \centering
-     \includegraphics[width=1\textwidth]{images/pd_sim.jpg}
-    \caption[Caption for Figure 1]{Simulation time frame}
-    \label{fig:pid_sim}
-\end{figure}
-\begin{figure}[h!]
-    \centering
-     \includegraphics[width=1\textwidth]{images/pd_traj_comparison.jpg}
-    \caption[Caption for Figure 2]{Actual and desired tarjectory in 3D space}
-    \label{fig:pd_traj_comparison}
-\end{figure}
-\begin{figure}[h!]
-    \centering
-     \includegraphics[width=1\textwidth]{images/pd_x.jpg}
-    \caption[Caption for Figure 3]{Actual and desired $x$ position}
-    \label{fig:pid_x}
-\end{figure}
-\begin{figure}[h!]
-    \centering
-     \includegraphics[width=1\textwidth]{images/pd_y.jpg}
-    \caption[Caption for Figure 4]{Actual and desired $y$ position}
-    \label{fig:pid_y}
-\end{figure}
-\begin{figure}[h!]
-    \centering
-     \includegraphics[width=1\textwidth]{images/pd_z.jpg}
-    \caption[Caption for Figure 5]{Actual and desired $z$ position}
-    \label{fig:pid_z}
-\end{figure}
+\end{bmatrix}
+\label{eq:rotor_velocities}
+\end{equation}
+Then, the rotor velocities \( \omega_i \) can then be obtained by 
+taking the square root of the computed \( \omega_i^2 \) values.
 
 \section{PID Control applied to PSO}
-The algorithm integrates the Particle Swarm Optimization (PSO) 
-framework with the dynamic motion control of drones to achieve source localization. 
-At each iteration of the PSO algorithm, the drones update their velocities and positions 
-based on their personal best positions $\mathbf{p}_i^{\text{best}}$, the group best position 
-$\mathbf{g}_i^{\text{best}}$, and additional stochastic perturbations. 
-The velocity update for each drone is governed by:
+\begin{figure}
+    \resizebox{\textwidth}{!}{
+    \centering
+    \begin{tikzpicture}[font=\sffamily, thick, node distance=2cm]
+        % Nodes
+        \node[draw, fill=orange!50, text centered, minimum width=3cm, minimum height=1.5cm] (attitude) {Attitude Control};
+        \node[draw, fill=ocra!50, text centered, minimum width=3cm, minimum height=1.5cm, 
+        below right=1.5cm and -0.25cm of attitude] (position) {Position Control};
+        \node[draw=black, line width=2pt, inner sep=0pt, anchor=center, minimum width=3cm, minimum height=2.5cm] 
+        at ($(attitude) + (8cm, -0.25cm)$) (drone) {
+        \includegraphics[height=2.5cm, width=3cm]{images/quad_model.png}};
+        \node[draw, fill=green!50, text centered, minimum width=3cm, minimum height=1.4cm]
+        at ($(drone) + (0.5cm, -3.3cm)$) (pso) {PSO};
+        % Arrows
+        % Attitude to Drone
+        \draw[-stealth] (attitude.east) -- ([yshift=0.25cm] drone.west) 
+            node[midway, above] {$\tau_\varphi(\tau_k), \tau_\vartheta(\tau_k), \tau_\psi(\tau_k)$};
+        % Position to Attitude
+        \draw[-stealth] (position.west) -| (attitude.south) 
+            node[near end, left] {$\varphi_d(\tau_k), \vartheta_d(\tau_k), \psi_d(\tau_k)$};
+        % Feedback loop from Drone to Attitude
+        \draw[-stealth] ([xshift=1cm] drone.east) 
+        -- ++(0,1.5cm) % Move up by 1 unit (cm by default in TikZ)
+        -- ([yshift=0.5cm] attitude.north) % Move left towards attitude.north with a shift
+        -- (attitude.north); % Move down to the exact attitude.north position
+        % Incorrect arrow corrected: Drone east side to itself
+        \draw (drone.east) -- ++(1cm, 0)
+        node[right] {$\mathbf{e}(\tau_k)$};
+        % Feedback loop from Drone to Position
+        \draw[-stealth] ([xshift=1cm] drone.east) |- ([yshift=0.5cm]position.east);
+        % Position to Drone (Thrust, shifted down)
+        \draw[-stealth] (position.north) |- ([yshift=-0.25cm] drone.west) 
+            node[midway, below right] {$T(\tau_k)$};
+        % Position Control Outputs to its East Side
+        \draw[-stealth] (pso.west) -- ([yshift=-0.5cm] position.east)
+            node[midway, below] {$\mathbf{x}_d(\tau_s), \mathbf{v}_d(\tau_s)$};    
+    \end{tikzpicture}}
+    \caption{Block diagram of the PID control applied to the PSO algorithm}
+    \label{fig:control_PSO}
+\end{figure}
+COLLEGARE L USCITA DEL MODELLO DEL DRONE CON PSO VOLENDO
+Finally, in order to ensure that the drones in the PSO swarm follows
+the desired velocity and position commands we integrate the 
+PID control described in the previous Section\ref{sec:PID_control} 
+with the PSO algorithm described in Section\ref{sec:PSO}.
+The block diagram of the complete localization and control 
+system is shown in Figure\ref{fig:control_PSO}.
+\\
 
+\noindent
+\textbf{Important}
+\\
+Note that the PSO algorithm updates are performed at a sample time 
+$\tau_s \neq \tau_k$, where $s \in \mathbb{N}$, which is less 
+frequent than the control time step $\tau_k$.
+In particular, the PSO algorithm updates once every second, while 
+$\tau_k \in \mathbb{R}$.
+This implies that at each sample time $\tau_s$ the NSS value is 
+evaluated by each $j$-th receiver drone at $\mathbf{p}_{r_j}(\tau_s)$ using 
+Eq.\ref{eq:received_signal}.
+% SE SI VUOLE DIRE CHE SI USA L EQUAZIONE QUELLA SEMÈLIFICATA BENE SENNO PACE
+This value is used to update the personal best position $\mathbf{pbest}_{j}$
+of each drone and the group best position $\mathbf{gbest}$ of each group,
+which occurs when the current NSS value exceeds previous records. 
+Then, the drones update their 2D velocities and positions
+as in Eqs.\ref{eq:model_velocity} and \ref{eq:model_position}:
 \begin{align}
-    \mathbf{v}_i^{(t+1)} &= \omega \mathbf{v}_i^{(t)} + c_1 r_1 (\mathbf{p}_i^{\text{best}} - \mathbf{x}_i^{(t)}) + c_2 r_2 (\mathbf{g}_i^{\text{best}} - \mathbf{x}_i^{(t)}),
+    \mathbf{v}_{j}(\tau_s+1) &= \omega \mathbf{v}_{j}(\tau_s) 
+    + c_1 r_1 \big(\mathbf{pbest}_{j}(\tau_s) - \mathbf{p}_{r_j}(\tau_s)\big) + \notag \\
+    &\quad + c_2 r_2 \big(\mathbf{gbest}(\tau_s) - \mathbf{p}_{j}(\tau_s)\big) \label{eq:model_velocity2} \\
+    \mathbf{p}_{r_j}(\tau_s + 1) &= \mathbf{p}_{r_j}(\tau_s) + \mathbf{v}_{j}(\tau_s+1) \label{eq:model_position2}
 \end{align}
+In addition, the velocity clamping in Eq.\ref{eq:velocity_clamping} is performed after
+this PSO update.
+We also note that the exclusion zone mechanism remains unvaried
+and follows the PSO algorithm in the same way.
 
-where $\omega$ is the inertia weight, $c_1$ and $c_2$ are the cognitive and social factors, 
-respectively, and $r_1$ and $r_2$ are uniformly distributed random numbers in $[0,1]$. 
-Using the updated velocity $\mathbf{v}_i^{(t+1)}$, the new position $\mathbf{x}_i^{(t+1)}$ of each drone is computed as:
-
-\begin{align}
-    \mathbf{x}_i^{(t+1)} &= \mathbf{x}_i^{(t)} + \mathbf{v}_i^{(t+1)}.
-\end{align}
-
-After computing these updates, the drones execute a one-second movement phase, 
-during which they follow the updated velocity vector $\mathbf{v}_i^{(t+1)}$. 
-This motion is simulated through a control dynamics model using a time step $\Delta t$. 
-The control dynamics ensure realistic drone motion by considering physical constraints such as acceleration and boundary conditions. 
-The drone’s state $\mathbf{s}_i$ is updated iteratively:
-
-\begin{align}
-    \dot{\mathbf{s}}_i &= f(\mathbf{s}_i, \mathbf{v}_i, \Delta t),
-\end{align}
-
-where $f$ models the system dynamics, including position, velocity, and angular rates. 
-During this period, the drones operate independently of the PSO loop, allowing them to 
-interact with the environment, detect sources, and avoid exclusion zones. This motion phase ensures that
-the drones can explore their updated positions in the search space effectively.
-
-At the end of the motion phase, the drones re-enter the PSO loop to evaluate their current positions 
-based on the Normalized Source Strength (NSS) function. The best positions are updated if the current 
-NSS value exceeds previous records. This iterative alternation between PSO updates and independent drone 
-control enables the swarm to balance global exploration and local exploitation, 
-ensuring efficient source localization.
+\noindent
+\\
+The resulting $\mathbf{v}_{j}(\tau_s+1) = \mathbf{v}_d(\tau_s)$ and $\mathbf{p}_{r_j}(\tau_s + 1) = \mathbf{x}_d(\tau_s)$
+are then used as velocity and position desired commands for the PSO, when 
+$\tau_s = \tau_k$.
+Then, during the next time interval $\Delta \def \tau_{s+1} - \tau_s$ the PID
+control algorithm ensures the the the desired position and velocity are reached,
+and the drone's movement follows the full dynamics system defined in 
+Eq.\ref{eq:final_model_more}:
+\begin{equation}
+    \dot{\mathbf{\xi}}(\tau_k) = f(\mathbf{\xi}(\tau_k))
+\end{equation}
+where the drone’s state $\mathbf{\xi}$ is updated at each time step $\tau_k$ in the 
+interval $\Delta = \tau_{s+1} - \tau_s$.
+Additionally, the control dynamics ensure the 
+search space boundary conditions as in
+Eq.\ref{eq:boundary_condition}.
+This iterative alternation between PSO updates and 
+independent drone 
+control enables the swarm to balance global 
+exploration and local exploitation, 
+ensuring efficient source localization and actual 
+control inputs.

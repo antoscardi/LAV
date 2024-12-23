@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  20 DEC 2024 07:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  23 DEC 2024 02:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1292,6 +1292,83 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip123
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/media9.sty
+Package: media9 2024/09/16 v1.29 acrobat-9/X compatible media
+\g_mix_pkgresizeflag_int=\count566
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/pdfbase.sty
+Package: pdfbase 2024/09/16 v0.59 driver independent access to low-level PDF features
+\g_pbs_page_int=\count567
+\g_pbs_oc_int=\count568
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/ocgx2/ocgbase.sty
+Package: ocgbase 2024/09/15 v0.24 support package for ocgx2.sty
+)
+\l_mix_poster_box=\box146
+\g_mix_wd_dim=\dimen324
+\g_mix_ht_dim=\dimen325
+\g_mix_dp_dim=\dimen326
+\g_mix_rmcnt_int=\count569
+\l_mix_viewcnt_int=\count570
+\g@mix@page@int=\count571
+\g_mix_resizeflag_int=\count572
+\l_mix_lineno_int=\count573
+\l_mix_pbtn_box=\box147
+\g_mix_mbtncnt_int=\count574
+\mix@btn@dim=\dimen327
+) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowinset=\dimen328
+\pgfarrowlength=\dimen329
+\pgfarrowwidth=\dimen330
+\pgfarrowlinewidth=\dimen331
+) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
+Package: empheq 2017/03/31 v2.15 Emphasizing equations
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2024/03/11 v1.30 mathematical typesetting tools
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count575
+\calc@Bcount=\count576
+\calc@Adimen=\dimen332
+\calc@Bdimen=\dimen333
+\calc@Askip=\skip124
+\calc@Bskip=\skip125
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count577
+\calc@Cskip=\skip126
+)
+\g_MT_multlinerow_int=\count578
+\l_MT_multwidth_dim=\dimen334
+\origjot=\skip127
+\l_MT_shortvdotswithinadjustabove_dim=\dimen335
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen336
+\l_MT_above_intertext_sep=\dimen337
+\l_MT_below_intertext_sep=\dimen338
+\l_MT_above_shortintertext_sep=\dimen339
+\l_MT_below_shortintertext_sep=\dimen340
+\xmathstrut@box=\box148
+\xmathstrut@dim=\dimen341
+)
+\l_EQ_equationtype_int=\count579
+\l_EQ_alignmentmode_int=\count580
+\l_EQ_totalwidth_dim=\dimen342
+\l_EQ_displaywidth_dim=\dimen343
+\l_EQ_temp_linewidth_dim=\dimen344
+\l_EQ_linewidth_dim=\dimen345
+\EmphEqdelimitershortfall=\dimen346
+\EmphEqdelimiterfactor=\count581
+\g_EQ_toptag_height_dim=\dimen347
+\g_EQ_bottomtag_depth_dim=\dimen348
+\g_EQ_toprow_height_dim=\dimen349
+\g_EQ_bottomrow_depth_dim=\dimen350
+\g_EQ_widesttag_dim=\dimen351
+\EQ_mathdisplay_box=\box149
+\EQ_tag_box=\box150
+\g_EQ_temprow_int=\count582
 )
 \Tesi@idxfile=\write7
 \openout7 = `Tesi.idx'.
@@ -1302,37 +1379,37 @@ Writing index file Tesi.idx
 \glo@main@file=\write9
 \openout9 = `Tesi.glo'.
 
-Package glossaries Info: Writing glossary file Tesi.glo on input line 98.
+Package glossaries Info: Writing glossary file Tesi.glo on input line 101.
 \glo@acronym@file=\write10
 \openout10 = `Tesi.acn'.
 
-Package glossaries Info: Writing glossary file Tesi.acn on input line 98.
+Package glossaries Info: Writing glossary file Tesi.acn on input line 101.
 (./glossario.tex)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
- (build/Tesi.aux (build/Cap_1.aux) (build/Cap_2.aux) (build/Cap_3.aux) (build/Cap_4.aux))
+ (build/Tesi.aux (build/Cap_1.aux) (build/Cap_2.aux) (build/Cap_3.aux) (build/Cap_4.aux) (build/Cap_5.aux))
 \openout1 = `Tesi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1380,16 +1457,16 @@ Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count566
-\scratchdimen=\dimen324
-\scratchbox=\box146
-\nofMPsegments=\count567
-\nofMParguments=\count568
+\scratchcounter=\count583
+\scratchdimen=\dimen352
+\scratchbox=\box151
+\nofMPsegments=\count584
+\nofMParguments=\count585
 \everyMPshowfont=\toks75
-\MPscratchCnt=\count569
-\MPscratchDim=\dimen325
-\MPnumerator=\count570
-\makeMPintoPDFobject=\count571
+\MPscratchCnt=\count586
+\MPscratchDim=\dimen353
+\MPnumerator=\count587
+\makeMPintoPDFobject=\count588
 \everyMPtoPDFconversion=\toks76
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1397,27 +1474,27 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Info: Redefining \textsubscript on input line 106.
-LaTeX Info: Redefining \microtypecontext on input line 106.
-Package microtype Info: Applying patch `item' on input line 106.
-Package microtype Info: Applying patch `toc' on input line 106.
-Package microtype Info: Applying patch `eqnum' on input line 106.
-Package microtype Info: Applying patch `footnote' on input line 106.
-Package microtype Info: Applying patch `verbatim' on input line 106.
+LaTeX Info: Redefining \textsubscript on input line 109.
+LaTeX Info: Redefining \microtypecontext on input line 109.
+Package microtype Info: Applying patch `item' on input line 109.
+Package microtype Info: Applying patch `toc' on input line 109.
+Package microtype Info: Applying patch `eqnum' on input line 109.
+Package microtype Info: Applying patch `footnote' on input line 109.
+Package microtype Info: Applying patch `verbatim' on input line 109.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 106.
+LaTeX Info: Redefining \showhyphens on input line 109.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 106.
+Package hyperref Info: Link coloring OFF on input line 109.
  (build/Tesi.out) (build/Tesi.out)
 \@outlinefile=\write11
 \openout11 = `Tesi.out'.
@@ -1435,11 +1512,11 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Tesi.bbl' found.
  (build/Tesi.bbl)
-Package biblatex Info: Reference section=0 on input line 106.
-Package biblatex Info: Reference segment=0 on input line 106.
-\SAP@parboxindent=\skip124
-\SAP@parboxwidth=\skip125
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 112.
+Package biblatex Info: Reference section=0 on input line 109.
+Package biblatex Info: Reference segment=0 on input line 109.
+\SAP@parboxindent=\skip128
+\SAP@parboxwidth=\skip129
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1447,44 +1524,44 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<sapienzalogo.pdf, id=252, 288.07625pt x 89.33376pt>
+<sapienzalogo.pdf, id=308, 288.07625pt x 89.33376pt>
 File: sapienzalogo.pdf Graphic file (type pdf)
 <use sapienzalogo.pdf>
-Package pdftex.def Info: sapienzalogo.pdf  used on input line 112.
+Package pdftex.def Info: sapienzalogo.pdf  used on input line 115.
 (pdftex.def)             Requested size: 142.26378pt x 44.11742pt.
 LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <10.95> not available
-(Font)              Font shape `T1/lmss/bx/n' tried instead on input line 112.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 112.
+(Font)              Font shape `T1/lmss/bx/n' tried instead on input line 115.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 112.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 112.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 112.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 112.
+(Font)              <10.95> on input line 115.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 112.
+(Font)              <8> on input line 115.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 112.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 112.
+(Font)              <6> on input line 115.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 112.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1498,22 +1575,22 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} </usr/local/texlive/2024/texmf-dist/tex/latex/sapthesis/sapienzalogo.pdf>]
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 112.
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 115.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 )
-Underfull \hbox (badness 10000) in paragraph at lines 112--112
+Underfull \hbox (badness 10000) in paragraph at lines 115--115
 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 112.
+(Font)              <10> on input line 115.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 112.
+(Font)              <7> on input line 115.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 112.
+(Font)              <5> on input line 115.
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--112
+Underfull \hbox (badness 10000) in paragraph at lines 115--115
 
  []
 
@@ -1523,7 +1600,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 112--112
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.112 
+l.115 
        [1
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}] (./abstract.tex)
@@ -1535,15 +1612,17 @@ l.112
 
 [3
 
-])
+]
+
+[4])
 \tf@toc=\write12
 \openout12 = `Tesi.toc'.
 
 
 
-[4] (build/Tesi.lof
+[5] (build/Tesi.lof
 
-[5
+[6
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}])
 \tf@lof=\write13
@@ -1551,13 +1630,13 @@ l.112
 
 
 
-[6] (build/Tesi.lot)
+[7] (build/Tesi.lot)
 \tf@lot=\write14
 \openout14 = `Tesi.lot'.
 
  (build/Tesi.acr)
 
-[7
+[8
 
 ]
 \openout2 = `Cap_1.aux'.
@@ -1661,7 +1740,7 @@ Chapter 3.
 
 
 ] Excluding 'comment' comment.
-<images/polar_plot.png, id=896, 338.2236pt x 330.2739pt>
+<images/polar_plot.png, id=1013, 338.2236pt x 330.2739pt>
 File: images/polar_plot.png Graphic file (type png)
 <use images/polar_plot.png>
 Package pdftex.def Info: images/polar_plot.png  used on input line 131.
@@ -1685,7 +1764,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [31]
 
 [32]
-<images/gradients_single_anal.jpg, id=979, 1927.2pt x 957.5775pt>
+<images/gradients_single_anal.jpg, id=1103, 1927.2pt x 957.5775pt>
 File: images/gradients_single_anal.jpg Graphic file (type jpg)
 <use images/gradients_single_anal.jpg>
 Package pdftex.def Info: images/gradients_single_anal.jpg  used on input line 537.
@@ -1698,7 +1777,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 536--543
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/NSS_single_anal.jpg, id=984, 1927.2pt x 957.5775pt>
+<images/NSS_single_anal.jpg, id=1108, 1927.2pt x 957.5775pt>
 File: images/NSS_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_single_anal.jpg>
 Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 555.
@@ -1706,7 +1785,7 @@ Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 555.
 
 
 [33]
-<images/gradients_rotated_single_anal.jpg, id=997, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_single_anal.jpg, id=1122, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_single_anal.jpg Graphic file (type jpg)
 <use images/gradients_rotated_single_anal.jpg>
 Package pdftex.def Info: images/gradients_rotated_single_anal.jpg  used on input line 600.
@@ -1716,7 +1795,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 599--603
  []|  [] 
  []
 
-<images/NSS_rotated_single_anal.jpg, id=998, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_single_anal.jpg, id=1123, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_rotated_single_anal.jpg>
 Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 608.
@@ -1726,7 +1805,7 @@ Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 
 [34 <./images/gradients_single_anal.jpg>]
 
 [35 <./images/NSS_single_anal.jpg> <./images/gradients_rotated_single_anal.jpg>]
-<images/gradients_single_num.jpg, id=1015, 1927.2pt x 957.5775pt>
+<images/gradients_single_num.jpg, id=1142, 1927.2pt x 957.5775pt>
 File: images/gradients_single_num.jpg Graphic file (type jpg)
 <use images/gradients_single_num.jpg>
 Package pdftex.def Info: images/gradients_single_num.jpg  used on input line 672.
@@ -1741,7 +1820,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 671--676
 [36 <./images/NSS_rotated_single_anal.jpg>]
 
 [37 <./images/gradients_single_num.jpg>]
-<images/gradients_rotated_single_num.jpg, id=1036, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_single_num.jpg, id=1165, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_single_num.jpg Graphic file (type jpg)
 <use images/gradients_rotated_single_num.jpg>
 Package pdftex.def Info: images/gradients_rotated_single_num.jpg  used on input line 739.
@@ -1751,7 +1830,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 738--742
  []|  [] 
  []
 
-<images/NSS_rotated_single_num.jpg, id=1037, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_single_num.jpg, id=1166, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_single_num.jpg Graphic file (type jpg)
 <use images/NSS_rotated_single_num.jpg>
 Package pdftex.def Info: images/NSS_rotated_single_num.jpg  used on input line 747.
@@ -1765,7 +1844,7 @@ Package pdftex.def Info: images/NSS_rotated_single_num.jpg  used on input line 7
 [40]
 
 [41]
-<images/gradients_multi_anal.jpg, id=1082, 1927.2pt x 991.705pt>
+<images/gradients_multi_anal.jpg, id=1215, 1927.2pt x 991.705pt>
 File: images/gradients_multi_anal.jpg Graphic file (type jpg)
 <use images/gradients_multi_anal.jpg>
 Package pdftex.def Info: images/gradients_multi_anal.jpg  used on input line 1000.
@@ -1775,12 +1854,12 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 999--1003
 []|  [] 
  []
 
-<images/NSS_multi_anal.jpg, id=1083, 1927.2pt x 991.705pt>
+<images/NSS_multi_anal.jpg, id=1216, 1927.2pt x 991.705pt>
 File: images/NSS_multi_anal.jpg Graphic file (type jpg)
 <use images/NSS_multi_anal.jpg>
 Package pdftex.def Info: images/NSS_multi_anal.jpg  used on input line 1010.
 (pdftex.def)             Requested size: 316.80121pt x 163.01898pt.
-<images/gradients_rotated_multi_anal.jpg, id=1084, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_multi_anal.jpg, id=1217, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_multi_anal.jpg Graphic file (type jpg)
 <use images/gradients_rotated_multi_anal.jpg>
 Package pdftex.def Info: images/gradients_rotated_multi_anal.jpg  used on input line 1019.
@@ -1790,7 +1869,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 1018--1022
 []|  [] 
  []
 
-<images/NSS_rotated_multi_anal.jpg, id=1085, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_multi_anal.jpg, id=1218, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_multi_anal.jpg Graphic file (type jpg)
 <use images/NSS_rotated_multi_anal.jpg>
 Package pdftex.def Info: images/NSS_rotated_multi_anal.jpg  used on input line 1029.
@@ -1802,7 +1881,7 @@ Package pdftex.def Info: images/NSS_rotated_multi_anal.jpg  used on input line 1
 [43 <./images/gradients_multi_anal.jpg> <./images/NSS_multi_anal.jpg>]
 
 [44 <./images/gradients_rotated_multi_anal.jpg> <./images/NSS_rotated_multi_anal.jpg>]
-<images/gradients_multi_num.jpg, id=1111, 1927.2pt x 991.705pt>
+<images/gradients_multi_num.jpg, id=1247, 1927.2pt x 991.705pt>
 File: images/gradients_multi_num.jpg Graphic file (type jpg)
 <use images/gradients_multi_num.jpg>
 Package pdftex.def Info: images/gradients_multi_num.jpg  used on input line 1106.
@@ -1812,12 +1891,12 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 1105--1109
 []|  [] 
  []
 
-<images/NSS_multi_num.jpg, id=1112, 1927.2pt x 991.705pt>
+<images/NSS_multi_num.jpg, id=1248, 1927.2pt x 991.705pt>
 File: images/NSS_multi_num.jpg Graphic file (type jpg)
 <use images/NSS_multi_num.jpg>
 Package pdftex.def Info: images/NSS_multi_num.jpg  used on input line 1116.
 (pdftex.def)             Requested size: 316.80121pt x 163.01898pt.
-<images/gradients_rotated_multi_num.jpg, id=1113, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_multi_num.jpg, id=1249, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_multi_num.jpg Graphic file (type jpg)
 <use images/gradients_rotated_multi_num.jpg>
 Package pdftex.def Info: images/gradients_rotated_multi_num.jpg  used on input line 1125.
@@ -1827,7 +1906,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 1124--1128
 []|  [] 
  []
 
-<images/NSS_rotated_multi_num.jpg, id=1114, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_multi_num.jpg, id=1250, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_multi_num.jpg Graphic file (type jpg)
 <use images/NSS_rotated_multi_num.jpg>
 Package pdftex.def Info: images/NSS_rotated_multi_num.jpg  used on input line 1135.
@@ -1862,7 +1941,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 ]
-<images/ECEF_ENU_Longitude_Latitude_relationships.png, id=1186, 521.95pt x 501.875pt>
+<images/ECEF_ENU_Longitude_Latitude_relationships.png, id=1334, 521.95pt x 501.875pt>
 File: images/ECEF_ENU_Longitude_Latitude_relationships.png Graphic file (type png)
 <use images/ECEF_ENU_Longitude_Latitude_relationships.png>
 Package pdftex.def Info: images/ECEF_ENU_Longitude_Latitude_relationships.png  used on input line 121.
@@ -1887,7 +1966,7 @@ File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
 
 [56]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 444.
+(Font)              <12> on input line 441.
 
 
 [57]
@@ -1895,68 +1974,43 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [58]
 
 [59]
+<images/quad_model.png, id=1453, 398.48875pt x 307.1475pt>
+File: images/quad_model.png Graphic file (type png)
+<use images/quad_model.png>
+Package pdftex.def Info: images/quad_model.png  used on input line 613.
+(pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
-[60]
+
+[60 <./images/quad_model.png>]
 
 [61]
-<images/pd_sim.jpg, id=1328, 884.30376pt x 521.95pt>
-File: images/pd_sim.jpg Graphic file (type jpg)
-<use images/pd_sim.jpg>
-Package pdftex.def Info: images/pd_sim.jpg  used on input line 788.
-(pdftex.def)             Requested size: 396.0pt x 233.73642pt.
-<images/pd_traj_comparison.jpg, id=1329, 1927.2pt x 991.705pt>
-File: images/pd_traj_comparison.jpg Graphic file (type jpg)
-<use images/pd_traj_comparison.jpg>
-Package pdftex.def Info: images/pd_traj_comparison.jpg  used on input line 794.
-(pdftex.def)             Requested size: 396.0pt x 203.76994pt.
-<images/pd_x.jpg, id=1330, 1927.2pt x 991.705pt>
-File: images/pd_x.jpg Graphic file (type jpg)
-<use images/pd_x.jpg>
-Package pdftex.def Info: images/pd_x.jpg  used on input line 800.
-(pdftex.def)             Requested size: 396.0pt x 203.76994pt.
-<images/pd_y.jpg, id=1331, 1927.2pt x 991.705pt>
-File: images/pd_y.jpg Graphic file (type jpg)
-<use images/pd_y.jpg>
-Package pdftex.def Info: images/pd_y.jpg  used on input line 806.
-(pdftex.def)             Requested size: 396.0pt x 203.76994pt.
-<images/pd_z.jpg, id=1332, 1927.2pt x 991.705pt>
-File: images/pd_z.jpg Graphic file (type jpg)
-<use images/pd_z.jpg>
-Package pdftex.def Info: images/pd_z.jpg  used on input line 812.
-(pdftex.def)             Requested size: 396.0pt x 203.76994pt.
+File: images/quad_model.png Graphic file (type png)
+<use images/quad_model.png>
+Package pdftex.def Info: images/quad_model.png  used on input line 891.
+(pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 895--903
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+ []
 
 
 
-[62 <./images/pd_sim.jpg>]
+[62])
 
-[63 <./images/pd_traj_comparison.jpg> <./images/pd_x.jpg>])
+[63]
+\openout2 = `Cap_5.aux'.
 
-[64 <./images/pd_y.jpg> <./images/pd_z.jpg>]
+ (./Cap_5.tex
+Chapter 5.
 
-[65] (build/Tesi.gls)
 
-[66
+[64
 
 
 
 
 ]
-Package microtype Info: Character `029' is missing
-(microtype)             in font `T1/qtm/m/sc/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 141.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 58.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1965,80 +2019,176 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (0.88255pt too wide) in paragraph at lines 142--142
+Overfull \hbox (10.26117pt too wide) in paragraph at lines 58--59
+\T1/qtm/m/n/10.95 (-20) (\T1/lmtt/m/n/10.95 n_iterations\T1/qtm/m/n/10.95 (-20) ), search space bound-aries (\T1/lmtt/m/n/10.95 bounds\T1/qtm/m/n/10.95 (-20) ), and max-i-mum ve-loc-ity (\T1/lmtt/m/n/10.95 max_velocity\T1/qtm/m/n/10.95 (-20) ).
+ []
+
+
+
+[65]
+
+[66] Excluding 'comment' comment.
+
+[67]
+
+[68]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 183.
+
+
+[69]
+<images/exploration_pattern.jpg, id=1560, 1495.5875pt x 957.5775pt>
+File: images/exploration_pattern.jpg Graphic file (type jpg)
+<use images/exploration_pattern.jpg>
+Package pdftex.def Info: images/exploration_pattern.jpg  used on input line 247.
+(pdftex.def)             Requested size: 396.0pt x 253.53766pt.
+
+
+[70]
+
+[71 <./images/exploration_pattern.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 353--357
+
+ []
+
+
+
+[72]
+
+[73]
+<images/traj_comparison.png, id=1601, 578.16pt x 361.35pt>
+File: images/traj_comparison.png Graphic file (type png)
+<use images/traj_comparison.png>
+Package pdftex.def Info: images/traj_comparison.png  used on input line 455.
+(pdftex.def)             Requested size: 396.0pt x 247.49568pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/pid_x.png, id=1602, 578.16pt x 361.35pt>
+File: images/pid_x.png Graphic file (type png)
+<use images/pid_x.png>
+Package pdftex.def Info: images/pid_x.png  used on input line 464.
+(pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
+<images/pid_y.png, id=1603, 578.16pt x 361.35pt>
+File: images/pid_y.png Graphic file (type png)
+<use images/pid_y.png>
+Package pdftex.def Info: images/pid_y.png  used on input line 470.
+(pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
+<images/pid_z.png, id=1604, 578.16pt x 361.35pt>
+File: images/pid_z.png Graphic file (type png)
+<use images/pid_z.png>
+Package pdftex.def Info: images/pid_z.png  used on input line 476.
+(pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/rotor_velocities.png, id=1605, 578.16pt x 361.35pt>
+File: images/rotor_velocities.png Graphic file (type png)
+<use images/rotor_velocities.png>
+Package pdftex.def Info: images/rotor_velocities.png  used on input line 491.
+(pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+)
+
+[74]
+
+LaTeX Warning: Text page 75 contains only floats.
+
+
+
+[75 <./images/traj_comparison.png (PNG copy)> <./images/pid_x.png (PNG copy)> <./images/pid_y.png (PNG copy)> <./images/pid_z.png (PNG copy)>]
+
+[76 <./images/rotor_velocities.png (PNG copy)>] (build/Tesi.gls)
+
+[77
+
+
+
+
+]
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/qtm/m/sc/10.95'.
+(microtype)             Ignoring protrusion settings for this character.
+
+Overfull \hbox (0.88255pt too wide) in paragraph at lines 145--145
 []\T1/qtm/m/n/10.95 (-20) J. Kennedy and R. Eber-hart, ^^P  Par-ti-cle swarm op-ti-miza-tion,^^Q in \T1/qtm/m/it/10.95 (-20) Pro-ceed-ings of ICNN'95
  []
 
 
 
-[67
+[78
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec-sc.enc}]
-Overfull \hbox (33.35397pt too wide) in paragraph at lines 142--142
+Overfull \hbox (33.35397pt too wide) in paragraph at lines 145--145
 []\T1/qtm/m/n/10.95 (-20) J. Mars-den and A. Tromba, \T1/qtm/m/it/10.95 (-20) Vec-tor Cal-cu-lus\T1/qtm/m/n/10.95 (-20) . Macmil-lan Learn-ing, 2012, \T1/qtm/m/sc/10.95 (-20) isbn\T1/qtm/m/n/10.95 (-20) : 9781429224048.
  []
 
 
-Overfull \hbox (31.68024pt too wide) in paragraph at lines 142--142
+Overfull \hbox (31.68024pt too wide) in paragraph at lines 145--145
 []\T1/qtm/m/n/10.95 (-20) D. Grif-fiths, \T1/qtm/m/it/10.95 (-20) In-tro-duc-tion to Elec-tro-dy-nam-ics\T1/qtm/m/n/10.95 (-20) . Pear-son Ed-u-ca-tion, 2014, \T1/qtm/m/sc/10.95 (-20) isbn\T1/qtm/m/n/10.95 (-20) : 9780321972101.
  []
 
 
 
-[68]
+[79]
 
-[69]
-Overfull \hbox (6.83246pt too wide) in paragraph at lines 142--142
+[80]
+Overfull \hbox (6.83246pt too wide) in paragraph at lines 145--145
 \T1/qtm/m/n/10.95 (-20) in avalanches us-ing ARVA: an ex-tremum seek-ing ap-proach,^^Q \T1/qtm/m/it/10.95 (-20) CoRR\T1/qtm/m/n/10.95 (-20) , vol. abs/2106.14514,
  []
 
 
-Overfull \hbox (19.12433pt too wide) in paragraph at lines 142--142
+Overfull \hbox (19.12433pt too wide) in paragraph at lines 145--145
 []$\T1/lmtt/m/n/10.95 https : / / www . sciencedirect . com / science / article / pii / S0300957221002148$[]\T1/qtm/m/n/10.95 (-20) . 
  []
 
 
 
-[70]
+[81]
 
 Package biblatex Warning: No driver for 'unknown'.
-(biblatex)                Using fallback driver on input line 141.
+(biblatex)                Using fallback driver on input line 144.
 
 
-Overfull \hbox (4.50258pt too wide) in paragraph at lines 142--142
+Overfull \hbox (4.50258pt too wide) in paragraph at lines 145--145
 \T1/lmtt/m/n/10.95 2023 . 106215$[]\T1/qtm/m/n/10.95 (-20) . [On-line]. Avail-able: []$\T1/lmtt/m/n/10.95 https : / / www . sciencedirect . com / science /
  []
 
 
 
-[71] (./ringraziamenti.tex)
+[82] (./ringraziamenti.tex)
 
-[72
+[83
 
-] (build/Tesi.aux (build/Cap_1.aux) (build/Cap_2.aux) (build/Cap_3.aux) (build/Cap_4.aux))
+] (build/Tesi.aux (build/Cap_1.aux) (build/Cap_2.aux) (build/Cap_3.aux) (build/Cap_4.aux) (build/Cap_5.aux))
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
  ***********
 Package rerunfilecheck Info: File `Tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 2F02559FAFA1FFCFAFA97F35CBAB6237;11127.
+(rerunfilecheck)             Checksum: 6449077F88AB2C591D2CAD46CD4F0D85;13005.
 Package logreq Info: Writing requests to 'Tesi.run.xml'.
 \openout1 = `Tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 56016 strings out of 473579
- 1171005 string characters out of 5728234
- 2078628 words of memory out of 5000000
- 77328 multiletter control sequences out of 15000+600000
- 713173 words of font info for 282 fonts, out of 8000000 for 9000
+ 58459 strings out of 473579
+ 1226882 string characters out of 5728234
+ 2139867 words of memory out of 5000000
+ 79677 multiletter control sequences out of 15000+600000
+ 714539 words of font info for 291 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,17n,131p,2376b,2330s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,17n,131p,2376b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on build/Tesi.pdf (80 pages, 4538061 bytes).
+Output written on build/Tesi.pdf (92 pages, 4561726 bytes).
 PDF statistics:
- 1701 PDF objects out of 1728 (max. 8388607)
- 1513 compressed objects within 16 object streams
- 428 named destinations out of 1000 (max. 500000)
- 66664 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1993 PDF objects out of 2073 (max. 8388607)
+ 1787 compressed objects within 18 object streams
+ 470 named destinations out of 1000 (max. 500000)
+ 67816 words of extra memory for PDF output out of 74296 (max. 10000000)
 

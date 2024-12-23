@@ -2481,6 +2481,15 @@
     <bcf:citekey order="103" intorder="1">control_quadrotor_main</bcf:citekey>
     <bcf:citekey order="104" intorder="1">simplified_model</bcf:citekey>
     <bcf:citekey order="105" intorder="1">simplified_model</bcf:citekey>
+    <bcf:citekey order="106" intorder="1">model_quadrotor</bcf:citekey>
+    <bcf:citekey order="107" intorder="1">figura_bella_drone</bcf:citekey>
+    <bcf:citekey order="107" intorder="2">model_quadrotor</bcf:citekey>
+    <bcf:citekey order="107" intorder="3">quadrotor_modeling_control_book</bcf:citekey>
+    <bcf:citekey order="107" intorder="4">backstepping_control</bcf:citekey>
+    <bcf:citekey order="107" intorder="5">geometric_control</bcf:citekey>
+    <bcf:citekey order="108" intorder="1">geometric_control</bcf:citekey>
+    <bcf:citekey order="109" intorder="1">PSO_IMPORTANT</bcf:citekey>
+    <bcf:citekey order="110" intorder="1">PSO_original</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="ynt">

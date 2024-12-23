@@ -380,18 +380,18 @@ since it is not critical in either the single-victim or multiple-victim cases.
 In the final model of the single-victim case, we consider one victim to 
 which it is attached an ARTVA transmitter and \( m \in \mathbb{N} \) receivers, 
 each rigidly attached to each drone. 
-We define the position of the $k$-th drone at sample time \( \tau_i \) with \( \mathbf{p}_{r_k}(\tau_i) \in \mathbb{R}^3 \) 
-where \( k, i \in \mathbb{N} \) and \( k = 1, \ldots, m \).
+We define the position of the $j$-th drone at sample time \( \tau_k \) with \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) 
+where \( k, i \in \mathbb{N} \) and \( j = 1, \ldots, m \).
 
 \noindent
 As described in \cite{similar-main} and as seen in the previous sections, 
 we model the intensity of the ARTVA signal using $\eta$ in Eq. \ref{eq:eta_final_final} 
 as an output function of the form \( y : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \):
 \[
-y(\mathbf{p}_{r_k}, \tau_i) = \mathbf{\Phi}^\top\mkern-2mu(\mathbf{p}_{r_k}) \, \mathbf{x}(\mathbf{p}_t) + 
-w_t(\mathbf{p}_{r_k}, \mathbf{p}_t, \tau_i),
+y(\mathbf{p}_{r_j}, \tau_k) = \mathbf{\Phi}^\top\mkern-2mu(\mathbf{p}_{r_j}) \, \mathbf{x}(\mathbf{p}_t) + 
+w_t(\mathbf{p}_{r_j}, \mathbf{p}_t, \tau_k),
 \]
-where $\mathbf{\Phi}(\mathbf{p}_{r_k})$ is the vector of known variables
+where $\mathbf{\Phi}(\mathbf{p}_{r_j})$ is the vector of known variables
 relative to each $k$-th receiver and 
 and \( w : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \) 
 represents the measurement noise and model 
@@ -417,30 +417,30 @@ centralized coordination is impractical or demands excessive resources.
 \noindent
 \\
 To estimate the constant vector \( \mathbf{p}_t \), we assume the position of each 
-UAV, \( \mathbf{p}_{r_k}(\tau_i) \), as known. 
+UAV, \( \mathbf{p}_{r_j}(\tau_k) \), as known. 
 Each UAV in the network collects data independently and transmits information only 
 to its neighboring agents. Each UAV then employs its own instance of the estimation 
 algorithm, populating the necessary matrices and vectors in the equations to 
 generate an independent estimate of the victim’s position:
 \[
-\mathbf{Y}(\tau_i) = \mathbf{H}(\tau_i) \mathbf{x}(\mathbf{p}_t) + \mathbf{W}(\tau_i)
+\mathbf{Y}(\tau_k) = \mathbf{H}(\tau_k) \mathbf{x}(\mathbf{p}_t) + \mathbf{W}(\tau_k)
 \]
 where
 \[
-\mathbf{Y}(\tau_i) = \mathrm{col}(y(\mathbf{p}_{r_1}(\tau_i), \tau_i), \ldots, y(\mathbf{p}_{r_m}(\tau_i), \tau_i)),
+\mathbf{Y}(\tau_k) = \mathrm{col}(y(\mathbf{p}_{r_1}(\tau_k), \tau_k), \ldots, y(\mathbf{p}_{r_m}(\tau_k), \tau_k)),
 \]
 \[
-\mathbf{H}(\tau_i) = \mathrm{col}(\mathbf{\Phi}^\top(\mathbf{p}_{r_1}(\tau_i)), \ldots, \mathbf{\Phi}^\top(\mathbf{p}_{r_m}(\tau_i))),
+\mathbf{H}(\tau_k) = \mathrm{col}(\mathbf{\Phi}^\top(\mathbf{p}_{r_1}(\tau_k)), \ldots, \mathbf{\Phi}^\top(\mathbf{p}_{r_m}(\tau_k))),
 \]
 \[
-\mathbf{W}(\tau_i) = \mathrm{col}(w(\mathbf{p}_{r_1}(\tau_i),\mathbf{p}_t, \tau_i), \ldots, v(\mathbf{p}_{r_m}(\tau_i), \mathbf{p}_t, \tau_i)).
+\mathbf{W}(\tau_k) = \mathrm{col}(w(\mathbf{p}_{r_1}(\tau_k),\mathbf{p}_t, \tau_k), \ldots, v(\mathbf{p}_{r_m}(\tau_k), \mathbf{p}_t, \tau_k)).
 \]
 The model above enables estimation of \( \mathbf{x} \) using the affine term 
-\( \mathbf{H}(\tau_i) \) through the RLS \footnote{RLS stands for Recursive Least Squares} algorithm:
+\( \mathbf{H}(\tau_k) \) through the RLS \footnote{RLS stands for Recursive Least Squares} algorithm:
 \[
 \begin{cases}
-    \hat{\mathbf{x}}(\tau_{i+1}) = \hat{\mathbf{x}}(\tau_i) + \mathbf{S}^{-1}(\tau_i)\mathbf{H}(\tau_i) \left( \mathbf{Y}(\tau_i) - \mathbf{H}(\tau_i)^\top \hat{\mathbf{x}}(\tau_i) \right) \\
-    \mathbf{S}(\tau_{i+1}) = \beta \mathbf{S}(\tau_i) + \mathbf{H}(\tau_i)\mathbf{H}(\tau_i)^\top
+    \hat{\mathbf{x}}(\tau_{k+1}) = \hat{\mathbf{x}}(\tau_k) + \mathbf{S}^{-1}(\tau_k)\mathbf{H}(\tau_k) \left( \mathbf{Y}(\tau_k) - \mathbf{H}(\tau_k)^\top \hat{\mathbf{x}}(\tau_k) \right) \\
+    \mathbf{S}(\tau_{k+1}) = \beta \mathbf{S}(\tau_k) + \mathbf{H}(\tau_k)\mathbf{H}(\tau_k)^\top
 \end{cases}
 \]
 where \( \beta \in (0, 1) \) is a forgetting factor, and \( \mathbf{S}(\tau_0) = \mathbf{S}_0 \in \mathbb{R}^{3 \times 3} \). 
@@ -448,7 +448,7 @@ where \( \beta \in (0, 1) \) is a forgetting factor, and \( \mathbf{S}(\tau_0) =
 \noindent
 The transmitter's position is estimated by
 \begin{equation}
-    \hat{\mathbf{p}}_t(\tau_i) = \mathbf{x}^{-1}(\hat{\mathbf{x}}(\tau_i))
+    \hat{\mathbf{p}}_t(\tau_k) = \mathbf{x}^{-1}(\hat{\mathbf{x}}(\tau_k))
     \label{eq:mapping}
 \end{equation}
 where \( \mathbf{x}^{-1} : \mathbb{R}^{10} \rightarrow \mathbb{R}^3 \) is well-defined as shown in \cite{similar-main}. 
@@ -464,25 +464,25 @@ a decentralized moving average of the UAVs' estimates.
 The ACF dynamics equations are described below:
 \[
 \begin{cases}
-    \dot{z}^k = \gamma(\alpha^k - z^k) - K_P \sum_{j \in \mathcal{N}_k} (z^k - z^j) + K_I \sum_{j \in \mathcal{N}_k} (\omega^k - \omega^j) \\
-    \dot{\omega}^k = - K_I \sum_{j \in \mathcal{N}_k} (z^k - z^j)
+    \dot{z}^l = \gamma(\alpha^j - z^j) - K_P \sum_{l \in \mathcal{N}_j} (z^j - z^l) + K_I \sum_{l \in \mathcal{N}_j} (\omega^j - \omega^j) \\
+    \dot{\omega}^j = - K_I \sum_{l \in \mathcal{N}_j} (z^j - z^l)
 \end{cases}
 \]
 where:
 \begin{itemize}
-    \item \( z^k \): moving average computed by the \( k \)-th UAV;
-    \item \( \omega^k \): integral variable, representing cumulative error 
+    \item \( z^j \): moving average computed by the \( k \)-th UAV;
+    \item \( \omega^j \): integral variable, representing cumulative error 
     with neighbors;
-    \item \( \alpha^k \): time-varying set-point, mean of neighboring UAVs' estimates;
-    \item \( \mathcal{N}_k \): set of neighbors of the \( k \)-th UAV;
+    \item \( \alpha^j \): time-varying set-point, mean of neighboring UAVs' estimates;
+    \item \( \mathcal{N}_j \): set of neighbors of the \( k \)-th UAV;
     \item \( \gamma \): hyperparameter adjusting convergence rate;
     \item \( K_P \) and \( K_I \): proportional and integral control gains.
 \end{itemize}
 This consensus mechanism enables UAVs to converge to a shared moving average, 
-as each minimizes differences with its neighbors. The tracking term \( \gamma(\alpha^k - z^k) \) 
-guides the \( k \)-th UAV towards its set-point, while the proportional control term 
-\( -K_P \sum_{j \in \mathcal{N}_k} (z^k - z^j) \) ensures alignment with its neighbors. 
-The integral control term \( K_I \sum_{j \in \mathcal{N}_k} (\omega^k - \omega^j) \) 
+as each minimizes differences with its neighbors. The tracking term \( \gamma(\alpha^j - z^j) \) 
+guides the \( j \)-th UAV towards its set-point, while the proportional control term 
+\( -K_P \sum_{j \in \mathcal{N}_j} (z^j - z^l) \) ensures alignment with its neighbors. 
+The integral control term \( K_I \sum_{j \in \mathcal{N}_j} (\omega^j - \omega^l) \) 
 adds cumulative adjustment based on historical differences, addressing steady-state errors.
 
 This algorithm supports convergence of the UAVs to a common moving average, even with 
@@ -1222,6 +1222,7 @@ defined in \ref{eq:H_rotated_noise}.
 VA AGGIUNTO CHE GLI INDICI DEI DRONI SONO ANCHE SORTATI E CHE NEL PSO AGGIUNGIAMO
 UNA VOMPONENTE RANDOMICA ALLA VELOCITÀ, QUINDI MANCA UN EQUAZIONE
 \subsubsection{Particle Swarm Oprimization}
+\label{sec:PSO}
 The PSO algorithm is an intelligent population-based stochastic optimization technique 
 that simulates the behavior of a natural biological swarm. 
 As already mentioned, each “particle” represents a potential solution in the search space
@@ -1334,14 +1335,11 @@ an exclusion zone mechanism.
 Firstly, the UAVs are confined to the 
 search-space and secondly their velocity is 
 capped to a max value to avoid speed "explosion", \cite{3}.
-
 The constraints are formulated as follows:
-\[
-\begin{cases}
-    \mathbf{p}_{r_j}(\tau_k + 1) = \mathbf{p}_\text{lim}, & \text{if } \mathbf{p}_{r_j}(\tau_k) \notin \Omega, \\
-    \mathbf{v}_j(\tau_k + 1) = v_{\text{max}} \frac{\mathbf{v}_j(\tau_k)}{\|\mathbf{v}_j(\tau_k)\|}, & \text{if } \|\mathbf{v}_j(\tau_k)\| > v_{\text{max}}.
-\end{cases}
-\]
+\begin{empheq}[left=\empheqlbrace]{alignat=2}
+    \mathbf{p}_{r_j}(\tau_k + 1) &= \mathbf{p}_\text{lim}, &\quad \text{if } \mathbf{p}_{r_j}(\tau_k) \notin \Omega \label{eq:boundary_condition}\\
+    \mathbf{v}_j(\tau_k + 1) &= v_{\text{max}} \frac{\mathbf{v}_j(\tau_k)}{\|\mathbf{v}_j(\tau_k)\|}, &\qquad \text{if } \|\mathbf{v}_j(\tau_k)\| > v_{\text{max}} \label{eq:velocity_clamping}
+\end{empheq}           
 where \( \mathbf{p}_\text{lim} \) is the nearest point on the boundaries of the search space \( \Omega \), 
 and \( v_{\text{max}} \) denotes the maximum allowed step length.
 
@@ -1396,7 +1394,7 @@ A neighboring UAV \( l \) receives the exclusion zone when:
 Each drone maintains a list of shared exclusion zones 
 \( \mathcal{E}_\text{shared} \), which is defined as:
 \[
-\mathcal{E}_\text{shared} = \{\mathcal{E}_1, \mathcal{E}_2, \dots, \mathcal{E}_k\}
+\mathcal{E}_\text{shared} = \{\mathcal{E}_1, \mathcal{E}_2, \dots, \mathcal{E}_j\}
 \]
 which is an unordered and incomplete set of 
 where the union is over all exclusion zones shared by neighboring drones.

@@ -1,16 +1,49 @@
-\chapter{Implementation}
-\section{Introduction}
-\section{Simulation Details}
-The code was written in \textit{Matlab} and is structured into multiple sections and files, to increase the modularity and readability of the code while simplifying the debugging process at the same time. The code has the following main components: 
+\chapter{Experiments}
 
+\section{Implementation}
+The implementation of this work is done in \textit{Matlab} and 
+is structured into multiple sections and files, to increase the modularity and 
+readability of the code while simplifying the debugging process at the same time. 
+The entire code is divided into the following categories:
+\begin{itemize}
+    \item A folder containing the RLS algorithm in the case where the sources
+    do not influence one another;
+    \item A folder containing the complete PSO algorithm integrated with 
+    the PID control (the main focus of our work);
+    \item A file with the complete NSS analysis of rotational invariance
+    and symmetry properties;
+    \item A file with the PID control applied to tracking the initial trajectory
+    the drone follow for setup.
+\end{itemize}
+Th latter contains the same controller and model functions of the Controller
+class of the PSO algorithm. The only difference consists in the desired velocities and positions, 
+which are given by a predefined trajectory and by the PSO algorithm
+respectively.
+
+\noindent
+\\
+The complete PSO with Control algorithm has the following main components: 
 \begin{itemize}
     \item Setup and main loop of the simulation;
-    \item The drone and ARTVA classes;
-    \item The trajectory replanner;
-    \item The plotter (that shows graphically the simulation).
+    \item The Particle/Drone class;
+    \item The Controller class;
+    \item The ARTVAs class;
+    \item The Plotter class.
 \end{itemize}
-
-The main structure of the simulation is the following: we first perform a setup step in which we initialize the drones, the transmitting ARTVA and other useful variables and constants; then in an infinite loop we carry out all the computations that need to be performed at every time instant, such as moving the drones along their trajectories, estimating the position of the transmitting ARTVA and drawing on the screen the current state of the simulation; if some specific conditions are met we trigger the Replanner, whose job is to assign new goals to the drones; finally if we have successfully estimated the position of the transmitting ARTVA we stop the simulation. We will now discuss in more detail all the steps presented.
+The main structure of the simulation is the following: 
+we first perform a setup step in which we initialize the drones, 
+the transmitting ARTVAs and other useful variables and constants.
+Then, the simulation is divided into two phases:
+\begin{itemize}
+    \item Exploration phase: the drones are asked to position 
+    themselves uniformly in the search space by followying a
+    predifined trajectory;
+    \item Exploition phase: the drones are moved by the modified complete
+    PSO algorithm to localive the multiple avalanche victims (ARTVAs).
+\end{itemize}
+If we have successfully estimated the position of all 
+the trasmitting ARTVAs we stop the simulation, otherwise. 
+We will now discuss in more detail all the steps presented.
 
 The simulation starts with the initialization of many variables and constants that will be useful throughout the whole experiment, such as the time step of the simulator, the kind of trajectory the drones will have to follow, the number of drones, the current time instant, whether we are in the centralized or distributed case and so on.
 
@@ -18,6 +51,19 @@ Then we move on to the setup step, in which we instantiate all the drones and as
 
 Finally, we move on to the main loop in which we first move the drones and then perform the estimation algorithm, directly in the main loop if we are in the centralized case or by calling the drones’ subroutine if we are in the decentralized case. In the decentralized case we also perform the Average Consensus Filter estimation as already described in a previous paragraph.\\
 The next step is to check if we are satisfying the stopping criterium and in such case end the simulation: in the initialization phase we define a “threshold” value and a “control time” value so that if the estimations of the ARTVA do not move more than “threshold” meters for “control time” seconds, then we can exit the main loop and terminate. If the stopping criterium is not met, we instead need to display the next frame representing the simulation and to do so we need to pass to the Plotter class all the necessary pieces of information, such as the new positions of the drones, their updated estimations, and in the distributed case also the updated values of the ACF estimation. 
+\section{Implementation}
+
+The implementation of the Particle Swarm Optimization (PSO) algorithm begins with the initialization of critical parameters and drone-specific properties to ensure robust exploration and optimization in the search space. The algorithm is designed to locate multiple fixed sources in a bounded region using a swarm of drones, which act as particles. Each drone independently evaluates its position while collaborating with others to optimize source detection. 
+
+The hyperparameters include the number of drones (\texttt{n\_drones}), the number of iterations (\texttt{n\_iterations}), search space boundaries (\texttt{bounds}), and maximum velocity (\texttt{max\_velocity}). These parameters control the dynamics of the swarm, including movement constraints and the duration of the search. The sources (\texttt{p\_sources}) are fixed at predefined positions, and their number (\texttt{n\_sources}) determines how the drones are grouped during initialization. The algorithm employs inertia (\texttt{inertia}), cognitive (\texttt{cognitive\_factor}), and social (\texttt{social\_factor}) coefficients to balance exploration and exploitation, ensuring drones explore the search space efficiently before converging on optimal solutions.
+
+The initialization phase involves assigning drones to groups based on the number of sources and setting up group best positions and values. Each drone is initialized with a position, velocity, and group affiliation, while their trajectories are preallocated to track their movements throughout the search process. The algorithm leverages a plotter to visualize drone positions, trajectories, and exclusion zones during the simulation.
+
+The exploration phase uses a circular pattern to evenly partition the search space, allowing drones to identify potential areas of interest. Drones move in straight lines toward their goals while adhering to maximum velocity constraints. This phase is crucial for ensuring that the search space is sufficiently covered before the optimization phase begins.
+
+During the main PSO loop, drones evaluate their positions based on the Normalized Source Strength (NSS) of detected sources. They share information within a specified communication radius, allowing collaborative updates to group best positions. Drones that enter exclusion zones—areas already associated with identified sources—adjust their positions and group affiliations to maintain the integrity of the optimization process. Their velocities, personal bests, and group bests are updated dynamically based on their performance and interactions.
+
+The algorithm concludes by visualizing the final positions of drones and sources, plotting their trajectories, and computing errors between detected and true source positions. This ensures the algorithm's performance can be evaluated against predefined criteria, such as maximum allowable errors, validating its effectiveness in multi-source localization scenarios.
 
 \subsection{Drone and ARTVA classes}
 The simpler of the two classes is the ARTVA class, and its sole purpose is to store the position of the ARTVA itself and emit the signal received by a drone. To “emit” such a signal we use the \textit{getSignal()} function, which takes in input the position of the drone and returns a single floating-point value, that is the value of the signal perceived by the drone. To obtain such value we can use the same equation that the drones use to estimate the ARTVA, namely $y(p_k,\tau_k) = \phi^T(p_k)x(p_t)$.\\
@@ -49,10 +95,6 @@ Where:
 \end{itemize}
 \end{comment}
 
-\subsection{Replanner}
-The Replanner is a single function that manages the trajectory re-planning whenever all the drones have reached their objective. Its behavior depends on the kind of trajectory type chosen, but the main idea is to wait for all the drones to reach their first objective, which is the one that makes the drones explore the space, and then make them converge to the estimated point.\\ 
-While converging to the estimated point, the space is explored further and once the drones reach their goal, a new, refined value for the estimated point is available. So once all the drones converge to their first estimated point, the Replanner sets the new, refined value as their new goal and this “looping” behavior continues until the stopping criterion of the simulation is met. 
-
 \subsection{Plotter}
 The Plotter class is the component that is responsible for the visualization of the simulation in real time: to do so, it opens a separate window at the beginning of the simulation and efficiently displays the simulation inside it. Since the draw calls of the Plotter can be the real bottleneck in the main loop of the simulation, we carefully optimized the code relative to this task so that redrawing the scene only updates the parts that changed between subsequent time-steps and everything else is kept as is.\\
 It should be noted that the simulation waits a defined time-step at each loop, from which all the computational time is subtracted, so to have faster simulations. However, this does not affect the time used to comment the results or for other calculations used in the algorithm, which remains the actual time it takes the drones to converge. 
@@ -78,7 +120,7 @@ When the \textit{check} array variable contains only 0 values, the algorithm ter
 
 In the distributed scenario, the stopping criterium remains fundamentally unchanged. However, the chosen estimate value is based on the mean estimated by the last drone through the ACF estimation. Thanks to the high precision of the ACF performance (with differences in the order of millimeters), it is possible to select arbitrarily any drone. This selected drone then signals all others to stop the search, as the goal has been accurately estimated. We opted for the final drone rather than any other one, as in the "\textit{linear}" case the last drone covers the greatest distance, which improves its estimation performance. In the other two cases, though, the choice was irrelevant because there were no drones outperforming the others, since they all tend to travel more or less the same amount of space.
 
-\section{Particle Swarm Optimization}
+\subsection{Particle Swarm Optimization}
 QUELLI DELLO SPAZIO METTONO LO PSEUDOCODICE DI QUESTA PARTE,
 MAGARI METTERE NELL IMPLEMENTATION.
 Algorithm 2: Update of the Global Historical Optimal
@@ -207,8 +249,8 @@ while $m$ is the slope of the trajectory calculated from the drone's angle.
     \label{fig:exploration_pattern}
 \end{figure}
 
-\section{Exploitation Phase}
-\subsection{Velocity Update}
+\subsubsection{Exploitation Phase}
+\textbf{Velocity Update}
 At each time step, the velocity update of the standard PSO algorithm is modified in order to favor the complete 
 exploration of the search space and to avoid premature convergence to local maxima, where a source is not present. 
 A uniform random noise is added to the velocity of each particle to achieve a \textit{persistence of excitation},
@@ -232,10 +274,10 @@ to a maximum value \(v_{\text{max}}\):
 v_{\text{max}} \cdot \frac{\mathbf{v}_i}{\|\mathbf{v}_i\|}, & \text{if } \|\mathbf{v}_i\| \geq v_{\text{max}} \\
 \mathbf{v}_i, & \text{otherwise}
 \end{cases}
-\] \label{eq:velocity_clamping}
+\] \label{eq:velocity_clamping3}
 
 
-\subsection{Exclusion Zone Mechanism}
+\textbf{Exclusion Zone Mechanism}
 An additional modification to the standard PSO algorithm 
 is the introduction of an exclusion zone mechanism.
 This mechanism prevents multiple drones from focusing 
@@ -256,7 +298,7 @@ zone mechanism involves several key parts:
     following a calculated escape vector.
 \end{itemize}
 
-\subsubsection{Detection}
+\textbf{Detection}
 Each drone establishes an exclusion zone when it detects a 
 source, meaning it has computed an NSS higher than a certain 
 threshold. The exclusion zone is defined as a circular area 
@@ -266,7 +308,7 @@ chosen experimentally, which determines the \textit{resolution}
 of the algorithm. The exclusion zone is mantained until the end 
 of the simulation.
 
-\subsubsection{Sharing}
+\textbf{Sharing}
 Our algorithm favors a decentralized approach, which is useful 
 in scenarios where communication between drones is not always 
 possible or easy. A drone can communicate with another when 
@@ -278,7 +320,7 @@ Each drone maintains a list of exclusion zones that it has
 received from others. This sharing process helps the swarm 
 avoid redundant exploration around already identified sources.
 
-\subsubsection{Avoidance}
+\textbf{Avoidance}
 When a drone detects that it is within the radius of a shared 
 exclusion zone, it is programmed to move away from it. 
 The drone computes a new goal position where it needs to go, far from the 
@@ -313,6 +355,7 @@ from the exclusion zone and covers a distance proportional
 to \(\alpha\). 
 \\
 
+MODIFICARE QUEST ALGORITHMO AGGIUNGENDO LA COSA DEL CONTROLLO
 The exclusion zone mechanism allows the swarm 
 to adaptively adjust its search strategy based on the locations 
 of previously detected sources, leading to faster convergence 
@@ -381,7 +424,10 @@ values, like in the standard PSO algorithm. The final output is the set of best 
 \( G_{\text{best}} \), composed of the best estimated position of a source by each group.
 
 
-\section{Experiments}
+\section{Results}
+DIRE CHE DRONE ABBIAMO USATO COME MODELLO PER LE SIMULAZIONI
+METTERE UNA FOTO VOLENDO e METTERE CITAZIONE DA DOVE VENGONO I DATI
+SPIEGARE I DATI DEL MODELLO DEI PARAMETRI DEL DRONE IN UNA TABELLA
 In the context of search and rescue (S\&R) missions, the number of available 
 UAVs is typically limited (ranging from 1 to 10 \cite{PSO_original}), and the search area 
 usually spans only a few thousand square meters.
@@ -397,3 +443,67 @@ continued operation in challenging environments such asmountain regions and adve
 conditions, like in our scenario. While decentralized methods may exhibit slower convergence and slightly higher estimation 
 errors due to partial information exchange, they remain effective and efficient in situations where 
 centralized coordination is impractical or demands excessive resources.
+
+\subsection{PID for Trajectory Tracking}
+METTERE LA TRAIETTORIA CHE VIENE SEGUITA
+The results of PID control using the simplified model \eqref{eq:simplified_model}, applied to trajectory tracking during the first positioning (exploration) phase of the algorithm, are presented in the following figures. Figure \ref{fig:pd_traj_comparison} illustrates the comparison between the actual and desired trajectory in 3D space, showcasing the effectiveness of the control strategy in aligning the drone's path with the desired trajectory. Figures \ref{fig:pid_x}, \ref{fig:pid_y}, and \ref{fig:pid_z} provide a detailed breakdown of the trajectory tracking along the \(x\), \(y\), and \(z\) axes, respectively. These plots highlight the individual tracking performance in each dimension and confirm the controller's precision in following the desired positions.
+
+Figure \ref{fig:pid_sim} shows the simulation over time, providing an overview of the control system's behavior during this phase. Additionally, the rotor velocities calculated using \eqref{eq:rotor_velocities} are plotted in Figure \ref{fig:rotor_velocities}. This figure provides insights into the actuation required to achieve the desired trajectory.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/traj_comparison.png}
+    \caption[3D Trajectory Tracking]{Comparison of the actual and desired trajectory in 3D space during the exploration phase.}
+    \label{fig:pd_traj_comparison}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/pid_x.png}
+        \caption[Tracking in X-axis]{Actual and desired $x$ position over time.}
+        \label{fig:pid_x}
+    \end{minipage}
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/pid_y.png}
+        \caption[Tracking in Y-axis]{Actual and desired $y$ position over time.}
+        \label{fig:pid_y}
+    \end{minipage}
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/pid_z.png}
+        \caption[Tracking in Z-axis]{Actual and desired $z$ position over time.}
+        \label{fig:pid_z}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=\textwidth]{images/pid_sim.png}
+    \caption[Simulation Overview]{Time instant during the simulation illustrating the system's dynamic behavior.}
+    \label{fig:pid_sim}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.49\textwidth]{images/rotor_velocities.png}
+    \caption[Rotor Velocities]{Rotor velocities over time as calculated using \eqref{eq:rotor_velocities}, showing the actuation required for trajectory tracking.}
+    \label{fig:rotor_velocities}
+\end{figure}
+
+\section{PSO wih Control}
+\subsection{Case 1}
+\subsection{Case 2}
+\subsection{Case 3}
+
+\section{Conclusions}
+dire che e un euristica quindi non e sempre sicuro
++ droni ovviamnete piu facile e 
+ma comunque buoni risultati in generale 
+puo succedere che l algoritmo non funzioni bene a volte 
+perchè i droni rimangono
+attratti sempre dalle stesse sorgenti e non 
+"vedono" delle altre ma questo è una cosa diciamo 
+intrinseca al problema in se che stiamo affrontando.

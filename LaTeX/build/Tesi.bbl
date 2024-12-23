@@ -227,6 +227,41 @@
       \verb 10.1071/EG04297
       \endverb
     \endentry
+    \entry{backstepping_control}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=4cf4957b4aeee5bd835a60c8ea3d8704}{%
+           family={Madani},
+           familyi={M\bibinitperiod},
+           given={Tarek},
+           giveni={T\bibinitperiod}}}%
+        {{hash=7722689e4914ea2cb1cd5a029830463f}{%
+           family={Benallegue},
+           familyi={B\bibinitperiod},
+           given={Abdelaziz},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{fullhash}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{fullhashraw}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{bibnamehash}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{authorbibnamehash}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{authornamehash}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{authorfullhash}{e8f52fa82023ee17974c3a00347c86e6}
+      \strng{authorfullhashraw}{e8f52fa82023ee17974c3a00347c86e6}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2006 IEEE/RSJ International Conference on Intelligent Robots and Systems}
+      \field{title}{Backstepping Control for a Quadrotor Helicopter}
+      \field{year}{2006}
+      \field{pages}{3255\bibrangedash 3260}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/IROS.2006.282433
+      \endverb
+      \keyw{Backstepping;Helicopters;Vehicle dynamics;Unmanned aerial vehicles;Automatic control;Propellers;Humans;Stability;Intelligent robots;Nonlinear control systems}
+    \endentry
     \entry{not_import_formula_z}{article}{}{}
       \name{author}{3}{}{%
         {{hash=23281aa9fc30632fc9a9f27b04c90608}{%
@@ -627,6 +662,46 @@
       \verb 10.1071/EG12020
       \endverb
     \endentry
+    \entry{geometric_control}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=86bc5919d49028a59b2e0a8cf7ffc3c4}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Taeyoung},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d0d728702b3b5068eeb3ccb10586143f}{%
+           family={Leok},
+           familyi={L\bibinitperiod},
+           given={Melvin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6b74c41e27a494f9efc20fe6a8402acc}{%
+           family={McClamroch},
+           familyi={M\bibinitperiod},
+           given={N.\bibnamedelimi Harris},
+           giveni={N\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab9cb6d4791a163c9f18ea77573fa2de}
+      \strng{fullhash}{ebe487b1ea3f73c983b23d6d08c7b614}
+      \strng{fullhashraw}{ebe487b1ea3f73c983b23d6d08c7b614}
+      \strng{bibnamehash}{ebe487b1ea3f73c983b23d6d08c7b614}
+      \strng{authorbibnamehash}{ebe487b1ea3f73c983b23d6d08c7b614}
+      \strng{authornamehash}{ab9cb6d4791a163c9f18ea77573fa2de}
+      \strng{authorfullhash}{ebe487b1ea3f73c983b23d6d08c7b614}
+      \strng{authorfullhashraw}{ebe487b1ea3f73c983b23d6d08c7b614}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2012 American Control Conference (ACC)}
+      \field{title}{Nonlinear robust tracking control of a quadrotor UAV on SE(3)}
+      \field{year}{2012}
+      \field{pages}{4649\bibrangedash 4654}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ACC.2012.6315143
+      \endverb
+      \keyw{Attitude control;Control systems;Vectors;Robustness;Propellers;Aerodynamics;Vehicle dynamics}
+    \endentry
     \entry{model_quadrotor}{article}{}{}
       \name{author}{3}{}{%
         {{hash=523f1624940e07366b63a96872ddb4be}{%
@@ -948,6 +1023,57 @@
       \endverb
       \verb{url}
       \verb https://books.google.it/books?id=J9ygBwAAQBAJ
+      \endverb
+    \endentry
+    \entry{figura_bella_drone}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=5ba9e2f4d22a4b7b82a67520dac7e7b8}{%
+           family={Lanzon},
+           familyi={L\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c51e07ae0b440ed165dfcbdc5b6ae6c2}{%
+           family={Freddi},
+           familyi={F\bibinitperiod},
+           given={Alessandro},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e4658aa7dfb2527682105193a4f39c3b}{%
+           family={Longhi},
+           familyi={L\bibinitperiod},
+           given={Sauro},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b1e57f1ee9a0881a5443fc406fb7174a}
+      \strng{fullhash}{1681b69684bb861223bd4c65bda7f6bf}
+      \strng{fullhashraw}{1681b69684bb861223bd4c65bda7f6bf}
+      \strng{bibnamehash}{1681b69684bb861223bd4c65bda7f6bf}
+      \strng{authorbibnamehash}{1681b69684bb861223bd4c65bda7f6bf}
+      \strng{authornamehash}{b1e57f1ee9a0881a5443fc406fb7174a}
+      \strng{authorfullhash}{1681b69684bb861223bd4c65bda7f6bf}
+      \strng{authorfullhashraw}{1681b69684bb861223bd4c65bda7f6bf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, the problem of designing a control law in case of rotor failure in quadrotor vehicles is addressed. First, a nonlinear mathematical model for a quadrotor vehicle is derived, which includes translational and rotational dynamics. Then a robust feedback linearization controller is developed, which sacrifices the controllability of the yaw state due to rotor failure to linearize the closed-loop system around a working point, where roll and pitch angles are zero and the angular speed around the vertical axis is a nonzero constant. An H∞ loop shaping technique is adopted to achieve regulation of these variables around the chosen working point. Finally, an outer loop is proposed for achieving control of the linear displacement under the assumption of small angles approximation for the pitch and roll angles. The proposed control strategy allows the vehicle to use the remaining three functional rotors to enter a constant angular speed around its vertical axis, granting stability and representing an effective way to deal with a rotor failure in quadrotor vehicles.}
+      \field{journaltitle}{Journal of Guidance, Control, and Dynamics}
+      \field{number}{2}
+      \field{title}{Flight Control of a Quadrotor Vehicle Subsequent to a Rotor Failure}
+      \field{volume}{37}
+      \field{year}{2014}
+      \field{pages}{580\bibrangedash 591}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.2514/1.59869
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.2514/1.59869
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2514/1.59869
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2514/1.59869
       \endverb
     \endentry
     \entry{12}{article}{}{}
