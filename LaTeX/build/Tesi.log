@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  23 DEC 2024 02:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  27 DEC 2024 18:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1613,6 +1613,15 @@ l.115
 [3
 
 ]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 88.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
 
 [4])
 \tf@toc=\write12
@@ -1740,7 +1749,7 @@ Chapter 3.
 
 
 ] Excluding 'comment' comment.
-<images/polar_plot.png, id=1013, 338.2236pt x 330.2739pt>
+<images/polar_plot.png, id=1020, 338.2236pt x 330.2739pt>
 File: images/polar_plot.png Graphic file (type png)
 <use images/polar_plot.png>
 Package pdftex.def Info: images/polar_plot.png  used on input line 131.
@@ -1764,7 +1773,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [31]
 
 [32]
-<images/gradients_single_anal.jpg, id=1103, 1927.2pt x 957.5775pt>
+<images/gradients_single_anal.jpg, id=1110, 1927.2pt x 957.5775pt>
 File: images/gradients_single_anal.jpg Graphic file (type jpg)
 <use images/gradients_single_anal.jpg>
 Package pdftex.def Info: images/gradients_single_anal.jpg  used on input line 537.
@@ -1777,7 +1786,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 536--543
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/NSS_single_anal.jpg, id=1108, 1927.2pt x 957.5775pt>
+<images/NSS_single_anal.jpg, id=1115, 1927.2pt x 957.5775pt>
 File: images/NSS_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_single_anal.jpg>
 Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 555.
@@ -1785,7 +1794,7 @@ Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 555.
 
 
 [33]
-<images/gradients_rotated_single_anal.jpg, id=1122, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_single_anal.jpg, id=1129, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_single_anal.jpg Graphic file (type jpg)
 <use images/gradients_rotated_single_anal.jpg>
 Package pdftex.def Info: images/gradients_rotated_single_anal.jpg  used on input line 600.
@@ -1795,7 +1804,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 599--603
  []|  [] 
  []
 
-<images/NSS_rotated_single_anal.jpg, id=1123, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_single_anal.jpg, id=1130, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_rotated_single_anal.jpg>
 Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 608.
@@ -1805,7 +1814,7 @@ Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 
 [34 <./images/gradients_single_anal.jpg>]
 
 [35 <./images/NSS_single_anal.jpg> <./images/gradients_rotated_single_anal.jpg>]
-<images/gradients_single_num.jpg, id=1142, 1927.2pt x 957.5775pt>
+<images/gradients_single_num.jpg, id=1149, 1927.2pt x 957.5775pt>
 File: images/gradients_single_num.jpg Graphic file (type jpg)
 <use images/gradients_single_num.jpg>
 Package pdftex.def Info: images/gradients_single_num.jpg  used on input line 672.
@@ -1820,7 +1829,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 671--676
 [36 <./images/NSS_rotated_single_anal.jpg>]
 
 [37 <./images/gradients_single_num.jpg>]
-<images/gradients_rotated_single_num.jpg, id=1165, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_single_num.jpg, id=1172, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_single_num.jpg Graphic file (type jpg)
 <use images/gradients_rotated_single_num.jpg>
 Package pdftex.def Info: images/gradients_rotated_single_num.jpg  used on input line 739.
@@ -1830,7 +1839,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 738--742
  []|  [] 
  []
 
-<images/NSS_rotated_single_num.jpg, id=1166, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_single_num.jpg, id=1173, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_single_num.jpg Graphic file (type jpg)
 <use images/NSS_rotated_single_num.jpg>
 Package pdftex.def Info: images/NSS_rotated_single_num.jpg  used on input line 747.
@@ -1844,7 +1853,7 @@ Package pdftex.def Info: images/NSS_rotated_single_num.jpg  used on input line 7
 [40]
 
 [41]
-<images/gradients_multi_anal.jpg, id=1215, 1927.2pt x 991.705pt>
+<images/gradients_multi_anal.jpg, id=1222, 1927.2pt x 991.705pt>
 File: images/gradients_multi_anal.jpg Graphic file (type jpg)
 <use images/gradients_multi_anal.jpg>
 Package pdftex.def Info: images/gradients_multi_anal.jpg  used on input line 1000.
@@ -1854,12 +1863,12 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 999--1003
 []|  [] 
  []
 
-<images/NSS_multi_anal.jpg, id=1216, 1927.2pt x 991.705pt>
+<images/NSS_multi_anal.jpg, id=1223, 1927.2pt x 991.705pt>
 File: images/NSS_multi_anal.jpg Graphic file (type jpg)
 <use images/NSS_multi_anal.jpg>
 Package pdftex.def Info: images/NSS_multi_anal.jpg  used on input line 1010.
 (pdftex.def)             Requested size: 316.80121pt x 163.01898pt.
-<images/gradients_rotated_multi_anal.jpg, id=1217, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_multi_anal.jpg, id=1224, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_multi_anal.jpg Graphic file (type jpg)
 <use images/gradients_rotated_multi_anal.jpg>
 Package pdftex.def Info: images/gradients_rotated_multi_anal.jpg  used on input line 1019.
@@ -1869,7 +1878,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 1018--1022
 []|  [] 
  []
 
-<images/NSS_rotated_multi_anal.jpg, id=1218, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_multi_anal.jpg, id=1225, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_multi_anal.jpg Graphic file (type jpg)
 <use images/NSS_rotated_multi_anal.jpg>
 Package pdftex.def Info: images/NSS_rotated_multi_anal.jpg  used on input line 1029.
@@ -1881,7 +1890,7 @@ Package pdftex.def Info: images/NSS_rotated_multi_anal.jpg  used on input line 1
 [43 <./images/gradients_multi_anal.jpg> <./images/NSS_multi_anal.jpg>]
 
 [44 <./images/gradients_rotated_multi_anal.jpg> <./images/NSS_rotated_multi_anal.jpg>]
-<images/gradients_multi_num.jpg, id=1247, 1927.2pt x 991.705pt>
+<images/gradients_multi_num.jpg, id=1254, 1927.2pt x 991.705pt>
 File: images/gradients_multi_num.jpg Graphic file (type jpg)
 <use images/gradients_multi_num.jpg>
 Package pdftex.def Info: images/gradients_multi_num.jpg  used on input line 1106.
@@ -1891,12 +1900,12 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 1105--1109
 []|  [] 
  []
 
-<images/NSS_multi_num.jpg, id=1248, 1927.2pt x 991.705pt>
+<images/NSS_multi_num.jpg, id=1255, 1927.2pt x 991.705pt>
 File: images/NSS_multi_num.jpg Graphic file (type jpg)
 <use images/NSS_multi_num.jpg>
 Package pdftex.def Info: images/NSS_multi_num.jpg  used on input line 1116.
 (pdftex.def)             Requested size: 316.80121pt x 163.01898pt.
-<images/gradients_rotated_multi_num.jpg, id=1249, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_multi_num.jpg, id=1256, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_multi_num.jpg Graphic file (type jpg)
 <use images/gradients_rotated_multi_num.jpg>
 Package pdftex.def Info: images/gradients_rotated_multi_num.jpg  used on input line 1125.
@@ -1906,7 +1915,7 @@ Overfull \hbox (81.02744pt too wide) in paragraph at lines 1124--1128
 []|  [] 
  []
 
-<images/NSS_rotated_multi_num.jpg, id=1250, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_multi_num.jpg, id=1257, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_multi_num.jpg Graphic file (type jpg)
 <use images/NSS_rotated_multi_num.jpg>
 Package pdftex.def Info: images/NSS_rotated_multi_num.jpg  used on input line 1135.
@@ -1923,9 +1932,11 @@ Package pdftex.def Info: images/NSS_rotated_multi_num.jpg  used on input line 11
 
 [49]
 
-[50])
+[50]
 
-[51]
+[51])
+
+[52]
 \openout2 = `Cap_4.aux'.
 
  (./Cap_4.tex
@@ -1935,13 +1946,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[52
+[53
 
 
 
 
 ]
-<images/ECEF_ENU_Longitude_Latitude_relationships.png, id=1334, 521.95pt x 501.875pt>
+<images/ECEF_ENU_Longitude_Latitude_relationships.png, id=1350, 521.95pt x 501.875pt>
 File: images/ECEF_ENU_Longitude_Latitude_relationships.png Graphic file (type png)
 <use images/ECEF_ENU_Longitude_Latitude_relationships.png>
 Package pdftex.def Info: images/ECEF_ENU_Longitude_Latitude_relationships.png  used on input line 121.
@@ -1952,7 +1963,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[53]
+[54]
 LaTeX Font Info:    Trying to load font information for U+euf on input line 179.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
@@ -1960,152 +1971,150 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
 )
 
-[54 <./images/ECEF_ENU_Longitude_Latitude_relationships.png>]
-
-[55]
+[55 <./images/ECEF_ENU_Longitude_Latitude_relationships.png>]
 
 [56]
+
+[57]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <12> on input line 441.
 
 
-[57]
-
 [58]
 
 [59]
-<images/quad_model.png, id=1453, 398.48875pt x 307.1475pt>
+
+[60]
+<images/quad_model.png, id=1469, 398.48875pt x 307.1475pt>
 File: images/quad_model.png Graphic file (type png)
 <use images/quad_model.png>
-Package pdftex.def Info: images/quad_model.png  used on input line 613.
+Package pdftex.def Info: images/quad_model.png  used on input line 614.
 (pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
 
-[60 <./images/quad_model.png>]
+[61 <./images/quad_model.png>]
 
-[61]
+[62]
 File: images/quad_model.png Graphic file (type png)
 <use images/quad_model.png>
-Package pdftex.def Info: images/quad_model.png  used on input line 891.
+Package pdftex.def Info: images/quad_model.png  used on input line 898.
 (pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 895--903
+Underfull \hbox (badness 10000) in paragraph at lines 902--910
 
  []
 
 
 
-[62])
+[63])
 
-[63]
+[64]
 \openout2 = `Cap_5.aux'.
 
  (./Cap_5.tex
 Chapter 5.
 
 
-[64
+[65
 
 
 
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 58.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
 
-Overfull \hbox (10.26117pt too wide) in paragraph at lines 58--59
-\T1/qtm/m/n/10.95 (-20) (\T1/lmtt/m/n/10.95 n_iterations\T1/qtm/m/n/10.95 (-20) ), search space bound-aries (\T1/lmtt/m/n/10.95 bounds\T1/qtm/m/n/10.95 (-20) ), and max-i-mum ve-loc-ity (\T1/lmtt/m/n/10.95 max_velocity\T1/qtm/m/n/10.95 (-20) ).
+[66]
+
+LaTeX Warning: Reference `eq:distance_formula' on page 67 undefined on input line 147.
+
+
+LaTeX Warning: Reference `eq:nss_formula' on page 67 undefined on input line 150.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
+
  []
 
 
-
-[65]
-
-[66] Excluding 'comment' comment.
 
 [67]
 
 [68]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 183.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 301.
 
 
 [69]
-<images/exploration_pattern.jpg, id=1560, 1495.5875pt x 957.5775pt>
-File: images/exploration_pattern.jpg Graphic file (type jpg)
-<use images/exploration_pattern.jpg>
-Package pdftex.def Info: images/exploration_pattern.jpg  used on input line 247.
-(pdftex.def)             Requested size: 396.0pt x 253.53766pt.
-
 
 [70]
 
-[71 <./images/exploration_pattern.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 353--357
+[71]
+<images/exploration_pattern.jpg, id=1596, 1495.5875pt x 957.5775pt>
+File: images/exploration_pattern.jpg Graphic file (type jpg)
+<use images/exploration_pattern.jpg>
+Package pdftex.def Info: images/exploration_pattern.jpg  used on input line 428.
+(pdftex.def)             Requested size: 396.0pt x 253.53766pt.
 
- []
+
+LaTeX Warning: Float too large for page by 20.31375pt on input line 524.
 
 
 
 [72]
 
-[73]
-<images/traj_comparison.png, id=1601, 578.16pt x 361.35pt>
+[73 <./images/exploration_pattern.jpg>]
+
+[74]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[75]
+
+[76]
+<images/traj_comparison.png, id=1650, 578.16pt x 361.35pt>
 File: images/traj_comparison.png Graphic file (type png)
 <use images/traj_comparison.png>
-Package pdftex.def Info: images/traj_comparison.png  used on input line 455.
+Package pdftex.def Info: images/traj_comparison.png  used on input line 675.
 (pdftex.def)             Requested size: 396.0pt x 247.49568pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<images/pid_x.png, id=1602, 578.16pt x 361.35pt>
+<images/pid_x.png, id=1651, 578.16pt x 361.35pt>
 File: images/pid_x.png Graphic file (type png)
 <use images/pid_x.png>
-Package pdftex.def Info: images/pid_x.png  used on input line 464.
+Package pdftex.def Info: images/pid_x.png  used on input line 684.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
-<images/pid_y.png, id=1603, 578.16pt x 361.35pt>
+<images/pid_y.png, id=1652, 578.16pt x 361.35pt>
 File: images/pid_y.png Graphic file (type png)
 <use images/pid_y.png>
-Package pdftex.def Info: images/pid_y.png  used on input line 470.
+Package pdftex.def Info: images/pid_y.png  used on input line 690.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
-<images/pid_z.png, id=1604, 578.16pt x 361.35pt>
+<images/pid_z.png, id=1653, 578.16pt x 361.35pt>
 File: images/pid_z.png Graphic file (type png)
 <use images/pid_z.png>
-Package pdftex.def Info: images/pid_z.png  used on input line 476.
+Package pdftex.def Info: images/pid_z.png  used on input line 696.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/rotor_velocities.png, id=1605, 578.16pt x 361.35pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/rotor_velocities.png, id=1654, 578.16pt x 361.35pt>
 File: images/rotor_velocities.png Graphic file (type png)
 <use images/rotor_velocities.png>
-Package pdftex.def Info: images/rotor_velocities.png  used on input line 491.
+Package pdftex.def Info: images/rotor_velocities.png  used on input line 711.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 )
 
-[74]
+[77 <./images/traj_comparison.png (PNG copy)>]
 
-LaTeX Warning: Text page 75 contains only floats.
+[78 <./images/pid_x.png (PNG copy)> <./images/pid_y.png (PNG copy)> <./images/pid_z.png (PNG copy)> <./images/rotor_velocities.png (PNG copy)>]
 
+[79] (build/Tesi.gls)
 
-
-[75 <./images/traj_comparison.png (PNG copy)> <./images/pid_x.png (PNG copy)> <./images/pid_y.png (PNG copy)> <./images/pid_z.png (PNG copy)>]
-
-[76 <./images/rotor_velocities.png (PNG copy)>] (build/Tesi.gls)
-
-[77
+[80
 
 
 
@@ -2121,7 +2130,7 @@ Overfull \hbox (0.88255pt too wide) in paragraph at lines 145--145
 
 
 
-[78
+[81
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec-sc.enc}]
 Overfull \hbox (33.35397pt too wide) in paragraph at lines 145--145
@@ -2135,9 +2144,9 @@ Overfull \hbox (31.68024pt too wide) in paragraph at lines 145--145
 
 
 
-[79]
+[82]
 
-[80]
+[83]
 Overfull \hbox (6.83246pt too wide) in paragraph at lines 145--145
 \T1/qtm/m/n/10.95 (-20) in avalanches us-ing ARVA: an ex-tremum seek-ing ap-proach,^^Q \T1/qtm/m/it/10.95 (-20) CoRR\T1/qtm/m/n/10.95 (-20) , vol. abs/2106.14514,
  []
@@ -2149,7 +2158,7 @@ Overfull \hbox (19.12433pt too wide) in paragraph at lines 145--145
 
 
 
-[81]
+[84]
 
 Package biblatex Warning: No driver for 'unknown'.
 (biblatex)                Using fallback driver on input line 144.
@@ -2161,34 +2170,38 @@ Overfull \hbox (4.50258pt too wide) in paragraph at lines 145--145
 
 
 
-[82] (./ringraziamenti.tex)
+[85] (./ringraziamenti.tex)
 
-[83
+[86
 
 ] (build/Tesi.aux (build/Cap_1.aux) (build/Cap_2.aux) (build/Cap_3.aux) (build/Cap_4.aux) (build/Cap_5.aux))
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `Tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 6449077F88AB2C591D2CAD46CD4F0D85;13005.
+(rerunfilecheck)             Checksum: A645F9BD422DBA175860702F683078B4;12896.
 Package logreq Info: Writing requests to 'Tesi.run.xml'.
 \openout1 = `Tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 58459 strings out of 473579
- 1226882 string characters out of 5728234
- 2139867 words of memory out of 5000000
- 79677 multiletter control sequences out of 15000+600000
- 714539 words of font info for 291 fonts, out of 8000000 for 9000
+ 58495 strings out of 473579
+ 1227634 string characters out of 5728234
+ 2140485 words of memory out of 5000000
+ 79694 multiletter control sequences out of 15000+600000
+ 715717 words of font info for 297 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,17n,131p,2376b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on build/Tesi.pdf (92 pages, 4561726 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
+Output written on build/Tesi.pdf (95 pages, 4596204 bytes).
 PDF statistics:
- 1993 PDF objects out of 2073 (max. 8388607)
- 1787 compressed objects within 18 object streams
- 470 named destinations out of 1000 (max. 500000)
- 67816 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 2047 PDF objects out of 2073 (max. 8388607)
+ 1835 compressed objects within 19 object streams
+ 480 named destinations out of 1000 (max. 500000)
+ 68840 words of extra memory for PDF output out of 74296 (max. 10000000)
 

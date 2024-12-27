@@ -2488,7 +2488,7 @@
     <bcf:citekey order="107" intorder="4">backstepping_control</bcf:citekey>
     <bcf:citekey order="107" intorder="5">geometric_control</bcf:citekey>
     <bcf:citekey order="108" intorder="1">geometric_control</bcf:citekey>
-    <bcf:citekey order="109" intorder="1">PSO_IMPORTANT</bcf:citekey>
+    <bcf:citekey order="109" intorder="1">drone</bcf:citekey>
     <bcf:citekey order="110" intorder="1">PSO_original</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->

@@ -180,8 +180,8 @@ for iter = iter:n_iterations
             iter = iter + step_size; %#ok<FXSET>
             % Introduce randomness to the new position
             %randomness_factor = 10*rand(1, 2);  % Strong random boost to force exploration
-            randomness_factor = 0;
-            particle.position = particle.position + randomness_factor;  % Apply random perturbation
+            %randomness_factor = 0;
+            %particle.position = particle.position + randomness_factor;  % Apply random perturbation
             % Reset personal best (P-best) to a far random position to avoid the exclusion zone
             random_position_far = particle.position + 100 * (2 * rand(1, 2) - 1);  % Set a far random position as new P-best
             particle.p_best = random_position_far;
@@ -218,7 +218,7 @@ for iter = iter:n_iterations
         iteration_duration = 1; 
         for t = 0:dt:iteration_duration
             % Update state
-            state_dot = particle.update_position(dt, state, desired_position, desired_velocity, desired_acceleration);
+            state_dot = particle.update_state(dt, state, desired_position, desired_velocity, desired_acceleration);
             state = state + dt * state_dot;
             % Enforce boundaries
             if state(1) < particle.bounds(1) || state(1) > particle.bounds(2) || ...

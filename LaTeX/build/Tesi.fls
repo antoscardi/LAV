@@ -670,6 +670,10 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/tex-gyre/ec-qtmb.tfm
 INPUT build/Tesi.toc
 INPUT build/Tesi.toc
 INPUT build/Tesi.toc
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
 OUTPUT build/Tesi.toc
 INPUT build/Tesi.lof
 INPUT build/Tesi.lof
@@ -804,6 +808,8 @@ INPUT ./images/NSS_rotated_multi_num.jpg
 INPUT ./images/NSS_rotated_multi_num.jpg
 INPUT ./images/NSS_rotated_multi_num.jpg
 INPUT ./images/NSS_rotated_multi_num.jpg
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
 INPUT ./Cap_4.tex
 INPUT ./Cap_4.tex
 OUTPUT build/Cap_4.aux
@@ -850,12 +856,8 @@ OUTPUT build/Cap_5.aux
 INPUT ./Cap_5.tex
 INPUT ./Cap_5.tex
 INPUT Cap_5.tex
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
 INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
@@ -943,6 +945,7 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb

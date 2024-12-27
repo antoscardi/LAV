@@ -1,246 +1,427 @@
 \chapter{Experiments}
 
 \section{Implementation}
-The implementation of this work is done in \textit{Matlab} and 
+The implementation of this work is done in \textit{Matlab} and it
 is structured into multiple sections and files, to increase the modularity and 
 readability of the code while simplifying the debugging process at the same time. 
 The entire code is divided into the following categories:
 \begin{itemize}
-    \item A folder containing the RLS algorithm in the case where the sources
+    \item A folder containing the \textbf{RLS} algorithm in the case where the sources
     do not influence one another;
-    \item A folder containing the complete PSO algorithm integrated with 
+    \item A folder containing the complete \textbf{PSO} algorithm integrated with 
     the PID control (the main focus of our work);
-    \item A file with the complete NSS analysis of rotational invariance
+    \item A file with the complete \textbf{NSS} analysis of rotational invariance
     and symmetry properties;
-    \item A file with the PID control applied to tracking the initial trajectory
-    the drone follow for setup.
+    \item A file with the \textbf{PID} control applied to tracking the initial trajectory
+    the drones follow for setup.
 \end{itemize}
-Th latter contains the same controller and model functions of the Controller
+Th latter contains the same controller and model functions of the \texttt{Controller}
 class of the PSO algorithm. The only difference consists in the desired velocities and positions, 
 which are given by a predefined trajectory and by the PSO algorithm
 respectively.
 
-\noindent
-\\
+\noindent\\
 The complete PSO with Control algorithm has the following main components: 
 \begin{itemize}
-    \item Setup and main loop of the simulation;
-    \item The Particle/Drone class;
-    \item The Controller class;
-    \item The ARTVAs class;
-    \item The Plotter class.
+    \item Setup and \textbf{\texttt{main loop}} of the simulation;
+    \item The \textbf{\texttt{Particle}} class;
+    \item The \textbf{\texttt{Controller}} class;
+    \item The \textbf{\texttt{ARTVAs}} class;
+    \item The \textbf{\texttt{Plotter}} class.
 \end{itemize}
 The main structure of the simulation is the following: 
 we first perform a setup step in which we initialize the drones, 
 the transmitting ARTVAs and other useful variables and constants.
 Then, the simulation is divided into two phases:
 \begin{itemize}
-    \item Exploration phase: the drones are asked to position 
+    \item \textbf{Exploration} phase: the drones are asked to position 
     themselves uniformly in the search space by followying a
     predifined trajectory;
-    \item Exploition phase: the drones are moved by the modified complete
+    \item \textbf{Exploitation} phase: the drones are moved by the modified complete
     PSO algorithm to localive the multiple avalanche victims (ARTVAs).
 \end{itemize}
 If we have successfully estimated the position of all 
-the trasmitting ARTVAs we stop the simulation, otherwise. 
-We will now discuss in more detail all the steps presented.
+the trasmitting ARTVAs we stop the simulation, otherwise if any of the 
+victims cannot be found the simulation stops after
+a predefined (\texttt{n\_iterations}) maximum number of iterations.
 
-The simulation starts with the initialization of many variables and constants that will be useful throughout the whole experiment, such as the time step of the simulator, the kind of trajectory the drones will have to follow, the number of drones, the current time instant, whether we are in the centralized or distributed case and so on.
+\noindent\\
+The implementation begings with the set-up of 
+many variables and constants that will be useful throughout 
+the whole experiment; and the initialization of the classes and theirs
+crucial parameters (UAV physical quantities, controller gains and 
+particles' data).
+The most important hyperparameters 
+include the number of drones (\texttt{n\_drones}), 
+the number of iterations (\texttt{n\_iterations}), 
+search space boundaries (\texttt{bounds}), 
+and maximum velocity (\texttt{max\_velocity} or $v_\text{max}$). 
+The sources (\texttt{p\_sources}) are fixed at predefined positions, 
+and their number (\texttt{n\_sources}) determines how the drones are grouped 
+during initialization, therefore 
+we suppose we have at least a prior knowledge 
+of the maximum number of victims. Instead, the PSO algorithm employs 
+the inertia (\texttt{inertia} or $\omega$), cognitive (\texttt{cognitive\_factor} or $c_1$), 
+and social (\texttt{social\_factor} or $c_2$) factors to 
+balance exploration and exploitation, 
+ensuring drones explore the search space efficiently
+before converging to optimal solutions.
+Other relevant parameters include the \texttt{velocity\_randomness} ($\beta$), 
+which determines the level of percistency of excitation, the number of groups 
+(\texttt{n\_groups}) which matches the number of sources and
+the \texttt{communication\_radius} ($r_\text{comm}$), which sets the maximum range for drone 
+data transfer.
+Instead, the \texttt{step\_size} ($\alpha$) defines the meters the drones need to 
+travel to move away from an exclusion zone they entered. 
+The \texttt{exclusion\_zone\_radius} ($r_\text{excl}$) prevents redundant 
+exploration near detected sources and avoids multiple drones 
+converging on the same source. It is important in determining
+the "resolution" of the algorithm, since no more than one victim can be found in that
+radius by the drones, only by the human rescuers. 
+A time step (\texttt{dt}) represents 
+the $\tau_s$ control time, while the \texttt{iteration\_duration} 
+is the $\Delta$ of 1 second in Section\ref{sec:PSO+PID}, determining the interval between one PSO 
+update and another.
+Each drone is has an initial position, velocity, and group affiliation, 
+while a data structure is preallocated to store its trajectory 
+throughout the search process.
+In addition to this, we also initialize the \texttt{Plotter} class, 
+whose job is to display in real time drone positions, trajectories, 
+and exclusion zones in real time.
 
-Then we move on to the setup step, in which we instantiate all the drones and assign them a goal as specified in the previous section about exploration strategies, then we instantiate the ARTVA by assigning it a random position inside the world region. In addition to that, we also initialize a Plotter class, whose job is to display the simulation on the screen in a separate window, but a more in-depth analysis of this component will be carried out in the following paragraph.
+\noindent\\
+Then the two phases begin:
+the exploration phase uses a radial pattern to evenly partition 
+the search space, dividing the space unfiformly 
+between the drones. 
+They move in straight lines toward their goals at maximum 
+allowed speed. 
 
-Finally, we move on to the main loop in which we first move the drones and then perform the estimation algorithm, directly in the main loop if we are in the centralized case or by calling the drones’ subroutine if we are in the decentralized case. In the decentralized case we also perform the Average Consensus Filter estimation as already described in a previous paragraph.\\
-The next step is to check if we are satisfying the stopping criterium and in such case end the simulation: in the initialization phase we define a “threshold” value and a “control time” value so that if the estimations of the ARTVA do not move more than “threshold” meters for “control time” seconds, then we can exit the main loop and terminate. If the stopping criterium is not met, we instead need to display the next frame representing the simulation and to do so we need to pass to the Plotter class all the necessary pieces of information, such as the new positions of the drones, their updated estimations, and in the distributed case also the updated values of the ACF estimation. 
-\section{Implementation}
+\noindent\\
+Instead, during the main PSO loop, drones evaluate 
+their positions based on the NSS signal received from the \texttt{ARTVAs} class. 
+If a drone detects NSS values higher than a (\texttt{NSS\_threshold}),
+it flags the localization of a drone.
+Drones that enter exclusion zones move away from it and 
+create a new group, with their velocities, 
+personal best (\texttt{p\_best} or $\mathbf{pbest}$), and group best 
+(\texttt{g\_best} or $\mathbf{gbest}$) resetted.
 
-The implementation of the Particle Swarm Optimization (PSO) algorithm begins with the initialization of critical parameters and drone-specific properties to ensure robust exploration and optimization in the search space. The algorithm is designed to locate multiple fixed sources in a bounded region using a swarm of drones, which act as particles. Each drone independently evaluates its position while collaborating with others to optimize source detection. 
+\noindent\\
+After the real time simulation stops visualizing the final 
+positions of drones and sources, plotting their trajectories, 
+and computing errors between detected and true source positions. 
 
-The hyperparameters include the number of drones (\texttt{n\_drones}), the number of iterations (\texttt{n\_iterations}), search space boundaries (\texttt{bounds}), and maximum velocity (\texttt{max\_velocity}). These parameters control the dynamics of the swarm, including movement constraints and the duration of the search. The sources (\texttt{p\_sources}) are fixed at predefined positions, and their number (\texttt{n\_sources}) determines how the drones are grouped during initialization. The algorithm employs inertia (\texttt{inertia}), cognitive (\texttt{cognitive\_factor}), and social (\texttt{social\_factor}) coefficients to balance exploration and exploitation, ensuring drones explore the search space efficiently before converging on optimal solutions.
+\subsection{\texttt{ARTVAs} class}
+DA RIGUARDARE SE SI DECIDE DI CAMBIARE (M. OPPURE NO?)
+The sole purpose of the \texttt{ARTVAs} class is to 
+emit the signal received by a drone, the NSS. 
+The signal is "emitted" using the \textit{send\_signal\_NSS()} 
+function, which takes the position of the drone as 
+input and returns a single floating-point value representing 
+the perceived signal strength, the same in Eq.\ref{eq:final_model_more}.
 
-The initialization phase involves assigning drones to groups based on the number of sources and setting up group best positions and values. Each drone is initialized with a position, velocity, and group affiliation, while their trajectories are preallocated to track their movements throughout the search process. The algorithm leverages a plotter to visualize drone positions, trajectories, and exclusion zones during the simulation.
+\noindent\\
+The main parameter of this class is \texttt{C}, a 
+scaling factor that determines the magnitude of the NSS signals, 
+whoch is set to a very high value of $10^8$, since we do not consider
+the other physical parameters involved and the signal has very low values
+with increasing distances.
 
-The exploration phase uses a circular pattern to evenly partition the search space, allowing drones to identify potential areas of interest. Drones move in straight lines toward their goals while adhering to maximum velocity constraints. This phase is crucial for ensuring that the search space is sufficiently covered before the optimization phase begins.
+\noindent\\
+DA RIGUARDARE SE SI DECIDE DI CAMBIARE (M. OPPURE NO?)
+It calculates both the combined signal strength 
+from all sources and the individual contributions based 
+on how far a drone is from each source. 
+These calculations ensure that drones receive 
+realistic signal strengths during the optimization process.
+The \textit{superpositionNSS()} method computes the total 
+NSS received by a drone by summing the signals from all sources, 
+considering their distances from the drone. 
+The \textit{send\_signal\_NSS()} method calculates the NSS from a
+specific source to a given drone position. 
+This is done using an inverse fourth-power relationship with distance, 
+ensuring the signal weakens realistically 
+as the drone moves farther from the source.
+The \textit{send\_signal\_NSS()} method applies the formula 
+described in Equation \ref{eq:distance_formula}, 
+where \texttt{\(r\)} is capped at a minimum value of $10^{-5}$ 
+to prevent division by zero. The NSS value is then calculated according 
+to the formula in Equation \ref{eq:nss_formula}.
 
-During the main PSO loop, drones evaluate their positions based on the Normalized Source Strength (NSS) of detected sources. They share information within a specified communication radius, allowing collaborative updates to group best positions. Drones that enter exclusion zones—areas already associated with identified sources—adjust their positions and group affiliations to maintain the integrity of the optimization process. Their velocities, personal bests, and group bests are updated dynamically based on their performance and interactions.
+\subsection{\texttt{Plotter} class}
+The \texttt{Plotter} class is the component that is responsible 
+for the visualization of the simulation in real time during: 
+it opens a separate window at the beginning
+of the simulation and efficiently displays the simulation inside it.
+It also provides methods for initializing plots, updating drone positions, 
+displaying exclusion zones, and presenting trajectories. 
+This visualization aids in monitoring the algorithm's 
+progress and understanding group dynamics.
+This class naturally includes properties to manage 
+the figure sizes, axes limits, drone and source markers, color schemes, 
+legends, and bounds of the plot.
+It also updates the plot title with the current iteration 
+number and simulation time.
 
-The algorithm concludes by visualizing the final positions of drones and sources, plotting their trajectories, and computing errors between detected and true source positions. This ensures the algorithm's performance can be evaluated against predefined criteria, such as maximum allowable errors, validating its effectiveness in multi-source localization scenarios.
+\noindent\\
+The \textit{draw()} method dynamically updates the positions of the 
+drones and displays the fixed sources positions.
+Since the draw calls of the \texttt{Plotter} can be the real bottleneck in the 
+main loop of the simulation, we carefully optimized the code relative 
+to this task so that redrawing the scene only updates the parts that 
+changed between subsequent time-steps and everything else is kept as is.\\
+Note that the simulation waits a defined time-step at each loop, 
+from which all the computational time is subtracted, so to have faster simulations. 
+However, this does not affect the time used to comment the results or for other 
+calculations used in the algorithm, which remains the actual time it takes the 
+drones to localize the victims. After this optimization, 
+we managed to make the \texttt{Plotter} run fast 
+enough that the simulation seems effectively in real time (since 
+the draw calls do not run in a separate thread and therefore are blocking calls).\\
 
-\subsection{Drone and ARTVA classes}
-The simpler of the two classes is the ARTVA class, and its sole purpose is to store the position of the ARTVA itself and emit the signal received by a drone. To “emit” such a signal we use the \textit{getSignal()} function, which takes in input the position of the drone and returns a single floating-point value, that is the value of the signal perceived by the drone. To obtain such value we can use the same equation that the drones use to estimate the ARTVA, namely $y(p_k,\tau_k) = \phi^T(p_k)x(p_t)$.\\
-The only difference is that in this case $x(p_t)$ is a vector of known constants that is populated as follows: 
+\noindent
+In particular, the \texttt{Plotter} displays:
 \begin{itemize}
-    \item $\bar{m}_{11} = \bar{m}_{22} = \bar{m}_{33} = 1$
-    \item $\bar{m}_{12} = \bar{m}_{13} = \bar{m}_{23} = 0$
-    \item $\bar{p}_t = p_t$ is now the real vector of the ARTVA position and not its estimated value
-    \item $\rho = p^T_tp_t$
+    \item The exploration phase trajectory lines in radial shape with respect to 
+    a imaginary circular boundary; 
+    \item The drones, each assigned their own unique color based on their group affiliation;
+    \item The positions of the real ARTVAs; 
+    \item The position of the multiple estimations of the ARTVA, each with 
+    the same color of the corresponding group;
+    \item The exclusion zones, represented as circles whose centers are determined
+    by the drone's position when the signals surpassed the threshold. 
 \end{itemize}
+Note that when a new group is created during 
+the simulation, a new color is dynamically generated and added 
+to the palette. The drone colors and the plot legend are updated 
+accordingly.
 
-The drone class is instead more complex since it has to oversee both the drone’s movement and the drone’s distributed estimation tasks. Moreover, like the ARTVA class, the drone class is used to store some useful properties such as the drone’s position, state, goal and distributed estimation variables (when needed). 
+\noindent\\
+In the final stages of the simulation, the \textit{plot\_best()} 
+method displays the best estimates for source positions achieved 
+by each group. These estimates are marked with group-specific colors, 
+and the legend is updated to include them. Similarly, 
+the \textit{plot\_trajectories()} method visualizes the paths 
+traveled by all drones, providing insight into their trajectories
+during the PSO algorithm, since during the real-time simulation
+the positions are shown only at each PSO time step $\tau_s$.
 
-Relatively to the movement task, the two most important functions are \textit{setGoal()}, that allows to specify a point in space that the drone should reach, and \textit{move()}, that allows to move the drone in small steps following either a bang-coast-bang or a bang-bang velocity profile, depending on whether the distance from the objective is big enough to allow for a coasting phase. 
+\subsection{\texttt{Controller} class}
+\label{sec:controller_class}
+The \texttt{Controller} class contains the 
+complete quadrotor dynamics and the PID control laws. 
+We define in it the physical properties of the drone, such as the mass, 
+the inertia matrix, and the torque and drag coefficients.
+Furthermore, we define the control proportional and derivative 
+gains both for the $x$, $y$, $z$ positions and the 
+the roll (\(\phi\)) and pitch (\(\theta\)) angles.
 
-Relatively to the distributed estimation task, the three most important functions are \textit{sync()}, that retrieves the information from nearby drones, \textit{estimate()}, that performs the actual distributed estimation algorithm, and \textit{ace()}, that implements the Average Consensus Filter. As a sidenote, in the estimation algorithm we used the pseudo-inverse in order to calculate $S^{-1}$.
+\noindent\\
+The \textit{quadrotor\_full\_dynamics()} method computes 
+the drone's translational and rotational dynamics based on 
+its current state, external forces and torques. 
+The state derivative is computed using the Equations\ref{eq:final_model_more}.
 
-\begin{comment}
-To invert the matrix we used the pseudo-inverse, since choosing a value of $\beta = 0.999$ made the S matrix singular, and hence non-invertible.
-The update of the estimation is performed by the code: \\
+\noindent\\
+A second method, \textit{control\_laws()}, is responsible 
+for calculating the input force and torques required 
+to control the quadrotor. This method first computes 
+the position and velocity errors, which are used to 
+determine the desired thrust like in Eq.~\ref{eq:desired_thrust}. 
+From this desired thrust, the method calculates its 
+$x$ and $y$ components \(T_x\) and \(T_y\), 
+which are used to derive the desired roll \(\phi_d\) 
+and pitch \(\theta_d\) angles with Eqs. \ref{eq:desire_phi}, 
+\ref{eq:desire_theta} respectively. 
+The desired yaw torque is computed separately 
+to align the quadrotor with the desired heading, 
+ensuring accurate orientation control. These desired angles and the 
+associated angular velocity errors are then combined 
+with the controller gains to calculate the commanding input torques,
+following Eqs. \ref{eq:input_phi}, \ref{eq:input_theta}, 
+\ref{eq:input_psi}. 
 
-$\texttt{est\textunderscore X = est\textunderscore X + pinv(est\textunderscore S)*(est\textunderscore H*(est\textunderscore Y - est\textunderscore H.'*est\textunderscore X));}$\\
-$\texttt{est\textunderscore S = est\textunderscore beta*est\textunderscore S + est\textunderscore H * est\textunderscore H.’;}$\\
+\noindent\\
+Finally, the \textit{compute\_rotor\_velocities()} 
+method determines the rotor speeds needed to achieve 
+the commanding thrust and torques. The speeds are found 
+inverting $\mathbf{A}$ matrix as in Eq.\ref{eq:rotor_velocities}.
+The computed rotor speeds are checked 
+to ensure non-negative values, as negative speeds are 
+physically invalid.
 
-Where:
-\begin{itemize}
-    \item \texttt{est\textunderscore beta} is $\beta$;
-    \item \textit{pinv()} is the \textit{Matlab} function used to calculate $S^{-1}$.
-\end{itemize}
-\end{comment}
+\subsection{\texttt{Particle} class}
+The \texttt{Particle} class, which is also called \texttt{Drone} 
+class, models each drone in the conplete PSO algorithm integrated with the PID
+control and postioning phase. 
+\noindent\\
+Each particle stores its current 
+position and velocity, as well as its personal 
+best position (\texttt{p\_best}), the corresponding
+highest NSS value found so far (\texttt{nss\_best}), 
+their group index (\texttt{group\_idx}), 
+the \texttt{victim\_found\_flag} to remember the found source and 
+data structures to remember the exclusion zones 
+that have been shared with and by the drone.
+The constructor of the class initializes the position 
+at the center of the search space, and the personal best
+to this position.
 
-\subsection{Plotter}
-The Plotter class is the component that is responsible for the visualization of the simulation in real time: to do so, it opens a separate window at the beginning of the simulation and efficiently displays the simulation inside it. Since the draw calls of the Plotter can be the real bottleneck in the main loop of the simulation, we carefully optimized the code relative to this task so that redrawing the scene only updates the parts that changed between subsequent time-steps and everything else is kept as is.\\
-It should be noted that the simulation waits a defined time-step at each loop, from which all the computational time is subtracted, so to have faster simulations. However, this does not affect the time used to comment the results or for other calculations used in the algorithm, which remains the actual time it takes the drones to converge. 
+\noindent\\
+This class contains the most important 
+methods: the \textit{update\_velocity()} method modifies the 
+particle's velocity using the formula described
+in \ref{eq:model_velocity2}. Then, random noise is 
+added to the velocity as in Eq.\ref{eq:persistence_of_excitation},
+while constraints ensure the velocity does not 
+exceed the \texttt{max\_velocity} following Eq. \ref{eq:velocity_clamping}.
 
-After this optimization, we managed to make the Plotter run fast enough that the simulation seems effectively in real time (since the draw calls do not run in a separate thread and therefore are blocking calls).\\
-The Plotter displays:
+\noindent\\
+Instead, the \textit{update\_state()} function is the one responsible
+of the implementation of the complete quadrotor dynamics
+and control laws, by calling the respective methods we have seen 
+in the \texttt{Controller} class\ref{sec:controller_class}.
+This is achieved through the initialization of a \texttt{Controller}
+class in every \texttt{Drone} class.
 
-\begin{itemize}
-    \item The lines determining either the vertical lanes or the circular sectors, depending on the trajectory; 
-    \item The drones, each with their own unique color to make them distinguishable;
-    \item The position of the real ARTVA; 
-    \item The position of the single estimation of the ARTVA, if in the centralized estimation mode; 
-    \item The position of the multiple estimations of the ARTVA, each with the same color of the corresponding drone, if in the decentralized estimation mode; 
-    \item The position of the multiple ACF estimations, each with the same color of the corresponding drone, if in the decentralized estimation mode. 
-\end{itemize}
-On a side-note, it should also be noted that the Plotter class is designed to adapt its behavior at run-time depending on the number of drones, trajectory chosen and mode of estimation.
-
-\subsection{Stopping Criterium}
-The stopping criterium was implemented right after the estimation of the ARTVA position and works in the following way: the values of those estimates are saved and used to check when the algorithm is not updating them significantly anymore. To do so, we first choose a number of time instants k representing how long the algorithm should "remain stable enough" to assess its convergence. Then we implemented a list named \textit{check} that contains k binary variables all initialized to 1: the idea is that if $check[i] = 0, \forall i \in [0,k-1]$, then in the last k time instants the estimations "did not change significantly", thus we converged to a reasonable solution and we can stop the simulation.
-
-In the centralized case, the $check[i]$ value is set to 0 when the difference between the estimate at time \textit{i} and the estimate at time \textit{i-1} falls below a threshold decided in advance. This is the way in which we encode the fact that the current estimation "did not change significantly". If that is not the case, the variable remains 1.\\
-When the \textit{check} array variable contains only 0 values, the algorithm terminates. However, an additional check is performed in this case: it is verified whether the difference between the current estimate and the estimate obtained k time instants ago falls below the threshold. This ensures that not only the estimates remained relatively stable during the control time period (i.e., subsequent changes were smaller than the threshold), but that the cumulative change was small enough to make it pointless for the algorithm to continue.
-
-In the distributed scenario, the stopping criterium remains fundamentally unchanged. However, the chosen estimate value is based on the mean estimated by the last drone through the ACF estimation. Thanks to the high precision of the ACF performance (with differences in the order of millimeters), it is possible to select arbitrarily any drone. This selected drone then signals all others to stop the search, as the goal has been accurately estimated. We opted for the final drone rather than any other one, as in the "\textit{linear}" case the last drone covers the greatest distance, which improves its estimation performance. In the other two cases, though, the choice was irrelevant because there were no drones outperforming the others, since they all tend to travel more or less the same amount of space.
-
-\subsection{Particle Swarm Optimization}
-QUELLI DELLO SPAZIO METTONO LO PSEUDOCODICE DI QUESTA PARTE,
-MAGARI METTERE NELL IMPLEMENTATION.
-Algorithm 2: Update of the Global Historical Optimal
-Solution
-1 Sort by fitness value: After updating the individual history of
-particles, each particle in the population is sorted from smallest to
-largest in terms of fitness Fit(pt
-i
-);
-Set gt+1
-temp = p1
-t
-;
-2 if Fit (gt+1
-temp) > Fit (gt
-) do:
-if p > rand (0, 1), (Get p using Eq. (17)) do:
-Update the global optimal solution, gt+1 = pt
-n;
-else gt+1 = gt
-;
-end if
-3 else gt+1 = gt+1
-temp;
-end
-4 Return gt+1
-
-
-\par In our implementation, each particle corresponds to an individual drone 
-within the swarm, and the velocity and position of each drone are updated in 
-accordance with the aforementioned standard PSO algorithm. Let $\mathbf{p}_i \in \mathbb{R}^2$ 
-for $i = 1, 2, \dots, n$ represent the position vectors of the drones in the 2D plane, 
-where $n$ is the total number of drones. The motion of each particle is governed 
-by two fundamental equations: the velocity update equation (Eq.~\ref{eq:velocity}) and 
-the position update equation (Eq.~\ref{eq:position}).
-\begin{align}
-    \mathbf{v}_{i}(t+1) &= \omega \, \mathbf{v}_{i}(t) + c_1 r_1 \left( \mathbf{pbest}_{i}(t) - \mathbf{p}_{i}(t) \right) 
-    + c_2 r_2 \left( \mathbf{gbest}(t) - \mathbf{p}_{i}(t) \right) \label{eq:velocity} \\
-    \mathbf{p}_{i}(t+1) &= \mathbf{p}_{i}(t) + \mathbf{v}_{i}(t+1) \label{eq:position}
-\end{align}
-    
-where $\mathbf{p}_i$, $\mathbf{pbest}_i$, and $\mathbf{gbest}$ represent the position vector of the $i$-th particle, 
-the $i$-th particle's individual best position vector, and the global best position vector, 
-$\omega$ is the inertia weight, $c_1$ and $c_2$ are positive constants, and
-$r_1$ and $r_2$ are random variables uniformly distributed over the interval $[0, 1]$.
-
-\par In the standard PSO algorithm, there is only one global best particle, 
-which means that only one optimal solution can be found. This limitation 
-poses a challenge when dealing with our problem, where we are looking for multiple sources, 
-and therefore, multiple local and global optima exist. To address this challenge, 
-we employ the same strategy of a modified version of the PSO algorithm \cite{PSO_IMPORTANT}. 
-In this modification, the swarm is divided into $M$ subpopulations, each tasked with exploring 
-different regions of the search space. Following this idea, the \textit{gbest} is referred to as 
-the best particle of each subpopulation, not as the global best particle in the whole population. 
-This means that these $M$ best particles are separately able to catch different optima, at most $M$ optima.
-
-\par The function \texttt{sort\_drones\_in\_groups} returns the number of groups and sorts the 
-particles in different groups based on the following logic (see Algorithm~\ref{alg:sort_drones_in_groups}):
+\noindent\\
+Furthermore, the \textit{evaluate\_nss()} method calculates the 
+NSS value at the particle's current position by passing the 
+\texttt{ARTVAs} class approriate function, as described 
+in Algorithm\ref{alg:evaluate_nss}.
+Its personal best is updated if higher then the previous best. 
+and if the particle discovers a source  
+it sets the flag to create an exclusion zone to true.
+The exclusion zone is mantained until the end 
+of the simulation. 
+In this last case the inertia is reduced to decrease 
+the excitation level.
 \begin{algorithm}[H]
+    \caption{\texttt{evaluate\_nss} (MATLAB function)}\label{alg:evaluate_nss}
+    \begin{algorithmic}[1]
+    \State \textbf{Inputs:}
+    \State $\mathbf{p}_r$: current position of the particle
+    \State \texttt{p\_sources}: array of source positions
+    \State $superpositionNSS$: function to compute the total NSS at a given position
+    \State \textbf{Outputs:}
+    \State \texttt{nss\_value}: NSS value at the particle's current position
+    \State $\mathbf{pbest}$: personal best position
+    \State \texttt{nss\_best}: personal best NSS value 
+    \State \texttt{victim\_found\_flag}: boolean variable 
+    \State \texttt{my\_exclusion\_zone}: center of the created exclusion zone
+
+    \State \textbf{Procedure:}
+    \State \quad \textbf{1.} compute the NSS value at the current position:
+    \State \quad \texttt{nss\_value} $\gets$ \textit{superpositionNSS}($\mathbf{p}_r$, \texttt{p\_sources})
+    \State \textbf{2. if}  \texttt{nss\_value} $>$ \texttt{nss\_best}:
+    \State \quad $\mathbf{pbest} \gets \mathbf{p}_r$
+    \State \quad \texttt{nss\_best} $\gets$ \texttt{nss\_value}
+    \State \quad \textbf{end if}
+    \State \textbf{3. if}  \texttt{nss\_value} $>$ \texttt{NSS\_threshold} and \texttt{victim\_found\_flag} = \texttt{false}:
+    \State \quad \texttt{victim\_found\_flag} $\gets$ \texttt{true}
+    \State \quad \texttt{my\_exclusion\_zone} $\gets \mathbf{p}_r$
+    \State \quad \texttt{inertia} $\gets 0.5$
+    \State \quad \textbf{end if}
+    \end{algorithmic}
+\end{algorithm}
+\noindent
+Communication between particles is allowed only by the 
+\textit{can\_I\_communicate\_with()} method, which 
+determines if two particles are within the predifined 
+communication radius, which is condition \ref{eq:in_comm}.
+
+\noindent\\
+The \textit{share\_exclusion\_zones()} 
+method allows the drone to communicate to its 
+neighbouring drones the position 
+of the found "supposed" source.
+
+\noindent\\
+Finally, the
+\textit{check\_if\_in\_exclusion\_zone()} 
+method verifies if a particle is inside any 
+exclusion zone the drones knows of and  
+the \textit{move\_away\_from\_exclusion()} function
+makes the drone take  big "jump" in the same incoming direction
+to get as far as possible from the zone, the goal 
+position is computed using Eq.\ref{eq:move_away}.
+
+\subsection{\texttt{Main Loop}}
+DECIDERE SE UNIFORARE LE VAR A TEXTTT MA POI NON ABBIAMO GLI 
+STESSI NOMI DELLA PARTE TEORICA, QUINDI DECIDI IN TUTTI GLI ALG
+The first step in the \texttt{main loop} involves the initialization
+of the UAVs (particles) and in particular the sorting of 
+the drones in different groups as described in Algorithm\ref{alg:sort_drones_in_groups}.
+DESCRIVERE BREVEMENTE LA FUNZIONE UNA RIGA, DOPO CHE C E LA VERSIONE DEFINITIVA
+\begin{algorithm}[H]
+    ATTENZIONE QUESTA FUNZIONE ANDREBBE MODIFICATA ANCHE NEL CODICE
+    PERCHÈ A VOLTE NON FUNZIONA
     \caption{\texttt{sort\_drones\_in\_groups} (MATLAB function)}\label{alg:sort_drones_in_groups}
     \begin{algorithmic}[1]
     \State \textbf{Inputs:}
-    \State $n\_drones$: Number of drones available for assignment
-    \State $n\_sources$: Number of sources to which drones need to be assigned
+    \State \texttt{n\_drones}: number of drones available for assignment
+    \State \texttt{n\_sources}: number of sources to which drones need to be assigned
     \State \textbf{Outputs:}
-    \State $group\_indices$: A vector of size $n\_drones$ indicating the assigned group
-    \State $n\_groups$: The obtained number of groups
-    \If{$n\_particles > n\_sources$}
-        \State Assign at least one particle to each group, following mathematical order
-        \State Randomly assign remaining particles to existing groups
-    \ElsIf{$n\_particles = n\_sources$}
-        \State Assign each particle to a unique group
+    \State \texttt{group\_indices}: a vector of size \texttt{n\_drones} indicating the assigned group
+    \State \texttt{n\_groups}: the obtained number of groups
+    \State
+    \State \textbf{Procedure:}
+    \If{\texttt{n\_drones} $>$ \texttt{n\_sources}}
+        \State assign at least one drone to each group, following mathematical order
+        \State randomly assign remaining drones to existing groups
+    \ElsIf{\texttt{n\_drones} = \texttt{n\_sources}}
+        \State assign each drone to a unique group
     \Else
-        \State Orderly assign particles up to $n\_drones$
+        \State orderly assign drones up to \texttt{n\_drones}
     \EndIf
-    \State Set the number of groups: $n\_groups = max(group\_indices)$
+    \State set the number of groups: \texttt{n\_groups} $\gets \texttt{max(group\_indices)}$
     \end{algorithmic}
 \end{algorithm}
-
-\par Note that the function \texttt{sort\_drones\_in\_groups} ensures the creation of sufficient groups 
+\noindent Note that the function \texttt{sort\_drones\_in\_groups} ensures the creation of sufficient groups 
 for the localization of multiple sources only when the number of drones is equal to or greater than 
 the number of sources.
 
-\section{Exploration phase}
-\par Unlike the modified PSO algorithm, in our implementation, the drones are not randomly initialized. 
+\subsection{Exploration phase}
 At the start of the simulation, all drones are located at the origin of the search space. 
-An Exploration Phase begins where the PSO algorithm is not yet employed. 
+During the first Exploration Phase, the PSO algorithm is not yet employed. 
 During this phase, the drones move according to predefined trajectories at maximum speed $v_{\text{max}}$. 
 The trajectories are determined based on the number of drones and follow a radial pattern, as shown in Figure \ref{fig:exploration_pattern}. 
-The drones follow these trajectories until they have covered a distance $travel\_distance$ equivalent to half the boundary of the search space.
+The drones follow these trajectories until they have covered a distance \texttt{travel\_distance} equivalent to half the boundary of the search space.
 The goal each drone needs to reach is computed using the following Algorithm~\ref{alg:exploration_goals}:
-
 \begin{algorithm}[H]
-    \caption{\texttt{exploration\_goals} (MATLAB function)} \label{alg:exploration_goals}
+    \caption{\texttt{exploration\_goal} (MATLAB function)} \label{alg:exploration_goals}
     \begin{algorithmic}[1]
-        \State \textbf{Input:} $n\_{drones}$, $x\_{max}$
-        \State \textbf{Output:} $goals$ 
-        \State Initialize an empty array $goals$
-        \State Set $angle\_step = 360 / n\_{drones}$
-        \State Set $travel\_distance = x\_{max} / 2$ 
-        \For{each drone $i = 1, 2, \dots, n\_{drones}$}
-            \State Get angle for the current drone: $drone\_angle = i \cdot angle\_step$
-            \State Calculate slope: $m = \tan(\texttt{deg2rad}(drone\_angle))$
-            \If{$drone\_angle > 315$ \textbf{or} $drone\_angle \leq 45$} 
-                \State $goal = [travel\_distance, m \cdot travel\_distance]$ \Comment{1st quadrants}
-            \ElsIf{$drone\_angle > 45$ \textbf{and} $drone\_angle \leq 135$}
-                \State $goal = [travel\_distance / m, travel\_distance]$ \Comment{2nd quadrant}
-            \ElsIf{$drone\_angle > 135$ \textbf{and} $drone\_angle \leq 225$}
-                \State $goal = [-travel\_distance, m \cdot -travel\_distance]$ \Comment{3rd quadrant}
-            \ElsIf{$drone\_angle > 225$ \textbf{and} $drone\_angle \leq 315$}
-                \State $goal = [-travel\_distance / m, -travel\_distance]$ \Comment{4th quadrant}
+        \State \textbf{Inputs:}
+        \State \texttt{n\_drones}: number of drones
+        \State \texttt{bounds}: maximum limit of search space
+        \State \textbf{Outputs:}
+        \State \texttt{goals}: $x$,$y$ position of the goal
+        \State
+        \State \textbf{Procedure:}
+        \State initialize an empty array: \texttt{goals}
+        \State set \texttt{angle\_step} $\gets 360 / \texttt{n\_drones}$
+        \State set \texttt{travel\_distance} $\gets \texttt{bounds} / 2$
+        \For{each drone $j = 1, 2, \dots, \texttt{n\_drones}$}
+            \State compute angle for the current drone: \texttt{drone\_angle} $\gets j \cdot \texttt{angle\_step}$
+            \State calculate slope: \texttt{m} $\gets \tan(\textit{deg2rad}(\texttt{drone\_angle}))$
+            \If{\texttt{drone\_angle} $>$ 315 \textbf{or} \texttt{drone\_angle} $\leq$ 45} 
+                \State \texttt{goal} $\gets [\texttt{travel\_distance}, \texttt{m} \cdot \texttt{travel\_distance}]$ \Comment{1st quadrant}
+            \ElsIf{\texttt{drone\_angle} $>$ 45 \textbf{and} \texttt{drone\_angle} $\leq$ 135}
+                \State \texttt{goal} $\gets [\texttt{travel\_distance} / \texttt{m}, \texttt{travel\_distance}]$ \Comment{2nd quadrant}
+            \ElsIf{\texttt{drone\_angle} $>$ 135 \textbf{and} \texttt{drone\_angle} $\leq$ 225}
+                \State \texttt{goal} $\gets [-\texttt{travel\_distance}, \texttt{m} \cdot -\texttt{travel\_distance}]$ \Comment{3rd quadrant}
+            \ElsIf{\texttt{drone\_angle} $>$ 225 \textbf{and} \texttt{drone\_angle} $\leq$ 315}
+                \State \texttt{goal} $\gets [-\texttt{travel\_distance} / \texttt{m}, -\texttt{travel\_distance}]$ \Comment{4th quadrant}
             \EndIf
-            \State Store the goal for drone $i$ in $goals[i]$
         \EndFor
-        \State Return $goals$
+        \State return \texttt{goal}
     \end{algorithmic}
 \end{algorithm}
-
-where $angle\_step$ is the angular increment to uniformly divide the space, $drone\_angle$ represents the angle assigned to each drone, determining its trajectory, 
-while $m$ is the slope of the trajectory calculated from the drone's angle. 
+\noindent
+where \texttt{angle\_step} is the angular increment to uniformly divide the space,
+\texttt{drone\_angle} represents the angle assigned to each drone, 
+while \texttt{m} is the slope of the trajectory calculated from the drone's angle. 
 
 \begin{figure}
     \centering
@@ -250,205 +431,244 @@ while $m$ is the slope of the trajectory calculated from the drone's angle.
 \end{figure}
 
 \subsubsection{Exploitation Phase}
-\textbf{Velocity Update}
-At each time step, the velocity update of the standard PSO algorithm is modified in order to favor the complete 
-exploration of the search space and to avoid premature convergence to local maxima, where a source is not present. 
-A uniform random noise is added to the velocity of each particle to achieve a \textit{persistence of excitation},
-allowing every drone to explore new and different directions, 
-as described in the following formula:
-\[
-\mathbf{v}_i = \mathbf{v}_i + \beta \cdot \mathbf{r} \cdot ||\mathbf{v}_i||
-\] \label{eq:persistence_of_excitation}
-where:
-\begin{itemize}
-    \item \(\beta\) is an hyperparameter chosen in the [0,1] range.
-    \item \(\mathbf{r} \sim \mathcal{U}(-1, 1)\) represents a random vector where each component is uniformly distributed between \(-1\) and \(1\).
-    \item \(||\mathbf{v}_i||\) is the magnitude of the velocity vector of particle \(i\).
-\end{itemize}
-Furthermore, not only because of the physical velocity limitations of the drones, but also to ensure smoother updates 
-and prevent instability due to excessive velocity, we clamp the velocity of each drone 
-to a maximum value \(v_{\text{max}}\):
-\[
-\mathbf{v}_i = 
-\begin{cases} 
-v_{\text{max}} \cdot \frac{\mathbf{v}_i}{\|\mathbf{v}_i\|}, & \text{if } \|\mathbf{v}_i\| \geq v_{\text{max}} \\
-\mathbf{v}_i, & \text{otherwise}
-\end{cases}
-\] \label{eq:velocity_clamping3}
+This is the most important part of the simulation since it involves
+the localization of the victims through the deployment of our modified PSO
+algorithm with the PID control, described in Section \ref{sec:PSO+PID}.
 
+\noindent\\
+At each $\tau_s$ iteration step until \texttt{n\_iterations},
+each $j$-th UAV checks the neighbouring drones with the
+\textit{can\_I\_communicate\_with()} function and with a 
+positive response they share their exclusion zones with each other
+(if they have found a source). The communication radio (\(r_{\text{comm}}\))
+is set to 10\,m.
 
-\textbf{Exclusion Zone Mechanism}
-An additional modification to the standard PSO algorithm 
-is the introduction of an exclusion zone mechanism.
-This mechanism prevents multiple drones from focusing 
-on the same source. It involves defining regions that 
-other particles should avoid, promoting better exploration 
-and reducing redundancy in source detection. The exclusion 
-zone mechanism involves several key parts:
-\begin{itemize}
-    \item \textbf{Detection}: A drone sets its exclusion zone 
-    when it identifies a source with a signal strength (NSS) 
-    exceeding a predefined threshold.
-    \item \textbf{Sharing}: The drone shares the position of 
-    its exclusion zone with neighboring drones.
-    \item \textbf{Checking}: Each drone continuously checks 
-    its position against all shared exclusion zones.
-    \item \textbf{Avoidance}: If a drone finds itself within 
-    a shared exclusion zone, it moves away from the zone 
-    following a calculated escape vector.
-\end{itemize}
-
-\textbf{Detection}
-Each drone establishes an exclusion zone when it detects a 
-source, meaning it has computed an NSS higher than a certain 
-threshold. The exclusion zone is defined as a circular area 
-centered around the position of the drone where the source 
-was detected. The radius of this zone is a fixed parameter, 
-chosen experimentally, which determines the \textit{resolution} 
-of the algorithm. The exclusion zone is mantained until the end 
-of the simulation.
-
-\textbf{Sharing}
-Our algorithm favors a decentralized approach, which is useful 
-in scenarios where communication between drones is not always 
-possible or easy. A drone can communicate with another when 
-they are less than 5 meters apart (\(r_{\text{comm}}\)).
-When a drone identifies a source 
-and sets its exclusion zone, it shares the estimated position 
-of the source with the drones within the communication range. 
-Each drone maintains a list of exclusion zones that it has 
-received from others. This sharing process helps the swarm 
-avoid redundant exploration around already identified sources.
-
-\textbf{Avoidance}
-When a drone detects that it is within the radius of a shared 
-exclusion zone, it is programmed to move away from it. 
-The drone computes a new goal position where it needs to go, far from the 
-exclusion zone . After it reaches the goal, 
-the PSO algorithm resumes, searching for a new source 
-in a different area of the space.
-
-The goal position is calculated using the vector joining 
-the exclusion zone center \(\mathbf{c}\) and the current 
-position of the drone \(\mathbf{p}_{\text{in\_zone}}\), when the drone finds itself 
-in an exclusion zone. The formula is given by:
-
-\[
-\mathbf{d} = \mathbf{c} - \mathbf{p}_{\text{in\_zone}}
-\]
-\[
-\mathbf{p}_{\text{goal}} = \mathbf{p}_{\text{in\_zone}} + \alpha \frac{\mathbf{d}}{\|\mathbf{d}\|}
-\] \label{eq:move_away}
-
-where:
-\begin{itemize}
-    \item \(\mathbf{d}\): Direction vector from the exclusion 
-    zone center to the drone's position.
-    \item \(\alpha\): Step size parameter, determining the 
-    distance the drone should travel away from the exclusion zone.
-    \item \(\mathbf{p}_{\text{goal}}\): Updated goal position of the drone.
-    \item \(\|\mathbf{d}\|\): Norm (magnitude) of the direction 
-    vector \(\mathbf{d}\), used to normalize the direction.
-\end{itemize}
-This calculation ensures that the drone moves directly away 
-from the exclusion zone and covers a distance proportional 
-to \(\alpha\). 
-\\
-
-MODIFICARE QUEST ALGORITHMO AGGIUNGENDO LA COSA DEL CONTROLLO
-The exclusion zone mechanism allows the swarm 
-to adaptively adjust its search strategy based on the locations 
-of previously detected sources, leading to faster convergence 
-and improved accuracy in multi-source localization.
-Finally, we can present the complete modified PSO algorithm in 
-Algorithm \ref{alg:PSO}: 
+\noindent\\
+Then, it calls \textit{check\_if\_in\_exclusion\_zone()}
+to verify if it's position is inside the radius of any of the 
+saved exclusion zones.
+In case of a positive response, the drone is commanded to 
+execute the \textit{move\_away\_from\_exclusion()} function. 
+Then, its velocity is reset to zero, and its personal 
+best position, \texttt{p\_best}, is assigned to a random point 
+far from the new location. Additionally, the $\mathbf{gbest}$ 
+is reset to \(-\infty\), and the 
+drone's \texttt{nss\_best} is also reset to \(-\infty\), 
+ensuring the drone restart exploring with a fresh start.
+DOBBIAMO DIRE CHE TRASFERIMENTO È INSTANTANEO?
+DECIDERE SE DIRLA QUESTA COSA O IMPLEMENTARE LA COSA FATTA BENE:
+For simplicity reasons, this movement is considered "instantaneous", 
+meaning that in the simulation, the drone's journey to the goal is 
+not displayed. Instead, in the next iteration, it will already 
+be at the designated location. However, the number of 
+iterations and the simulation time account for the actual 
+time required for the drone to reach the goal at maximum speed.
+In case of a negative response, the \textit{evaluate\_nss()} is 
+called and the group best ($\mathbf{gbest}$) is updated if the received NSS signal 
+is greater than the previous best.
 \begin{algorithm}
     \caption{Particle Swarm Optimization for Multi-Source Localization}\label{alg:PSO}
     \begin{algorithmic}[1]
-        \State \textbf{Initialize} drones' positions to the center of the search space.
-        \State \textbf{Initialize} group best positions \( G_{\text{best}} \) and values \(\textit{NSS}_{\text{best}}\).
-        \State \textbf{Assign} each drone to a group using function \ref{alg:sort_drones_in_groups}.
+        \State \textbf{Initialize} the positions of the drones to the center of the search space.
+        \State \textbf{Initialize} \texttt{g\_best\_values}.
+        \State \textbf{Assign} each drone to a group using the function as in Alg.\eqref{alg:sort_drones_in_groups}.
         
+        \State 
         \State \textbf{Exploration Phase}:
-        \State \textbf{Compute} exploration goals using function \ref{alg:exploration_goals}.
-        \For{each drone \( i \)}
-            \State \textbf{Do}: reach goal.
+        \State \textbf{Compute} exploration goals using the function as in Alg.\eqref{alg:exploration_goals}.
+        \For{each drone \( j \)}
+            \State \textbf{Move} to the goal with \texttt{max\_velocity}.
         \EndFor
-
+        
+        \State 
         \State \textbf{Exploitation Phase}:
-        \For{each iteration \( t = 1 \) to \( n_{iters} \)}
-            \For{each drone \( i \)}
-                \State \textbf{Update} velocity using standard PSO formula as in Eq.\eqref{eq:velocity}.
-                \State \textbf{Apply} persistence of excitation as in Eq. \eqref{eq:persistence_of_excitation}.
-                \State \textbf{Limit} velocity to \( v_{\text{max}} \) as in Eq. \eqref{eq:velocity_clamping}.
-                \State \textbf{Update} position as in Eq. \eqref{eq:position}.
-                \State \textbf{Apply} boundary conditions to keep \(\mathbf{p}_i(t+1)\) within search bounds.
-                
-                \For{each other drone \( j \neq i \)}
-                    \If{\(\|\mathbf{p}_i(t+1) - \mathbf{p}_j(t+1)\| \leq r_{\text{comm}}\)}
-                        \If{\(\text{NSS}_{i}\) or \(\text{NSS}_{j} > \text{threshold}\)}
-                            \State \textbf{Share} exclusion zones between drones \( i \) and \( j \).
-                        \EndIf
+        \For{each iteration \( \tau_s = 1 \) to \texttt{n\_iterations}}
+            \For{each drone \( j \)}
+                \For{each other drone \( l \neq j \)}
+                    \If{\textit{can\_I\_communicate\_with()} || 
+                    \texttt{victim\_found\_flag} == true}
+                        \State \textit{share\_exclusion\_zones(j,l)}
                     \EndIf
                 \EndFor
+                \State \textit{check\_if\_in\_exclusion\_zone()} 
                 
-                \State \textbf{Check} if drone \( i \) is within an exclusion zone.
-                \If{drone \( i \) is in an exclusion zone}
-                    \If{drone \( i \) is not alone in its group}
-                        \State \textbf{Reassign} drone \( i \) to a new group.
-                        \State \textbf{Initialize} \( G_{\text{best}} \) and \(\textit{NSS}_{\text{best}}\) of the new group.
+                \If{\textit{check\_if\_in\_exclusion\_zone()} == true}
+                    \If{drone \( j \) is not alone in its group}
+                        \State \textbf{Reassign} drone \( j \) to a new group.
+                        \State \textbf{Initialize} the new \texttt{g\_best} and \texttt{nss\_best}.
                     \EndIf
-                    \State \textbf{Move} away from exclusion zone as in Eq. \eqref{eq:move_away}.
-                    \State \textbf{Reset} personal best \(\mathbf{p}_{\text{best}, i}\).
-                    \State \textbf{Set} drone \( i \) inertia \(\omega = 0\).
+                    \State \textit{move\_away\_from\_exclusion()}
+                    \State \textbf{Reset} the personal best \texttt{p\_best}.
+                    \State \textbf{Set} the drone \( j \)'s inertia to \( \omega = 0.5 \).
                 \Else
-                    \State \textbf{Evaluate} NSS at \(\mathbf{p}_i(t+1)\).
-                    \If{current NSS \( > \) personal best NSS}
-                        \State \textbf{Update} personal best \(\mathbf{p}_{\text{best}, i}\).
+                    \State \textbf{Evaluate} NSS at \(\mathbf{p}_j(\tau_s)\).
+                    \If{\texttt{nss\_value} \( > \) \texttt{nss\_best}}
+                        \State \textbf{Update} \texttt{p\_best}.
                     \EndIf
-                    \If{current NSS \( > \) group best NSS}
-                        \State \textbf{Update} group best \( G_{\text{best}} \).
+                    \If{\texttt{nss\_value} \( > \) \texttt{g\_best}}
+                        \State \textbf{Update} \texttt{g\_best\_values}.
                     \EndIf
                 \EndIf
+                \State \textbf{Desired velocity} : \textit{update\_velocity()}
+                \State \textbf{Apply} persistence of excitation as in Eq.\eqref{eq:persistence_of_excitation}.
+                \State \textbf{Limit} the velocity to \texttt{max\_velocity} as in Eq.\eqref{eq:velocity_clamping}.
+                \State \textbf{Desired position} : as in Eq. \eqref{eq:model_position2}
+                \State \textbf{Set} \texttt{iteration\_duration = 1}
+                \For{each time step \( \texttt{t} = 0 : \texttt{dt} : \texttt{iteration\_duration} \)}
+                    \State \textbf{Control Dynamics} : \textit{update\_state()}   
+                    \State \textbf{Enforce} boundaries on position as in Eq.\eqref{eq:boundary_condition}.
+                \EndFor
             \EndFor
         \EndFor
-        
-        \State \textbf{Return} \( G_{\text{best}} \).
     \end{algorithmic}
 \end{algorithm}
-Note that the inertia of a drone that has found a source is set to zero (\(\omega = 0\)), increasing
-convergence speed.
-Throughout the process, each drone updates its personal 
-and group best positions based on newly evaluated NSS 
-values, like in the standard PSO algorithm. The final output is the set of best estimates 
-\( G_{\text{best}} \), composed of the best estimated position of a source by each group.
 
+\noindent\\
+Subsequently, the \textit{update\_velocity()} method computes the desired 
+velocity command for the control loop and the desired position is obtained 
+using the standard PSO formula in Eq. \ref{eq:model_position2}.
+At each time step $\tau_k$ until the end of the $\Delta$, 
+the \textit{update\_state()} function is called and the
+boundries are enforced as in \ref{eq:boundary_condition}.
+Finally, we can present the complete modified PSO algorithm in 
+Algorithm \ref{alg:PSO}: 
 
+Note that the inertia of a drone that has found a source 
+is set to zero (\(\omega = 0\)), increasing
+convergence speed. The final output is the set of best estimates 
+\texttt{g\_best\_values}, composed of the best estimated position 
+of a source by each group.
+
+\newpage
 \section{Results}
-DIRE CHE DRONE ABBIAMO USATO COME MODELLO PER LE SIMULAZIONI
-METTERE UNA FOTO VOLENDO e METTERE CITAZIONE DA DOVE VENGONO I DATI
-SPIEGARE I DATI DEL MODELLO DEI PARAMETRI DEL DRONE IN UNA TABELLA
+METTERE UNA FOTO VOLENDO
+DECIDERE DOVE METTERE TUTTI I PARAMETRI SE QUI O SOPRA
+
+The drone used as reference for the experiments is 
+the in Dragonfly IV \cite{drone}, whose physical characteristics are 
+given in Table\ref{tab:drone_parameters}.
+In both simulations (trajectory tracking and PSO with
+control) these same parameters are used for the control
+part, in conjunction with the gains 
+described in Table~\ref{tab:control_gains}.
+\begin{table}[h!]
+\centering
+\caption{Drone Parameters for PSO and Trajectory Tracking Control}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Parameter}           & \textbf{Symbol}  & \textbf{Value} \\ \hline
+Mass                        & \(m\)           & \(0.4 \, \text{kg}\) \\ \hline
+Moment of inertia (x-axis)  & \(J_x\)         & \(3.8278 \times 10^{-3} \, \text{kg}\,\text{m}^2\) \\ \hline
+Moment of inertia (y-axis)  & \(J_y\)         & \(3.8278 \times 10^{-3} \, \text{kg}\,\text{m}^2\) \\ \hline
+Moment of inertia (z-axis)  & \(J_z\)         & \(7.1345 \times 10^{-3} \, \text{kg}\,\text{m}^2\) \\ \hline
+Arm length                  & \(l\)           & \(0.205 \, \text{m}\) \\ \hline
+Thrust coefficient          & \(c_t\)         & \(6.354 \times 10^{-4}\) \\ \hline
+Torque coefficient          & \(c_d\)         & \(0.048\) \\ \hline
+\end{tabular}
+\label{tab:drone_parameters}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{Control Gain Values}
+\label{tab:control_gains}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Control Type} & \textbf{Proportional Gain} & \textbf{Derivative Gain} \\ \hline
+Position Control (\(x\)) & \(k_{xp} = 0.1\)         & \(k_{xd} = 0.5\)         \\ \hline
+Position Control (\(y\)) & \(k_{yp} = 0.1\)         & \(k_{yd} = 0.54\)        \\ \hline
+Position Control (\(z\)) & \(k_{zp} = 1.0\)         & \(k_{zd} = 2.5\)         \\ \hline
+Attitude Control (\(\phi\)) & \(k_{p\phi} = 2.0\)     & \(k_{d\phi} = 2.5\)      \\ \hline
+Attitude Control (\(\theta\)) & \(k_{p\theta} = 2.0\)  & \(k_{d\theta} = 2.5\)    \\ \hline
+Attitude Control (\(\psi\)) & \(k_{p\psi} = 2.0\)     & \(k_{d\psi} = 4.0\)      \\ \hline
+\end{tabular}
+\end{table}
+\noindent\\
+Instead, the hyperparameters relative to the PSO algorithm are
+defined in Table \ref{tab:pso_parameters}.
+\begin{table}[h!]
+\centering
+\caption{PSO Hyperparameters and Settings}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Parameter}            & \textbf{Symbol}         & \textbf{Value} \\ \hline
+Number of drones             & \(n_{\text{drones}}\)   & 4 \\ \hline
+Number of iterations         & \(n_{\text{iterations}}\) & 310 \\ \hline
+Search space bounds          & \(\text{bounds}\)       & \([-80, 80]\) \\ \hline
+Maximum velocity             & \(v_{\text{max}}\)      & 2 \\ \hline
+Source positions             & \(p_{\text{sources}}\)  & \([20, 50], [-50, 70], [60, 30], [-10, 30]\) \\ \hline
+Number of sources            & \(n_{\text{sources}}\)  & 4 \\ \hline
+Inertia weight               & \(w\)                  & 1.05 \\ \hline
+Cognitive factor             & \(c_{\text{cognitive}}\) & 2.05 \\ \hline
+Social factor                & \(c_{\text{social}}\)   & 1.5 \\ \hline
+Velocity randomness          & \(r_v\)                & 0.6 \\ \hline
+Communication radius         & \(r_{\text{comm}}\)     & 10 \\ \hline
+Step size                    & \(s\)                  & 90 \\ \hline
+Exclusion zone radius        & \(r_{\text{excl}}\)     & 3 \\ \hline
+Time step                    & \(\Delta t\)           & 0.04 \\ \hline
+Iteration duration           & \(t_{\text{iter}}\)     & 1 \\ \hline
+\end{tabular}
+\label{tab:pso_parameters}
+\end{table}
+\noindent\\
+Each drone in the Particle Swarm Optimization (PSO) framework is 
+initialized with a set of carefully chosen parameters. 
+The drones start their search with an initial position at the 
+center of the search space, defined as \([0, 0]\). 
+Their initial velocities are randomized using a scaling factor of \(0.6\), 
+which adds variation, and capped at a maximum velocity of \(2 \, \text{m/s}\) 
+to prevent overshooting targets. The search space is constrained within bounds 
+of \([-80, 80]\) for both the x and y directions.
+
+Each drone's best-known position (\(p_{\text{best}}\)) is initialized 
+to its starting position, while its best Normalized Source Strength (NSS) 
+value is set to \(-\infty\), ensuring that any detected signal improves 
+its current state. The drones operate with an inertia weight of \(1.05\), 
+balancing exploration and exploitation during the optimization process. 
+Additionally, an exclusion zone radius of \(3 \, \text{m}\) is defined, 
+representing a region where the NSS signal diminishes significantly.
+
+The drones are grouped based on a variable group index, allowing for 
+clustering when searching for multiple targets. Each drone also has a 
+specific goal position that acts as its target during the optimization process. 
+For orientation and dynamics, the roll, pitch, and yaw angles (\(RPY\)) 
+are initialized to \([0, 0, 0]\), ensuring a neutral starting orientation. 
+These parameters collectively define the initial state and behavior of the 
+drones in the PSO framework.
+
+
 In the context of search and rescue (S\&R) missions, the number of available 
-UAVs is typically limited (ranging from 1 to 10 \cite{PSO_original}), and the search area 
+UAVs is typically limited (ranging from 1 to 10 \cite{PSO_original}), and 
+the search area 
 usually spans only a few thousand square meters.
 Therefore, it is reasonable to 
 assume the presence of a communication network with a static topology, allowing 
 for the implementation of a centralized estimation algorithm.
-PUT ADVANTAGES OF DECENTRALIZED APPROACH
-QUESTO È QUELLO CHE AVEVAMO SCRITTO NEL PROGETTO
-Furthermore, decentralization provides improved robustness to "communication noise" by removing 
-dependence on a central computation unit. This autonomy enables the system to adapt to varying 
-communication conditions, such as intermittent information availability or delays, thus supporting 
-continued operation in challenging environments such asmountain regions and adverse weather 
-conditions, like in our scenario. While decentralized methods may exhibit slower convergence and slightly higher estimation 
-errors due to partial information exchange, they remain effective and efficient in situations where 
-centralized coordination is impractical or demands excessive resources.
 
 \subsection{PID for Trajectory Tracking}
 METTERE LA TRAIETTORIA CHE VIENE SEGUITA
-The results of PID control using the simplified model \eqref{eq:simplified_model}, applied to trajectory tracking during the first positioning (exploration) phase of the algorithm, are presented in the following figures. Figure \ref{fig:pd_traj_comparison} illustrates the comparison between the actual and desired trajectory in 3D space, showcasing the effectiveness of the control strategy in aligning the drone's path with the desired trajectory. Figures \ref{fig:pid_x}, \ref{fig:pid_y}, and \ref{fig:pid_z} provide a detailed breakdown of the trajectory tracking along the \(x\), \(y\), and \(z\) axes, respectively. These plots highlight the individual tracking performance in each dimension and confirm the controller's precision in following the desired positions.
+The results of PID control using the full quadrotor dynamics 
+model \eqref{eq:final_model},
+applied to trajectory tracking during the first positioning 
+(exploration) phase of the algorithm, 
+are presented in the following figures: 
+Figure \ref{fig:pd_traj_comparison} illustrates 
+the comparison between the actual and desired trajectory in 3D space, 
+showcasing the effectiveness of the control strategy in 
+aligning the drone's path with the desired trajectory. 
+Figures \ref{fig:pid_x}, \ref{fig:pid_y}, and \ref{fig:pid_z}
+provide a detailed breakdown of the trajectory t
+racking along the \(x\), \(y\), and \(z\) axes, respectively. 
+These plots highlight the individual tracking performance 
+in each dimension and confirm the controller's precision 
+in following the desired positions.
 
-Figure \ref{fig:pid_sim} shows the simulation over time, providing an overview of the control system's behavior during this phase. Additionally, the rotor velocities calculated using \eqref{eq:rotor_velocities} are plotted in Figure \ref{fig:rotor_velocities}. This figure provides insights into the actuation required to achieve the desired trajectory.
+Figure \ref{fig:pid_sim} shows the simulation over time,
+providing an overview of the control system's behavior 
+during this phase. Additionally, the rotor velocities 
+calculated using \eqref{eq:rotor_velocities} are plotted 
+in Figure \ref{fig:rotor_velocities}. This figure provides 
+insights into the actuation required to achieve the desired 
+trajectory.
 
 \begin{figure}[h!]
     \centering
@@ -507,3 +727,23 @@ perchè i droni rimangono
 attratti sempre dalle stesse sorgenti e non 
 "vedono" delle altre ma questo è una cosa diciamo 
 intrinseca al problema in se che stiamo affrontando.
+
+
+The exclusion zone mechanism allows the swarm 
+to adaptively adjust its search strategy based on the locations 
+of previously detected sources, leading to faster convergence 
+and improved accuracy in multi-source localization.
+
+
+PUT ADVANTAGES OF DECENTRALIZED APPROACH
+QUESTO È QUELLO CHE AVEVAMO SCRITTO NEL PROGETTO
+Furthermore, decentralization provides improved robustness to "communication noise" by removing 
+dependence on a central computation unit. This autonomy enables the system to adapt to varying 
+communication conditions, such as intermittent information availability or delays, thus supporting 
+continued operation in challenging environments such asmountain regions and adverse weather 
+conditions, like in our scenario. While decentralized methods may exhibit slower convergence and slightly higher estimation 
+errors due to partial information exchange, they remain effective and efficient in situations where 
+centralized coordination is impractical or demands excessive resources.
+Our algorithm favors a decentralized approach, which is useful 
+in scenarios where communication between drones is not always 
+possible or easy.

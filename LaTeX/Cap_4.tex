@@ -570,9 +570,10 @@ the control thrust \( T \) required to maintain the altitude is given by:
 \noindent
 Substituting \( \ddot{z}_r \) from Eq.\ref{eq:virtual_input} in Eq.\ref{eq:true_input},
 we obtain:
-\[
-T = \frac{M}{\cos\theta \cos\phi} \, \left( g + K_{p_z} e_z + K_{d_z} \dot{e}_z + \ddot{z}_d \right)
-\]
+\begin{equation}
+    T = \frac{M}{\cos\theta \cos\phi} \, \left( g + K_{p_z} e_z + K_{d_z} \dot{e}_z + \ddot{z}_d \right)
+    \label{eq:desired_thrust}
+\end{equation}
 %Since we do not need any vertical acceleration we specify $\ddot{z}_d = 0$, questo dillo nell implementazione.
 %nell implementazione dire che la traiettoria scelat è una TRAIETTORIA ESPONENZIALE 
 
@@ -646,9 +647,11 @@ We substitute the desired angles and obtain:
 After performing algebraic and trigonometric manipulations, we derive expressions for the desired roll and pitch angles:
 \begin{equation}
     \phi_d =  \arcsin\left(  (T_y \cos\psi - T_x \sin\psi) \right)
+    \label{eq:desire_phi}
 \end{equation}
 \begin{equation}
     \theta_d = - \arcsin\left(\frac{T_x \cos\psi + T_y \sin\psi}{ \cos\phi_d } \right)
+    \label{eq:desire_theta}
 \end{equation}
 where $T_x = \frac{M}{T} \ddot{x}_r$ and $T_y = \frac{M}{T} \ddot{y}_r$ are the
 desired components of the thrust vector in $x$ and $y$ and are found
@@ -665,12 +668,15 @@ Specifically, the yaw angle is determined as:
 \noindent
 Using the desired angles $\phi_d$, $\theta_d, \psi_d$, the control torques are defined as:
 \begin{equation}
+    \label{eq:input_phi}
     \tau_\phi = I_x \left(  K_{p_\phi} e_\phi + K_{d_\phi} \dot{e}_\phi \right)
 \end{equation}
 \begin{equation}
+    \label{eq:input_theta}
     \tau_\theta = I_y \left(K_{p_\theta} e_\theta + K_{d_\theta} \dot{e}_\theta \right)
 \end{equation}
 \begin{equation}
+    \label{eq:input_psi}
     \tau_\psi = I_z \left(K_{p_\psi} e_\psi + K_{d_\psi} \dot{e}_\psi \right)
 \end{equation}
 Where $K_{p_\phi}$, $K_{d_\phi}$, $K_{p_\theta}$, $K_{d_\theta}$, $K_{p_\psi}$, and $K_{d_\psi}$ 
@@ -852,6 +858,7 @@ Then, the rotor velocities \( \omega_i \) can then be obtained by
 taking the square root of the computed \( \omega_i^2 \) values.
 
 \section{PID Control applied to PSO}
+\label{sec:PSO+PID}
 \begin{figure}
     \resizebox{\textwidth}{!}{
     \centering

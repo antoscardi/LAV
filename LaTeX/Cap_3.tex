@@ -1218,7 +1218,7 @@ and \( w : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \)
 represents the measurement noise related to the electromagnetic interference,
 defined in \ref{eq:H_rotated_noise}.
 
-\subsection{Modified Particle Swarm Optimization with Exlusion Zones}
+\subsection{Modified Particle Swarm Optimization with Exclusion Zones}
 VA AGGIUNTO CHE GLI INDICI DEI DRONI SONO ANCHE SORTATI E CHE NEL PSO AGGIUNGIAMO
 UNA VOMPONENTE RANDOMICA ALLA VELOCITÀ, QUINDI MANCA UN EQUAZIONE
 \subsubsection{Particle Swarm Oprimization}
@@ -1326,13 +1326,27 @@ the best particle of each subpopulation, not as the global best particle in the 
 This means that these $M$ best particles are separately able to catch different optima, 
 at most $M$ optima.
 
-\noindent
-\\
+\noindent\\
 In addition, we perform further modifications to the PSO algorithm,
-we introduce physical constraints as already done in \cite{3} and 
-an exclusion zone mechanism.
+we introduce physical constraints as already done in \cite{3}, 
+an exclusion zone mechanism and a percistency of excitation 
+Firstly, uniform random noise is added to the velocity of each 
+particle to achieve a \textit{persistence of excitation} state,
+allowing every drone to explore new and different directions, 
+as described in Eq.\ref{eq:persistence_of_excitation}:
+\begin{equation}
+    \mathbf{v}_j(\tau_k + 1) = \mathbf{v}_j(\tau_k) + \beta \cdot \mathbf{rand} \cdot ||\mathbf{v}_j(\tau_k)||
+\label{eq:persistence_of_excitation}
+\end{equation}
+where:
+\begin{itemize}
+    \item \(\beta\) is an hyperparameter chosen experimentally in the [0,1] range.
+    \item \(\mathbf{rand} = [\texttt{rand}_1, \texttt{rand}_2]^\top\) and \(\texttt{rand}_1, \texttt{rand}_2 \sim \mathcal{U}(-1, 1)\) represents a random vector where each component is uniformly distributed between \(-1\) and \(1\).
+    \item \(||\mathbf{v}_j(\tau_k)||\) is the magnitude of the velocity vector of particle \(j\).
+\end{itemize}
 
-Firstly, the UAVs are confined to the 
+\noindent\\
+Secondly, the UAVs are confined to the 
 search-space and secondly their velocity is 
 capped to a max value to avoid speed "explosion", \cite{3}.
 The constraints are formulated as follows:
@@ -1388,9 +1402,10 @@ Instead, a drone \( j \) shares the center \( \mathbf{c}_j \) and radius
 \( r_{\text{excl}} \) of its exclusion zone with neighboring drones 
 if they are within the communication range \( r_{\text{comm}} \). 
 A neighboring UAV \( l \) receives the exclusion zone when:
-\[
-\|\mathbf{p}_{r_l}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\| \leq r_{\text{comm}}.
-\]
+\begin{equation}
+\|\mathbf{p}_{r_l}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\| \leq r_{\text{comm}}
+\label{eq:in_comm}
+\end{equation}
 Each drone maintains a list of shared exclusion zones 
 \( \mathcal{E}_\text{shared} \), which is defined as:
 \[
@@ -1411,7 +1426,6 @@ This is verified by:
 If a drone \( j \) finds itself within a shared exclusion zone at time \( \tau_k \), 
 it computes a new goal position \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \) 
 to escape the zone. The avoidance mechanism follows these steps:
-
 \[
 \mathbf{d}_j(\tau_k) = \mathbf{c}_j(\tau_k) - \mathbf{p}_{r_j}(\tau_k),
 \]
@@ -1420,10 +1434,11 @@ from the exclusion zone center \( \mathbf{c}_j(\tau_k) \), and
 \( \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_j(\tau_k) \).
 \noindent\\
 The goal position the drone needs to reach in the next time steps is then calculated as:
-\[
-\mathbf{p}_{r_j}^{\text{goal}} = \mathbf{p}_{r_j}(\tau_k) 
-+ \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|},
-\]
+\begin{equation}
+    \mathbf{p}_{r_j}^{\text{goal}} = \mathbf{p}_{r_j}(\tau_k) 
+    + \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|}
+    \label{eq:move_away}
+\end{equation}
 where:
 \begin{itemize}
     \item \( \alpha \): Step size parameter that determines 

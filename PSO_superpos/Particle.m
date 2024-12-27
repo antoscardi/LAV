@@ -89,7 +89,7 @@ classdef Particle < handle
         end
         
         % Update particle's position based on velocity and apply boundary conditions
-        function state_dot = update_position(obj, dt, state, desired_position, desired_velocity, desired_acceleration)
+        function state_dot = update_state(obj, dt, state, desired_position, desired_velocity, desired_acceleration)
 
             % Controller inputs
             [input_torques, input_force] = obj.controller.control_laws(state, desired_position, desired_velocity, ...

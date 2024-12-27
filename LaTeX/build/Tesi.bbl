@@ -227,6 +227,46 @@
       \verb 10.1071/EG04297
       \endverb
     \endentry
+    \entry{drone}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=49702908410e2e81d47e722bfa03ff46}{%
+           family={Derafa},
+           familyi={D\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=423f7b5ccc302c858be2d3dfce981322}{%
+           family={Madani},
+           familyi={M\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4bfd2308aafc9db0c15e774264c34b2d}{%
+           family={Benallegue},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{81fba1650e059a67829b400ac969c15c}
+      \strng{fullhash}{6a1bac906d222d47b4302dab1987fc8b}
+      \strng{fullhashraw}{6a1bac906d222d47b4302dab1987fc8b}
+      \strng{bibnamehash}{6a1bac906d222d47b4302dab1987fc8b}
+      \strng{authorbibnamehash}{6a1bac906d222d47b4302dab1987fc8b}
+      \strng{authornamehash}{81fba1650e059a67829b400ac969c15c}
+      \strng{authorfullhash}{6a1bac906d222d47b4302dab1987fc8b}
+      \strng{authorfullhashraw}{6a1bac906d222d47b4302dab1987fc8b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2006 IEEE International Conference on Industrial Technology}
+      \field{title}{Dynamic Modelling and Experimental Identification of Four Rotors Helicopter Parameters}
+      \field{year}{2006}
+      \field{pages}{1834\bibrangedash 1839}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICIT.2006.372515
+      \endverb
+      \keyw{Helicopters;Aerodynamics;Vehicle dynamics;Unmanned aerial vehicles;Rotors;Uniform resource locators;Mathematical model;Friction;Propellers;Turning}
+    \endentry
     \entry{backstepping_control}{inproceedings}{}{}
       \name{author}{2}{}{%
         {{hash=4cf4957b4aeee5bd835a60c8ea3d8704}{%
