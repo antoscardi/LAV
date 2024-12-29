@@ -30,11 +30,11 @@
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Quadrotor model }}{62}{figure.caption.61}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Block diagram of the PID control applied to the PSO algorithm}}{64}{figure.caption.62}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Radial exploration pattern for 5 drones at the end of the Exploration Phase.}}{73}{figure.caption.63}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces 3D Trajectory Tracking}}{77}{figure.caption.68}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Tracking in X-axis}}{78}{figure.caption.69}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Tracking in Y-axis}}{78}{figure.caption.69}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Tracking in Z-axis}}{78}{figure.caption.69}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Simulation Overview}}{78}{figure.caption.70}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Rotor Velocities}}{78}{figure.caption.71}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Radial exploration pattern for 5 drones at the end of the Exploration Phase.}}{73}{figure.caption.66}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 3D Trajectory Tracking}}{74}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Tracking in X-axis}}{75}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Tracking in Y-axis}}{75}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Tracking in Z-axis}}{75}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Simulation Overview}}{75}{figure.caption.74}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Rotor Velocities}}{75}{figure.caption.75}%
 \addvspace {10\p@ }

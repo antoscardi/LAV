@@ -468,14 +468,14 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/inlinedef/inlinedef.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/inlinedef/inlinedef.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest-lib-linguistics.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest-lib-linguistics.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithms/algorithm.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithms/algorithm.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/relsize/relsize.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/relsize/relsize.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/media9/media9.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/media9/media9.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/media9/pdfbase.sty
@@ -858,6 +858,7 @@ INPUT ./Cap_5.tex
 INPUT Cap_5.tex
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtti10.tfm
 INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
 INPUT ./images/exploration_pattern.jpg
@@ -947,6 +948,8 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt8.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtti10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb

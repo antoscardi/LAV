@@ -297,35 +297,35 @@ The exclusion zone is mantained until the end
 of the simulation. 
 In this last case the inertia is reduced to decrease 
 the excitation level.
-\begin{algorithm}[H]
-    \caption{\texttt{evaluate\_nss} (MATLAB function)}\label{alg:evaluate_nss}
-    \begin{algorithmic}[1]
-    \State \textbf{Inputs:}
-    \State $\mathbf{p}_r$: current position of the particle
-    \State \texttt{p\_sources}: array of source positions
-    \State $superpositionNSS$: function to compute the total NSS at a given position
-    \State \textbf{Outputs:}
-    \State \texttt{nss\_value}: NSS value at the particle's current position
-    \State $\mathbf{pbest}$: personal best position
-    \State \texttt{nss\_best}: personal best NSS value 
-    \State \texttt{victim\_found\_flag}: boolean variable 
-    \State \texttt{my\_exclusion\_zone}: center of the created exclusion zone
+\SetKwFunction{Fdue}{\texttt{evaluate\_nss}}
+\begin{algorithm}[h]
+     \caption{\texttt{evaluate\_nss} (MATLAB function)}\label{alg:evaluate_nss}
+     \KwIn{$\mathbf{p}_r$: current position of the particle.}
+     \KwIn{\texttt{p\_sources}: array of source positions.}
+     \KwIn{$superpositionNSS$: function to compute the total NSS at a given position.}
+     \KwOut{\texttt{nss\_value}: NSS value at the particle's current position.}
+     \KwOut{\texttt{p\_best}: personal best position.}
+     \KwOut{\texttt{nss\_best}: personal best NSS value.}
+     \KwOut{\texttt{my\_exclusion\_zone}: center of the created exclusion zone.}
+     \vspace{0.3\baselineskip}
+     \nonl \Fn(\tcc*[h]{}){\Fdue{$\mathbf{p}_r$, \texttt{p\_sources}}}{
+        \SetAlgoBlockMarkers{}{}
+        \DontPrintSemicolon \nonl \textbf{Compute the NSS value at the current position:}\;\PrintSemicolon
+        \texttt{nss\_value} $\gets$ \textit{superpositionNSS}($\mathbf{p}_r$, \texttt{p\_sources})\;
 
-    \State \textbf{Procedure:}
-    \State \quad \textbf{1.} compute the NSS value at the current position:
-    \State \quad \texttt{nss\_value} $\gets$ \textit{superpositionNSS}($\mathbf{p}_r$, \texttt{p\_sources})
-    \State \textbf{2. if}  \texttt{nss\_value} $>$ \texttt{nss\_best}:
-    \State \quad $\mathbf{pbest} \gets \mathbf{p}_r$
-    \State \quad \texttt{nss\_best} $\gets$ \texttt{nss\_value}
-    \State \quad \textbf{end if}
-    \State \textbf{3. if}  \texttt{nss\_value} $>$ \texttt{NSS\_threshold} and \texttt{victim\_found\_flag} = \texttt{false}:
-    \State \quad \texttt{victim\_found\_flag} $\gets$ \texttt{true}
-    \State \quad \texttt{my\_exclusion\_zone} $\gets \mathbf{p}_r$
-    \State \quad \texttt{inertia} $\gets 0.5$
-    \State \quad \textbf{end if}
-    \end{algorithmic}
-\end{algorithm}
-\noindent
+        \If{ \texttt{nss\_value} $>$ \texttt{nss\_best}}{
+            \texttt{p\_best}$ \gets \mathbf{p}_r$\;
+            \texttt{nss\_best} $\gets$ \texttt{nss\_value}\;
+        }
+        \ElseIf{\texttt{nss\_value} $>$ \texttt{NSS\_threshold} \textbf{and} \texttt{victim\_found\_flag} = \texttt{false}}{
+            \texttt{victim\_found\_flag} $\gets$ \texttt{true}\;
+            \texttt{my\_exclusion\_zone} $\gets \mathbf{p}_r$\;
+            \texttt{inertia} $\gets 0.5$\;
+        }
+     }
+ \end{algorithm}
+
+\noindent\\
 Communication between particles is allowed only by the 
 \textit{can\_I\_communicate\_with()} method, which 
 determines if two particles are within the predifined 
@@ -354,70 +354,81 @@ The first step in the \texttt{main loop} involves the initialization
 of the UAVs (particles) and in particular the sorting of 
 the drones in different groups as described in Algorithm\ref{alg:sort_drones_in_groups}.
 DESCRIVERE BREVEMENTE LA FUNZIONE UNA RIGA, DOPO CHE C E LA VERSIONE DEFINITIVA
-\begin{algorithm}[H]
-    ATTENZIONE QUESTA FUNZIONE ANDREBBE MODIFICATA ANCHE NEL CODICE
-    PERCHÈ A VOLTE NON FUNZIONA
+ATTENZIONE QUESTA FUNZIONE ANDREBBE MODIFICATA ANCHE NEL CODICE
+PERCH\`E A VOLTE NON FUNZIONA
+\SetKwFunction{Funo}{\texttt{sort\_drones\_in\_groups}}
+\begin{algorithm}[h]
     \caption{\texttt{sort\_drones\_in\_groups} (MATLAB function)}\label{alg:sort_drones_in_groups}
-    \begin{algorithmic}[1]
-    \State \textbf{Inputs:}
-    \State \texttt{n\_drones}: number of drones available for assignment
-    \State \texttt{n\_sources}: number of sources to which drones need to be assigned
-    \State \textbf{Outputs:}
-    \State \texttt{group\_indices}: a vector of size \texttt{n\_drones} indicating the assigned group
-    \State \texttt{n\_groups}: the obtained number of groups
-    \State
-    \State \textbf{Procedure:}
-    \If{\texttt{n\_drones} $>$ \texttt{n\_sources}}
-        \State assign at least one drone to each group, following mathematical order
-        \State randomly assign remaining drones to existing groups
-    \ElsIf{\texttt{n\_drones} = \texttt{n\_sources}}
-        \State assign each drone to a unique group
-    \Else
-        \State orderly assign drones up to \texttt{n\_drones}
-    \EndIf
-    \State set the number of groups: \texttt{n\_groups} $\gets \texttt{max(group\_indices)}$
-    \end{algorithmic}
+    \KwIn{\textbf{\texttt{n\_drones}}: number of drones available for assignment.}
+    \KwIn{\textbf{\texttt{n\_sources}}: number of sources to which drones need to be assigned.}
+    \KwOut{\textbf{\texttt{group\_indices}}: array of indices indicating the assigned group.}
+    \KwOut{\textbf{\texttt{n\_groups}}: the obtained number of groups.}
+    \vspace{0.3\baselineskip}
+    \nonl \Fn(\tcc*[h]{}){\Funo{\texttt{n\_drones}, \texttt{n\_sources}}}{
+    \SetAlgoBlockMarkers{}{}
+    \If{\texttt{n\_drones} $>$ \texttt{n\_sources}}{
+        \textbf{Assign} at least one drone to each group, following mathematical order\;
+        \textbf{Assign randmly} remaining drones to existing groups\;
+    }
+    \ElseIf{\texttt{n\_drones} = \texttt{n\_sources}}{
+        \textbf{Assign} each drone to a unique group\;
+    }
+    \Else{
+        \textbf{Assign orderly} drones up to \texttt{n\_drones}\;
+    }
+    \textbf{Set} the number of groups: \texttt{n\_groups} $\gets \texttt{max(group\_indices)}$\;
+    }
 \end{algorithm}
+
 \noindent Note that the function \texttt{sort\_drones\_in\_groups} ensures the creation of sufficient groups 
 for the localization of multiple sources only when the number of drones is equal to or greater than 
 the number of sources.
 
 \subsection{Exploration phase}
-At the start of the simulation, all drones are located at the origin of the search space. 
+At the start of the simulation, all drones are located at the origin of the search space.
 During the first Exploration Phase, the PSO algorithm is not yet employed. 
 During this phase, the drones move according to predefined trajectories at maximum speed $v_{\text{max}}$. 
 The trajectories are determined based on the number of drones and follow a radial pattern, as shown in Figure \ref{fig:exploration_pattern}. 
 The drones follow these trajectories until they have covered a distance \texttt{travel\_distance} equivalent to half the boundary of the search space.
 The goal each drone needs to reach is computed using the following Algorithm~\ref{alg:exploration_goals}:
-\begin{algorithm}[H]
-    \caption{\texttt{exploration\_goal} (MATLAB function)} \label{alg:exploration_goals}
-    \begin{algorithmic}[1]
-        \State \textbf{Inputs:}
-        \State \texttt{n\_drones}: number of drones
-        \State \texttt{bounds}: maximum limit of search space
-        \State \textbf{Outputs:}
-        \State \texttt{goals}: $x$,$y$ position of the goal
-        \State
-        \State \textbf{Procedure:}
-        \State initialize an empty array: \texttt{goals}
-        \State set \texttt{angle\_step} $\gets 360 / \texttt{n\_drones}$
-        \State set \texttt{travel\_distance} $\gets \texttt{bounds} / 2$
-        \For{each drone $j = 1, 2, \dots, \texttt{n\_drones}$}
-            \State compute angle for the current drone: \texttt{drone\_angle} $\gets j \cdot \texttt{angle\_step}$
-            \State calculate slope: \texttt{m} $\gets \tan(\textit{deg2rad}(\texttt{drone\_angle}))$
-            \If{\texttt{drone\_angle} $>$ 315 \textbf{or} \texttt{drone\_angle} $\leq$ 45} 
-                \State \texttt{goal} $\gets [\texttt{travel\_distance}, \texttt{m} \cdot \texttt{travel\_distance}]$ \Comment{1st quadrant}
-            \ElsIf{\texttt{drone\_angle} $>$ 45 \textbf{and} \texttt{drone\_angle} $\leq$ 135}
-                \State \texttt{goal} $\gets [\texttt{travel\_distance} / \texttt{m}, \texttt{travel\_distance}]$ \Comment{2nd quadrant}
-            \ElsIf{\texttt{drone\_angle} $>$ 135 \textbf{and} \texttt{drone\_angle} $\leq$ 225}
-                \State \texttt{goal} $\gets [-\texttt{travel\_distance}, \texttt{m} \cdot -\texttt{travel\_distance}]$ \Comment{3rd quadrant}
-            \ElsIf{\texttt{drone\_angle} $>$ 225 \textbf{and} \texttt{drone\_angle} $\leq$ 315}
-                \State \texttt{goal} $\gets [-\texttt{travel\_distance} / \texttt{m}, -\texttt{travel\_distance}]$ \Comment{4th quadrant}
-            \EndIf
-        \EndFor
-        \State return \texttt{goal}
-    \end{algorithmic}
+\SetKwFunction{Ftre}{\texttt{exploration\_goal}}
+\newcommand{\forcond}{drone $j=1$ \KwTo $m$}
+\begin{algorithm}[h]
+    \caption{\texttt{exploration\_goal} (MATLAB function)}\label{alg:exploration_goals}
+    \KwIn{\texttt{n\_drones}: number of drones available for exploration.}
+    \KwIn{\texttt{bounds}: maximum limit of the search space.}
+    \KwOut{\texttt{goals}: array containing $x$,$y$ positions of the exploration goals.}
+    \vspace{0.3\baselineskip}
+    \nonl \Fn(\tcc*[h]{}){\Ftre{\texttt{n\_drones}, \texttt{bounds}}}{
+    \SetAlgoBlockMarkers{}{} \DontPrintSemicolon
+    \KwInitialize{ an empty array \texttt{goals}.}\;
+    \textbf{Set} \texttt{angle\_step} $\gets \frac{360}{\texttt{n\_drones}}$.\;
+    \textbf{Set} \texttt{travel\_distance} $\gets \frac{\texttt{bounds}}{2}$.\;
+    \PrintSemicolon
+    \For{\forcond}{
+        \textbf{Compute} angle for the current drone: \texttt{drone\_angle} $\gets j \cdot \texttt{angle\_step}$\;
+        \textbf{Calculate} slope: \texttt{m} $\gets \tan(\textit{deg2rad}(\texttt{drone\_angle}))$\;
+        \DontPrintSemicolon \tcc*[h]{\hfill 1st quadrant \hfill }\; \PrintSemicolon
+        \uIf{\texttt{drone\_angle} $>$ 315 \textbf{or} \texttt{drone\_angle} $\leq$ 45}{
+            \textbf{Set} \texttt{goal} $\gets [\texttt{travel\_distance}, \texttt{m} \cdot \texttt{travel\_distance}]$
+        }
+        \DontPrintSemicolon \tcc*[h]{\hfill 2nd quadrant \hfill }\; \PrintSemicolon
+        \ElseIf{\texttt{drone\_angle} $>$ 45 \textbf{and} \texttt{drone\_angle} $\leq$ 135}{
+            \textbf{Set} \texttt{goal} $\gets [\frac{\texttt{travel\_distance}}{\texttt{m}}, \texttt{travel\_distance}]$ 
+        }
+        \DontPrintSemicolon \tcc*[h]{\hfill 3rd quadrant \hfill }\; \PrintSemicolon
+        \ElseIf{\texttt{drone\_angle} $>$ 135 \textbf{and} \texttt{drone\_angle} $\leq$ 225}{
+            \textbf{Set} \texttt{goal} $\gets [-\texttt{travel\_distance}, \texttt{m} \cdot -\texttt{travel\_distance}]$ 
+        }
+        \DontPrintSemicolon \tcc*[h]{\hfill 4th quadrant \hfill }\; \PrintSemicolon
+        \ElseIf{\texttt{drone\_angle} $>$ 225 \textbf{and} \texttt{drone\_angle} $\leq$ 315}{
+            \textbf{Set} \texttt{goal} $\gets [-\frac{\texttt{travel\_distance}}{\texttt{m}}, -\texttt{travel\_distance}]$ 
+        }
+        \texttt{goals} $\gets$ \texttt{goals} + [\texttt{goal}]\;
+    }
+    }
 \end{algorithm}
+
 \noindent
 where \texttt{angle\_step} is the angular increment to uniformly divide the space,
 \texttt{drone\_angle} represents the angle assigned to each drone, 
@@ -466,62 +477,59 @@ time required for the drone to reach the goal at maximum speed.
 In case of a negative response, the \textit{evaluate\_nss()} is 
 called and the group best ($\mathbf{gbest}$) is updated if the received NSS signal 
 is greater than the previous best.
-\begin{algorithm}
+\SetAlgoBlockMarkers{}{}
+\begin{algorithm}[h!]
+    \DontPrintSemicolon
     \caption{Particle Swarm Optimization for Multi-Source Localization}\label{alg:PSO}
-    \begin{algorithmic}[1]
-        \State \textbf{Initialize} the positions of the drones to the center of the search space.
-        \State \textbf{Initialize} \texttt{g\_best\_values}.
-        \State \textbf{Assign} each drone to a group using the function as in Alg.\eqref{alg:sort_drones_in_groups}.
-        
-        \State 
-        \State \textbf{Exploration Phase}:
-        \State \textbf{Compute} exploration goals using the function as in Alg.\eqref{alg:exploration_goals}.
-        \For{each drone \( j \)}
-            \State \textbf{Move} to the goal with \texttt{max\_velocity}.
-        \EndFor
-        
-        \State 
-        \State \textbf{Exploitation Phase}:
-        \For{each iteration \( \tau_s = 1 \) to \texttt{n\_iterations}}
-            \For{each drone \( j \)}
-                \For{each other drone \( l \neq j \)}
-                    \If{\textit{can\_I\_communicate\_with()} || 
-                    \texttt{victim\_found\_flag} == true}
-                        \State \textit{share\_exclusion\_zones(j,l)}
-                    \EndIf
-                \EndFor
-                \State \textit{check\_if\_in\_exclusion\_zone()} 
-                
-                \If{\textit{check\_if\_in\_exclusion\_zone()} == true}
-                    \If{drone \( j \) is not alone in its group}
-                        \State \textbf{Reassign} drone \( j \) to a new group.
-                        \State \textbf{Initialize} the new \texttt{g\_best} and \texttt{nss\_best}.
-                    \EndIf
-                    \State \textit{move\_away\_from\_exclusion()}
-                    \State \textbf{Reset} the personal best \texttt{p\_best}.
-                    \State \textbf{Set} the drone \( j \)'s inertia to \( \omega = 0.5 \).
-                \Else
-                    \State \textbf{Evaluate} NSS at \(\mathbf{p}_j(\tau_s)\).
-                    \If{\texttt{nss\_value} \( > \) \texttt{nss\_best}}
-                        \State \textbf{Update} \texttt{p\_best}.
-                    \EndIf
-                    \If{\texttt{nss\_value} \( > \) \texttt{g\_best}}
-                        \State \textbf{Update} \texttt{g\_best\_values}.
-                    \EndIf
-                \EndIf
-                \State \textbf{Desired velocity} : \textit{update\_velocity()}
-                \State \textbf{Apply} persistence of excitation as in Eq.\eqref{eq:persistence_of_excitation}.
-                \State \textbf{Limit} the velocity to \texttt{max\_velocity} as in Eq.\eqref{eq:velocity_clamping}.
-                \State \textbf{Desired position} : as in Eq. \eqref{eq:model_position2}
-                \State \textbf{Set} \texttt{iteration\_duration = 1}
-                \For{each time step \( \texttt{t} = 0 : \texttt{dt} : \texttt{iteration\_duration} \)}
-                    \State \textbf{Control Dynamics} : \textit{update\_state()}   
-                    \State \textbf{Enforce} boundaries on position as in Eq.\eqref{eq:boundary_condition}.
-                \EndFor
-            \EndFor
-        \EndFor
-    \end{algorithmic}
-\end{algorithm}
+    \KwInitialize{positions of drones to the center of the search space.}\;
+    \KwInitialize{\texttt{g\_best\_values}.}\;
+    \textbf{Assign} each drone to a group using the function in Algorithm \ref{alg:sort_drones_in_groups}.\;
+    \vspace{0.3\baselineskip}
+    \DontPrintSemicolon \nonl \textbf{Exploration Phase:}\; \PrintSemicolon
+    \textbf{Compute} exploration goals using the function in Algorithm \ref{alg:exploration_goals}\;
+    \For{\forcond}{
+        \textbf{Move} to goal with \texttt{max\_velocity}\;
+    }
+    \vspace{0.3\baselineskip}
+    \DontPrintSemicolon \nonl \textbf{Exploitation Phase:}\; \PrintSemicolon
+    \For{\( \tau_s = 1 \) to \texttt{n\_iterations}}{
+        \For{\forcond}{
+            \For{\textbf{each} other drone \(l \neq j\)}{
+                \If{\textit{can\_I\_communicate\_with()} \textbf{or} \texttt{victim\_found\_flag} = \text{true}}{
+                    \textbf{Share} exclusion zones between \(j\) and \(l\)\;
+                }
+            }
+            
+            \If{\textit{check\_if\_in\_exclusion\_zone()} = true}{
+                \If{\textbf{drone} \(j\) is not alone in its group}{
+                    \textbf{Reassign} drone \(j\) to a new group\;
+                    \textbf{Initialize} new \texttt{g\_best} and \texttt{nss\_best}\;
+                }
+                \textbf{Move} away from exclusion zones\;
+                \textbf{Reset} personal best \texttt{p\_best}\;
+                \textbf{Set} drone \(j\) \texttt{inertia} to 0.5\;
+            }
+            \Else{
+                \textbf{Evaluate} NSS at \(\mathbf{p}_j(\tau_s)\)\;
+                \If{\texttt{nss\_value} \( > \) \texttt{nss\_best}}{
+                    \textbf{Update} \texttt{p\_best}\;
+                }
+                \If{\texttt{nss\_value} \( > \) \texttt{g\_best}}{
+                    \textbf{Update} \texttt{g\_best\_values}\;
+                }
+            }
+            \textbf{Compute} desired velocity: \textit{update\_velocity()}\;
+            \textbf{Apply} persistence of excitation as in Eq.\eqref{eq:persistence_of_excitation}\;
+            \textbf{Limit} velocity to \texttt{max\_velocity} as in Eq.\eqref{eq:velocity_clamping}\;
+            \textbf{Desired} position: as in Eq.\eqref{eq:model_position2}\;
+            \textbf{Set} \texttt{iteration\_duration} to 1\;
+            \For{\(\texttt{t} = 0 : \texttt{dt} : \texttt{iteration\_duration}\)}{
+                \textbf{Control} dynamics: \textit{update\_state()}\;
+                \textbf{Enforce} boundaries on position as in Eq.\eqref{eq:boundary_condition}\;
+            }
+        }
+    }
+\end{algorithm}    
 
 \noindent\\
 Subsequently, the \textit{update\_velocity()} method computes the desired 
@@ -542,12 +550,13 @@ of a source by each group.
 \newpage
 \section{Results}
 METTERE UNA FOTO VOLENDO
-DECIDERE DOVE METTERE TUTTI I PARAMETRI SE QUI O SOPRA
+SPOSTARLI TUTTI SOPRA
 
-The drone used as reference for the experiments is 
-the in Dragonfly IV \cite{drone}, whose physical characteristics are 
-given in Table\ref{tab:drone_parameters}.
-In both simulations (trajectory tracking and PSO with
+The parameters relative to the UAVs physical
+characteristics used in the simulations are from 
+the real Dragonfly IV drone \cite{drone}, these values are
+summarized in Table\ref{tab:drone_parameters}.
+In both experiments (trajectory tracking and PSO with
 control) these same parameters are used for the control
 part, in conjunction with the gains 
 described in Table~\ref{tab:control_gains}.

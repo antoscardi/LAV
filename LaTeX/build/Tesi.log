@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  27 DEC 2024 18:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  28 DEC 2024 08:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1262,64 +1262,86 @@ Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest-lib-linguistics.sty
 Package: forest-lib-linguistics 2017/07/14 v0.1.2
 \standardnodestrutbox=\box143
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithms/algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
- (/usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2017/07/18 v5.2 algorithms environments
+\c@AlgoLine=\count557
+\algocf@hangindent=\skip121
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count558
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+\skiptotal=\skip122
+\skiplinenumber=\skip123
+\skiprule=\skip124
+\skiphlne=\skip125
+\skiptext=\skip126
+\skiplength=\skip127
+\algomargin=\skip128
+\skipalgocfslide=\skip129
+\algowidth=\dimen324
+\inoutsize=\dimen325
+\inoutindent=\dimen326
+\interspacetitleruled=\dimen327
+\interspacealgoruled=\dimen328
+\interspacetitleboxruled=\dimen329
+\algocf@ruledwidth=\skip130
+\algocf@inoutbox=\box144
+\algocf@inputbox=\box145
+\AlCapSkip=\skip131
+\AlCapHSkip=\skip132
+\algoskipindent=\skip133
+\algocf@nlbox=\box146
+\algocf@hangingbox=\box147
+\algocf@untilbox=\box148
+\algocf@skipuntil=\skip134
+\algocf@capbox=\box149
+\algocf@lcaptionbox=\skip135
+\algoheightruledefault=\skip136
+\algoheightrule=\skip137
+\algotitleheightruledefault=\skip138
+\algotitleheightrule=\skip139
+\c@algocfline=\count559
+\c@algocfproc=\count560
+\c@algocf=\count561
+\algocf@algoframe=\box150
+\algocf@algobox=\box151
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count557
+\c@float@type=\count562
 \float@exts=\toks72
-\float@box=\box144
+\float@box=\box152
 \@float@everytoks=\toks73
-\@floatcapt=\box145
-)
-\@float@every@algorithm=\toks74
-\c@algorithm=\count558
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
-Package: algpseudocode 
- (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
-Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
-
-Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count559
-\c@ALG@rem=\count560
-\c@ALG@nested=\count561
-\ALG@tlm=\skip121
-\ALG@thistlm=\skip122
-\c@ALG@Lnr=\count562
-\c@ALG@blocknr=\count563
-\c@ALG@storecount=\count564
-\c@ALG@tmpcounter=\count565
-\ALG@tmplength=\skip123
-)
-Document Style - pseudocode environments for use with the `algorithmicx' style
+\@floatcapt=\box153
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/media9.sty
 Package: media9 2024/09/16 v1.29 acrobat-9/X compatible media
-\g_mix_pkgresizeflag_int=\count566
+\g_mix_pkgresizeflag_int=\count563
  (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/pdfbase.sty
 Package: pdfbase 2024/09/16 v0.59 driver independent access to low-level PDF features
-\g_pbs_page_int=\count567
-\g_pbs_oc_int=\count568
+\g_pbs_page_int=\count564
+\g_pbs_oc_int=\count565
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/ocgx2/ocgbase.sty
 Package: ocgbase 2024/09/15 v0.24 support package for ocgx2.sty
 )
-\l_mix_poster_box=\box146
-\g_mix_wd_dim=\dimen324
-\g_mix_ht_dim=\dimen325
-\g_mix_dp_dim=\dimen326
-\g_mix_rmcnt_int=\count569
-\l_mix_viewcnt_int=\count570
-\g@mix@page@int=\count571
-\g_mix_resizeflag_int=\count572
-\l_mix_lineno_int=\count573
-\l_mix_pbtn_box=\box147
-\g_mix_mbtncnt_int=\count574
-\mix@btn@dim=\dimen327
+\l_mix_poster_box=\box154
+\g_mix_wd_dim=\dimen330
+\g_mix_ht_dim=\dimen331
+\g_mix_dp_dim=\dimen332
+\g_mix_rmcnt_int=\count566
+\l_mix_viewcnt_int=\count567
+\g@mix@page@int=\count568
+\g_mix_resizeflag_int=\count569
+\l_mix_lineno_int=\count570
+\l_mix_pbtn_box=\box155
+\g_mix_mbtncnt_int=\count571
+\mix@btn@dim=\dimen333
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen328
-\pgfarrowlength=\dimen329
-\pgfarrowwidth=\dimen330
-\pgfarrowlinewidth=\dimen331
+\pgfarrowinset=\dimen334
+\pgfarrowlength=\dimen335
+\pgfarrowwidth=\dimen336
+\pgfarrowlinewidth=\dimen337
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
@@ -1330,45 +1352,45 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 Package: mathtools 2024/03/11 v1.30 mathematical typesetting tools
  (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count575
-\calc@Bcount=\count576
-\calc@Adimen=\dimen332
-\calc@Bdimen=\dimen333
-\calc@Askip=\skip124
-\calc@Bskip=\skip125
+\calc@Acount=\count572
+\calc@Bcount=\count573
+\calc@Adimen=\dimen338
+\calc@Bdimen=\dimen339
+\calc@Askip=\skip140
+\calc@Bskip=\skip141
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count577
-\calc@Cskip=\skip126
+\calc@Ccount=\count574
+\calc@Cskip=\skip142
 )
-\g_MT_multlinerow_int=\count578
-\l_MT_multwidth_dim=\dimen334
-\origjot=\skip127
-\l_MT_shortvdotswithinadjustabove_dim=\dimen335
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen336
-\l_MT_above_intertext_sep=\dimen337
-\l_MT_below_intertext_sep=\dimen338
-\l_MT_above_shortintertext_sep=\dimen339
-\l_MT_below_shortintertext_sep=\dimen340
-\xmathstrut@box=\box148
-\xmathstrut@dim=\dimen341
+\g_MT_multlinerow_int=\count575
+\l_MT_multwidth_dim=\dimen340
+\origjot=\skip143
+\l_MT_shortvdotswithinadjustabove_dim=\dimen341
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen342
+\l_MT_above_intertext_sep=\dimen343
+\l_MT_below_intertext_sep=\dimen344
+\l_MT_above_shortintertext_sep=\dimen345
+\l_MT_below_shortintertext_sep=\dimen346
+\xmathstrut@box=\box156
+\xmathstrut@dim=\dimen347
 )
-\l_EQ_equationtype_int=\count579
-\l_EQ_alignmentmode_int=\count580
-\l_EQ_totalwidth_dim=\dimen342
-\l_EQ_displaywidth_dim=\dimen343
-\l_EQ_temp_linewidth_dim=\dimen344
-\l_EQ_linewidth_dim=\dimen345
-\EmphEqdelimitershortfall=\dimen346
-\EmphEqdelimiterfactor=\count581
-\g_EQ_toptag_height_dim=\dimen347
-\g_EQ_bottomtag_depth_dim=\dimen348
-\g_EQ_toprow_height_dim=\dimen349
-\g_EQ_bottomrow_depth_dim=\dimen350
-\g_EQ_widesttag_dim=\dimen351
-\EQ_mathdisplay_box=\box149
-\EQ_tag_box=\box150
-\g_EQ_temprow_int=\count582
+\l_EQ_equationtype_int=\count576
+\l_EQ_alignmentmode_int=\count577
+\l_EQ_totalwidth_dim=\dimen348
+\l_EQ_displaywidth_dim=\dimen349
+\l_EQ_temp_linewidth_dim=\dimen350
+\l_EQ_linewidth_dim=\dimen351
+\EmphEqdelimitershortfall=\dimen352
+\EmphEqdelimiterfactor=\count578
+\g_EQ_toptag_height_dim=\dimen353
+\g_EQ_bottomtag_depth_dim=\dimen354
+\g_EQ_toprow_height_dim=\dimen355
+\g_EQ_bottomrow_depth_dim=\dimen356
+\g_EQ_widesttag_dim=\dimen357
+\EQ_mathdisplay_box=\box157
+\EQ_tag_box=\box158
+\g_EQ_temprow_int=\count579
 )
 \Tesi@idxfile=\write7
 \openout7 = `Tesi.idx'.
@@ -1379,11 +1401,11 @@ Writing index file Tesi.idx
 \glo@main@file=\write9
 \openout9 = `Tesi.glo'.
 
-Package glossaries Info: Writing glossary file Tesi.glo on input line 101.
+Package glossaries Info: Writing glossary file Tesi.glo on input line 111.
 \glo@acronym@file=\write10
 \openout10 = `Tesi.acn'.
 
-Package glossaries Info: Writing glossary file Tesi.acn on input line 101.
+Package glossaries Info: Writing glossary file Tesi.acn on input line 111.
 (./glossario.tex)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -1392,24 +1414,24 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
  (build/Tesi.aux (build/Cap_1.aux) (build/Cap_2.aux) (build/Cap_3.aux) (build/Cap_4.aux) (build/Cap_5.aux))
 \openout1 = `Tesi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1457,44 +1479,44 @@ Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count583
-\scratchdimen=\dimen352
-\scratchbox=\box151
-\nofMPsegments=\count584
-\nofMParguments=\count585
-\everyMPshowfont=\toks75
-\MPscratchCnt=\count586
-\MPscratchDim=\dimen353
-\MPnumerator=\count587
-\makeMPintoPDFobject=\count588
-\everyMPtoPDFconversion=\toks76
+\scratchcounter=\count580
+\scratchdimen=\dimen358
+\scratchbox=\box159
+\nofMPsegments=\count581
+\nofMParguments=\count582
+\everyMPshowfont=\toks74
+\MPscratchCnt=\count583
+\MPscratchDim=\dimen359
+\MPnumerator=\count584
+\makeMPintoPDFobject=\count585
+\everyMPtoPDFconversion=\toks75
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Info: Redefining \textsubscript on input line 109.
-LaTeX Info: Redefining \microtypecontext on input line 109.
-Package microtype Info: Applying patch `item' on input line 109.
-Package microtype Info: Applying patch `toc' on input line 109.
-Package microtype Info: Applying patch `eqnum' on input line 109.
-Package microtype Info: Applying patch `footnote' on input line 109.
-Package microtype Info: Applying patch `verbatim' on input line 109.
+LaTeX Info: Redefining \textsubscript on input line 119.
+LaTeX Info: Redefining \microtypecontext on input line 119.
+Package microtype Info: Applying patch `item' on input line 119.
+Package microtype Info: Applying patch `toc' on input line 119.
+Package microtype Info: Applying patch `eqnum' on input line 119.
+Package microtype Info: Applying patch `footnote' on input line 119.
+Package microtype Info: Applying patch `verbatim' on input line 119.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 109.
+LaTeX Info: Redefining \showhyphens on input line 119.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 109.
+Package hyperref Info: Link coloring OFF on input line 119.
  (build/Tesi.out) (build/Tesi.out)
 \@outlinefile=\write11
 \openout11 = `Tesi.out'.
@@ -1512,11 +1534,11 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Tesi.bbl' found.
  (build/Tesi.bbl)
-Package biblatex Info: Reference section=0 on input line 109.
-Package biblatex Info: Reference segment=0 on input line 109.
-\SAP@parboxindent=\skip128
-\SAP@parboxwidth=\skip129
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 115.
+Package biblatex Info: Reference section=0 on input line 119.
+Package biblatex Info: Reference segment=0 on input line 119.
+\SAP@parboxindent=\skip144
+\SAP@parboxwidth=\skip145
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1527,41 +1549,41 @@ Package microtype Info: Loading generic protrusion settings for font family
 <sapienzalogo.pdf, id=308, 288.07625pt x 89.33376pt>
 File: sapienzalogo.pdf Graphic file (type pdf)
 <use sapienzalogo.pdf>
-Package pdftex.def Info: sapienzalogo.pdf  used on input line 115.
+Package pdftex.def Info: sapienzalogo.pdf  used on input line 125.
 (pdftex.def)             Requested size: 142.26378pt x 44.11742pt.
 LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <10.95> not available
-(Font)              Font shape `T1/lmss/bx/n' tried instead on input line 115.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 115.
+(Font)              Font shape `T1/lmss/bx/n' tried instead on input line 125.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 115.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 115.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 115.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 115.
+(Font)              <10.95> on input line 125.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 115.
+(Font)              <8> on input line 125.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 115.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 115.
+(Font)              <6> on input line 125.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 115.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1575,22 +1597,22 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} </usr/local/texlive/2024/texmf-dist/tex/latex/sapthesis/sapienzalogo.pdf>]
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 115.
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 125.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 )
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
+Underfull \hbox (badness 10000) in paragraph at lines 125--125
 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 115.
+(Font)              <10> on input line 125.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 115.
+(Font)              <7> on input line 125.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 115.
+(Font)              <5> on input line 125.
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
+Underfull \hbox (badness 10000) in paragraph at lines 125--125
 
  []
 
@@ -1600,7 +1622,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--115
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.115 
+l.125 
        [1
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}] (./abstract.tex)
@@ -2039,57 +2061,68 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--182
 [67]
 
 [68]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 301.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 
 [69]
 
-[70]
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[71]
-<images/exploration_pattern.jpg, id=1596, 1495.5875pt x 957.5775pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/exploration_pattern.jpg, id=1584, 1495.5875pt x 957.5775pt>
 File: images/exploration_pattern.jpg Graphic file (type jpg)
 <use images/exploration_pattern.jpg>
-Package pdftex.def Info: images/exploration_pattern.jpg  used on input line 428.
+Package pdftex.def Info: images/exploration_pattern.jpg  used on input line 439.
 (pdftex.def)             Requested size: 396.0pt x 253.53766pt.
 
 
-LaTeX Warning: Float too large for page by 20.31375pt on input line 524.
+[70]
+
+LaTeX Warning: Float too large for page by 16.81477pt on input line 532.
 
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[71]
 
 [72]
 
-[73 <./images/exploration_pattern.jpg>]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[74]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[75]
-
-[76]
-<images/traj_comparison.png, id=1650, 578.16pt x 361.35pt>
+[73 <./images/exploration_pattern.jpg>]
+<images/traj_comparison.png, id=1686, 578.16pt x 361.35pt>
 File: images/traj_comparison.png Graphic file (type png)
 <use images/traj_comparison.png>
-Package pdftex.def Info: images/traj_comparison.png  used on input line 675.
+Package pdftex.def Info: images/traj_comparison.png  used on input line 684.
 (pdftex.def)             Requested size: 396.0pt x 247.49568pt.
-<images/pid_x.png, id=1651, 578.16pt x 361.35pt>
+<images/pid_x.png, id=1687, 578.16pt x 361.35pt>
 File: images/pid_x.png Graphic file (type png)
 <use images/pid_x.png>
-Package pdftex.def Info: images/pid_x.png  used on input line 684.
+Package pdftex.def Info: images/pid_x.png  used on input line 693.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
-<images/pid_y.png, id=1652, 578.16pt x 361.35pt>
+<images/pid_y.png, id=1688, 578.16pt x 361.35pt>
 File: images/pid_y.png Graphic file (type png)
 <use images/pid_y.png>
-Package pdftex.def Info: images/pid_y.png  used on input line 690.
+Package pdftex.def Info: images/pid_y.png  used on input line 699.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
-<images/pid_z.png, id=1653, 578.16pt x 361.35pt>
+<images/pid_z.png, id=1689, 578.16pt x 361.35pt>
 File: images/pid_z.png Graphic file (type png)
 <use images/pid_z.png>
-Package pdftex.def Info: images/pid_z.png  used on input line 696.
+Package pdftex.def Info: images/pid_z.png  used on input line 705.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
 
 
@@ -2098,19 +2131,25 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/rotor_velocities.png, id=1654, 578.16pt x 361.35pt>
+<images/rotor_velocities.png, id=1690, 578.16pt x 361.35pt>
 File: images/rotor_velocities.png Graphic file (type png)
 <use images/rotor_velocities.png>
-Package pdftex.def Info: images/rotor_velocities.png  used on input line 711.
+Package pdftex.def Info: images/rotor_velocities.png  used on input line 720.
 (pdftex.def)             Requested size: 194.04218pt x 121.27492pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-)
 
-[77 <./images/traj_comparison.png (PNG copy)>]
 
-[78 <./images/pid_x.png (PNG copy)> <./images/pid_y.png (PNG copy)> <./images/pid_z.png (PNG copy)> <./images/rotor_velocities.png (PNG copy)>]
+[74 <./images/traj_comparison.png (PNG copy)>]
+
+[75 <./images/pid_x.png (PNG copy)> <./images/pid_y.png (PNG copy)> <./images/pid_z.png (PNG copy)> <./images/rotor_velocities.png (PNG copy)>])
+
+[76]
+
+[77]
+
+[78]
 
 [79] (build/Tesi.gls)
 
@@ -2124,7 +2163,7 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/qtm/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (0.88255pt too wide) in paragraph at lines 145--145
+Overfull \hbox (0.88255pt too wide) in paragraph at lines 155--155
 []\T1/qtm/m/n/10.95 (-20) J. Kennedy and R. Eber-hart, ^^P  Par-ti-cle swarm op-ti-miza-tion,^^Q in \T1/qtm/m/it/10.95 (-20) Pro-ceed-ings of ICNN'95
  []
 
@@ -2133,12 +2172,12 @@ Overfull \hbox (0.88255pt too wide) in paragraph at lines 145--145
 [81
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec-sc.enc}]
-Overfull \hbox (33.35397pt too wide) in paragraph at lines 145--145
+Overfull \hbox (33.35397pt too wide) in paragraph at lines 155--155
 []\T1/qtm/m/n/10.95 (-20) J. Mars-den and A. Tromba, \T1/qtm/m/it/10.95 (-20) Vec-tor Cal-cu-lus\T1/qtm/m/n/10.95 (-20) . Macmil-lan Learn-ing, 2012, \T1/qtm/m/sc/10.95 (-20) isbn\T1/qtm/m/n/10.95 (-20) : 9781429224048.
  []
 
 
-Overfull \hbox (31.68024pt too wide) in paragraph at lines 145--145
+Overfull \hbox (31.68024pt too wide) in paragraph at lines 155--155
 []\T1/qtm/m/n/10.95 (-20) D. Grif-fiths, \T1/qtm/m/it/10.95 (-20) In-tro-duc-tion to Elec-tro-dy-nam-ics\T1/qtm/m/n/10.95 (-20) . Pear-son Ed-u-ca-tion, 2014, \T1/qtm/m/sc/10.95 (-20) isbn\T1/qtm/m/n/10.95 (-20) : 9780321972101.
  []
 
@@ -2147,12 +2186,12 @@ Overfull \hbox (31.68024pt too wide) in paragraph at lines 145--145
 [82]
 
 [83]
-Overfull \hbox (6.83246pt too wide) in paragraph at lines 145--145
+Overfull \hbox (6.83246pt too wide) in paragraph at lines 155--155
 \T1/qtm/m/n/10.95 (-20) in avalanches us-ing ARVA: an ex-tremum seek-ing ap-proach,^^Q \T1/qtm/m/it/10.95 (-20) CoRR\T1/qtm/m/n/10.95 (-20) , vol. abs/2106.14514,
  []
 
 
-Overfull \hbox (19.12433pt too wide) in paragraph at lines 145--145
+Overfull \hbox (19.12433pt too wide) in paragraph at lines 155--155
 []$\T1/lmtt/m/n/10.95 https : / / www . sciencedirect . com / science / article / pii / S0300957221002148$[]\T1/qtm/m/n/10.95 (-20) . 
  []
 
@@ -2161,10 +2200,10 @@ Overfull \hbox (19.12433pt too wide) in paragraph at lines 145--145
 [84]
 
 Package biblatex Warning: No driver for 'unknown'.
-(biblatex)                Using fallback driver on input line 144.
+(biblatex)                Using fallback driver on input line 154.
 
 
-Overfull \hbox (4.50258pt too wide) in paragraph at lines 145--145
+Overfull \hbox (4.50258pt too wide) in paragraph at lines 155--155
 \T1/lmtt/m/n/10.95 2023 . 106215$[]\T1/qtm/m/n/10.95 (-20) . [On-line]. Avail-able: []$\T1/lmtt/m/n/10.95 https : / / www . sciencedirect . com / science /
  []
 
@@ -2184,24 +2223,29 @@ L3 programming layer <2024-09-10>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Tesi.out' has not changed.
-(rerunfilecheck)             Checksum: A645F9BD422DBA175860702F683078B4;12896.
+(rerunfilecheck)             Checksum: 00433EC88C8257707E6920CFFBE9B848;12896.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                Tesi
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'Tesi.run.xml'.
 \openout1 = `Tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 58495 strings out of 473579
- 1227634 string characters out of 5728234
- 2140485 words of memory out of 5000000
- 79694 multiletter control sequences out of 15000+600000
- 715717 words of font info for 297 fonts, out of 8000000 for 9000
+ 58986 strings out of 473579
+ 1235945 string characters out of 5728234
+ 2158305 words of memory out of 5000000
+ 80090 multiletter control sequences out of 15000+600000
+ 716036 words of font info for 298 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,17n,131p,2376b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on build/Tesi.pdf (95 pages, 4596204 bytes).
+ 94i,22n,131p,2376b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
+Output written on build/Tesi.pdf (95 pages, 4635167 bytes).
 PDF statistics:
- 2047 PDF objects out of 2073 (max. 8388607)
- 1835 compressed objects within 19 object streams
- 480 named destinations out of 1000 (max. 500000)
- 68840 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 2170 PDF objects out of 2487 (max. 8388607)
+ 1953 compressed objects within 20 object streams
+ 574 named destinations out of 1000 (max. 500000)
+ 69352 words of extra memory for PDF output out of 74296 (max. 10000000)
 

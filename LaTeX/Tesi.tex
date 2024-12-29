@@ -46,12 +46,22 @@ sorting=ynt
 \usepackage{amsmath, slashed}
 \usepackage{amsfonts}
 \usepackage[linguistics]{forest} % Diagram package
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage[ruled,linesnumbered]{algorithm2e}
 \usepackage{float}
 \usepackage{media9}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \usepackage{empheq}
+
+%ALGORITHM
+\SetArgSty{textnormal} % Arguments and other text will be in normal style
+\SetNlSty{}{}{:} % Line numbers: no bold, no italics, with colo
+%\DontPrintSemicolon
+\SetKw{KwInitialize}{Initialize}
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}
+\SetKwProg{Fn}{Function}{:}{}
+\AlgoDisplayBlockMarkers \SetAlgoBlockMarkers{}{end}
+\SetAlgoNoEnd
 
 % Define custom colors
 \definecolor{ocra}{rgb}{1, 0.8, 0}      % Ocra color (HEX: #ffcc00)
