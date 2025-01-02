@@ -10,9 +10,9 @@ classdef Plotter < handle
         legend_entries
         plot_handles
         n_groups
-        font_labels = 18;
-        font_title = 20;
-        font_legend = 17;
+        font_labels = 30;
+        font_title = 30;
+        font_legend = 26;
     end
     
     methods
@@ -140,7 +140,7 @@ classdef Plotter < handle
                 drone_trajectory = squeeze(trajectories(i, 1:valid_steps(i), :)); % Only valid rows
                 
                 % Plot the trajectory
-                plot(drone_trajectory(:, 1), drone_trajectory(:, 2), '-', 'LineWidth', 2, ...
+                plot(drone_trajectory(:, 1), drone_trajectory(:, 2), '-', 'LineWidth', 3, ...
                         'DisplayName', sprintf('Trajectory Drone %d', i), 'Color', obj.drone_colors(i, :));
             end
             
@@ -150,6 +150,9 @@ classdef Plotter < handle
             title('Drone Trajectories During PSO', 'FontSize', obj.font_title, 'Interpreter', 'latex');
             legend('FontSize', obj.font_legend, 'Location', 'northeastoutside', 'Interpreter', 'latex');
             grid on;
+            a = annotation('rectangle',[0 0 1 1],'Color','w');
+            exportgraphics(gcf, fullfile('figures', 'case_3_fail.pdf'),'ContentType', 'vector');
+            delete(a);
             hold off;
         end
     end

@@ -159,7 +159,7 @@ After simplifications and further calculations, we obtain:
     \left| \mathbf{H} \right| = \frac{m}{4 \pi} \left(\frac{(ab)^2}{b^2 x^2 + a^2 (y^2 + z^2)}\right)^{3/2}
     \label{eq:H_mag_cart}
 \end{equation}
-where we call $I \, \pi \, b^2$ the magnetic moment $m$, as seen in \ref{eq:magnetic_moment}.
+where we call $I \, \pi \, b^2$ the magnetic moment magnitude $m$, as seen in \ref{eq:magnetic_moment}.
 Then, we can define $\eta$ as \cite{main}:
 \[ \eta = \left( \frac{m}{4 \pi \left| \mathbf{H} \right|} \right)^{2/3} \cdot \, (ab)^2 = \]
 by substituting \ref{eq:H_mag_cart}:
@@ -1219,9 +1219,6 @@ represents the measurement noise related to the electromagnetic interference,
 defined in \ref{eq:H_rotated_noise}.
 
 \subsection{Modified Particle Swarm Optimization with Exclusion Zones}
-VA AGGIUNTO CHE GLI INDICI DEI DRONI SONO ANCHE SORTATI E CHE NEL PSO AGGIUNGIAMO
-UNA VOMPONENTE RANDOMICA ALLA VELOCITÀ, QUINDI MANCA UN EQUAZIONE
-\subsubsection{Particle Swarm Oprimization}
 \label{sec:PSO}
 The PSO algorithm is an intelligent population-based stochastic optimization technique 
 that simulates the behavior of a natural biological swarm. 
@@ -1335,13 +1332,13 @@ particle to achieve a \textit{persistence of excitation} state,
 allowing every drone to explore new and different directions, 
 as described in Eq.\ref{eq:persistence_of_excitation}:
 \begin{equation}
-    \mathbf{v}_j(\tau_k + 1) = \mathbf{v}_j(\tau_k) + \beta \cdot \mathbf{rand} \cdot ||\mathbf{v}_j(\tau_k)||
+    \mathbf{v}_j(\tau_k + 1) = \mathbf{v}_j(\tau_k) + \beta \cdot \mathbf{w} \cdot ||\mathbf{v}_j(\tau_k)||
 \label{eq:persistence_of_excitation}
 \end{equation}
 where:
 \begin{itemize}
     \item \(\beta\) is an hyperparameter chosen experimentally in the [0,1] range.
-    \item \(\mathbf{rand} = [\texttt{rand}_1, \texttt{rand}_2]^\top\) and \(\texttt{rand}_1, \texttt{rand}_2 \sim \mathcal{U}(-1, 1)\) represents a random vector where each component is uniformly distributed between \(-1\) and \(1\).
+    \item \(\mathbf{w} = [\text{w}_1, \text{w}_2]^\top\) and \(\text{w}_1, \text{w}_2 \sim \mathcal{U}(-1, 1)\) represents a random vector where each component is uniformly distributed between \(-1\) and \(1\).
     \item \(||\mathbf{v}_j(\tau_k)||\) is the magnitude of the velocity vector of particle \(j\).
 \end{itemize}
 
@@ -1369,7 +1366,7 @@ This means that:
     while maintaining the same direction.
 \end{itemize}
 
-\subsection{Exclusion Zone Mechanism}
+\subsubsection{Exclusion Zone Mechanism}
 In order to avoid clustering around the same source 
 and to ensure that the swarm does not converge only 
 on a few sources, we introduce an exclusion zone mechanism. 

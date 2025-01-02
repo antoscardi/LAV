@@ -178,6 +178,9 @@ for k = 1:length(time)
     end
     R = rotation_matrix(x(7), x(8), x(9));
     body_frame_handles = plot_drone(x(1:3), R, t);
+    if t == 7 
+        exportgraphics(gcf, fullfile('figures', 'pid_sim.pdf'), 'ContentType', 'vector');
+    end
     if do_video
         frame = getframe(figure_handle); % Capture high-resolution frame
         frame_resized = imresize(frame.cdata, [995, 1910]);
@@ -193,11 +196,16 @@ end
 % Extract results
 plot_results(time, desired_position, state_history, rotor_velocities_history, rotor_forces_history);
 % Save all other plots generated in the simulation
-saveas(figure(2), 'figures/plot_2.png');
-saveas(figure(3), 'figures/plot_3.png');
-saveas(figure(4), 'figures/plot_4.png');
-saveas(figure(5), 'figures/plot_5.png');
-saveas(figure(6), 'figures/plot_6.png');
+exportgraphics(figure(2), fullfile('figures', 'plot_2.pdf'),'ContentType', 'vector');
+exportgraphics(figure(3), fullfile('figures', 'plot_3.pdf'),'ContentType', 'vector');
+exportgraphics(figure(4), fullfile('figures', 'plot_4.pdf'),'ContentType', 'vector');
+exportgraphics(figure(5), fullfile('figures', 'plot_5.pdf'),'ContentType', 'vector');
+exportgraphics(figure(6), fullfile('figures', 'plot_6.pdf'),'ContentType', 'vector');
+%saveas(figure(2), 'figures/plot_2.png');
+%saveas(figure(3), 'figures/plot_3.png');
+%saveas(figure(4), 'figures/plot_4.png');
+%saveas(figure(5), 'figures/plot_5.png');
+%saveas(figure(6), 'figures/plot_6.png');
 
 
 function x_dot = full_model(dt, state, F, input_torques)
@@ -312,9 +320,9 @@ function figure_handle = init_plot(time, desired_position)
     set(figure_handle, 'Units', 'pixels', 'Position', [100, 100, 1910, 995]); % Fixed size
     hold on;
     grid on;
-    xlabel('$x$ [m]', 'Interpreter', 'latex', 'FontSize', label_font_size);
-    ylabel('$y$ [m]', 'Interpreter', 'latex', 'FontSize', label_font_size);
-    zlabel('$z$ [m]', 'Interpreter', 'latex', 'FontSize', label_font_size);
+    xlabel('$x$ [m]', 'Interpreter', 'latex', 'FontSize', label_font_size+6);
+    ylabel('$y$ [m]', 'Interpreter', 'latex', 'FontSize', label_font_size+6);
+    zlabel('$z$ [m]', 'Interpreter', 'latex', 'FontSize', label_font_size+6);
     view(15.6875,37.9459)
     %view(45, 30);
     %view(0, 90); % view from above
@@ -324,9 +332,9 @@ function figure_handle = init_plot(time, desired_position)
     quiver3(0, 0, 0, 4, 0, 0, 'Color', red, 'LineWidth', 2.5); % X-axis 
     quiver3(0, 0, 0, 0, 7, 0, 'Color', blue, 'LineWidth', 2.5); % Y-axis 
     quiver3(0, 0, 0, 0, 0, 1, 'Color', green, 'LineWidth', 2.5); % Z-axis 
-    text(4, 0, 0, '$x_i$', 'Color', red, 'FontSize', label_font_size+2, 'Interpreter', 'latex');
-    text(0, 7.1, 0, '$y_i$', 'Color', blue, 'FontSize', label_font_size+2, 'Interpreter', 'latex');
-    text(0, 0, 1.1, '$z_i$', 'Color', green, 'FontSize', label_font_size+2, 'Interpreter', 'latex');
+    text(4, 0, 0, '$x_i$', 'Color', red, 'FontSize', label_font_size, 'Interpreter', 'latex');
+    text(0, 7.1, 0, '$y_i$', 'Color', blue, 'FontSize', label_font_size, 'Interpreter', 'latex');
+    text(0, 0, 1.1, '$z_i$', 'Color', green, 'FontSize', label_font_size, 'Interpreter', 'latex');
 
     % Plot desired trajectory
     t_full = time; % Time vector for the full trajectory
@@ -449,9 +457,9 @@ function plot_results(time, desired_position, state_history, rotor_velocities_hi
     grid on;
 
     % X, Y, Z Plots
-    plot_single_dimension(time, x_hist, xd, '$x$ [m]', 'Plot of position $x(t)$');
-    plot_single_dimension(time, y_hist, yd, '$y$ [m]', 'Plot of position $y(t)$');
-    plot_single_dimension(time, z_hist, zd, '$z$ [m]', 'Plot of position $z(t)$');
+    plot_single_dimension(time, x_hist, xd, '$x$ [m]', '$x(t)$');
+    plot_single_dimension(time, y_hist, yd, '$y$ [m]', '$y(t)$');
+    plot_single_dimension(time, z_hist, zd, '$z$ [m]', '$z(t)$');
 
     % Rotor velocities plot
     figure;

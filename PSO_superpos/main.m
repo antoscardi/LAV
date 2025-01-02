@@ -14,9 +14,9 @@ rng(seed)
 n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 310;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 450;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
-bounds = [-80, 80];    % Search space boundaries for drone positions. This defines the limits for the x and y 
+bounds = [-80, 80];      % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
                          % from (-100, -100) to (100, 100).
 
@@ -29,7 +29,7 @@ max_velocity = 2;        % Maximum allowable velocity for each drone (m/s). Limi
 p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];   % n drones 4 randomness 0.5 ex zone 1
 %p_sources = [ 20, 50; 5, 70; 20, 57];              % n drone 3 randomness 0.1  (reduce rand or they will get stuck in the other exclusion zone)
 %p_sources = [ 20, 50; 20, 51];                     % 1 m apart, ex zone 0.5 m, n drones 2 doesn t work with any randomness
-%p_sources = [ 16, 50; 18, 46; 20, 52; 22, 48];     % 2 m apart, n drones 4, randomness 0.2 ex zone 1
+%p_sources = [20, 50; 26, 50; 20, 56; 26, 56];       % 6 m aoart
 %p_sources = [ -70, -70; 70, 70; -70, 70; 70, -70];  % far away 4 drones, randomness 0.2, ex zone 1   
 
 n_sources = size(p_sources, 1);
@@ -43,7 +43,7 @@ cognitive_factor = 2.05;     % Cognitive factor (personal learning coefficient),
                              % to its own best-known position. Higher values make drones focus on their personal best.
                              % Typical range: [1.5 - 2.5]
 
-social_factor = 1.5;           % Social factor (global learning coefficient), controls how much a drone is influenced by 
+social_factor = 1.5;         % Social factor (global learning coefficient), controls how much a drone is influenced by 
                              % the swarm's global best-known position. Higher values increase the influence of the swarm.
                              % Typical range: [1.5 - 2.5], in our case the swarm is relative to the group.
 
@@ -244,6 +244,15 @@ for iter = iter:n_iterations
         % Extract position of each particle
         positions(i, :) = particles{i}.position;  
     end
+
+    % Check if all drones have found sources
+    num_sources_found = size(cell2mat(cellfun(@(p) p.my_exclusion_zone, particles, 'UniformOutput', false)), 1);
+    if num_sources_found == n_sources
+        fprintf('All drones have found a source at iteration %d.\n', iter);
+        fprintf('Simulation time: %.2f seconds\n', time+1);
+        break; 
+    end
+
     % Update plot with current drone positions
     time = (iter - 1) * iteration_duration;
     plotter.draw(positions, iter, time);

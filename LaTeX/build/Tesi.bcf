@@ -2471,25 +2471,26 @@
     <bcf:citekey order="93" intorder="1">3</bcf:citekey>
     <bcf:citekey order="94" intorder="1">3</bcf:citekey>
     <bcf:citekey order="95" intorder="1">model_quadrotor</bcf:citekey>
-    <bcf:citekey order="96" intorder="1">ENU</bcf:citekey>
+    <bcf:citekey order="96" intorder="1">model_quadrotor</bcf:citekey>
     <bcf:citekey order="97" intorder="1">ENU</bcf:citekey>
-    <bcf:citekey order="98" intorder="1">book-robotics</bcf:citekey>
-    <bcf:citekey order="99" intorder="1">simplified_model</bcf:citekey>
-    <bcf:citekey order="100" intorder="1">control_quadrotor_main</bcf:citekey>
-    <bcf:citekey order="101" intorder="1">quadrotor_modeling_control_book</bcf:citekey>
-    <bcf:citekey order="102" intorder="1">book-robotics</bcf:citekey>
-    <bcf:citekey order="103" intorder="1">control_quadrotor_main</bcf:citekey>
-    <bcf:citekey order="104" intorder="1">simplified_model</bcf:citekey>
+    <bcf:citekey order="98" intorder="1">ENU</bcf:citekey>
+    <bcf:citekey order="99" intorder="1">book-robotics</bcf:citekey>
+    <bcf:citekey order="100" intorder="1">simplified_model</bcf:citekey>
+    <bcf:citekey order="101" intorder="1">control_quadrotor_main</bcf:citekey>
+    <bcf:citekey order="102" intorder="1">quadrotor_modeling_control_book</bcf:citekey>
+    <bcf:citekey order="103" intorder="1">book-robotics</bcf:citekey>
+    <bcf:citekey order="104" intorder="1">control_quadrotor_main</bcf:citekey>
     <bcf:citekey order="105" intorder="1">simplified_model</bcf:citekey>
-    <bcf:citekey order="106" intorder="1">model_quadrotor</bcf:citekey>
-    <bcf:citekey order="107" intorder="1">figura_bella_drone</bcf:citekey>
-    <bcf:citekey order="107" intorder="2">model_quadrotor</bcf:citekey>
-    <bcf:citekey order="107" intorder="3">quadrotor_modeling_control_book</bcf:citekey>
-    <bcf:citekey order="107" intorder="4">backstepping_control</bcf:citekey>
-    <bcf:citekey order="107" intorder="5">geometric_control</bcf:citekey>
-    <bcf:citekey order="108" intorder="1">geometric_control</bcf:citekey>
-    <bcf:citekey order="109" intorder="1">drone</bcf:citekey>
-    <bcf:citekey order="110" intorder="1">PSO_original</bcf:citekey>
+    <bcf:citekey order="106" intorder="1">simplified_model</bcf:citekey>
+    <bcf:citekey order="107" intorder="1">model_quadrotor</bcf:citekey>
+    <bcf:citekey order="108" intorder="1">figura_bella_drone</bcf:citekey>
+    <bcf:citekey order="108" intorder="2">model_quadrotor</bcf:citekey>
+    <bcf:citekey order="108" intorder="3">quadrotor_modeling_control_book</bcf:citekey>
+    <bcf:citekey order="108" intorder="4">backstepping_control</bcf:citekey>
+    <bcf:citekey order="108" intorder="5">geometric_control</bcf:citekey>
+    <bcf:citekey order="109" intorder="1">geometric_control</bcf:citekey>
+    <bcf:citekey order="110" intorder="1">drone</bcf:citekey>
+    <bcf:citekey order="111" intorder="1">PSO_original</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="ynt">
