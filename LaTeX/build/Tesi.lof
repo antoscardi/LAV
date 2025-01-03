@@ -29,15 +29,15 @@
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Quadrotor model }}{62}{figure.caption.60}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Block diagram of the PID control applied to the PSO algorithm}}{64}{figure.caption.61}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces 3D Trajectory Tracking}}{77}{figure.caption.71}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Tracking in X-axis}}{78}{figure.caption.72}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Tracking in Y-axis}}{78}{figure.caption.72}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Tracking in Z-axis}}{78}{figure.caption.72}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Simulation Overview}}{78}{figure.caption.73}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Rotor Velocities}}{79}{figure.caption.74}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces PSO Case 1}}{80}{figure.caption.75}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces PSO Case 2}}{81}{figure.caption.76}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces PSO Case 2}}{81}{figure.caption.77}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces PSO Case 3}}{82}{figure.caption.78}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces PSO Case 3}}{83}{figure.caption.79}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 3D Trajectory Tracking}}{76}{figure.caption.71}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Tracking in X-axis}}{77}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Tracking in Y-axis}}{77}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Tracking in Z-axis}}{77}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Simulation Overview}}{77}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Rotor Velocities}}{78}{figure.caption.74}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces PSO Case 1}}{79}{figure.caption.75}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces PSO Case 2}}{80}{figure.caption.76}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces PSO Case 2}}{80}{figure.caption.77}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces PSO Case 3}}{81}{figure.caption.78}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces PSO Case 3}}{82}{figure.caption.79}%
 \addvspace {10\p@ }

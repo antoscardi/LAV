@@ -103,19 +103,19 @@ particles' data).
 \begin{tabular}{c c c c}
 \hline\hline
 \textbf{Symbol}              & \textbf{Value}        & \textbf{Unit}           & \textbf{Description}      \\ \hline\hline                   
-\(n_{\text{iterations}}\) (\texttt{n\_iterations})      & 450                   & --                      & Number of iterations      \\
+\(n_{\text{iterations}}\) (\texttt{n\_iterations})      & 500                   & --                      & Number of iterations      \\
 \(\omega\) (\texttt{inertia})                          & 1.05                  & --                      & Inertia weight            \\
 \(c_1\) (\texttt{cognitive\_factor})                   & 2.05                  & --                      & Cognitive factor          \\
 \(c_2\) (\texttt{social\_factor})                      & 1.5                   & --                      & Social factor             \\
- \texttt{NSS\_threshold}                               & $10^9$                & --                      & NSS signal locating threshold\\
-\(\beta\) (\texttt{velocity\_randomness})              & 0.6                   & --                      & Velocity randomness       \\ \hline
+ \texttt{NSS\_threshold}                               & 350300                & --                      & NSS signal locating threshold\\
+\(\beta\) (\texttt{velocity\_randomness})              & 0.5                   & --                      & Velocity randomness       \\ \hline
 \(\Omega_{x,y}\) (\texttt{bounds})                     & \([-80, 80]\)         & \(\text{m}\)            & Search space limits       \\
 \(v_{\text{max}}\) (\texttt{max\_velocity})            & 2                     & \(\text{m/s}\)          & Maximum velocity          \\                
 \(r_{\text{comm}}\) (\texttt{communication\_radius})   & 10                    & \(\text{m}\)           & Communication radius      \\
-\(\alpha\) (\texttt{step\_size})                       & 90                    & \(\text{m}\)           & Move away distance        \\
+\(\alpha\) (\texttt{step\_size})                       & 120                    & \(\text{m}\)           & Move away distance        \\
 \(r_{\text{excl}}\) (\texttt{exclusion\_zone\_radius}) & 3                     & \(\text{m}\)           & Exclusion zone radius     \\
 \(\delta t\) (\texttt{dt})                             & 0.04                  & \(\text{s}\)           & Control time step         \\
-\(\Delta\) (\texttt{iteration\_duration})             & 1                     & \(\text{s}\)           & PSO iteration duration    \\
+\(\Delta\) (\texttt{iteration\_duration})              & 1                     & \(\text{s}\)           & PSO iteration duration    \\
 \hline\hline
 \end{tabular}
 \label{tab:pso_parameters}
@@ -187,41 +187,23 @@ positions of drones and sources, plotting their trajectories,
 and computing errors between detected and true source positions.
 
 \subsection{\texttt{ARTVAs} class}
-DA RIGUARDARE SE SI DECIDE DI CAMBIARE (M. OPPURE NO?)
 The sole purpose of the \texttt{ARTVAs} class is to 
 emit the signal received by a drone, the NSS. 
-The signal is "emitted" using the \textit{send\_signal\_NSS()} 
-function, which takes the position of the drone as 
-input and returns a single floating-point value representing 
-the perceived signal strength, the same in Eq.\ref{eq:final_model_more}.
+The signal of a single ARTVA source is "emitted" using the \textit{send\_signal\_NSS()} 
+function, which takes the position of the ARTVA and of the drone as 
+input and returns the relative gradient matrix,
+computed using the analitical method with Eq.\ref{eq:G_analit}.
+Then the \textit{superpositionNSS()} method sums 
+the gradient matrices and computes the eigenvalues of the resultant 
+total magnetic gradient,
+following the same steps used to obtain Eq.\ref{eq:NSS_multi_final}.
 
 \noindent\\
 The main parameter of this class is \texttt{C}, a 
 scaling factor that determines the magnitude of the NSS signals, 
-whoch is set to a very high value of $10^8$, since we do not consider
+which is set to a very high value of $10^7$, since we do not consider
 the other physical parameters involved and the signal has very low values
 with increasing distances.
-
-\noindent\\
-DA RIGUARDARE SE SI DECIDE DI CAMBIARE (M. OPPURE NO?)
-It calculates both the combined signal strength 
-from all sources and the individual contributions based 
-on how far a drone is from each source. 
-These calculations ensure that drones receive 
-realistic signal strengths during the optimization process.
-The \textit{superpositionNSS()} method computes the total 
-NSS received by a drone by summing the signals from all sources, 
-considering their distances from the drone. 
-The \textit{send\_signal\_NSS()} method calculates the NSS from a
-specific source to a given drone position. 
-This is done using an inverse fourth-power relationship with distance, 
-ensuring the signal weakens realistically 
-as the drone moves farther from the source.
-The \textit{send\_signal\_NSS()} method applies the formula 
-described in Equation \ref{eq:distance_formula}, 
-where \texttt{\(r\)} is capped at a minimum value of $10^{-5}$ 
-to prevent division by zero. The NSS value is then calculated according 
-to the formula in Equation \ref{eq:nss_formula}.
 
 \subsection{\texttt{Plotter} class}
 The \texttt{Plotter} class is the component that is responsible 
@@ -800,17 +782,17 @@ and \([-10, 30] \, \text{m}\),
 randomly distributed across the search space.
 
 \noindent\\
-The time it took for the swarm to find the victims was 214 seconds (\(\sim 3.6\) minutes),
+The time it took for the swarm to find the victims was 292 seconds (\(\sim 4.9\) minutes),
 during which the drones successfully converged on the sources, 
-achieving precise estimates with an average error of \(0.04 \, \text{m}\). The estimate for the first source was 
-just \(0.125 \, \text{m}\) away, while the second, third, and fourth sources were 
-located with errors of \(0.037 \, \text{m}\), \(0.005 \, \text{m}\), and \(0.002 \, \text{m}\), respectively.
+achieving precise estimates with an average error of \(0.09 \, \text{m}\). The estimate for the first source was 
+just \(0.025 \, \text{m}\) away, while the second, third, and fourth sources were 
+located with errors of \(0.287 \, \text{m}\), \(0.013 \, \text{m}\), and \(0.053 \, \text{m}\), respectively.
 
 \noindent\\
 In Figure~\ref{fig:case1} we can see  
 the sources' locations and the drones' trajectories duing the PSO 
 optimization process, from which is evident that the exclusion zone mechanism
-worked in favour of drone 3 in successfully locating a source.
+worked in favour of drones 3 and 4 in successfully locating a source.
 
 \begin{figure}
     \centering
@@ -825,29 +807,30 @@ sources positioned at \([-70, -70] \, \text{m}\), \([70, 70] \, \text{m}\), \([-
 distributed very far apart across the search space.
 
 \noindent\\
-The time it took for the swarm to locate the sources was 227 seconds (\(\sim 3.8\) minutes). 
+The time it took for the swarm to locate the sources was 336 seconds (\(\sim 5.6\) minutes). 
 During this time, 
-the drones successfully converged on the sources, achieving an average error of \(0.26 \, \text{m}\). 
-The estimates for all the sources were: the first source was \(0.549 \, \text{m}\) away, 
-the second was \(0.003 \, \text{m}\) away, the third was \(0.478 \, \text{m}\) away, 
-and the fourth was \(0.012 \, \text{m}\). 
+the drones successfully converged on the sources, achieving an average error of \(0.10 \, \text{m}\). 
+The estimates for all the sources were: the first source was \(0.16 \, \text{m}\) away, 
+the second was \(0.002 \, \text{m}\) away, the third was \(0.001 \, \text{m}\) away, 
+and the fourth was \(0.233 \, \text{m}\). 
 
 \noindent\\
 In Figure~\ref{fig:case2}, the sources' locations and the drones' 
 trajectories during the PSO optimization process are depicted. 
-In this case, we can see how the trajectory mechanism was not 
-necessary in guiding the drones towards new sources.
-
+This case is one of the most complicated since the sources are near
+the borders of the search space and therefore
+the signal they send are less strong.
 \noindent\\
 To evaluate the impact of increasing the number of drones, a second simulation 
 was conducted by adding an additional drone to the swarm. 
 Naturally, we see improved performance in the total time
-needed by the UAVs to find all victims, which was just 150 seconds (\(\sim 2.5\) minutes).
-The average error across all sources was reduced to \(0.11 \, \text{m}\).
-This improvement was due to drone 3 now 
-having a different trajectory and initial position (after the exploration phase), 
-which was 
-nearer the source than before.
+needed by the UAVs to find all victims, which was just 137 seconds (\(\sim 2.3\) minutes).
+The average error across all sources slightly increased to \(0.26 \, \text{m}\),
+due to the very high time reduction which did not consent the drones
+to converge towards more precise positions. 
+Instead, the time improvement was due to some drones 
+having a better trajectory during the exploration phase, which brougth 
+them nearer the sources.
 Figure~\ref{fig:case2more} illustrates the results of this improved configuration. 
 
 \begin{figure}
@@ -870,13 +853,13 @@ at \([20, 50] \, \text{m}\), \([26, 50] \, \text{m}\), \([20, 56] \, \text{m}\),
 This situation is particularly difficult for the algorithm due to 
 the fact that we have an exclusion zone radius of \(3 \, \text{m}\) and 
 whenever one drone gets inside the exlusion zone of another
-it has to go \(90 \, \text{m}\) away.
+it has to go \(120 \, \text{m}\) away.
 Therefore, when three drones have found their sources, the fourth has only a few
 possible directions to reach the fourth source.
 
 \noindent\\
 Initially, with four drones, the algorithm fails to reliably 
-locate all sources within the 450 seconds allocated for the simulation,
+locate all sources within the 500 seconds allocated for the simulation,
 as seen in Figure~\ref{fig:case3fail}. 
 While increasing the simulation time could potentially improve performance, 
 this approach is unsuitable for our time-sensitive application, where
@@ -886,11 +869,11 @@ after the time of the accident.
 \noindent\\
 To address this issue, an additional drone is introduced, increasing the 
 swarm size to five drones. Now, the algorithm successfully 
-locates all sources in 369 seconds (approximately \(6.15\) minutes). 
-The estimates for the sources are: the first source was \(0.085 \, \text{m}\) away, 
-the second was \(0.022 \, \text{m}\) away, the third was \(0.024 \, \text{m}\) away, and the 
-fourth was \(0.500 \, \text{m}\) away. The total error for all valid estimates was 
-reduced to \(0.16 \, \text{m}\), demonstrating the effectiveness of increasing the 
+locates all sources in 293 seconds (approximately \(4.9\) minutes). 
+The estimates for the sources are: the first source was \(0.245 \, \text{m}\) away, 
+the second was \(0.32 \, \text{m}\) away, the third was \(0.265 \, \text{m}\) away, and the 
+fourth was \(0.12 \, \text{m}\) away. The total error for all valid estimates was 
+reduced to \(0.24 \, \text{m}\), demonstrating the effectiveness of increasing the 
 swarm size in challenging scenarios.
 In Figure~\ref{fig:case3}, the addition of a fifth drone and the subsequent 
 success in the localization can bee seen clearly.

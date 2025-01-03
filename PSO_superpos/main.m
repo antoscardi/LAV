@@ -11,10 +11,10 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 5;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 450;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-80, 80];      % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
@@ -26,12 +26,11 @@ max_velocity = 2;        % Maximum allowable velocity for each drone (m/s). Limi
 % Source fixed positions (the targets the drones need to find)
 % AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
 % QUANDO TROVANO VITTIMA INERTIA VIENE RIDOTTA A 0.5
-p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];   % n drones 4 randomness 0.5 ex zone 1
-%p_sources = [ 20, 50; 5, 70; 20, 57];              % n drone 3 randomness 0.1  (reduce rand or they will get stuck in the other exclusion zone)
-%p_sources = [ 20, 50; 20, 51];                     % 1 m apart, ex zone 0.5 m, n drones 2 doesn t work with any randomness
-%p_sources = [20, 50; 26, 50; 20, 56; 26, 56];       % 6 m aoart
-%p_sources = [ -70, -70; 70, 70; -70, 70; 70, -70];  % far away 4 drones, randomness 0.2, ex zone 1   
-
+%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];     % n drones 4 randomness 0.5 ex zone 1
+%p_sources = [ 20, 50; 5, 70; 20, 57];                % n drone 3 randomness 0.1  (reduce rand or they will get stuck in the other exclusion zone)
+%p_sources = [ 20, 50; 20, 54];                       % 1 m apart, ex zone 0.5 m, n drones 2 doesn t work with any randomness
+p_sources = [20, 50; 26, 50; 20, 56; 26, 56];        % 6 m aoart
+%p_sources = [ -70, -70; 70, 70; -70, 70; 70, -70];    % far away 4 drones, randomness 0.2, ex zone 1   
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
@@ -47,7 +46,7 @@ social_factor = 1.5;         % Social factor (global learning coefficient), cont
                              % the swarm's global best-known position. Higher values increase the influence of the swarm.
                              % Typical range: [1.5 - 2.5], in our case the swarm is relative to the group.
 
-velocity_randomness = 0.6;   % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
+velocity_randomness = 0.5;   % Factor between 0 and 1 that controls the amount of randomness added to particle velocity.
                              % A higher value increases exploration by adding more variation to the drone's movement,while
                              % a lower value reduces randomness, promoting more predictable movement towards the target.
 
@@ -55,14 +54,14 @@ velocity_randomness = 0.6;   % Factor between 0 and 1 that controls the amount o
                              % sources. For example, if there are 4 sources, drones can be divided into 4 groups to 
                              % focus on different sources.
 
-communication_radius = 10;    % Distance between two drones that enables communication with each other.
+communication_radius = 10;   % Distance between two drones that enables communication with each other.
 
-step_size = 90;  %ERA 40     % Set how far the drone should move away in ONLY ONE ITERATION
+step_size = 120;  %ERA 40    % Set how far the drone should move away in ONLY ONE ITERATION
 
 exclusion_zone_radius = 3;
 
-dt = 0.04;                     % Time step for simulation dynamics
-iteration_duration = 1;        % PSO ITERATION DURATION
+dt = 0.04;                    % Time step for simulation dynamics
+iteration_duration = 1;       % PSO ITERATION DURATION
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                 INITIALIZATION                                                 %
@@ -76,7 +75,7 @@ group_best_values = -Inf * ones(n_groups, 1);  % Initialize group best values to
 positions = zeros(n_drones, 2);                % Initialize a matrix to store changing positions at each iteration.
 
 % Initialize ARTVA
-artva = ARTVAs();
+artva = ARTVAs(n_drones, n_sources);
 
 % Initialize the particles array using a cell array
 particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_indices, max_velocity, velocity_randomness, inertia); 

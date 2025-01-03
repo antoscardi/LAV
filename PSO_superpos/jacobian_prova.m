@@ -22,7 +22,7 @@ f = @(point) magnetic_field(point);
 J_numerical = computeJacobianNumerically(f, point, R_array, R_drones,  p_sources);  % Numerical
 checkSymmetry(J_numerical, 1, 0.1, 0.1, 0, 'numerical')
 disp(J_numerical)
-J_analytical = computeJacobianAnalytically(point, p_sources, R_array, R_drones);  % Analytical
+J_analytical = computeJacobianAnalytically(point, p_sources, R_array, R_drones);   % Analytical
 disp(J_analytical)
 checkSymmetry(J_analytical, 1, 0.1, 0.1, 0, 'analitycal')
 nss_value_numerical = compute_nss(J_numerical);

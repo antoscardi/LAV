@@ -89,16 +89,16 @@
 \contentsline {subsection}{\numberline {5.1.3}\texttt {Controller} class}{69}{subsection.5.1.3}%
 \contentsline {subsection}{\numberline {5.1.4}\texttt {Particle} class}{70}{subsection.5.1.4}%
 \contentsline {subsection}{\numberline {5.1.5}\texttt {Main Loop}}{71}{subsection.5.1.5}%
-\contentsline {subsubsection}{Exploration phase}{72}{section*.67}%
+\contentsline {subsubsection}{Exploration phase}{71}{section*.67}%
 \contentsline {subsubsection}{Exploitation Phase}{72}{section*.69}%
-\contentsline {section}{\numberline {5.2}Results}{76}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}PID for Trajectory Tracking}{76}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}PSO wih Control}{77}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Case 1}{79}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Case 2}{79}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}Case 3}{82}{subsection.5.2.5}%
-\contentsline {section}{\numberline {5.3}Conclusions}{83}{section.5.3}%
-\contentsline {chapter}{Glossary}{85}{section*.80}%
-\contentsline {chapter}{Bibliography}{86}{section*.81}%
-\contentsline {section}{Figure}{91}{section*.83}%
-\contentsline {chapter}{Ringraziamenti}{91}{chapter*.84}%
+\contentsline {section}{\numberline {5.2}Results}{75}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}PID for Trajectory Tracking}{75}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}PSO wih Control}{76}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Case 1}{78}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Case 2}{78}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Case 3}{81}{subsection.5.2.5}%
+\contentsline {section}{\numberline {5.3}Conclusions}{82}{section.5.3}%
+\contentsline {chapter}{Glossary}{84}{section*.80}%
+\contentsline {chapter}{Bibliography}{85}{section*.81}%
+\contentsline {section}{Figure}{90}{section*.83}%
+\contentsline {chapter}{Ringraziamenti}{90}{chapter*.84}%

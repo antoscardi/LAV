@@ -108,7 +108,7 @@ classdef Particle < handle
                 %fprintf('Drone %d has received an NSS signal of  %.1f.\n', ...
                 %    obj.identifier, obj.nss_best_value);
             end
-            if obj.nss_value > 1000000000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
+            if obj.nss_value > 350300 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
                 obj.victim_found_flag = true;
                 % Remove inertia
                 obj.inertia = 0.5;
