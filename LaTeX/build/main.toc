@@ -1,0 +1,70 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Previous Works}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Magnetic Dipole Localization}{5}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Particle Swarm Optimization}{6}{subsubsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.2}The ARTVA}{8}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Theoretical Foundation}{10}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Gradient, Divergence, and Curl}{10}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Gradient of a Scalar Field}{10}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Definition of a Vector Field}{10}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Divergence of a Vector Field}{10}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Laplacian of a Vector Field}{11}{subsubsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.5}Curl of a Vector Field}{11}{subsubsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.2}Stokes' Theorem}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Divergence Theorem}{12}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Null Identity Theorem}{12}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Phasor Notation}{13}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Spherical Coordinates}{13}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Conversion from Cartesian to Spherical Coordinates}{14}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Conversion from Cartesian to Spherical Coordinates}{14}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}Expressing Spherical Unit Vectors using Cartesian Unit Vectors}{14}{subsubsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.4}The Gradient, Divergence, and Curl in Spherical Coordinates}{15}{subsubsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.7}3D Dirac Delta}{16}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Green's Function for Poisson Equation}{16}{subsection.2.8}%
+\contentsline {section}{\numberline {3}Electromagnetism}{18}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Maxwell's Equations}{18}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Conservation of Charge Principle}{19}{subsubsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.2}Wave Equation for Magnetic Vector Potential}{20}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Finding the Potential by Solving the Wave Equation}{21}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Magnetic Dipole}{21}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Magnetic Field Intensity H}{26}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Normalized Source Strength}{27}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Demonstration of Rotation Invariance}{32}{subsubsection.3.4.1}%
+\contentsline {section}{\numberline {4}Mathematical Model}{35}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Single Victim Case}{35}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Magnitude of Magnetic Field Intensity H}{36}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Finding the ARTVA position}{38}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Recursive Least Square}{42}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Average Consensus Filter}{43}{subsubsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.5}Normalized Source Strength}{44}{subsubsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.2}Multiple Victims Case}{52}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Total Magnitude}{53}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Normalized Source Strength}{55}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Final Model}{61}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Modified Particle Swarm Optimization with Exclusion Zones}{62}{subsubsection.4.2.4}%
+\contentsline {paragraph}{Checking}{65}{section*.25}%
+\contentsline {paragraph}{Avoidance}{65}{section*.26}%
+\contentsline {section}{\numberline {5}Control}{67}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Notations}{67}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Complete Quadrotor Dynamics}{71}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Translational Dynamics}{71}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Rotational Dynamics}{72}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Final Complete Quadrotor Dynamics}{74}{subsubsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.3}Simplified Dynamics}{75}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}PID Control}{76}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Position Control}{77}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Attitude Control}{78}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Rotor Velocities}{79}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}PID Control applied to PSO}{80}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Experiments}{82}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Implementation}{82}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}\texttt {ARTVAs} class}{85}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}\texttt {Plotter} class}{85}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}\texttt {Controller} class}{86}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}\texttt {Particle} class}{87}{subsubsection.6.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.5}\texttt {Main Loop}}{88}{subsubsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.2}Results}{93}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}PID for Trajectory Tracking}{93}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}PSO with Control}{96}{subsubsection.6.2.2}%
+\contentsline {section}{\numberline {7}Conclusions}{101}{section.7}%
+\contentsline {section}{Ringraziamenti}{110}{section*.48}%

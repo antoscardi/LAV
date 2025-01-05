@@ -1,1090 +1,423 @@
-\chapter{Electromagnetism}
+\documentclass[main]{subfiles}
+\begin{document}
+\section{Theoretical Foundation}
 
-The ARTVA instrument in transmitter and receiver 
-mode is a magnetic dipole. In order to formulate 
-a coherent mathematical model, it is necessary to 
-report some results of electromagnetic theory. 
-Firstly, we identify and name the fundamental 
-electromagnetic physical quantities:
-\begin{table}[h!]
-    \centering
-    \caption{\textbf{Electromagnetic Physical 
-    Quantities}}
-    \begin{tabular}{ccc}
-        \hline\hline
-        \textbf{Symbol} & \textbf{Description} & \textbf{Unit} \\
-        \hline
-        $\mathbf{E}$ & Electric field intensity & V/m \\
-        $\mathbf{D}$ & Electric displacement field & C/m$^2$ \\
-        $\mathbf{H}$ & Magnetic field intensity & A/m \\
-        $\mathbf{B}$ & Magnetic flux density & T \\
-        $\mathbf{J}$ & Current density & A/m$^2$ \\
-        $\mathbf{A}$ & Magnetic vector potential & V $\cdot$ s/m \\
-        $\mathbf{m}$ & Magnetic vector moment & A $\cdot$ m$^2$ \\
-        $\rho$ & Volume charge density & C/m$^3$ \\
-        $\epsilon$ & Permittivity of the medium & F/m \\
-        $\mu$ & Permeability of the medium & H/m \\
-        $c$ & Speed of light in vacuum & m/s \\
-        \hline\hline
-    \end{tabular}
-    \label{tab:symbols}
-\end{table}
+\subsection{Gradient, Divergence, and Curl} \label{Gradient, Divergence, and Curl}
+We briefly define the following operators which will be used throughout this 
+work.
 
-\section{Maxwell's Equations}
-
-We postulate Maxwell's equations in a simple 
-(linear, isotropic, and homogeneous) medium in 
-phasor notation \ref{Phasor Notation}, which have 
-been discovered experimentally \cite{book-magnetism}:
-
-\begin{align}
-    \nabla \times \mathbf{E} &= -j\omega \mathbf{B} 
-    \label{eq:curl_E} \\
-    \nabla \times \mathbf{H} &= \mathbf{J} + j\omega 
-    \epsilon \mathbf{E} \label{eq:curl_H} \\
-    \nabla \cdot \mathbf{E} &= \frac{\rho}{\epsilon} 
-    \label{eq:E} \\
-    \nabla \cdot \mathbf{B} &= 0 \label{eq:B}
-\end{align}
-
-In these equations, the space-coordinate arguments 
-have been omitted for simplicity. The fact that 
-the same notations are used for the phasors as 
-are used for their corresponding time-dependent 
-quantities should create little confusion because 
-we will deal exclusively with sinusoidal vector 
-fields.
-
-From Maxwell's equation \ref{eq:B}, we know that 
-the magnetic flux density \(\mathbf{B}\) is solenoidal 
-(zero divergence). Then, \(\mathbf{B}\) can be expressed 
-as the curl of another vector field using the 
-Null Theorem \ref{eq:null}, obtaining \ref{eq:B}:
-
+\subsubsection{Gradient of a Scalar Field}
+\textbf{Definition}\noindent\\
+Given a scalar function \( f(x_1, x_2, \ldots, x_n): \mathbb{R}^n \to \mathbb{R} 
+\) or scalar field, the gradient of the function is a vector field of partial 
+derivatives and denoted by \( \nabla f \), is defined as:
 \begin{equation}
-    \mathbf{B} = \nabla \times \mathbf{A}
-    \label{curlA}
+\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial 
+x_2}, \frac{\partial f}{\partial x_3}, \ldots, \frac{\partial f}{\partial x_n} 
+\right)
+\label{eq:gradient}
+\end{equation}
+where \( \nabla \) is the vector differential operator \cite{math-book}.
+
+\noindent\\
+\textbf{Properties}\noindent\\
+The gradient is a vector which points in the direction of the greatest ascent of 
+the function and its magnitude is the increase.
+
+\subsubsection{Definition of a Vector Field}
+A \textbf{vector field} on a subset \(S \subseteq \mathbb{R}^n\) is a 
+vector-valued function \(\mathbf{V}: S \to \mathbb{R}^n\) that assigns to each 
+point \(\mathbf{x} = (x_1, x_2, \ldots, x_n) \in S\) a vector 
+\(\mathbf{V}(\mathbf{x})\) \cite{math-book}.
+
+\noindent\\
+Note that from now on, we usually omit the spatial dependency of vector fields
+from points $\mathbf{x}$, since it's implied.
+
+\subsubsection{Divergence of a Vector Field}
+For simplicity and since we are working with \(\mathbb{R}^3\) Euclidean space, we 
+limit our discussion from now on to Euclidean coordinates.
+
+\noindent\\
+\textbf{Definition}\noindent\\
+Given a vector field \(\mathbf{V}\), the divergence of \(\mathbf{V}\) at a point 
+\( \mathbf{p} \in \mathbb{R}^3 \) is defined as the net outward flux of 
+\(\mathbf{V}\) per unit volume \(\Delta v\) as the volume about the point tends 
+to zero:
+\begin{equation}
+\nabla \cdot \mathbf{V} = \lim_{\Delta v \to 0} \frac{1}{\Delta v} \iint_S 
+\mathbf{V} \cdot d\mathbf{s}
+\label{eq:divergence}
+\end{equation}
+where \( \mathbf{V} \cdot d\mathbf{s} \) is the flux of \( \mathbf{V} \) through 
+the surface \(S\) \cite{book-magnetism}.
+
+\noindent\\
+Since \(\mathbf{V} = V_{x} \mathbf{e_x} + V_{y} \mathbf{e_y} + V_{z} 
+\mathbf{e_z}\), the divergence of \(\mathbf{V}\), can be computed as:
+\begin{equation}
+\nabla \cdot \mathbf{V} = \frac{\partial V_{x}}{\partial x} + \frac{\partial 
+V_{y}}{\partial y} + \frac{\partial V_{z}}{\partial z}
+\end{equation}
+where \(V_{x}\), \(V_{y}\), and \(V_{z}\) are the components of the vector field 
+\(\mathbf{V}\) in the \(x\), \(y\), and \(z\) directions, respectively 
+\cite{math-book}.
+
+\noindent\\
+\textbf{Properties}\noindent\\
+When the vector field is represented using flux lines (indicating the direction 
+and intensity), the divergence is the number of flux lines diverging/converging 
+through a given point.
+
+\noindent\\
+A net outward flux of a vector field through a surface bounding a volume 
+indicates the presence of a source, the divergence measures the strength of the 
+source. The divergence of a vector field is a scalar field. 
+
+\subsubsection{Laplacian of a Vector Field}
+The Laplacian of a vector field $\mathbf{V}$, denoted by $\nabla^2$, is similar 
+to the scalar Laplacian and is defined as:
+\begin{equation}
+\nabla^2 V = \frac{\partial^2 V_x}{\partial x^2} + \frac{\partial^2 V_y}{\partial 
+y^2} + \frac{\partial^2 V_z}{\partial z^2} \quad
 \end{equation}
 
-Also, \(\mathbf{B}\) relates to the magnetic field 
-intensity \(\mathbf{H}\) through the permeability of 
-the medium \(\mu\):
-
+\noindent\\
+Alternatively, by taking the curl of the curl of a vector field, the Laplacian 
+can be expressed as:
 \begin{equation}
-    \mathbf{B} = \mu \mathbf{H}
-    \label{eq:BH}
+   \nabla^2 \mathbf{V} = \nabla (\nabla \cdot \mathbf{V}) - \nabla \times 
+ (\nabla \times \mathbf{V})
+   \label{eq:laplacian}
 \end{equation}
 
-Another useful form of Maxwell's first equation 
-\ref{eq:curl_E} can be found by substituting 
-\ref{curlA}:
-
-\begin{align}
-    \nabla \times \mathbf{E} = - j \omega 
-    (\nabla \times \mathbf{A}) &= -\nabla \times 
-    j \omega \mathbf{A} \nonumber \\
-    \nabla \times \left(\mathbf{E} + 
-    j \omega \mathbf{A}\right) &= 0 \nonumber
-\end{align}
-
-Since the sum of vector fields is itself a vector 
-field, \(\mathbf{E} + j \omega \mathbf{A}\) is a 
-vector field, and we can define a \textbf{scalar} 
-field, the electric potential \(V\), such that:
-
+\subsubsection{Curl of a Vector Field}
+\textbf{Definition}\noindent\\
+The curl of \(\mathbf{V}\), denoted by \(\nabla \times \mathbf{V}\), at a point in 
+space \(\mathbf{x} \in \mathbb{R}^3\) is a vector field whose magnitude is the 
+maximum net circulation of \(\mathbf{V}\) per unit area as the area tends to zero 
+and whose direction is the normal direction of the area when the area is oriented 
+to make the net circulation maximum:
 \begin{equation}
-    \mathbf{E} + j \omega \mathbf{A} = -\nabla V
-    \label{eq:V}
+\nabla \times \mathbf{V} = \lim_{\Delta s \to 0} \frac{1}{\Delta s} \mathbf{n} 
+\oint_{C} \mathbf{V} \cdot d\mathbf{l}
+\label{eq:curl}
+\end{equation}
+where \(\mathbf{n}\) is the unit normal vector to the surface \(S\), \(d\mathbf{l}\) 
+is the differential line element along the boundary, and the integral represents 
+the circulation of \(\mathbf{V}\) around the boundary of the surface 
+\cite{book-magnetism}.
+
+\noindent\\
+The curl of a vector field \(\mathbf{V}\) can be then computed in terms of its 
+components \cite{math-book}:
+\begin{equation}
+\nabla \times \mathbf{V} = \left( \frac{\partial V_z}{\partial y} - \frac{\partial 
+V_y}{\partial z}, \frac{\partial V_x}{\partial z} - \frac{\partial V_z}{\partial 
+x}, \frac{\partial V_y}{\partial x} - \frac{\partial V_x}{\partial y} \right)
+\label{eq:curl_calculation}
 \end{equation}
 
-If the curl of a vector field is zero, a scalar 
-field exists whose gradient gives the vector field.
+\noindent\\
+\textbf{Properties}\noindent\\
+Since the normal to an area can point in two opposite directions, the direction 
+of the curl is given by the right-hand rule.
+A vortex source causes a circulation of the vector field around it. The 
+circulation of a vector field around a closed path is defined as the scalar line 
+integral of the vector over the path. Note that a circulation of \(\mathbf{V}\) 
+can exist even when the divergence of \(\mathbf{V}\) is zero, meaning there is no 
+net source or sink.
 
-\subsection{Conservation of Charge Principle}
-
-The principle of conservation of charge states 
-that the net charge within a closed system remains 
-constant over time, meaning no charge can be 
-created nor destroyed \cite{book-magnetism}:
-
+\subsection{Stokes' Theorem} \label{Stokes' Theorem}
+The surface integral of the curl of a vector field \(\mathbf{V}\) over a surface 
+\( s \) is equal to the line integral of the vector field over the boundary 
+contour \( c \) of the surface:
 \begin{equation}
-    \nabla \cdot \mathbf{J} = -\frac{\partial \rho}
-    {\partial t}
+\oint_C \mathbf{V} \cdot d\mathbf{l} = \iint_S (\nabla \times \mathbf{V}) \cdot 
+d\mathbf{s}
+\label{eq:stokes}
+\end{equation}
+The proof of the theorem comes directly from the definition of the curl 
+\eqref{eq:curl} and by dividing the surface $S$ into smaller areas. The idea comes 
+from the fact that computing the line integral around the boundary of a surface 
+is equal to computing the integral for all the smaller areas, since the 
+\(d\mathbf{l}\) components of the neighboring regions are in opposite 
+directions.
+
+\subsection{Divergence Theorem}
+The theorem states that the surface integral of a vector field \(\mathbf{V}\) 
+over a closed surface \(S\) is equal to the volume integral of the divergence of 
+\(\mathbf{V}\) over the volume enclosed by \(S\):
+\begin{equation}
+\iint_S\mathbf{V} \cdot d\mathbf{s} = \iiint_V (\nabla \cdot \mathbf{V}) \, dv
+\label{eq:divergence_th}
 \end{equation}
 
-The current density \(\mathbf{J}\) is defined as:
+\noindent\\
+The idea of the proof is similar to \ref{Stokes' Theorem}, starting from the 
+definition of the divergence \eqref{eq:divergence}. Considering a volume divided 
+into smaller volumes, the contributions from the internal surfaces cancel each 
+other, leaving only the contribution from the outer surface.
 
+\subsection{Null Identity Theorem}
+The divergence of the curl of any vector field is always zero \cite{book-magnetism}:
 \begin{equation}
-    \mathbf{J} = N q \mathbf{u}
+\nabla \cdot (\nabla \times \mathbf{V}) = 0 
+\label{eq:null}
 \end{equation}
+The proof leverages the Divergence Theorem \eqref{eq:divergence_th} applied to the 
+vector field \(\nabla \cdot (\nabla \times \mathbf{V})\). Considering that any 
+volume can be divided in half, then the surface bounding the volume would be the 
+sum of 2 surfaces, connected by a common boundary that has been drawn twice. One 
+can then compute the two surface integrals using Eq.\ref{eq:stokes}, and since the 
+two normals \(\mathbf{n}\) have equal intensity and opposite direction, their sum 
+is zero and the integrand as well.
 
-where \(N\) is the number of charge carriers per 
-unit volume, \(q\) is the charge of each carrier, 
-and \(\mathbf{u}\) is the drift velocity of the 
-charge carriers.
-
-This means that if a current flows out of a volume, 
-the charge density inside the volume must decrease 
-at a rate equal to the current. The current leaving 
-the volume is the flux of the current density 
-through surface \(S\):
-
-\begin{equation}
-    I = \oint_S \mathbf{J} \cdot d\mathbf{s}
-    \label{eq:defI}
-\end{equation}
-
-\section{Wave Equation for Magnetic Vector Potential}
-
-In order to determine the intensity of the magnetic 
-field, we first need to find an expression for the 
-magnetic vector potential \(\mathbf{A}\), called the 
-wave equation. Starting from Maxwell's equations, 
-we find the wave equation by substituting \ref{curlA} 
-and \ref{eq:BH} into the second Maxwell equation 
-\ref{eq:curl_H}:
-
+\noindent\\
+A converse statement of the theorem is as follows: 
+If a vector field \(\mathbf{B}\) is divergence-less, then it can be expressed as 
+the curl of another vector field \(\mathbf{V}\):
 \[
-    \nabla \times \nabla \times \mathbf{A} = 
-    \mu \mathbf{J} + j\omega\epsilon \mu \mathbf{E}
+\nabla \cdot \mathbf{B} = 0 \implies \mathbf{B} = \nabla \times \mathbf{V}
+\]
+Since the identity \(\nabla \cdot (\nabla \times \mathbf{V}) = 0\) always holds, 
+it means that for any magnetic field \(\mathbf{B}\) with zero divergence, we can 
+find a vector potential \(\mathbf{V}\) such that \(\mathbf{B}\) is the curl of 
+\(\mathbf{V}\).
+
+\subsection{Phasor Notation} \label{Phasor Notation}
+For dealing with time-varying vector fields, we use phasor notation to represent 
+sinusoidal varying field vectors (which is usually the case in real-world 
+applications, such as the magnetic dipole) \cite{book-magnetism}. Phasor notation 
+simplifies the analysis of such fields by converting differential equations into 
+algebraic equations.
+
+\noindent\\
+Then, an harmonic vector field \( \mathbf{V}(x, y, z, t) = \mathbf{V}(x, y, z) 
+\, \cos\omega t\) can be represented by a vector phasor that depends on space 
+coordinates but not on time:
+\[
+\mathbf{V}(x, y, z, t) = \mathbf{V}(x, y, z) e^{j\omega t}
+\]
+where \(\omega\) is the angular frequency and \( \mathbf{V}(x, y, z) \) is a 
+vector phasor that contains information on direction, magnitude, and phase.
+
+\noindent\\
+The time-domain function can be recovered from the phasor by taking the real part:
+\[
+\mathbf{V}(x, y, z, t) = \Re\{ \mathbf{V}(x, y, z) e^{j\omega t} \}
 \]
 
-Then we substitute \ref{eq:V} for $\mathbf{E}$ and 
-use the Laplacian \ref{eq:laplacian} on the left side:
-
-\[
-    \nabla (\nabla \cdot \mathbf{A}) - \nabla^2 
-    \mathbf{A} = \mu \mathbf{J} + j\omega \epsilon 
-    \mu \left(-\nabla V - j \omega \mathbf{A}\right)
-\]
-
-The definition of a vector requires the specification 
-of both its curl and its divergence. Although the curl 
-of $\mathbf{A}$ is designated $\mathbf{B}$ in 
-\ref{curlA}, we are still at liberty to choose its 
-divergence to simplify the expression 
-\cite{book-magnetism}:
-
-\[
-    \nabla \cdot \mathbf{A} = - j \omega \epsilon 
-    \mu V
-\]
-
-Finally, rearranging the terms and substituting 
-the square of $j$, we get:
-
-\[
-    \nabla^2 \mathbf{A} + \omega^2 \epsilon \mu 
-    \mathbf{A} = -\mu \mathbf{J}
-\]
-
-This is the wave equation for the magnetic vector 
-potential \(\mathbf{A}\):
-
-\begin{equation}
-    \nabla^2 \mathbf{A} - k^2 \mathbf{A} = 
-    -\mu \mathbf{J}
-    \label{eq:wave}
-\end{equation}
-
-where \(k = \omega \sqrt{\mu \epsilon}\) is the wave 
-number, which characterizes the propagation of the 
-electromagnetic wave in the medium.
-\subsection{Finding the Potential by Solving the Wave Equation}
-
-Since both \(\mathbf{A}\) and \(\mathbf{J}\) are vector 
-fields, the wave equation \ref{eq:wave} can be written 
-for each component of \(\mathbf{A}\):
-
-\begin{equation}
-    \nabla^2 
-    \begin{pmatrix} 
-        A_x \\ A_y \\ A_z 
-    \end{pmatrix} = 
-    k^2 
-    \begin{pmatrix} 
-        A_x \\ A_y \\ A_z 
-    \end{pmatrix} - 
-    \mu 
-    \begin{pmatrix} 
-        J_x \\ J_y \\ J_z 
-    \end{pmatrix}
-    \label{eq:wavematrix}
-\end{equation}
-
-In order to solve \ref{eq:wavematrix}, we can use the 
-Green function for Poisson's equation \ref{eq:poisson} 
-for each of the components when $k = 0$ (the case of 
-static fields). Then, the solution is given by the 
-formula:
-
-\begin{equation}
-    \mathbf{A} = \frac{\mu}{4 \pi} \int_V 
-    \mathbf{J} \frac{e^{-jkr}}{r} dv
-    \label{eq:solA}
-\end{equation}
-
-by using the superposition principle and by finding the 
-solution of the time-dependent differential equation.
-
-\section{Magnetic Dipole}
+\subsection{Spherical Coordinates} \label{Spherical Coordinates}
+We define two classical coordinate systems: spherical coordinates $(r, \theta, 
+\phi)$ and Cartesian coordinates \((x, y, z)\), with their respective vector 
+basis \( \{\mathbf{e}_r, \mathbf{e}_{\theta}, \mathbf{e}_{\phi} \} \) and 
+\( \{\mathbf{e}_x, \mathbf{e}_y, \mathbf{e}_z\} \), represented in Figure 
+\ref{fig:coordinates}, from which the following relationships are evident. Note 
+that we use the convention in \cite{main} for the angles and the axes. 
 
 \begin{figure}
     \centering
-    \begin{tikzpicture}
-        % Draw the 3D coordinate system
-        \draw[axis] (0,0,0) -- (3,0,0) 
-        node[anchor=north east]{$z$};
-        \draw[axis] (0,0,0) -- (0,3,0) 
-        node[anchor=north west]{$x$};
-        \draw[axis] (0,0,0) -- (0,0,4) 
-        node[anchor=south]{$y$};
-        % Coordinates
-        \coordinate (O) at (0,0,0);
-        \coordinate (R) at (3,2,1);
-        % Line from p to b
-        \draw[thick] (1,0,0) -- (R) 
-        node[midway, below, yshift=-0.1cm]{$r_1$};
-        % Draw the point r
-        \fill (R) circle (2pt);
-        \node[above right] at (R) {$p$};
-        % Draw and label the angle theta
-        \draw (0,1) arc[start angle=90,end angle=58,,radius=2cm];
-        \node at (0.5,0.7) {$\theta$};
-        % Label in space called b
-        \node at (1,0,1.5) {$I$};
-        % Draw a circle in the xz-plane
-        \begin{scope}[canvas is xz plane at y=0]
-            \draw[thick, color=blue!80!black] 
-            (0,0) circle [radius=1];
-            \draw[-stealth, color=blue!80!black] 
-            (0,1) arc[start angle=90,end angle=45,radius=1];
-        \end{scope}
-        % Draw the line from origin to point r
-        \draw[thick] (O) -- (R) node[midway, above]{$r$};
+    \tdplotsetmaincoords{70}{110}
+    \pgfmathsetmacro{\thetavec}{48.17}
+    \pgfmathsetmacro{\phivec}{63.5}
+    
+    \begin{tikzpicture}[tdplot_main_coords]
+        %Axis
+        \draw[axis] (0,0,0) -- (6.5,0,0) node [pos=1.1] {$y$};
+        \draw[axis] (0,0,0) -- (0,6,0) node [pos=1.05] {$z$};
+        \draw[axis] (0,0,0) -- (0,0,5.5)  node [pos=1.05] {$x$};   
+        %Unit Vectors
+        \tdplotsetcoord{P'}{7}{\thetavec}{\phivec}
+        \draw[univec] (0,0,0) -- (P') node [pos=1.05] {$\mathbf{e_r}$};
+        \tdplotsetcoord{P''}{1}{90}{90+\phivec}
+        \draw[univec] (2,4,0) -- ($(P'') + (2,4,0)$) node [pos=1.3] {$\mathbf{e_\phi}$};
+        \tdplotsetcoord{P'''}{1}{90+\thetavec}{\phivec}
+        \draw[univec] (2,4,4) -- ($(P''') + (2,4,4)$) node [pos=1.3] {$\mathbf{e_\theta}$};
+        
+        %Vectors
+        \tdplotsetcoord{P}{6}{\thetavec}{\phivec}
+        \draw[vec] (0,0,0) -- (P) node [midway, above] {$r$};
+        \draw[thick] (0,0,0) -- (2,4,0);
+        
+        %Help Lines
+        \draw[dashed] (2,4,4) -- (2,4,0);
+        \draw[dashed] (2,0,0) -- (2,4,0) node [pos=-0.1] {};
+        \draw[dashed] (0,4,0) -- (2,4,0) node [pos=-0.3] {};
+        \draw[dashed] (0,0,4) -- (2,4,4) node [pos=-0.1] {};
+        \draw[dashed, tdplot_main_coords] (4.47,0,0) arc (0:90:4.47);
+        
+        %Point
+        \node[fill=black, circle, inner sep=0.8pt] at (2,4,4) {};
+        
+        %Angles
+        \tdplotdrawarc{(0,0,0)}{0.7}{0}{\phivec}{below}{$\phi$}
+         
+        \tdplotsetthetaplanecoords{\phivec}
+        \tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.5}{0}{\thetavec}{}{}
+        \node at (0,0.25,0.67) {$\theta$};
+        
     \end{tikzpicture}
-    \caption{Magnetic dipole representation}
-    \label{fig:dipole}
+    \caption{Spherical and Cartesian coordinates with their respective unit 
+ vectors.}
+    \label{fig:coordinates}
 \end{figure}
 
-We have a small filament loop of radius \( b \), 
-carrying an AC current \( I(t) = I \cos(\omega t) \) 
-as shown in Figure \ref{fig:dipole}. If \( S \) is the 
-cross-section area of the wire and \( dl \) a 
-differential length, we have \( \mathbf{J} \perp 
-\mathbf{s} \), the normal to the area and the volume:
+\subsubsection{Conversion from Cartesian to Spherical Coordinates} 
+\label{Conversion from Cartesian to Spherical Coordinates}
+\begin{align}
+ r &= \sqrt{x^2 + y^2 + z^2}, \\
+    \theta &= \cos^{-1} \left(\frac{\sqrt{z^2 + y^2}}{x}\right), \\
+    \phi &= \tan^{-1} \left(\frac{y}{z}\right).
+\end{align}
 
-\begin{equation}
-    dv = S \, dl
-    \label{eq:dvolume}
-\end{equation}
+\subsubsection{Conversion from Cartesian to Spherical Coordinates} 
+\label{Conversion from Spherical to Cartesian Coordinates}
+\begin{align}
+ x &= r \cos \theta, \\
+ y &= r \sin \theta \cos \phi, \\
+ z &= r \sin \theta \sin \phi.   
+\end{align}
 
-In order to determine the magnetic field intensity 
-\(\mathbf{H}\) at a certain point in space \( p \), 
-we need to compute the magnetic vector potential 
-\(\mathbf{A}\) first \cite{book-magnetism}. Since the 
-charges move only in the thin wire, they are located 
-only in the wire region, then from the definition of 
-current \ref{eq:defI}:
-
+\subsubsection{Expressing Spherical Unit Vectors using Cartesian Unit Vectors}
+A point $\mathbf{r}$ in Cartesian coordinates is given by:
 \[
-    I = S \, \mathbf{J}
+\mathbf{r} = x \, \mathbf{e}_x + y \, \mathbf{e}_y + z \, \mathbf{e}_z.
+\]
+The radial unit vector \( \mathbf{e}_r \) is defined as the normalized position 
+vector, obtained by substituting the coordinates in Section
+\ref{Conversion from Cartesian to Spherical Coordinates}:
+\begin{equation}
+\mathbf{e}_r = \frac{\mathbf{r}}{|\mathbf{r}|} = \cos\theta \, \mathbf{e}_x + 
+\sin\theta \cos\phi \, \mathbf{e}_y + \sin\theta \sin\phi  \, \mathbf{e}_z.
+\label{e_r}
+\end{equation}
+The unit vector \( \mathbf{e}_\theta \), which is perpendicular to \( 
+\mathbf{e}_r \) and lies in the plane formed by the origin and the \( z \)-axis, 
+points in the direction of increasing \( \theta \). It can be found by taking the 
+partial derivative of the position vector with respect to \( \theta \) and 
+normalize it:
+\begin{equation}
+\mathbf{e}_\theta = -\sin\theta \, \mathbf{e}_x + \cos\theta \cos\phi \, 
+\mathbf{e}_y + \cos\theta \sin\phi \, \mathbf{e}_z.
+\label{e_theta}
+\end{equation}
+Similarly, the unit vector \( \mathbf{e}_\phi \), which is perpendicular to both 
+\( \mathbf{e}_r \) and \( \mathbf{e}_\theta \), points in the direction of 
+increasing \( \phi \). It can be derived by taking the partial derivative of the 
+position vector with respect to \( \phi \) and normalizing it:
+\[
+\mathbf{e}_\phi = \frac{\frac{\partial \mathbf{r}}{\partial 
+\phi}}{|\frac{\partial \mathbf{r}}{\partial \phi}|} = - \sin\phi  \, \mathbf{e}_y 
++ \cos\phi \, \mathbf{e}_z.
 \]
 
-The volume integral in \ref{eq:solA} becomes:
+\subsubsection{The Gradient, Divergence, and Curl in Spherical Coordinates}
+We omit the demonstration of how these formulas are found starting from the 
+definitions given in Cartesian coordinates \ref{Gradient, Divergence, and Curl}, 
+which involve a large amount of computations \cite{book-magnetism}.
 
+\noindent\\
+For a vector field expressed in spherical coordinates:
 \[
-    \int_V \mathbf{J} \, dv =  \int_V \mathbf{J} \, S \, dl
+\mathbf{V} = V_r \mathbf{e}_R + V_\theta \mathbf{e}_{\theta} + V_\phi \mathbf{e}_\phi 
 \]
-
-Then, we substitute \ref{eq:defI} and change the 
-integral type since it is now the sum over the length, 
-so the formula becomes (the current must flow in a 
-closed path):
-
+The divergence is:
 \begin{equation}
-    \mathbf{A} = \frac{\mu_0 I}{4\pi} \oint_C 
-    \frac{d\mathbf{l}}{r_1} e^{-j k r_1}
-    \label{sol_A_dipole}
+\nabla \cdot \mathbf{V} = \frac{1}{r^2} \frac{\partial}{\partial r} (r^2 V_r) + 
+\frac{1}{r \sin \theta} \frac{\partial}{\partial \theta} (\sin \theta V_\theta) 
++ \frac{1}{r \sin \theta} \frac{\partial V_\phi}{\partial \phi}.
 \end{equation}
-
-where $r_1$ is the distance between the point $p$ and 
-the charges (source element) and $d\mathbf{l}$ is a 
-vector tangent to the loop of differential length $dl$.
-
-\subsubsection{Assumption} \label{Assumption}
-
-We can then simplify \ref{sol_A_dipole} by considering 
-the radius $b$ to be small enough, such that 
-$r_1 - r \approx 0$. Then by adding and subtracting $r$ 
-from the power of the exponential:
-
-\[
-    e^{-j k r_1} = e^{-j k (r_1 + r - r)} = 
-    e^{-j k r} \, e^{-j k (r_1 - r)}
-\]
-
-Then by using Taylor approximation on the second 
-exponential ($ x = r_1 - r \approx 0$) we obtain:
-
-\[
-    e^{-j k r_1} = e^{-j k r}\, \left[ 1 - j k (r_1 - r) \right]
-\]
-
-Then, we substitute this result in \ref{sol_A_dipole} 
-and simplify:
-
-\[
-\begin{aligned}
-    \mathbf{A} &= \frac{\mu_0 I}{4 \pi} e^{-j k r} 
-    \left[ 1 - j k (r_1 - r) \right] \oint_C 
-    \frac{d\mathbf{l}}{r_1} \\
-    &= \frac{\mu_0 I}{4 \pi} e^{-j k r} \left( 
-    \oint \frac{d\mathbf{l}}{r_1} - j k \oint 
-    (r_1 - r) \frac{d\mathbf{l}}{R_1} \right)
-\end{aligned}
-\]
-
-Since the integral of \(d\mathbf{l}\) over a closed loop 
-is zero, because we have considered a small loop $b \to 0$:
-
-\[
-    \oint_C d\ell = 2\pi b \quad \rightarrow \quad 
-    \oint_C d\ell \rightarrow 0
-\]
-
-Then we obtain:
-
+The curl in spherical coordinates is:
 \begin{equation}
-    \mathbf{A} = \frac{\mu_0 I}{4 \pi} e^{-j k r} 
-    \left[ \left(1 + j k r \right) \oint 
-    \frac{d\mathbf{l}}{r_1}\right]
-    \label{eq:sol_A_simp}
+\nabla \times \mathbf{V} = \frac{1}{r \sin \theta} \begin{vmatrix} 
+ \mathbf{e}_r & r  \mathbf{e}_\theta & r \sin \theta \mathbf{e}_\phi \\ 
+ \frac{\partial}{\partial r} & \frac{\partial}{\partial \theta} & 
+ \frac{\partial}{\partial \phi} \\ 
+ V_r & r V_\theta & r \sin \theta V_\phi 
+    \end{vmatrix}.
+    \label{curl_spher}
 \end{equation}
-\subsubsection{Assumption Quasi-Static Field/Near Field Zone}
-If we consider a region near the magnetic dipole, we 
-obtain quasi-static fields. We defined the wave number 
-$k$ as:
-
-\begin{equation}
-    k = \omega \sqrt{\mu \epsilon}
-    \label{eq:k}
-\end{equation}
-
-Electromagnetic waves propagate with velocity $u$ 
-(speed of light in vacuum) \cite{book-magnetism}:
-
-\begin{equation}
-    u = \frac{1}{\sqrt{\mu \epsilon}}
-    \label{eq:u}
-\end{equation}
-
-Then, by inverting \ref{eq:u} and substituting in 
-\ref{eq:k}, we can write $k$ as:
-
-\begin{equation}
-    k = \frac{\omega}{u}
-    \label{eq:k2}
-\end{equation}
-
-From wave theory $f = \frac{\omega}{2\pi}$ and 
-$\lambda = \frac{u}{f}$, we obtain another expression 
-for $u$:
-
-\begin{equation}
-   u = \frac{\lambda \, \omega}{2 \, \pi}
-\end{equation}
-\label{eq:u2}
-
-\noindent Therefore, we can substitute \ref{eq:u2} in 
-\ref{eq:k2}:
-
-\begin{equation}
-    k = \frac{2 \pi}{\lambda}
-    \label{eq:k3}
-\end{equation}
-
-To simplify the expression for $\mathbf{A}$ 
-\ref{sol_A_dipole}, we make the assumption that 
-$k \, r \ll 1$, and if we substitute the found 
-expression of $k$ \ref{eq:k3}:
-
-\[
-    k \, r \ll 1 \implies \frac{2\pi r}{\lambda} 
-    \ll 1 \implies r \ll \frac{\lambda}{2\pi}
-\]
-
-This means that $r$ needs to be small in comparison 
-to $\lambda$. If this is the case:
-
-\[
-    e^{-j k r} \approx e^0 = 1
-\]
-
-We eliminate completely the time dependence and 
-obtain the expression for $\mathbf{A}$:
-
-\begin{equation}
-    \mathbf{A} = \frac{\mu_0 I}{4\pi} \oint_C 
-    \frac{d\mathbf{l}}{r_1}
-    \label{A_approx}
-\end{equation}
-
-In the ARTVA case, the standard operating frequency 
-is \( f = 475 \, \text{kHz} \) and the optimal range 
-of the instrument is \( <80 \, \text{m} \). Then in 
-the worst case, when \( r = 80 \, \text{m} \), we 
-obtain the approximation \( k \, r = 0.79 \).
-
-\subsubsection{Symmetry}
-
-In the particular case of a magnetic dipole, the 
-magnetic vector potential $\mathbf{A}$ is symmetric 
-with respect to the \(x\)-axis, therefore independent 
-to the $\phi$ angle \ref{Spherical Coordinates}. 
-This is true since we can choose freely the $z$-axis 
-and $y$-axis orientation in space around the loop. 
-Then we can choose the point $\mathbf{p}$ to lie on 
-the $zx$-plane or the $yx$-plane; in both cases, we 
-will obtain that one of the two $d\mathbf{l}$ 
-components $d\mathbf{l_z}$ and $d\mathbf{l_y}$ will 
-cancel themselves out as we integrate over the loop.
-
-For example, if we consider the point to lie on the 
-$yx$-plane, then take a point on the loop where 
-$d\mathbf{l}$ is and its symmetric w.r.t. the 
-$y$-axis, the component $d\mathbf{l_y}$ of the first 
-will cancel itself out with the one of the second.
-
-We can write the length of a circumference as 
-$l = r \, \alpha$, where $\alpha$ is the subtended 
-angle by the length $l$ and $r$ the radius. In 
-addition, we express $\mathbf{e_\phi}$ using the 
-Cartesian basis:
-
-$$
-    \mathbf{e_\phi} = - \sin\phi \, \mathbf{e_y} 
-    + \cos\phi \, \mathbf{e_z}
-$$
-
-Then, $d\mathbf{l}$ magnitude depends on the 
-differential angle $d\phi$ and the radius $b$, and 
-has the same direction as $\mathbf{e_\phi}$:
-
-\begin{equation}
-    d\mathbf{l} = b \, d\phi \, \mathbf{e_\phi} 
-    = b \, d\phi \left(- \sin\phi \, \mathbf{e_y} 
-    + \cos\phi \, \mathbf{e_z}\right)
-    \label{eq:dl}
-\end{equation}
-
-For every $d\mathbf{l}$, there is another 
-symmetrically located differential length element on 
-the other side of the $y$-axis that will contribute 
-an equal amount to $\mathbf{A}$ in the $\mathbf{e_z}$ 
-direction but will cancel the contribution of 
-$d\mathbf{l}$ in the $\mathbf{e_y}$ direction. 
-Since $\mathbf{e_z} = \mathbf{e_\phi}$, if point $P$ 
-lies on the $yx$-plane, equation \ref{A_approx} can 
-be written as:
-
-\begin{equation}
-    \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b}{4 \pi} 
-    \int_{0}^{2\pi} \frac{\cos \phi}{r_1} \, d\phi
-    \label{eq:A_final}
-\end{equation}
-
-\subsubsection{Computing the Integral in Spherical Coordinates}
-
-Firstly, we find $r_1$ by applying the law of cosines 
-on the triangle $OPP'$, Figure \ref{fig:dipole2}:
-
-\begin{figure}
-    \centering
-    \begin{tikzpicture}
-        % Draw the 3D coordinate system
-        \draw[axis] (0,0,0) -- (4,0,0) 
-        node[anchor=north east]{$z$};
-        \draw[axis] (0,0,0) -- (0,4,0) 
-        node[anchor=north west]{$x$};
-        \draw[axis] (0,0,0) -- (0,0,5) 
-        node[anchor=south]{$y$};
-        % Coordinates
-        \coordinate (O) at (0,0,0);
-        \coordinate (R) at (0,4,4);
-        \coordinate (P') at (1.7,0,1.2);
-        % Line from p to b
-        \draw[thick] (P') -- (R) node[right, yshift=0.1cm]{};
-        % Draw the point 
-        \fill (R) circle (2pt);
-        \fill (P') circle (2pt);
-        \node[above right] at (R) {$P$};
-        % Draw the angle theta between r and y-axis
-        \draw[->] (0,1.5,0) arc[start angle=90, 
-        end angle=115, radius=2cm];
-        \node at (-0.3,1.7,0) {$\theta$};
-        \draw[bend right,->] (0,0,1) to 
-        node [auto] {} (0.7,0,0.5);
-        \node at (0.7,0.6,1) {$\beta$};
-        \draw[bend right,->] (0.4,0,0.3) to 
-        node [auto] {} (0,0.5,0.5);
-        % Label in space called b
-        \node at (1.8,0,1.8) {$b$};
-        \node at (2.3,0,2) {$P'$};
-        \node at (0.7,0,1.2) {$\phi$};
-        % Draw a circle in the xz-plane
-        \begin{scope}[canvas is xz plane at y=0]
-            \draw[thick, color=blue!80!black] 
-            (0,0) circle [radius=2];
-        \end{scope}
-        % Draw the line from origin to point r
-        \draw[thick] (O) -- (R) 
-        node[midway, above right, yshift=0.4cm]{};
-        \draw[thick] (O) -- (P') 
-        node[midway, above right]{};
-    \end{tikzpicture}
-    \caption{Magnetic dipole representation with the $OPP'$ triangle}
-    \label{fig:dipole2}
-\end{figure}
-
-We start with the equation for \( r_1 \):
-$$
-    r_1^2 = r^2 + b^2 - 2 r b \cos\beta
-$$
-Since we are on the \( xy \)-plane, we can write the 
-\( \mathbf{b} \) and \( \mathbf{r} \) vectors as:
-$$
-    \mathbf{r} = r \sin \theta \, \mathbf{e_y} 
-    + r \cos \theta \, \mathbf{e_x}
-$$
-$$
-    \mathbf{b} = b \cos \phi \, \mathbf{e_y} 
-    + b \sin \phi \, \mathbf{e_z}
-$$
-Then we find the angle \(\beta\) between 
-\( \mathbf{r} \) and \( \mathbf{b} \):
-$$
-    \cos \beta = \frac{\mathbf{b} \cdot \mathbf{r}}{r b} 
-    = \sin \theta \cos \phi
-$$
-We have obtained a formula for \( r_1 \):
-$$
-    r_1 = \sqrt{r^2 + b^2 - 2 r b \sin \theta \cos \phi}
-$$
-Simplifying further, we get:
-$$
-    r_1^2 = r^2 \left( 1 + \frac{b^2}{r^2} - 2\, 
-    \frac{b}{r} \sin \theta \cos \phi \right)
-$$
-Using the same assumption as before, that the loop is 
-very small with respect to \( r \) (i.e., \( b \ll r \) 
-and therefore \( b^2 \ll r^2 \)), we can write:
-$$
-    r_1 \approx r \left( 1 - 2 \, \frac{b}{r} \, 
-    \sin \theta \cos \phi \right)^{1/2}
-$$
-Then we compute the inverse \( \frac{1}{r_1} \) and 
-use the Taylor approximation to the first derivative, 
-considering \( x = 2 \, \frac{b }{r} \, \sin \theta 
-\cos \phi \), which tends to zero, we obtain:
-
-\begin{equation}
-    \frac{1}{r_1} \approx \frac{1}{r} 
-    \left( 1 + \frac{b}{r} \sin \theta \cos \phi \right)
-    \label{eq:r_1}
-\end{equation}
-
-Now, substituting \ref{eq:r_1} in \ref{eq:A_final}, we 
-can calculate the integral for \( \mathbf{A} \) over 
-the entire loop:
-
-$$
-    \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b}{4 \pi} 
-    \int_{0}^{2\pi} \left( 1 + \frac{b}{r} \sin \theta 
-    \cos \phi \right) \cos \phi \, d\phi
-$$
-
-Since \( b \), \( r \), and $\theta$ do not depend on 
-$\phi$, the first integral is zero, and the second one 
-gives $\pi$:
-
-\begin{enumerate}[label=(\arabic*)]
-    \item 
-    \parbox{\textwidth}{
-    \[
-        \int_0^{2\pi} \cos \phi \, d\phi = \sin \phi \Big|_0^{2\pi} = 0
-    \]
-    }
-
-    \item 
-    \parbox{\textwidth}{
-    \[
-        \int_{0}^{2\pi} \cos^2 \phi \, d\phi = \int_{0}^{2\pi} 
-        \frac{1 + \cos(2\phi)}{2} \, d\phi = \frac{1}{2} \cdot 2\pi 
-        + \frac{1}{2} \cdot 0 = \pi
-    \]
-    }
-\end{enumerate}
-
-Therefore, we obtain:
-
-\begin{equation}
-    \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b^2}{4 \, r^2} 
-    \sin \theta
-    \label{eq:A_spher}
-\end{equation}
-
-\subsubsection{Magnetic Field Intensity $\mathbf{H}$}
-Finally, we can now obtain an expression in spherical 
-coordinates of the magnetic field intensity 
-$\mathbf{H}$, by first finding $\mathbf{B}$ using 
-\ref{curlA} and then inverting \ref{eq:BH}.
-\\
-We compute the curl of $\mathbf{A}$ in spherical 
-coordinates \ref{curl_spher}:
-
-\[
-    \mathbf{B} = \nabla \times \mathbf{A} = \frac{1}{r^2 \sin \theta} 
-    \begin{vmatrix}
-        \mathbf{e_r} & \mathbf{e_\theta} r & \mathbf{e_\phi} r \sin \theta \\
-        \frac{\partial}{\partial r} & \frac{\partial}{\partial \theta} & 
-        \frac{\partial}{\partial \phi} \\
-        0 & 0 & r \sin \theta A_\phi
-    \end{vmatrix} =
-\]
-\[
-    = \frac{1}{r^2 \sin \theta} \left( \mathbf{e_r} 
-    \frac{\partial}{\partial \theta} (r \sin \theta A_\phi) 
-    - \mathbf{e_\theta} \frac{\partial}{\partial r} 
-    (r \sin \theta A_\phi) \right)
-\]
-
-where $A_\phi$ is the magnitude of the vector field 
-found in \ref{eq:A_spher}, while $A_r$ and $A_\theta$ 
-are zero since the potential has only the 
-$\mathbf{e_\phi}$ direction. Substituting 
-\ref{eq:A_spher}:
-
-\[
-\begin{aligned}
-    \mathbf{B}&= \frac{1}{r^2 \sin \theta} 
-    \frac{\mu b^2 I}{4 \pi} \left(\mathbf{e_r} 
-    \frac{2}{r} \cos \theta \sin \theta + 
-    \mathbf{e_\theta} r \sin^2 \theta \, r^{-2}\right) =
-    \\
-     &= \frac{\mu I b^2 }{4 \, r^3} \left( 
-     \mathbf{e_r} 2 \cos \theta + \mathbf{e_\theta} 
-     \sin \theta \right)
-\end{aligned}
-\]
-
-Then, by inverting equation \ref{eq:BH}, we obtain the 
-final expression for $\mathbf{H}$:
-
-\begin{equation}
-    \mathbf{H} = \frac{ I b^2}{4 \, r^3} \left( 
-    \mathbf{e_r} 2 \cos \theta + \mathbf{e_\theta} 
-    \sin \theta \right)
-    \label{eq:H_spheric}
-\end{equation}
-
-which can also be expressed using the Cartesian unit 
-vectors \((\mathbf{e}_x, \mathbf{e}_y, \mathbf{e}_z)\) 
-by substituting \(\mathbf{e}_r\) with \ref{e_r} and 
-\(\mathbf{e}_\theta\) with \ref{e_theta}:
-
-\[
-    \mathbf{H} = \frac{I b^2}{4 \pi \, r^3} \left[ 
-    (2\cos^2\theta - \sin^2\theta) \mathbf{e}_x 
-    + 3\cos\theta \sin\theta \cos\phi \, \mathbf{e}_y 
-    + 3\cos\theta \sin\theta \sin\phi \, \mathbf{e}_z \right]
-\]
-
-or in vector form:
-
-\[
-    \mathbf{H} = \frac{I b^2}{4 \, r^3} 
-    \begin{bmatrix}
-        2\cos^2\theta - \sin^2\theta \\
-        3\cos\theta \sin\theta \cos\phi \\
-        3\cos\theta \sin\theta \sin\phi
-    \end{bmatrix}
-\]
-
-We can finally find the expression for $\mathbf{H}$ 
-using only Cartesian coordinates by inverting the 
-equations in \ref{Conversion from Spherical to 
-Cartesian Coordinates}:
-
-\begin{equation}
-    \mathbf{H} = \frac{I b^2}{4 \, r^5} 
-    \begin{bmatrix}
-        2x^2 - y^2 - z^2 \\
-        3xy \\
-        3xz
-    \end{bmatrix}
-\label{eq:final_H}
-\end{equation}
-
-This expression has been derived by applying the Pythagorean identity.
-
-\section{Normalized Source Strength}
-The magnetic field intensity $\mathbf{H}$ and the magnetic flux density $\mathbf{B}$ are vector fields 
-sensible to the orientation of the source coordinate system. 
-The expression for $\mathbf{H}$, as given in equation \ref{eq:final_H}, is expressed with respect to a 
-coordinate system centered at the center of the current loop, as we have seen in the previous section.
-However, we need to introduce a quantity which is invariant with
-respect to the orientation of the electromagnetic target.
-
-The magnetic gradient tensor is simply the transposed Jacobian of the magnetic flux density $\mathbf{B}$, and it is defined
-as follows:
+carrying out the determinant:
 \begin{equation}
 \begin{aligned}
-\mathbf{G} &= 
-\begin{bmatrix}
-    \frac{\partial B_x}{\partial x} & \frac{\partial B_y}{\partial x} & \frac{\partial B_z}{\partial x}\\
-    \frac{\partial B_x}{\partial y} & \frac{\partial B_y}{\partial y} & \frac{\partial B_z}{\partial y}\\
-    \frac{\partial B_x}{\partial z} & \frac{\partial B_y}{\partial z} & \frac{\partial B_z}{\partial z}\\
-\end{bmatrix}
-\\
-&=
-\begin{bmatrix}
-    B_{xx} & B_{yx} & B_{zx}\\
-    B_{xy} & B_{yy} & B_{zy}\\
-    B_{xz} & B_{yz} & B_{zz}\\
-\end{bmatrix}
-\end{aligned}
-\label{eq:Jacobian}
-\end{equation}
-It represents the spatial rate of change of the magnetic field vector $\mathbf{B}$
-along the three mutually orthogonal directions of the Cartesian coordinates.
-
-In most cases, rotational invariants,
-such as the Frobenius norm of $\mathbf{G}$ and any combination of its
-eigenvalues, are sensitive to the direction of the target magnetic
-moment vector $\mathbf{m}$ \cite{NSS_single_localization}. The magnetic moment represents the strenght 
-and orientation of the magnetic field, and for a magnetic dipole of a current
-loop it is defined as follows, \cite{book-magnetism}:
-\begin{equation}
-    \mathbf{m} = I \, \mathbf{S}
-\end{equation}
-where $I$ is the current flowing in the loop and $\mathbf{S}$, is the normal to the area of the loop
-and it is not to be confused with $S$ in \ref{eq:dvolume}, which is the area
-of the section of the wire.
-In our representation of the magentic dipole, with the Cartesian axes
-defined in Figure \ref{fig:dipole}, the direction of the magnetic moment is the $x$-axis,
-and the magnitude is:
-\begin{equation}
-    m = I \, \pi \, b^2
-    \label{eq:magnetic_moment}  
-\end{equation}
-
-Instead the NSS\footnote{NSS stands for Normalized Source Strength}, a tensor invariant calculated 
-from the eigenvalues of the magnetic gradient tensor $\mathbf{G}$, 
-does not depend on the magnetization direction and it 
-is completely isotropic around the magnetic dipole \cite{multiple_real_plots_invariants}.
-This follows from the magnetic gradient tensor $\mathbf{G}$ being symmetric and traceless,
-thanks to Maxwell's equations.
-
-In particular from the fourth equation \ref{eq:B}, 
-and from the definition of gradient \ref{eq:gradient} we deduce the traceless property:
-\begin{equation}
-    \nabla \cdot \mathbf{B} = 0
-    \Rightarrow
-    \frac{\partial B_x}{\partial x} +\frac{\partial B_y}{\partial y} + \frac{\partial B_z}{\partial z} = 0
-    \Rightarrow
-    B_{xx} + B_{yy} + B_{zz} = 0
-\end{equation}
-
-Instead, from the second Maxwell's equation \eqref{eq:curl_H}, in the case
-of the quasi-static field assumption we used before, and considering regions
-of space where there is an absence of electric currents (\(\mathbf{J} = 0\)),
-the curl of \(\mathbf{B}\) is zero (\(\nabla \times \mathbf{B} = 0\)), \cite{NSS_single_different_dimensions}.
-Then, from the definition of curl \eqref{eq:curl_calculation}, we deduce the symmetry property:
-\begin{equation}
-    \nabla \times \mathbf{B} = 0
-    \begin{aligned}[t]
-        &\Rightarrow \frac{\partial B_x}{\partial y} - \frac{\partial B_y}{\partial x} = 0, \quad 
-        \frac{\partial B_x}{\partial z} - \frac{\partial B_z}{\partial x} = 0, \quad 
-        \frac{\partial B_y}{\partial z} - \frac{\partial B_z}{\partial y} = 0 \\
-        &\Rightarrow B_{xy} = B_{yx}, \quad B_{xz} = B_{zx}, \quad B_{yz} = B_{zy}
+\nabla \times \mathbf{V} = \frac{1}{r \sin \theta} \Bigg[ 
+ \left( \frac{\partial}{\partial \theta} (V_\phi \sin \theta) - 
+ \frac{\partial V_\theta}{\partial \phi} \right)  &\mathbf{e}_r \\
+ + \left( \frac{1}{\sin \theta} \frac{\partial V_r}{\partial \phi} - 
+ \frac{\partial}{\partial r} (r V_\phi) \right)  &\mathbf{e}_\theta \\
+ + \left( \frac{\partial}{\partial r} (r V_\theta) - \frac{\partial V_r}{\partial 
+    \theta} \right)  &\mathbf{e}_\phi 
+\Bigg].
 \end{aligned}
 \end{equation}
-The NSS is a combination of the eigenvalues of the tensor \( \mathbf{G} \).
-In order to find the eigenvectors of a matrix, we need to solve the equation:
+
+\subsection{3D Dirac Delta}
+\textbf{Definition}\noindent\\
+Given a point \(\mathbf{r}\) in Cartesian coordinates, the Dirac delta function 
+\(\delta(\mathbf{r})\) is defined as \cite{book-magnetism2}:
+\begin{itemize}
+    \item \(\delta(\mathbf{r}) = 0\) at all points except at \(\mathbf{r} = 
+ (0,0,0)\).
+    \item The integral across the entire space satisfies:
+    \begin{equation}
+    \int_V \delta(\mathbf{r}) \, dv = 1
+    \label{eq:dirac}
+    \end{equation}
+\end{itemize}
+
+\noindent\\
+The result of the integral could be the value of any function in zero, $f(0)$.
+For example, the Dirac delta could be the charge density $\rho$ defined in 
+Table \ref{tab:symbols} 
+of a point particle located at the origin whose charge is \(q\).
+
+\subsection{Green's Function for Poisson Equation}
+Poisson's equation using Green's function is written as:
 \begin{equation}
-\mathbf{G} \mathbf{v}_i = \lambda_i \mathbf{v}_i
-\label{eq:eigen}
+\nabla^2 G(\mathbf{r}) = \delta(\mathbf{r})
+\label{eq:poisson}
 \end{equation}
-which is true for all pairs of eigenvalue \( \lambda_i \) and eigenvector \( \mathbf{v}_i \).
-The eigenvalues are found by solving the characteristic polynomial, defined as:
-\begin{equation}
-\det(\mathbf{G} - \lambda \mathbf{I}) = 0
-\label{eq:characteristic}
-\end{equation}
-where \( \mathbf{I} \) is the identity matrix.
-Expanding the determinant yields the cubic equation:
-\begin{equation}
-\lambda^3 - I_1 \lambda^2 + I_2 \lambda - I_3 = 0
-\end{equation}
-where \( I_1 \) is the trace of the gradient tensor \( \mathbf{G} \), 
-\( I_2 \) is the sum of the principal minors, 
-and \( I_3 \) is the determinant of \( \mathbf{G} \). 
-However, since \( \mathbf{G} \) is traceless, meaning that the coefficient 
-of \( \lambda^2 \) vanishes, \( I_1 = 0 \), we can simplify the cubic equation as done in
-\cite{NSS_single_different_dimensions}:
-\begin{equation}
-\lambda^3 + I_2 \lambda - I_3 = 0
-\end{equation}
-The invariants \( I_1 \), \( I_2 \), and \( I_3 \) are found
-following the linear algebra definitions mentioned before and simplified thanks to the symmetric property:
-\\
-
-\noindent
-\textbf{1.} \, \( I_1 \) (Trace):
-\begin{align*}
-    I_1 = B_{xx} + B_{yy} + B_{zz} = 0
-\end{align*}
-
-\noindent
-\textbf{2.} \, \( I_2 \) (Sum of principal minors):
-\begin{align*}
-    I_2 &= B_{xx}B_{yy} + B_{yy}B_{zz} + B_{xx}B_{zz} 
-        - (B_{xy}B_{yx} + B_{yz}B_{zy} + B_{xz}B_{zx}) = \\
-        &= B_{xx}B_{yy} + B_{yy}B_{zz} + B_{xx}B_{zz} 
-         - (B_{xy}^2 + B_{yz}^2 + B_{xz}^2)
-\end{align*}
-
-\noindent
-\textbf{3.} \, \( I_3 \) (Determinant):
-\begin{align*}
-    I_3 &= B_{xx} (B_{yy} B_{zz} - B_{zy} B_{yz}) 
-    - B_{yx} (B_{xy} B_{zz} - B_{zy} B_{xz}) 
-    + B_{zx} (B_{xy} B_{yz} - B_{yy} B_{xz}) = \\
-        &= B_{xx}B_{yy}B_{zz} + 2B_{xy}B_{yz}B_{xz} - 
-        B_{xx}B_{yz}^2 - B_{yy}B_{xz}^2 - B_{zz}B_{xy}^2
-\end{align*}
-\\
-It is shown later in \ref{invariance} that these coefficients are rotational invariants of 
-the tensor \( \mathbf{G} \), meaning that they are unchanged by a 
-rotation of the coordinate axes. They have the neat property that they can be simply expressed
-directly in terms of the tensor components with respect to any
-Cartesian reference frame.
-Each distinct root of the cubic equation defines a corresponding 
-eigenvalue of the tensor. From linear algebra we know that for each eigenvalue \( \lambda_i \), the 
-associated eigenvectors can be found as non-zero vectors 
-\( \mathbf{v}_i \) that satisfy \ref{eq:eigen}.
-Also, since \( \mathbf{G} \) is a symmetric real \( 3 \times 3 \) matrix, 
-all its eigenvalues are real, and the eigenvectors corresponding to 
-distinct eigenvalues are orthogonal. It is always possible to construct 
-an orthonormal set of the three eigenvectors, even in cases where the 
-eigenvalues are degenerate (i.e., two or more eigenvalues are equal).
-Furthermore, it is demonstrated later in \ref{invariance} that the eigenvalues \( \lambda_{\text{min}} \), 
-\( \lambda_{\text{med}} \), and \( \lambda_{\text{max}} \) are rotational 
-invariants of the tensor \cite{NSS_single_different_dimensions}.
-Therefore, any combination of the eigenvalues 
-constitutes a rotational invariant and the NSS is defined as:
-\begin{equation}
-\text{NSS} = \sqrt{\lambda_{\text{med}}^2 - \lambda_{\text{min}} \lambda_{\text{max}}}
-\label{eq:NSS}
-\end{equation}
-Additionally, it is shown that the NSS is inversely proportional to the fourth power of 
-the distance between the computed point in space and the source \cite{NSS_single_localization}:
-\begin{equation}
-\text{NSS} = \frac{3 \mu_0 m}{4 \pi r^4}
-\label{eq:NSS_decay}
-\end{equation}
-From which it is also evident that it is a rotational invariant (since it dipends
-only on the distance $r$) and also that it does not depend on the direction of the magnetic
-moment $\mathbf{m}$, only on its magnitude.
-\\
-
-\noindent
-\subsection{Demonstration of Rotation Invariance}
-\label{invariance}
-
-\noindent
-Let's define the gradient operator $\nabla$ in any Cartesian  
-coordinate system $(x, y, z)$, given by 
-\begin{equation}
-\nabla = 
-\begin{bmatrix} 
-\frac{\partial}{\partial x} \\ 
-\frac{\partial}{\partial y} \\
-\frac{\partial}{\partial z}
-\end{bmatrix}
-\label{eq:nabla}
-\end{equation}
-as a column vector.
-
-\noindent
-Let \( (x, y, z) \) be the Cartesian coordinates in the original frame, 
-and \( (x', y', z') \) denote the coordinates in a rotated frame. 
-The rotation is defined by a rotation matrix, which for simplicity, 
-we assume to be a rotation around the \( z \)-axis by an angle \( \theta \):
+The solution to the above equation is given by:
 \[
-\mathbf{R}_z(\theta) = 
-\begin{pmatrix}
-\cos \theta & -\sin \theta & 0 \\
-\sin \theta & \cos \theta & 0 \\
-0 & 0 & 1
-\end{pmatrix}
+G(r) =  - \frac{1}{4 \pi r}
 \]
-
-\noindent
-The new coordinates $(x', y', z')$ after the rotation are related to 
-the original coordinates by:
+\textbf{Proof}\noindent\\
+We assume \(G(r)\) to be axis-symmetric, implying that it only depends on the 
+magnitude $r$, not the vector position $\mathbf{r}$.
+Considering the point \((x,y,z)\) and the distance \(r\) from the origin.
+To find Green's function we look for the simplest function that satisfies the 
+equation, which has the form:
 \[
-\begin{bmatrix} 
-x' \\ 
-y' \\
-z'
-\end{bmatrix} 
-= 
-\mathbf{R}_z\mkern-2mu(\theta)
-\begin{bmatrix} 
-x \\ 
-y \\
-z
-\end{bmatrix}
+G(r) = A \frac{1}{r} + B
 \]
+where \(A\) and \(B\) are constants. 
 
-\noindent
-Using the chain rule, we express the derivatives with respect to the rotated coordinates 
-in terms of the original derivatives: 
+\noindent\\
+Assuming \(B = 0\) for simplicity, we find \(A\) by integrating over a sphere of 
+volume $\epsilon$.
+Substituting Poisson's Equation \eqref{eq:poisson} in the definition of the 
+Dirac delta \eqref{eq:dirac}:
 \[
-\frac{\partial}{\partial x'} = \cos(\theta) \frac{\partial}{\partial x} 
-- \sin(\theta) \frac{\partial}{\partial y}
+\int_V \nabla^2 G(r) \, dv = 1 
+\]
+Using the Divergence Theorem \eqref{eq:divergence_th}:
+\[
+\int_V \nabla^2 G(r) \, dv = \int_S \nabla G(r) \cdot d\mathbf{s} 
 \]
 \[
-\frac{\partial}{\partial y'} = \sin(\theta) \frac{\partial}{\partial x} 
-+ \cos(\theta) \frac{\partial}{\partial y}
+1 = \int_S \nabla G(r) \cdot d\mathbf{s} 
 \]
+The right-hand side represents the flux through the surface \(S\). We take the 
+integral over the surface of a sphere of radius \(r\), knowing that the surface 
+area is \(4 \pi r^2\) and computing the divergence (which is just the derivative 
+thanks to the assumption) of $A \, \frac{1}{r}$:
 \[
-\frac{\partial}{\partial z'} = \frac{\partial}{\partial z}
+1 = \int_S - \frac{A}{r^2} d\mathbf{s} = - \frac{4 \pi \slashed{r^2} 
+A}{\slashed{r^2}}
 \]
-
-\noindent
-Thus, the gradient operator in the rotated coordinate system 
-can be expressed in matrix form as:
-\begin{equation}
-\nabla' 
-= 
-\mathbf{R}_z\mkern-2mu(\theta) \, \nabla
-\label{eq:gradient_rotated}
-\end{equation}
-
-\noindent
-Now, let \( \mathbf{B} \) be a 3D vector field exspressed as a column vector as well:
+From which we conclude:
 \[
-\mathbf{B}(x, y, z) = 
-\begin{bmatrix}
-    B_x(x, y, z) \\
-    B_y(x, y, z) \\
-    B_z(x, y, z)
-\end{bmatrix}
+A = - \frac{1}{4 \pi}
 \]
-
-\noindent
-The components of the vector field after the rotation 
-are given by:
-\begin{equation}
-    \mathbf{B}' = \mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{B}
-\label{eq:vect_rotated}
-\end{equation}
-
-\noindent
-Then, we can rewrite the definition of the gradient tensor \ref{eq:gradient},
-in matrix form \cite{gradient_tensor_rotated}:
-\[
-\mathbf{G} = \nabla \mathbf{B}^\top
-\]
-Which becomes in the rotated coordinates $(x', y', z')$:
-\[
-\mathbf{G}' = \nabla' \mathbf{B}'^\top
-\]
-
-\noindent
-Thus, substituting \ref{eq:gradient_rotated} and \ref{eq:vect_rotated}
-into the expression for \( G' \), we obtain:
-\[
-\mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \,  \nabla \, (\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{B})^\top
-\]
-
-\noindent
-Using the linear algebra property of the transpose of the product of two matrices:
-\[
-\mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \, \nabla \, (\mathbf{B}^\top {\mathbf{R}}^\top_z\mkern-3.5mu(\theta))
-\]
-
-\noindent
-Recognizing that \( \nabla \, \mathbf{B}^\top \) is the original gradient 
-\( \mathbf{G} \), we finally obtain the same result as \cite{gradient_tensor_rotated}:
-\begin{equation}
-    \mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta)
-    \label{eq:rotated_gradient_tensor}
-\end{equation}
-
-\noindent
-Firstly, we focus on the eigenvalues of \( \mathbf{G} \), namely 
-\( \lambda_{\text{min}} \), \( \lambda_{\text{med}} \), and \( \lambda_{\text{max}} \). 
-To demonstrate rotational invariance, we recall the characteristic polynomial 
-\ref{eq:characteristic}, which defines the eigenvalues of \( \mathbf{G} \). 
-Under a coordinate rotation, the tensor \( \mathbf{G} \) transforms as shown in 
-\eqref{eq:rotated_gradient_tensor}. Then, the characteristic equation for the rotated tensor is:
-\[
-    \det(\mathbf{G}' - \lambda \mathbf{I}) = 
-    \det(\mathbf{R}_z\mkern-2mu(\theta) \,  \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta) - \lambda \mathbf{I})
-\]
-
-\noindent
-Using Binet's Theorem and the property of orthogonal matrices \( \det\mkern-2mu\big(\mathbf{R}\big) = \det\mkern-2mu\big(\mathbf{R}^\top\big) = 1 \):
-\begin{equation}
-    \det\mkern-2mu\big(\mathbf{R}_z\mkern-2mu(\theta) \, (\mathbf{G} - \lambda \mathbf{I}) \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta)\big) = 
-    \det\mkern-2mu\big(\mathbf{G} - \lambda \mathbf{I}\big)
-    \label{eq:rotational_invariance}
-\end{equation}
-
-\noindent 
-Consequently, the eigenvalues \( \lambda_{\text{min}} \), \( \lambda_{\text{med}} \), 
-and \( \lambda_{\text{max}} \) of the tensor \( \mathbf{G} \) remain unchanged, 
-proving that they are rotationally invariant.
-
-\noindent
-Secondly, we now demonstrate how \( I_2 \) and \( I_3 \) are rotational invariants 
-with respect to a rotation of the coordinates systems.
-\( I_2 \) is defined as the sum of the principal minors of order 2 of \( \mathbf{G} \). 
-From linear algebra we know that the sum of principal minors is a linear combination of the eigenvalues
-of a matrix, which are in turn rotational invariants, as we just demonstrated, therefore \( I_2 \)
-is a rotational invariant as well.
-
-\noindent
-Similarly, the determinant of \( \mathbf{G} \), \( I_3 \),
-is also invariant under orthogonal transformations. 
-This is agian due to the fact that the determinat of orthogonal matrices is 1 and thanks
-to Binet's Theorem:
-\[
-\det\mkern-3mu\big(\mathbf{G}'\big) = \det\mkern-3mu\big(\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-2mu(\theta)\big) = 
-\det\mkern-3mu\big(\mathbf{R}_z\mkern-2mu(\theta) \big) \det\mkern-3mu\big(\mathbf{G}\big) \det\mkern-3mu\big({\mathbf{R}}^\top_z\mkern-2mu(\theta)\big) = 
-\det\mkern-3mu\big(\mathbf{G}\big)
-\]
-
-\noindent
-As \( I_2 \) and \( I_3 \) are constructed respectively from the sum of principal minors 
-and the determinant of \( \mathbf{G} \), both quantities remain invariant under any rotation 
-of the coordinate system.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{document}

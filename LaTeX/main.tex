@@ -1,0 +1,171 @@
+\documentclass[12pt,a4paper,oneside]{article}
+\usepackage{graphicx}
+\usepackage{titlepic}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1.1in,right=1.1in, top=1in, bottom= 1in]{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{placeins} % Add this package in the preamble
+\usepackage{amsmath}
+\usepackage{xcolor}  % For color support
+\usepackage{pifont}  % For the ding symbols
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{etoolbox}
+\usepackage[nottoc]{tocbibind}
+\usepackage{appendix}
+\usepackage{multicol}
+\usepackage{leftidx}
+\graphicspath{{images/}}
+\usepackage{ragged2e}
+\usepackage{mathtools}
+\usepackage{units}
+\usepackage{commath}
+\usepackage{amsthm}
+% Bibliography setup using biblatex and biber
+\usepackage[
+backend=biber,
+style=ieee, % You can change this style as per your preference
+sorting=ynt
+]{biblatex}
+\addbibresource{bibliography.bib} % Ensure the .bib file exists and is correct
+
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{tgtermes}
+\usetikzlibrary{angles,quotes,intersections}
+\usetikzlibrary{3d,perspective}
+\usepackage{subcaption}
+\tikzset{axis/.style={thick,-latex}}
+\tikzset{vec/.style={thick,blue}}
+\tikzset{univec/.style={thick,red,-latex}}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath, slashed}
+\usepackage{amsfonts}
+\usepackage[linguistics]{forest} % Diagram package
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{float}
+\usepackage{media9}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\usepackage{empheq}
+\usepackage{newtxtext}
+\usepackage{setspace}
+
+
+%ALGORITHM
+\SetArgSty{textnormal} % Arguments and other text will be in normal style
+\SetNlSty{}{}{:} % Line numbers: no bold, no italics, with colo
+%\DontPrintSemicolon
+\SetKw{KwInitialize}{Initialize}
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}
+\SetKwProg{Fn}{Function}{:}{}
+\AlgoDisplayBlockMarkers \SetAlgoBlockMarkers{}{end}
+\SetAlgoNoEnd
+
+% Define custom colors
+\definecolor{ocra}{rgb}{1, 0.8, 0}      % Ocra color (HEX: #ffcc00)
+\definecolor{orange}{rgb}{0.922, 0.38, 0.24} % Orange color (HEX: #eb613d)
+\definecolor{gray}{rgb}{0.75, 0.75, 0.75}    % Gray color (HEX: #C0C0C0)
+\definecolor{red}{rgb}{0.545, 0, 0}     % Dark Red color (HEX: #8B0000)
+\definecolor{blue}{rgb}{0, 0, 0.803}    % Blue color (HEX: #0000CD)
+\definecolor{green}{rgb}{0, 0.502, 0}   % Green color (HEX: #008000)
+
+\renewcommand{\arraystretch}{1.3} % Increase vertical spacing in the matrix
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem{theorem}{Theorem}
+
+\usepackage[none]{hyphenat} % Avoids to go out of margin
+
+\usepackage{subfiles}
+\usepackage{verse}
+\usepackage{microtype}
+
+
+% --------------------------------------------- %
+
+\title{Localization of multiple avalanche victims 
+\\[6pt]
+by a team of UAVs}                               
+\author{}
+
+% Authors separated by \\
+\date{}             % Date
+
+% Font size of figure smaller than normal size:
+\usepackage{caption}
+\captionsetup[figure]{font=small}
+%\captionsetup[table]{font=small}
+
+%\usepackage{setspace} % double spacing
+\linespread{1.2}
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\begin{document}
+
+\include{title}
+\clearpage
+\thispagestyle{empty} % No headers or footers
+\vspace*{\fill}
+\hspace*{\fill} % Push everything to the right
+\begin{minipage}{0.6\textwidth} %
+    \raggedleft 
+    \itshape 
+    Tu prova ad avere un mondo nel cuore\\
+    e non riesci ad esprimerlo con le parole,\\
+    e la luce del giorno si divide la piazza\\
+    tra un villaggio che ride e te, lo scemo, che passa,\\
+    e neppure la notte ti lascia da solo:\\ 
+    gli altri sognan se stessi e tu sogni di loro.\\
+    \vspace{3\baselineskip} 
+    E sì, anche tu andresti a cercare\\
+    le parole sicure per farti ascoltare:\\
+    per stupire mezz’ora basta un libro di storia,\\
+    io cercai di imparare la Treccani a memoria,\\
+    e dopo maiale, Majakowskij e malfatto,\\
+    continuarono gli altri fino a leggermi matto.
+\end{minipage}
+\vspace*{\fill}
+
+\clearpage
+\tableofcontents
+\clearpage
+\subfile{Cap_1}
+\clearpage
+\subfile{Cap_2}
+\clearpage
+\subfile{Cap_3}
+\clearpage
+\subfile{Cap_4}
+\clearpage
+\subfile{Cap_5}
+\clearpage
+\subfile{Cap_6}
+\clearpage
+\subfile{Cap_7}
+
+\clearpage
+\printbibliography 
+\nocite{*}  % to include references that were not cited
+
+\clearpage
+\subfile{ringraziamenti}
+\clearpage
+
+\end{document}

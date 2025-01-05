@@ -1,1475 +1,1099 @@
-\chapter{Mathematical Model}
+\documentclass[main]{subfiles}
+\begin{document}
+\section{Electromagnetism}
+The ARTVA instrument in transmitter and receiver 
+mode is a magnetic dipole. In order to formulate 
+a coherent mathematical model, it is necessary to 
+report some results of electromagnetic theory. 
+Firstly, we identify and name the fundamental 
+electromagnetic physical quantities:
+\begin{table}[h!]
+    \centering
+    \caption{\textbf{Electromagnetic Physical 
+ Quantities}}
+    \begin{tabular}{ccc}
+        \hline\hline
+        \textbf{Symbol} & \textbf{Description} & \textbf{Unit} \\
+        \hline
+        $\mathbf{E}$ & Electric field intensity & V/m \\
+        $\mathbf{D}$ & Electric displacement field & C/m$^2$ \\
+        $\mathbf{H}$ & Magnetic field intensity & A/m \\
+        $\mathbf{B}$ & Magnetic flux density & T \\
+        $\mathbf{J}$ & Current density & A/m$^2$ \\
+        $\mathbf{A}$ & Magnetic vector potential & V $\cdot$ s/m \\
+        $\mathbf{m}$ & Magnetic vector moment & A $\cdot$ m$^2$ \\
+        $\rho$ & Volume charge density & C/m$^3$ \\
+        $\epsilon$ & Permittivity of the medium & F/m \\
+        $\mu$ & Permeability of the medium & H/m \\
+        $c$ & Speed of light in vacuum & m/s \\
+        \hline\hline
+    \end{tabular}
+    \label{tab:symbols}
+\end{table}
 
-\section{Single Victim Case}
+\subsection{Maxwell's Equations}
+We postulate Maxwell's equations in a simple 
+(linear, isotropic, and homogeneous) medium in 
+phasor notation, Section \ref{Phasor Notation}, which have 
+been discovered experimentally \cite{book-magnetism}:
+
+\begin{align}
+    \nabla \times \mathbf{E} &= -j\omega \mathbf{B} 
+    \label{eq:curl_E} \\
+    \nabla \times \mathbf{H} &= \mathbf{J} + j\omega 
+    \epsilon \mathbf{E} \label{eq:curl_H} \\
+    \nabla \cdot \mathbf{E} &= \frac{\rho}{\epsilon} 
+    \label{eq:E} \\
+    \nabla \cdot \mathbf{B} &= 0 \label{eq:B}
+\end{align}
+
+\noindent\\
+In these equations, the space-coordinate arguments 
+have been omitted for simplicity. The fact that 
+the same notations are used for the phasors as 
+are used for their corresponding time-dependent 
+quantities should create little confusion because 
+we will deal exclusively with sinusoidal vector 
+fields.
+
+\noindent\\
+From Maxwell's Equation \eqref{eq:B}, we know that 
+the magnetic flux density \(\mathbf{B}\) is solenoidal 
+(zero divergence). Then, \(\mathbf{B}\) can be expressed 
+as the curl of another vector field using the 
+Null Theorem \eqref{eq:null}, obtaining \ref{eq:B}:
+\begin{equation}
+ \mathbf{B} = \nabla \times \mathbf{A}
+    \label{curlA}
+\end{equation}
+
+\noindent\\
+Also, \(\mathbf{B}\) relates to the magnetic field 
+intensity \(\mathbf{H}\) through the permeability of 
+the medium \(\mu\):
+
+\begin{equation}
+ \mathbf{B} = \mu \mathbf{H}
+    \label{eq:BH}
+\end{equation}
+
+\noindent\\
+Another useful form of Maxwell's first Equation 
+\eqref{eq:curl_E} can be found by substituting 
+\ref{curlA}:
+\begin{align}
+    \nabla \times \mathbf{E} = - j \omega 
+ (\nabla \times \mathbf{A}) &= -\nabla \times 
+ j \omega \mathbf{A} \nonumber \\
+    \nabla \times \left(\mathbf{E} + 
+ j \omega \mathbf{A}\right) &= 0 \nonumber
+\end{align}
+
+\noindent\\
+Since the sum of vector fields is itself a vector 
+field, \(\mathbf{E} + j \omega \mathbf{A}\) is a 
+vector field, and we can define a \textbf{scalar} 
+field, the electric potential \(V\), such that:
+
+\begin{equation}
+ \mathbf{E} + j \omega \mathbf{A} = -\nabla V
+    \label{eq:V}
+\end{equation}
+
+\noindent\\
+If the curl of a vector field is zero, a scalar 
+field exists whose gradient gives the vector field.
+
+\subsubsection{Conservation of Charge Principle}
+The principle of conservation of charge states 
+that the net charge within a closed system remains 
+constant over time, meaning no charge can be 
+created nor destroyed \cite{book-magnetism}:
+\begin{equation}
+    \nabla \cdot \mathbf{J} = -\frac{\partial \rho}
+ {\partial t}
+\end{equation}
+
+\noindent\\
+The current density \(\mathbf{J}\) is defined as:
+\begin{equation}
+ \mathbf{J} = N q \mathbf{u}
+\end{equation}
+where \(N\) is the number of charge carriers per 
+unit volume, \(q\) is the charge of each carrier, 
+and \(\mathbf{u}\) is the drift velocity of the 
+charge carriers.
+
+\noindent\\
+This means that if a current flows out of a volume, 
+the charge density inside the volume must decrease 
+at a rate equal to the current. The current leaving 
+the volume is the flux of the current density 
+through surface \(S\):
+\begin{equation}
+ I = \oint_S \mathbf{J} \cdot d\mathbf{s}
+    \label{eq:defI}
+\end{equation}
+
+\subsection{Wave Equation for Magnetic Vector Potential}
+In order to determine the intensity of the magnetic 
+field, we first need to find an expression for the 
+magnetic vector potential \(\mathbf{A}\), called the 
+wave equation. Starting from Maxwell's equations, 
+we find the wave equation by substituting \ref{curlA} 
+and \ref{eq:BH} into the second Maxwell Equation 
+\eqref{eq:curl_H}:
+\[
+    \nabla \times \nabla \times \mathbf{A} = 
+    \mu \mathbf{J} + j\omega\epsilon \mu \mathbf{E}
+\]
+
+\noindent\\
+Then we substitute \ref{eq:V} for $\mathbf{E}$ and 
+use the Laplacian \eqref{eq:laplacian} on the left side:
+\[
+    \nabla (\nabla \cdot \mathbf{A}) - \nabla^2 
+ \mathbf{A} = \mu \mathbf{J} + j\omega \epsilon 
+    \mu \left(-\nabla V - j \omega \mathbf{A}\right)
+\]
+
+\noindent\\
+The definition of a vector requires the specification 
+of both its curl and its divergence. Although the curl 
+of $\mathbf{A}$ is designated $\mathbf{B}$ in 
+\ref{curlA}, we are still at liberty to choose its 
+divergence to simplify the expression 
+\cite{book-magnetism}:
+\[
+    \nabla \cdot \mathbf{A} = - j \omega \epsilon 
+    \mu V
+\]
+
+\noindent\\
+Finally, rearranging the terms and substituting 
+the square of $j$, we get:
+\[
+    \nabla^2 \mathbf{A} + \omega^2 \epsilon \mu 
+ \mathbf{A} = -\mu \mathbf{J}
+\]
+
+\noindent\\
+This is the wave equation for the magnetic vector 
+potential \(\mathbf{A}\):
+\begin{equation}
+    \nabla^2 \mathbf{A} - k^2 \mathbf{A} = 
+ -\mu \mathbf{J}
+    \label{eq:wave}
+\end{equation}
+where \(k = \omega \sqrt{\mu \epsilon}\) is the wave 
+number, which characterizes the propagation of the 
+electromagnetic wave in the medium.
+
+\subsubsection{Finding the Potential by Solving the Wave Equation}
+Since both \(\mathbf{A}\) and \(\mathbf{J}\) are vector 
+fields, the wave Equation \eqref{eq:wave} can be written 
+for each component of \(\mathbf{A}\):
+\begin{equation}
+    \nabla^2 
+    \begin{pmatrix} 
+ A_x \\ A_y \\ A_z 
+    \end{pmatrix} = 
+ k^2 
+    \begin{pmatrix} 
+ A_x \\ A_y \\ A_z 
+    \end{pmatrix} - 
+    \mu 
+    \begin{pmatrix} 
+ J_x \\ J_y \\ J_z 
+    \end{pmatrix}
+    \label{eq:wavematrix}
+\end{equation}
+
+\noindent\\
+In order to solve \ref{eq:wavematrix}, we can use the 
+Green function for Poisson's Equation \eqref{eq:poisson} 
+for each of the components when $k = 0$ (the case of 
+static fields). Then, the solution is given by the 
+formula:
+\begin{equation}
+ \mathbf{A} = \frac{\mu}{4 \pi} \int_V 
+ \mathbf{J} \frac{e^{-jkr}}{r} dv
+    \label{eq:solA}
+\end{equation}
+by using the superposition principle and by finding the 
+solution of the time-dependent differential equation.
+
+\subsection{Magnetic Dipole}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        % Draw the 3D coordinate system
+        \draw[axis] (0,0,0) -- (3,0,0) 
+ node[anchor=north east]{$z$};
+        \draw[axis] (0,0,0) -- (0,3,0) 
+ node[anchor=north west]{$x$};
+        \draw[axis] (0,0,0) -- (0,0,4) 
+ node[anchor=south]{$y$};
+        % Coordinates
+        \coordinate (O) at (0,0,0);
+        \coordinate (R) at (3,2,1);
+        % Line from p to b
+        \draw[thick] (1,0,0) -- (R) 
+ node[midway, below, yshift=-0.1cm]{$r_1$};
+        % Draw the point r
+        \fill (R) circle (2pt);
+        \node[above right] at (R) {$p$};
+        % Draw and label the angle theta
+        \draw (0,1) arc[start angle=90,end angle=58,,radius=2cm];
+        \node at (0.5,0.7) {$\theta$};
+        % Label in space called b
+        \node at (1,0,1.5) {$I$};
+        % Draw a circle in the xz-plane
+        \begin{scope}[canvas is xz plane at y=0]
+            \draw[thick, color=blue!80!black] 
+ (0,0) circle [radius=1];
+            \draw[-stealth, color=blue!80!black] 
+ (0,1) arc[start angle=90,end angle=45,radius=1];
+        \end{scope}
+        % Draw the line from the origin to point r
+        \draw[thick] (O) -- (R) node[midway, above]{$r$};
+    \end{tikzpicture}
+    \caption{Magnetic dipole representation}
+    \label{fig:dipole}
+\end{figure}
+
+We have a small filament loop of radius \( b \), 
+carrying an AC current \( I(t) = I \cos(\omega t) \) 
+as shown in Figure \ref{fig:dipole}. If \( S \) is the 
+cross-section area of the wire and \( dl \) a 
+differential length, we have \( \mathbf{J} \perp 
+\mathbf{s} \), the normal to the area and the volume:
+\begin{equation}
+ dv = S \, dl
+    \label{eq:dvolume}
+\end{equation}
+
+\noindent\\
+In order to determine the magnetic field intensity 
+\(\mathbf{H}\) at a certain point in space \( p \), 
+we need to compute the magnetic vector potential 
+\(\mathbf{A}\) first \cite{book-magnetism}. Since the 
+charges move only in the thin wire, they are located 
+only in the wire region, then from the definition of 
+current \eqref{eq:defI}:
+\[
+ I = S \, \mathbf{J}
+\]
+
+\noindent\\
+The volume integral in Eq.\ref{eq:solA} becomes:
+
+\[
+    \int_V \mathbf{J} \, dv =  \int_V \mathbf{J} \, S \, dl
+\]
+
+\noindent\\
+Then, we substitute \ref{eq:defI} and change the 
+integral type since it is now the sum over the length, 
+so the formula becomes (the current must flow in a 
+closed path):
+\begin{equation}
+ \mathbf{A} = \frac{\mu_0 I}{4\pi} \oint_C 
+ \frac{d\mathbf{l}}{r_1} e^{-j k r_1}
+    \label{sol_A_dipole}
+\end{equation}
+where $r_1$ is the distance between the point $p$ and 
+the charges (source element) and $d\mathbf{l}$ is a 
+vector tangent to the loop of differential length $dl$.
+
+\noindent\\
+\textbf{Assumption} \label{Assumption}\noindent\\
+We can then simplify Eq.\ref{sol_A_dipole} by considering 
+the radius $b$ to be small enough, such that 
+$r_1 - r \approx 0$. Then by adding and subtracting $r$ 
+from the power of the exponential:
+\[
+ e^{-j k r_1} = e^{-j k (r_1 + r - r)} = 
+ e^{-j k r} \, e^{-j k (r_1 - r)}
+\]
+
+\noindent\\
+Then by using Taylor's approximation on the second 
+exponential ($ x = r_1 - r \approx 0$) we obtain:
+\[
+ e^{-j k r_1} = e^{-j k r}\, \left[ 1 - j k (r_1 - r) \right]
+\]
+
+\noindent\\
+Then, we substitute this result in Eq.\ref{sol_A_dipole} 
+and simplify:
+\[
+\begin{aligned}
+ \mathbf{A} &= \frac{\mu_0 I}{4 \pi} e^{-j k r} 
+ \left[ 1 - j k (r_1 - r) \right] \oint_C 
+ \frac{d\mathbf{l}}{r_1} \\
+    &= \frac{\mu_0 I}{4 \pi} e^{-j k r} \left( 
+    \oint \frac{d\mathbf{l}}{r_1} - j k \oint 
+ (r_1 - r) \frac{d\mathbf{l}}{R_1} \right)
+\end{aligned}
+\]
+
+\noindent\\
+Since the integral of \(d\mathbf{l}\) over a closed loop 
+is zero, because we have considered a small loop $b \to 0$:
+\[
+    \oint_C d\ell = 2\pi b \quad \rightarrow \quad 
+    \oint_C d\ell \rightarrow 0
+\]
+
+\noindent\\
+Then we obtain:
+\begin{equation}
+ \mathbf{A} = \frac{\mu_0 I}{4 \pi} e^{-j k r} 
+ \left[ \left(1 + j k r \right) \oint 
+ \frac{d\mathbf{l}}{r_1}\right]
+    \label{eq:sol_A_simp}
+\end{equation}
+
+\noindent\\
+\textbf{Assumption Quasi-Static Field/Near Field Zone}\noindent\\
+If we consider a region near the magnetic dipole, we 
+obtain quasi-static fields. We defined the wave number 
+$k$ as:
+\begin{equation}
+ k = \omega \sqrt{\mu \epsilon}
+    \label{eq:k}
+\end{equation}
+
+\noindent\\
+Electromagnetic waves propagate with velocity $u$ 
+(speed of light in vacuum) \cite{book-magnetism}:
+\begin{equation}
+ u = \frac{1}{\sqrt{\mu \epsilon}}
+    \label{eq:u}
+\end{equation}
+
+\noindent\\
+Then, by inverting \ref{eq:u} and substituting in 
+Eq.\ref{eq:k}, we can write $k$ as:
+\begin{equation}
+ k = \frac{\omega}{u}
+    \label{eq:k2}
+\end{equation}
+
+\noindent\\
+From wave theory $f = \frac{\omega}{2\pi}$ and 
+$\lambda = \frac{u}{f}$, we obtain another expression 
+for $u$:
+\begin{equation}
+ u = \frac{\lambda \, \omega}{2 \, \pi}
+\end{equation}
+\label{eq:u2}
+
+\noindent\\ 
+Therefore, we can substitute \ref{eq:u2} in 
+Eq.\ref{eq:k2}:
+\begin{equation}
+ k = \frac{2 \pi}{\lambda}
+    \label{eq:k3}
+\end{equation}
+
+\noindent\\
+To simplify the expression for $\mathbf{A}$ 
+\eqref{sol_A_dipole}, we make the assumption that 
+$k \, r \ll 1$, and if we substitute the found 
+expression of $k$ \eqref{eq:k3}:
+\[
+ k \, r \ll 1 \implies \frac{2\pi r}{\lambda} 
+    \ll 1 \implies r \ll \frac{\lambda}{2\pi}
+\]
+
+\noindent\\
+This means that $r$ needs to be small in comparison 
+to $\lambda$. If this is the case:
+\[
+ e^{-j k r} \approx e^0 = 1
+\]
+
+\noindent\\
+We eliminate the time dependence and 
+obtain the expression for $\mathbf{A}$:
+\begin{equation}
+ \mathbf{A} = \frac{\mu_0 I}{4\pi} \oint_C 
+ \frac{d\mathbf{l}}{r_1}
+    \label{A_approx}
+\end{equation}
+
+\noindent\\
+In the ARTVA case, the standard operating frequency 
+is \( f = 475 \, \text{kHz} \) and the optimal range 
+of the instrument is \( <80 \, \text{m} \). Then in 
+the worst case, when \( r = 80 \, \text{m} \), we 
+obtain the approximation \( k \, r = 0.79 \).
+
+\noindent\\
+\textbf{Symmetry}\noindent\\
+In the particular case of a magnetic dipole, the 
+magnetic vector potential $\mathbf{A}$ is symmetric 
+with respect to the \(x\)-axis, therefore independent 
+to the $\phi$ angle from Section \ref{Spherical Coordinates}. 
+This is true since we can choose freely the $z$-axis 
+and $y$-axis orientation in space around the loop. 
+Then we can choose the point $\mathbf{p}$ to lie on 
+the $zx$-plane or the $yx$-plane; in both cases, we 
+will obtain that one of the two $d\mathbf{l}$ 
+components $d\mathbf{l_z}$ and $d\mathbf{l_y}$ will 
+cancel themselves out as we integrate over the loop.
+
+\noindent\\
+For example, if we consider the point to lie on the 
+$yx$-plane, then take a point on the loop where 
+$d\mathbf{l}$ is and its symmetric w.r.t. the 
+$y$-axis, the component $d\mathbf{l_y}$ of the first 
+will cancel itself out with the one of the second.
+
+\noindent\\
+We can write the length of a circumference as 
+$l = r \, \alpha$, where $\alpha$ is the subtended 
+angle by the length $l$ and $r$ the radius. In 
+addition, we express $\mathbf{e_\phi}$ using the 
+Cartesian basis:
+$$
+ \mathbf{e_\phi} = - \sin\phi \, \mathbf{e_y} 
+ + \cos\phi \, \mathbf{e_z}
+$$
+
+\noindent\\
+Then, $d\mathbf{l}$ magnitude depends on the 
+differential angle $d\phi$ and the radius $b$, and 
+has the same direction as $\mathbf{e_\phi}$:
+\begin{equation}
+ d\mathbf{l} = b \, d\phi \, \mathbf{e_\phi} 
+ = b \, d\phi \left(- \sin\phi \, \mathbf{e_y} 
+ + \cos\phi \, \mathbf{e_z}\right)
+    \label{eq:dl}
+\end{equation}
+
+\noindent\\
+For every $d\mathbf{l}$, there is another 
+symmetrically located differential length element on 
+the other side of the $y$-axis that will contribute 
+an equal amount to $\mathbf{A}$ in the $\mathbf{e_z}$ 
+direction but will cancel the contribution of 
+$d\mathbf{l}$ in the $\mathbf{e_y}$ direction. 
+Since $\mathbf{e_z} = \mathbf{e_\phi}$, if point $P$ 
+lies on the $yx$-plane, Eq.\ref{A_approx} can 
+be written as:
+\begin{equation}
+ \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b}{4 \pi} 
+    \int_{0}^{2\pi} \frac{\cos \phi}{r_1} \, d\phi
+    \label{eq:A_final}
+\end{equation}
+
+\noindent\\
+\textbf{Computing the Integral in Spherical Coordinates}\noindent\\
+Firstly, we find $r_1$ by applying the law of cosines 
+on the triangle $OPP'$, Figure \ref{fig:dipole2}:
 \begin{figure}[H]
     \centering
-    \tdplotsetmaincoords{70}{110}
-    \begin{tikzpicture}[tdplot_main_coords]
-    \draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$y_g$};
-    \draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$z_g$};
-    \draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$x_g$};
-    % Point Pt1
-    \coordinate (Pt1) at (5,0,5);
-    \draw[->, thick] (0,0,0) -- (Pt1) node[pos=0.5,anchor=east]{${}^g \mathbf{p}_t$};      
-    % Point tp
-    \coordinate (p1) at (5,5,6);
-    \draw[->, thick] (5,0,5) -- (p1) node[pos=0.5,anchor=south]{${}^t \bm{p}_{tr}$};      
-    % pr
-    \draw[->, thick] (0,0,0) -- (p1) node[pos=0.5,anchor=east]{${}^g \mathbf{p}_r$};
-
-    \node at (p1) [anchor= south west] {$\mathbf{p}$};
-    
-    \coordinate (Shift) at (5,0,5);
-    \tdplotsetrotatedcoordsorigin{(Shift)}
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (.7,0,0) node[anchor=north]{$y_{t}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,.7,0) node[anchor=north]{$z_{t}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,0,.7) node[anchor=south]{$x_{t}$};
-    \coordinate (Shift) at (5,5,6);
-    \tdplotsetrotatedcoordsorigin{(Shift)}
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (.7,0,0) node[anchor=east]{$y_{r}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,.7,0) node[anchor=west]{$z_{r}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,0,.7) node[anchor=south]{$x_{r}$};
+    \begin{tikzpicture}
+        % Draw the 3D coordinate system
+        \draw[axis] (0,0,0) -- (4,0,0) 
+ node[anchor=north east]{$z$};
+        \draw[axis] (0,0,0) -- (0,4,0) 
+ node[anchor=north west]{$x$};
+        \draw[axis] (0,0,0) -- (0,0,5) 
+ node[anchor=south]{$y$};
+        % Coordinates
+        \coordinate (O) at (0,0,0);
+        \coordinate (R) at (0,4,4);
+        \coordinate (P') at (1.7,0,1.2);
+        % Line from p to b
+        \draw[thick] (P') -- (R) node[right, yshift=0.1cm]{};
+        % Draw the point 
+        \fill (R) circle (2pt);
+        \fill (P') circle (2pt);
+        \node[above right] at (R) {$P$};
+        % Draw the angle theta between r and y-axis
+        \draw[->] (0,1.5,0) arc[start angle=90, 
+ end angle=115, radius=2cm];
+        \node at (-0.3,1.7,0) {$\theta$};
+        \draw[bend right,->] (0,0,1) to 
+ node [auto] {} (0.7,0,0.5);
+        \node at (0.7,0.6,1) {$\beta$};
+        \draw[bend right,->] (0.4,0,0.3) to 
+ node [auto] {} (0,0.5,0.5);
+        % Label in space called b
+        \node at (1.8,0,1.8) {$b$};
+        \node at (2.3,0,2) {$P'$};
+        \node at (0.7,0,1.2) {$\phi$};
+        % Draw a circle in the xz-plane
+        \begin{scope}[canvas is xz plane at y=0]
+            \draw[thick, color=blue!80!black] 
+ (0,0) circle [radius=2];
+        \end{scope}
+        % Draw the line from the origin to point r
+        \draw[thick] (O) -- (R) 
+ node[midway, above right, yshift=0.4cm]{};
+        \draw[thick] (O) -- (P') 
+ node[midway, above right]{};
     \end{tikzpicture}
-    \caption{Inertial frames in the single victim case}
-    \label{fig:frames-1victim}
+    \caption{Magnetic dipole representation with the $OPP'$ triangle}
+    \label{fig:dipole2}
 \end{figure}
-Three Cartesian coordinate frames are defined as \cite{main} and shown in \ref{fig:frames-1victim}:
-\begin{enumerate}[label=(\roman*)]
-    \item Frame $g$ (global): denoted as $F_g = (O_g, x_g, y_g, z_g)$, is the global (inertial) frame with origin $O_g$,
-    fixed reference for all objects in space.
-    \item Frame $r$ (receiver ARTVA): denoted as $F_r = (O_r, x_r, y_r, z_r)$, is the body right-hand frame associated with the receiver installed on the drone.
-    \item Frame $t$ (transmitter ARTVA): denoted as $F_t = (O_t, x_t, y_t, z_t)$, is the body right-hand frame associated with the transmitter worn by the victim.
+
+\noindent\\
+We start with the equation for \( r_1 \):
+$$
+ r_1^2 = r^2 + b^2 - 2 r b \cos\beta
+$$
+
+\noindent\\
+Since we are on the \( xy \)-plane, we can write the 
+\( \mathbf{b} \) and \( \mathbf{r} \) vectors as:
+$$
+ \mathbf{r} = r \sin \theta \, \mathbf{e_y} 
+ + r \cos \theta \, \mathbf{e_x}
+$$
+$$
+ \mathbf{b} = b \cos \phi \, \mathbf{e_y} 
+ + b \sin \phi \, \mathbf{e_z}
+$$
+
+\noindent\\
+Then we find the angle \(\beta\) between 
+\( \mathbf{r} \) and \( \mathbf{b} \):
+$$
+ \cos \beta = \frac{\mathbf{b} \cdot \mathbf{r}}{r b} 
+ = \sin \theta \cos \phi
+$$
+
+\noindent\\
+We have obtained a formula for \( r_1 \):
+$$
+ r_1 = \sqrt{r^2 + b^2 - 2 r b \sin \theta \cos \phi}
+$$
+\noindent\\
+Simplifying further, we get:
+$$
+ r_1^2 = r^2 \left( 1 + \frac{b^2}{r^2} - 2\, 
+ \frac{b}{r} \sin \theta \cos \phi \right)
+$$
+
+\noindent\\
+Using the same assumption as before, that the loop is 
+very small with respect to \( r \) (i.e., \( b \ll r \) 
+and therefore \( b^2 \ll r^2 \)), we can write:
+$$
+ r_1 \approx r \left( 1 - 2 \, \frac{b}{r} \, 
+ \sin \theta \cos \phi \right)^{1/2}
+$$
+
+\noindent\\
+Then we compute the inverse \( \frac{1}{r_1} \) and 
+use the Taylor approximation to the first derivative, 
+considering \( x = 2 \, \frac{b }{r} \, \sin \theta 
+\cos \phi \), which tends to zero, we obtain:
+\begin{equation}
+ \frac{1}{r_1} \approx \frac{1}{r} 
+ \left( 1 + \frac{b}{r} \sin \theta \cos \phi \right)
+    \label{eq:r_1}
+\end{equation}
+
+\noindent\\
+Now, substituting \ref{eq:r_1} in Eq.\ref{eq:A_final}, we 
+can calculate the integral for \( \mathbf{A} \) over 
+the entire loop:
+$$
+ \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b}{4 \pi} 
+    \int_{0}^{2\pi} \left( 1 + \frac{b}{r} \sin \theta 
+ \cos \phi \right) \cos \phi \, d\phi
+$$
+
+\noindent\\
+Since \( b \), \( r \), and $\theta$ do not depend on 
+$\phi$, the first integral is zero, and the second one 
+gives $\pi$:
+\begin{enumerate}[label=(\arabic*)]
+    \item 
+    \parbox{\textwidth}{
+    \[
+        \int_0^{2\pi} \cos \phi \, d\phi = \sin \phi \Big|_0^{2\pi} = 0
+    \]
+ }
+
+    \item 
+    \parbox{\textwidth}{
+    \[
+        \int_{0}^{2\pi} \cos^2 \phi \, d\phi = \int_{0}^{2\pi} 
+ \frac{1 + \cos(2\phi)}{2} \, d\phi = \frac{1}{2} \cdot 2\pi 
+ + \frac{1}{2} \cdot 0 = \pi
+    \]
+ }
 \end{enumerate}
 
-\noindent
-\textbf{Assumption}
-\\
-We assume that the receiver frame $F_r$, relative to the ARTVA
-instrument coincides with the fixed right-hand body frame $F_b$, for sake of semplicity
-as in \cite{similar-main}.
+\noindent\\
+Therefore, we obtain:
+\begin{equation}
+ \mathbf{A} = \mathbf{e_\phi} \frac{\mu I b^2}{4 \, r^2} 
+ \sin \theta
+    \label{eq:A_spher}
+\end{equation}
 
-The position of $O_r$ relative to $O_t$ is indicated by the vector $\mathbf{p}_{tr} \in \mathbb{R}^3$, with $\mathbf{p}_{tr} = \mathbf{p}_r - \mathbf{p}_t$, 
-while the positions of $O_r$ and $O_t$ relative to $O_g$ are indicated, respectively, by the vectors $\mathbf{p}_r \in \mathbb{R}^3$ and $\mathbf{p}_t \in \mathbb{R}^3$.
-We use the apex $g$, $r$ or $t$ on the left of the vector to indicate in which frame the vector is expressed , e.g. ${}^t p$. 
-If it is not specified, we assume the global (inertial) frame.
-We denote the \textit{special orthogonal group} of order three as \( \textit{SO}(3) \), 
-which is the set of all \( 3 \times 3 \) orthogonal matrices with determinant equal to one:
+\subsubsection{Magnetic Field Intensity H}
+Finally, we can now obtain an expression in spherical 
+coordinates of the magnetic field intensity 
+$\mathbf{H}$, by first finding $\mathbf{B}$ using 
+\ref{curlA} and then inverting \ref{eq:BH}.
+
+\noindent\\
+We compute the curl of $\mathbf{A}$ in spherical 
+coordinates \eqref{curl_spher}:
 \[
-\textit{SO}(3) = \{ \mathbf{R} \in \mathbb{R}^{3 \times 3} \mid \mathbf{R}^\top \mathbf{R} = \mathbf{I}, \, \det(\mathbf{R}) = 1 \}
+ \mathbf{B} = \nabla \times \mathbf{A} = \frac{1}{r^2 \sin \theta} 
+    \begin{vmatrix}
+ \mathbf{e_r} & \mathbf{e_\theta} r & \mathbf{e_\phi} r \sin \theta \\
+ \frac{\partial}{\partial r} & \frac{\partial}{\partial \theta} & 
+ \frac{\partial}{\partial \phi} \\
+        0 & 0 & r \sin \theta A_\phi
+    \end{vmatrix} =
 \]
-Therefore, we indicate with \( \mathbf{R}^g_t \in \textit{SO}(3) \) the rotation matrix of frame $F_t$ with respect to frame $F_g$,
-it rotates frame \( g \) into frame \( t \) and transforms vectors described in $t$ to $g$, as in \cite{book-robotics}.
-\begin{comment}
-    The matrix $R_t^i$ is the matrix which lets us express the vector in frame $i$ using the coordinates of the vector in frame $t$.Since we are expressing in the columns the coordinates of the axis of $t$ w.r.t using the axis of $i$.
-    Then if we have the coordinates of point $P$ with respect to frame i $\mathbf{P}$ 
-    (and if we know the rotation that goes from frame $i$ to frame $t$ (which also means we know the orientation and coordinates of the axis of frame $t$ with respect to those of frame $i$ $(R_t^i$ notation of Soper/this Chapman book), 
-    we can find the coordinates at point $P$ w.r.t frame i which is $\mathbf{P}$.
-    Also consider that from frame $i$ after a rotation $R_t^i$ we obtain the same orientation of frame $t$ which is just translated by the $\mathbf{P}_R$ vector.
-    v1 is  coordinates of the point before the translation but after the rotation, the coordinate of the point wrt the inertial frame  i are v1^i = R p^{i2}
-\end{comment}
-
-\noindent
-As mentioned in the Introduction \ref{intro}, the ARTVA instrument can be equipped with three antennas aligned along 
-the receiver frame axes \( x_r \), \( y_r \), and \( z_r \), corresponding to the longitudinal, 
-lateral, and vertical directions of the sensor case, respectively. 
-In both the single victim and multiple victims cases, we assume 
-that the ARTVA receiver position \( \mathbf{p}_r \) and orientation \( \mathbf{R}_r \) in 
-the inertial frame are known, as in \cite{main}. 
-
-The electromagnetic field measured by the receiver, defined as  \( {}^r \mathbf{H} \), 
-is given by the projection of vector field \( {}^t\mathbf{H} \) onto the \( F_r \) frame, 
-corrupted by some sensor noise:
-\begin{equation}
-    {}^r\mathbf{H} =  \mathbf{R}^r_t \, {}^t\mathbf{H} + {}^r\mathbf{W}(t)
-    \label{eq:H_rotated_noise}
-\end{equation}
-where \( {}^r\mathbf{W}(t) : \mathbb{R} \rightarrow \mathbb{R}^3 \) represents the 
-EMI\footnote{EMI stands for electromagnetic interference} 
-expressed in the receiver frame. 
-Note that the noise is bounded and it is modeled as white noise 
-${}^r\mathbf{W}(t) \sim \mathcal{N}(0, \sigma^2 \mathbf{I})$.
-
-\subsection{Magnitude of Magnetic Field Intensity H}
-We have found an expression of $\mathbf{H}$ in spherical coordinates, \ref{eq:H_spheric}, whose magnitude is found as:
-\begin{equation}
-    \left| \mathbf{H} \right| = \frac{I b^2}{4 \, r^3} \sqrt{ 4 \cos^2 \theta + \sin^2 \theta} = \frac{I b^2}{4 \, r^3} \sqrt{ 3 \cos^2 \theta + 1}
-    \label{eq:H_mag_spher}
-\end{equation}
-
-\subsubsection{Approximation}
-We use the same approximation in \cite{main} in order to remove the non-linearity given by the square root term $\sqrt{ 3 \cos^2 \theta + 1}$. Therefore we approximate:
 \[
-\frac{1}{\sqrt[3]{ 3 \cos^2 \theta + 1}} \approx \frac{1}{a^2 }\cos^2 \theta + \frac{1}{b^2} \sin^2 \theta
+ = \frac{1}{r^2 \sin \theta} \left( \mathbf{e_r} 
+ \frac{\partial}{\partial \theta} (r \sin \theta A_\phi) 
+ - \mathbf{e_\theta} \frac{\partial}{\partial r} 
+ (r \sin \theta A_\phi) \right)
 \]
-of which the polar plot is shown in Figure \ref{fig:polarplot} when $a$ and $b$ have values 1.291 and 1.028, 
-respectively, which minimize the relative mean squared error = 0.123\%.
+where $A_\phi$ is the magnitude of the vector field 
+found in Eq.\ref{eq:A_spher}, while $A_r$ and $A_\theta$ 
+are zero since the potential has only the 
+$\mathbf{e_\phi}$ direction.
 
-% with the relative error this are instead the best values
-% Best a: 1.284
-% Best b: 1.034
-
-Thus, the square root term becomes:
-\begin{equation}
-    \sqrt{ 3 \cos^2 \theta + 1} \approx \frac{1}{\left(\frac{1}{a^2} \cos^2 \theta + \frac{1}{b^2} \sin^2 \theta\right)^{3/2}}
-    \label{eq:approx}
-\end{equation}
-
-Using the approximation \eqref{eq:approx} in \eqref{eq:H_mag_spher}:
-\begin{equation}
-    \left| \mathbf{H} \right| = \frac{I b^2}{4 \, r^3} \left(\frac{1}{a^2} \cos^2 \theta + \frac{1}{b^2} \sin^2 \theta\right)^{2/3}
-    \label{eq:H_mag_approx}
-\end{equation}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.5\textwidth]{images/polar_plot.png}
-\caption{Polar plot of the actual function $\sqrt{ 3 \cos^2 \theta + 1} $ in blue 
-and the approximated one $\frac{1}{a^2 }\cos^2 \theta + \frac{1}{b^2} \sin^2 \theta$ in orange.}
-\label{fig:polarplot}
-\end{figure}
-
-Now we can express the magnitude using the Cartesian coordinates relative to the frame of the transmitter ARTVA $F_t$. 
-If we consider the point ${}^t \mathbf{p}_{tr}$\[
-    {}^t \mathbf{p}_{tr} = \begin{pmatrix}
-    x \\
-    y \\
-    z
-\end{pmatrix}
-\] having these coordinates $(x,y,z)$ in frame $t$, then remembering $r$ from \ref{Conversion from Cartesian to Spherical Coordinates} and $\cos\theta$ from \ref{Conversion from Spherical to Cartesian Coordinates}:
-\[
-\begin{cases}
-r^2 = x^2 + y^2 + z^2 \\
-\cos\theta = \frac{x}{r}
-\end{cases}
-\]
-
-Substituting the expressions for \(r\) and \(\cos\theta\) in \ref{eq:H_mag_approx}:
-\[
-\left| \mathbf{H} \right| = \frac{I b^2}{4} \frac{1}{(x^2 + y^2 + z^2)^{3}} \left(\frac{1}{a^2} \frac{x^2}{x^2 + y^2 + z^2} + \frac{1}{b^2} \frac{y^2 + z^2}{x^2 + y^2 + z^2}\right)^{2/3}
-\]
-
-After simplifications and further calculations, we obtain:
-\begin{equation}
-    \left| \mathbf{H} \right| = \frac{m}{4 \pi} \left(\frac{(ab)^2}{b^2 x^2 + a^2 (y^2 + z^2)}\right)^{3/2}
-    \label{eq:H_mag_cart}
-\end{equation}
-where we call $I \, \pi \, b^2$ the magnetic moment magnitude $m$, as seen in \ref{eq:magnetic_moment}.
-Then, we can define $\eta$ as \cite{main}:
-\[ \eta = \left( \frac{m}{4 \pi \left| \mathbf{H} \right|} \right)^{2/3} \cdot \, (ab)^2 = \]
-by substituting \ref{eq:H_mag_cart}:
+\noindent\\
+Substituting \ref{eq:A_spher}:
 \[
 \begin{aligned}
-&= \left( \frac{m}{4 \pi \frac{m}{4 \pi} \left(\frac{(ab)^2}{b^2 x^2 + a^2 (y^2 + z^2)}\right)^{3/2}} \right)^{2/3} \cdot (ab)^2 = 
-\\
-&= \left( \left(\frac{b^2 x^2 + a^2 (y^2 + z^2)}{(ab)^2}\right)^{3/2}\right)^{2/3} \cdot (ab)^2
+ \mathbf{B}&= \frac{1}{r^2 \sin \theta} 
+ \frac{\mu b^2 I}{4 \pi} \left(\mathbf{e_r} 
+ \frac{2}{r} \cos \theta \sin \theta + 
+ \mathbf{e_\theta} r \sin^2 \theta \, r^{-2}\right) =
+    \\
+     &= \frac{\mu I b^2 }{4 \, r^3} \left( 
+ \mathbf{e_r} 2 \cos \theta + \mathbf{e_\theta} 
+ \sin \theta \right)
 \end{aligned}
 \]
 
-So:
+\noindent\\
+Then, by inverting Eq.\ref{eq:BH}, we obtain the 
+final expression for $\mathbf{H}$:
 \begin{equation}
-    \eta = b^2 x^2 + a^2 (y^2 + z^2)
-    \label{eq:eta}
+ \mathbf{H} = \frac{ I b^2}{4 \, r^3} \left( 
+ \mathbf{e_r} 2 \cos \theta + \mathbf{e_\theta} 
+ \sin \theta \right)
+    \label{eq:H_spheric}
 \end{equation}
-
-\subsection{Finding the ARTVA position}
-In order to find the victim's position $\mathbf{p}_t$ with respect to the global frame $F_g$, we need to use homogeneous transformations \cite{book-robotics}. 
-Also from Figure \ref{fig:frames-1victim}, we can express the position of the receiver $\mathbf{p}_r$ in the inertial (global) frame as the sum of the other two vectors:
+which can also be expressed using the Cartesian unit 
+vectors \((\mathbf{e}_x, \mathbf{e}_y, \mathbf{e}_z)\) 
+by substituting \(\mathbf{e}_r\) with \ref{e_r} and 
+\(\mathbf{e}_\theta\) with \ref{e_theta}:
 \[
-\begin{aligned}
-{}^g \mathbf{p}_r &= {}^g \mathbf{p}_t + {}^t \mathbf{p}_{tr} \\
-{}^t \mathbf{p}_{tr} &= \mathbf{R}_g^t \,\, {}^g \mathbf{p}_{tr}
-\end{aligned}
+ \mathbf{H} = \frac{I b^2}{4 \pi \, r^3} \left[ 
+ (2\cos^2\theta - \sin^2\theta) \mathbf{e}_x 
+ + 3\cos\theta \sin\theta \cos\phi \, \mathbf{e}_y 
+ + 3\cos\theta \sin\theta \sin\phi \, \mathbf{e}_z \right]
 \]
-where $\mathbf{R}_g^t$ is the rotation matrix that rotates frame $t$ to $g$.
 
-From which we can find $\mathbf{p}_t$ by multiplying by ${\mathbf{R}_g^t}^\top$ since ${\mathbf{R}_g^t}$ is orthogonal (${\mathbf{R}_g^t}^\top = {\mathbf{R}_g^t}^{-1}$):
+\noindent\\
+or in vector form:
+\[
+ \mathbf{H} = \frac{I b^2}{4 \, r^3} 
+    \begin{bmatrix}
+        2\cos^2\theta - \sin^2\theta \\
+        3\cos\theta \sin\theta \cos\phi \\
+        3\cos\theta \sin\theta \sin\phi
+    \end{bmatrix}
+\]
 
+\noindent\\
+We can finally find the expression for $\mathbf{H}$ 
+using only Cartesian coordinates by inverting the 
+equations in Section \ref{Conversion from Spherical to 
+Cartesian Coordinates}:
 \begin{equation}
-    {}^t \mathbf{p}_{tr} = {\mathbf{R}_g^t}^\top (\mathbf{p}_r - \mathbf{p}_t)
-    \label{eq:pt}
+ \mathbf{H} = \frac{I b^2}{4 \, r^5} 
+    \begin{bmatrix}
+        2x^2 - y^2 - z^2 \\
+        3xy \\
+        3xz
+    \end{bmatrix}
+\label{eq:final_H}
 \end{equation}
-
-In addition, remembering how we defined the coordinates of ${}^t \mathbf{p}_{tr}$, then from linear algebra:
-\[
-\begin{aligned}
-x &= \mathbf{e}_x^\top \, {}^t \mathbf{p}_{tr} \\
-y &= \mathbf{e}_y^\top \, {}^t \mathbf{p}_{tr} \\
-x  &= \mathbf{e}_z^\top  \, {}^t \mathbf{p}_{tr}
-\end{aligned}
-\]
-also,
-\[
-x^2 = x \cdot x = \left( \mathbf{e}_x^\top \, {}^t \mathbf{p}_{tr} \right)^\top \cdot \, \left( \mathbf{e}_x^\top \, {}^t \mathbf{p}_{tr} \right)
-\]
-and the same is valid for the other two coordinates, we will omit the calculations for the other two from now on. 
-We can then substitute the expression we found for ${}^t \mathbf{p}_{tr}$ \ref{eq:pt} and apply linear algebra properties of the transpose:
-$$(\mathbf{A}\mathbf{B}\mathbf{C})^\top = \mathbf{C}^\top \mathbf{B}^\top \mathbf{A}^\top$$ to calculate the transpose of $\mathbf{e}_x^\top {\mathbf{R}_g^t}^\top (\mathbf{p}_r - \mathbf{p}_t)$:
-
-\[
-(\mathbf{e}_x^\top {\mathbf{R}_g^t}^\top (\mathbf{p}_r - \mathbf{p}_t))^\top = (\mathbf{p}_r - \mathbf{p}_t)^\top {\mathbf{R}_g^t} \mathbf{e}_x
-\]
-The expression for $x^2$ then becomes:
-\begin{equation}
-    x^2 = \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top {\mathbf{R}_g^t} \mathbf{e}_x \mathbf{e}_x^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)
-    \label{eq:x2}
-\end{equation}
-
-Furthermore:
-\[
-\mathbf{e}_x \mathbf{e}_x^\top =\begin{pmatrix}
-1 \\
-0 \\
-0
-\end{pmatrix}
-\begin{pmatrix}
-1 & 0 & 0
-\end{pmatrix}
- = \text{diag}(1,0,0)
-\]
-and:
-\[
-\begin{aligned}
-    \mathbf{e}_y \mathbf{e}_y^\top &= \text{diag}(0,1,0) \\
-    \mathbf{e}_z \mathbf{e}_z^\top &= \text{diag}(0,0,1)
-\end{aligned}
-\]
-Lastly we substitute the result found in \ref{eq:x2} in the expression of $\eta$ \ref{eq:eta}:
-\[
-\begin{aligned}
-    \eta &=  \ b^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \mathbf{e}_x \mathbf{e}_x^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) + \\
-    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \mathbf{e}_y \mathbf{e}_y^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) +\\
-    &+ a^2 \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \mathbf{e}_z \mathbf{e}_z^\top {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right) =
-\end{aligned}
-\]
-collect common terms,
-\[
-= \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \left( b^2 \mathbf{e}_x \mathbf{e}_x^\top + a^2 \mathbf{e}_y \mathbf{e}_y^\top + a^2 \mathbf{e}_z \mathbf{e}_z^\top \right) {R_t^g}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)=
-\]
-\begin{equation}
-    = \left(\mathbf{p}_r - \mathbf{p}_t\right)^\top \mathbf{R}_g^t \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_g^t}^\top \left(\mathbf{p}_r - \mathbf{p}_t\right)
-    \label{eq:eta2}
-\end{equation}
-
-We call the \( \mathbf{R}_g^t \, \text{diag}(b^2, a^2, a^2) {\mathbf{R}_g^t}^\top \) matrix $\mathbf{M}$ and the diagonal matrix $\text{diag}(b^2, a^2, a^2)$ $D$.
-
-\subsubsection{Symmetry of \( \mathbf{M} \)}
-\textbf{Definition} \\
-A matrix \( \mathbf{M} \in \mathbb{R}^{n \times n} \) is symmetric if and only if \( \mathbf{M} = \mathbf{M}^\top \).
-\\
-\textbf{Proof} \\
-We compute \( \mathbf{M}^\top \):
-\[
-    \mathbf{M}^\top = \left( \mathbf{R}_g^t \mathbf{D} {\mathbf{R}_g^t}^\top \right)^\top = \left( {\mathbf{R}_g^t}^\top \right)^\top \mathbf{D}^\top {\mathbf{R}_g^t}^\top = \mathbf{R}_g^t \mathbf{D}^\top {\mathbf{R}_g^t}^\top
-\]
-Since \( \mathbf{D} \) is a diagonal matrix, it is equal to its transpose $\mathbf{D}^\top = \mathbf{D}$ :
-$$
-\mathbf{M}^\top =  \mathbf{R}_g^t D {\mathbf{R}_g^t}^\top = \mathbf{M}
-$$
-
-\subsubsection{Final expression for $\eta$}
-By applying the distributive property to \ref{eq:eta2} and since M is symmetric:
-\begin{equation}
-    \eta = \mathbf{p}_r^\top \mathbf{M} \mathbf{p}_r - \mathbf{p}_r^\top \mathbf{M} \mathbf{p}_t - \mathbf{p}_t^\top \mathbf{M} \mathbf{p}_r+ \mathbf{p}_t^\top \mathbf{M} \mathbf{p}_t
-    \label{eq:eta3}
-\end{equation}
-The vector $\mathbf{\hat{p}}_t$ gives an estimate of the true position $\mathbf{p}_t$ :
-\[
-\mathbf{\hat{p}}_t = \mathbf{M} \mathbf{p}_t
-\]
-and since $M$ is symmetric:
-\[
-\mathbf{\hat{p}}_t^\top =  \mathbf{p}_t^\top \mathbf{M}^\top = \mathbf{p}_t^\top \mathbf{M}
-\]
-We substitute these expressions in \ref{eq:eta3} and use the definition of the scalar product:
-\[
-\eta = \mathbf{p}_r^\top \mathbf{M} \mathbf{p}_r - \mathbf{p}_r^\top \mathbf{\hat{p}}_t - \mathbf{\hat{p}}_t^\top \mathbf{p}_r+ \mathbf{p}_t^\top \mathbf{M} \mathbf{p}_r = \mathbf{p}_r^\top \mathbf{M} \mathbf{p}_r - 2 \mathbf{p}_r^\top \mathbf{\hat{p}}_t + \mathbf{p}_t^\top \mathbf{M} \mathbf{p}_t
-\]
-If we define the coordinates of $\mathbf{p}_r$ :
-\[
-\mathbf{p}_r = \begin{pmatrix}
-    x_r \\
-    y_r \\
-    z_r
-\end{pmatrix}
-\]
-and
-\[
-    \mathbf{M} = \begin{pmatrix}
-    m_{11} & m_{12} & m_{13} \\
-    m_{12} & m_{22} & m_{23} \\
-    m_{13} & m_{23} & m_{33} \\
-\end{pmatrix}
-\]
-we can compute $\mathbf{p}_r^\top \mathbf{M} \mathbf{p}_r$:
-\[
-\mathbf{p}_r^\top \mathbf{M} \mathbf{p}_r = 
-m_{11} \, x_r^2 \; + \; 2 \, m_{12} \, x_r \, y_r \; + \; 2 \, m_{13} \, z_r \, x_r \; + \;
-m_{22} \, y_r^2 \; + \; 2 \, m_{23} \, y_r \, z_r \; + \; m_{33} \, z_r^2
-\]
-Then, we obtain a final expression for $\eta$ as in \cite{main}:
-\begin{equation}
-\begin{aligned}
-\eta = & \ m_{11} \, x_r^2 + 2 \, m_{12} \, x_r \, y_r + 2 \, m_{13} \, z_r \, x_r \\
-       & \ + m_{22} \, y_r^2 + 2 \, m_{23} \, y_r \, z_r + m_{33} \, z_r^2 \\
-       & \ - 2 \, x_r \, x_t - 2 \, y_r \, y_t - 2 \, z_r \, z_t \\
-       & \ + \mathbf{p}_t^\top \mathbf{M} \mathbf{p}_t
-\end{aligned}
-\label{eq:eta_final}
-\end{equation}
-
-\noindent
-We can rewrite the expression of eta in vector form by defining a vector $\mathbf{\Phi}$,
-which is a funcion of known variables:
-\begin{equation}
-\renewcommand{\arraystretch}{1}
-\mathbf{\Phi}(\mathbf{p}_{r}) = 
-\begin{pmatrix}
-x_r^2 \\
-2x_r y_r \\
-2x_r z_r \\
-y_r^2 \\
-2y_r z_r \\
-z_r^2 \\
--2x_r \\
--2y_r \\
--2z_r \\
-1
-\end{pmatrix}
-\label{eq:Phi_vector}
-\end{equation}
-and a vector of unknown constants $\mathbf{x}$:
-\begin{equation}
-\renewcommand{\arraystretch}{1}
-\mathbf{x}(\mathbf{p}_t) = 
-\begin{pmatrix}
-m_{11} \\
-m_{12} \\
-m_{13} \\
-m_{22} \\
-m_{23} \\
-m_{33} \\
-\mathbf{p}_t \\
-\rho
-\end{pmatrix}
-\label{eq:x_vector}
-\end{equation}  
-where \( \rho := \mathbf{p}_t^\top \mathbf{M} \mathbf{p}_t \).
-
-\noindent
-Then $\eta$ exspressed in a compact vector form is:
-\begin{equation}
-    \eta = \mathbf{\Phi}^\top\mkern-2mu(\mathbf{p}_{r}) \, \mathbf{x}(\mathbf{p}_t)
-    \label{eq:eta_final_final}
-\end{equation}
-
-\noindent
-Afterward, we leverage the $\eta$ signal (function of the ARTVA output
-of Eq. \ref{eq:H_rotated_noise}) to estimate the
-the transmitter’s position \( \mathbf{p}_t \), which corresponds to the victim's location. 
-We omit the estimation of the transmitter orientation \( \mathbf{R}_g^t \),
-since it is not critical in either the single-victim or multiple-victim cases.
-
-\subsubsection{Final Model}
-\noindent
-In the final model of the single-victim case, we consider one victim to 
-which it is attached an ARTVA transmitter and \( m \in \mathbb{N} \) receivers, 
-each rigidly attached to each drone. 
-We define the position of the $j$-th drone at sample time \( \tau_k \) with \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) 
-where \( k, i \in \mathbb{N} \) and \( j = 1, \ldots, m \).
-
-\noindent
-As described in \cite{similar-main} and as seen in the previous sections, 
-we model the intensity of the ARTVA signal using $\eta$ in Eq. \ref{eq:eta_final_final} 
-as an output function of the form \( y : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \):
-\[
-y(\mathbf{p}_{r_j}, \tau_k) = \mathbf{\Phi}^\top\mkern-2mu(\mathbf{p}_{r_j}) \, \mathbf{x}(\mathbf{p}_t) + 
-w_t(\mathbf{p}_{r_j}, \mathbf{p}_t, \tau_k),
-\]
-where $\mathbf{\Phi}(\mathbf{p}_{r_j})$ is the vector of known variables
-relative to each $k$-th receiver and 
-and \( w : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \) 
-represents the measurement noise and model 
-mismatch introduced by the approximation.
-Note that $w$ is realted to the EMI defined in \ref{eq:H_rotated_noise}, as demonstrated in \cite{similar-main}.
-
-\subsection{Recursive Least Square}
-%VA SPIEGATO MEGLIO COME SI FA RLS DECENTRALIZZATO? VA CITATO L RLS NON SONO RIUSCITO A TROVARLO
-We propose a decentralized estimation algorithm to address our task of localizing avalanche 
-victims. A decentralized approach offers several advantages over a centralized one, particularly 
-in scenarios characterized by limited computational resources and large-scale deployments. 
-By distributing computation across multiple agents (the UAVs), this method reduces computational 
-overload, enhancing scalability as the number of agents increases.
-
-Furthermore, decentralization provides improved robustness to "communication noise" by removing 
-dependence on a central computation unit. This autonomy enables the system to adapt to varying 
-communication conditions, such as intermittent information availability or delays, thus supporting 
-continued operation in challenging environments such asmountain regions and adverse weather 
-conditions, like in our scenario. While decentralized methods may exhibit slower convergence and slightly higher estimation 
-errors due to partial information exchange, they remain effective and efficient in situations where 
-centralized coordination is impractical or demands excessive resources.
-
-\noindent
-\\
-To estimate the constant vector \( \mathbf{p}_t \), we assume the position of each 
-UAV, \( \mathbf{p}_{r_j}(\tau_k) \), as known. 
-Each UAV in the network collects data independently and transmits information only 
-to its neighboring agents. Each UAV then employs its own instance of the estimation 
-algorithm, populating the necessary matrices and vectors in the equations to 
-generate an independent estimate of the victim’s position:
-\[
-\mathbf{Y}(\tau_k) = \mathbf{H}(\tau_k) \mathbf{x}(\mathbf{p}_t) + \mathbf{W}(\tau_k)
-\]
-where
-\[
-\mathbf{Y}(\tau_k) = \mathrm{col}(y(\mathbf{p}_{r_1}(\tau_k), \tau_k), \ldots, y(\mathbf{p}_{r_m}(\tau_k), \tau_k)),
-\]
-\[
-\mathbf{H}(\tau_k) = \mathrm{col}(\mathbf{\Phi}^\top(\mathbf{p}_{r_1}(\tau_k)), \ldots, \mathbf{\Phi}^\top(\mathbf{p}_{r_m}(\tau_k))),
-\]
-\[
-\mathbf{W}(\tau_k) = \mathrm{col}(w(\mathbf{p}_{r_1}(\tau_k),\mathbf{p}_t, \tau_k), \ldots, v(\mathbf{p}_{r_m}(\tau_k), \mathbf{p}_t, \tau_k)).
-\]
-The model above enables estimation of \( \mathbf{x} \) using the affine term 
-\( \mathbf{H}(\tau_k) \) through the RLS \footnote{RLS stands for Recursive Least Squares} algorithm:
-\[
-\begin{cases}
-    \hat{\mathbf{x}}(\tau_{k+1}) = \hat{\mathbf{x}}(\tau_k) + \mathbf{S}^{-1}(\tau_k)\mathbf{H}(\tau_k) \left( \mathbf{Y}(\tau_k) - \mathbf{H}(\tau_k)^\top \hat{\mathbf{x}}(\tau_k) \right) \\
-    \mathbf{S}(\tau_{k+1}) = \beta \mathbf{S}(\tau_k) + \mathbf{H}(\tau_k)\mathbf{H}(\tau_k)^\top
-\end{cases}
-\]
-where \( \beta \in (0, 1) \) is a forgetting factor, and \( \mathbf{S}(\tau_0) = \mathbf{S}_0 \in \mathbb{R}^{3 \times 3} \). 
-
-\noindent
-The transmitter's position is estimated by
-\begin{equation}
-    \hat{\mathbf{p}}_t(\tau_k) = \mathbf{x}^{-1}(\hat{\mathbf{x}}(\tau_k))
-    \label{eq:mapping}
-\end{equation}
-where \( \mathbf{x}^{-1} : \mathbb{R}^{10} \rightarrow \mathbb{R}^3 \) is well-defined as shown in \cite{similar-main}. 
-
-\noindent
-Note that, in both the RLS method applied for the single-victim case and in the multiple-victim algorithm, 
-we assume the use of a precise positioning system, such as an ideal GPS.
-
-\subsection{Average Consensus Filter}
-
-A PI-ACF\footnote{PI-ACF stands for Proportional Integral Average Consensus Filter} was employed to compute 
-a decentralized moving average of the UAVs' estimates. 
-The ACF dynamics equations are described below:
-\[
-\begin{cases}
-    \dot{z}^l = \gamma(\alpha^j - z^j) - K_P \sum_{l \in \mathcal{N}_j} (z^j - z^l) + K_I \sum_{l \in \mathcal{N}_j} (\omega^j - \omega^j) \\
-    \dot{\omega}^j = - K_I \sum_{l \in \mathcal{N}_j} (z^j - z^l)
-\end{cases}
-\]
-where:
-\begin{itemize}
-    \item \( z^j \): moving average computed by the \( k \)-th UAV;
-    \item \( \omega^j \): integral variable, representing cumulative error 
-    with neighbors;
-    \item \( \alpha^j \): time-varying set-point, mean of neighboring UAVs' estimates;
-    \item \( \mathcal{N}_j \): set of neighbors of the \( k \)-th UAV;
-    \item \( \gamma \): hyperparameter adjusting convergence rate;
-    \item \( K_P \) and \( K_I \): proportional and integral control gains.
-\end{itemize}
-This consensus mechanism enables UAVs to converge to a shared moving average, 
-as each minimizes differences with its neighbors. The tracking term \( \gamma(\alpha^j - z^j) \) 
-guides the \( j \)-th UAV towards its set-point, while the proportional control term 
-\( -K_P \sum_{j \in \mathcal{N}_j} (z^j - z^l) \) ensures alignment with its neighbors. 
-The integral control term \( K_I \sum_{j \in \mathcal{N}_j} (\omega^j - \omega^l) \) 
-adds cumulative adjustment based on historical differences, addressing steady-state errors.
-
-This algorithm supports convergence of the UAVs to a common moving average, even with 
-limited communication. It allows the fleet to track changing set-points while 
-reducing differences with neighbors in order to reach consensus.
+This expression has been derived by applying the Pythagorean identity.
 
 \subsection{Normalized Source Strength}
-In both the single-victim and multiple-victims cases, we can find the the NSS not only numerically but also
-analytically, in this section we will detail how we compute the NSS for a single source with both methods.
+The magnetic field intensity $\mathbf{H}$ and the magnetic flux density $\mathbf{B}$ are vector fields 
+sensible to the orientation of the source coordinate system. 
+The expression for $\mathbf{H}$, as given in Eq.\ref{eq:final_H}, is expressed with respect to a 
+coordinate system centered at the center of the current loop, as we have seen in the previous section.
+However, we need to introduce a quantity that is invariant with
+respect to the orientation of the electromagnetic target.
 
-\subsubsection{Analitycal method}
-Since we have an expression of the magnetic field intensity ${}^t \mathbf{H}$
-in Cartesian coordinates (in the transmitter reference frame) \ref{eq:final_H}, we can compute the derivatives and therefore the
-gradient tensor ${}^t \mathbf{G}$ analytically as:
+\noindent\\
+The magnetic gradient tensor is simply the transposed Jacobian of the magnetic flux density $\mathbf{B}$, and it is defined
+as follows:
 \begin{equation}
-{}^t \mathbf{G} = \frac{1}{r^{5/2}}
-\scalebox{0.96}{$
+\begin{aligned}
+\mathbf{G} &= 
 \begin{bmatrix}
-3 x (-2 x^2 + 3y^2 + 3z^2) & 3 y (-4 x^2 + y^2 + z^2) & 3 z (-4x^2 + y^2 + z^2) \\
-3 y (-4 x^2 + y^2 + z^2) & 3 x (x^2 - 4 y^2 + z^2) & -15 x y z \\
-3 z (-4 x^2 + y^2 + z^2) & -15 x y z & 3 x (x^2 + y^2 - 4 z^2)
+ \frac{\partial B_x}{\partial x} & \frac{\partial B_y}{\partial x} & \frac{\partial B_z}{\partial x}\\
+ \frac{\partial B_x}{\partial y} & \frac{\partial B_y}{\partial y} & \frac{\partial B_z}{\partial y}\\
+ \frac{\partial B_x}{\partial z} & \frac{\partial B_y}{\partial z} & \frac{\partial B_z}{\partial z}\\
 \end{bmatrix}
-$}
-\label{eq:G_analit}
-\end{equation}
-where $r$ is of course the distance, $r = \sqrt{x^2 +y^2 +z^2}$.
-
-Note once again the symmetry and traceless property of the gradient tensor 
-$\mathbf{G}$ is evident, when we compute it explicitly.
-Also note that for simplicity we computed the gradient using $\mathbf{H}$ and not $\mathbf{B}$,
-since they vary only by the constant permeability $\mu$. 
-We also omitted the constants $I$, $b$, since they don't depend on the coordinates $(x, y, z)$
-neither, and therefore do not influence the results.
-
-In Figure \ref{fig:gradients_single_anal}, we show the gradients for a single
-source centered at the origin of the space, when the global frame 
-$F_g$ coincides with the trasmitter (source) frame $F_t$ and also when there 
-is no rotation between these frames and the receiver frame $F_r$ of the drones. 
-In this way, we have that the magnetic field intensity ${}^t \mathbf{H} = {}^g \mathbf{H}$
-can be computed using the inertial coordinates, and also the
-NSS at any point in space coincides with the signal received by 
-any drone located at that point.
-The gradients are calculated on a grid of equally spaced points in the range $[-5, 5]$, when we fix the $z$ coordinates
-at 3 m, considering a reasonable flying height for the drones.
-We need to fix one coordinate in order to be able to plot 
-a function of 3 variables, but also because we assume the drones
-flying always at a fixed height, as it will be explained more in 
-depth lately.   
-\begin{figure}[h]
-\centering
-\hspace*{-0.2\textwidth} 
-\includegraphics[width=1.4\textwidth]{images/gradients_single_anal.jpg}
-\caption{Plot of the gradients \( \frac{\partial H_i}{\partial q_j} \), where \( i, j \in \{x, y, z\} \)
-, $H_i$ are the scalar functions relative to the $i$-th component of the magnetic field 
-intensity $\mathbf{H}$ and $q_j$ are the Cartesian coordinates.
-The gradients are the components $H_{ij}$ of the gradient tensor \( \mathbf{G} \) when computed analytically as in Eq.~\ref{eq:G_analit}. 
-This example considers a single source located at the center \((0,0,0)\) of the space, with no rotations 
-between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
-\label{fig:gradients_single_anal}
-\end{figure}
-
-After having found the gradient tensor $\mathbf{G}$, we numerically
-compute its eigenvalues and we find the NSS using the definition \ref{eq:NSS}.
-In Figure \ref{fig:NSS_single_anal}, we plot the NSS distribution over the same grid,
-with the same $z$ value fixed.
-These values will be the signals received by the drones at their location
-in space in the multiple victims case, which will be explained more in depth in the following paragraph.
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{images/NSS_single_anal.jpg}
-\caption{Plot of the NSS values computed at each point on the grid, which
-represent the signal received by the drones, in the case of a single source located
-at the center $(0,0,0)$ of the space when there are no rotations between the coordinates
-frames $F_g$, $F_r$, $F_t$..}
-\label{fig:NSS_single_anal}
-\end{figure}
-
-Instead, let's consider the case when the source location is translated
-with respect to the global frame $F_g$ and the transmitter frame $F_t$ is rotated
-with respect to the same one by a rotation $\mathbf{R}_g^t$, like in the previous 
-section.
-Furthermore, we also consider the rotation matrix $\mathbf{R}^r_t$ of the transmitter frame $F_t$ 
-with respect to the receiver frame $F_r$.
-Then, we compute the coordinates of any point in space with respect to the
-transmitter frame as in \ref{eq:pt}.
-Using these coordinates we find the magnetic intensity vector ${}^t\mathbf{H}$,
-expressed in the trasmitter frame and compute the gradient tensor ${}^t \mathbf{G}$.
-The magnetic field read by the receiver, denoted by ${}^r\mathbf{H}$, is given by the projection
-of vector ${}^t\mathbf{H}$ onto the $F_r$ frame, as in Eq.\ref{eq:H_rotated_noise} but without considering
-the noise for the moment:
-\begin{equation}
-    {}^r\mathbf{H} = \mathbf{R}^r_t \, {}^t\mathbf{H}
-    \label{eq:H_receiver}
-\end{equation}
-Therefore, we apply Eq. \ref{eq:rotated_gradient_tensor} to find the gradient tensor
-in the receiver frame, which represents the signal obtained in a real world scenario:
-\begin{equation}
-    {}^r \mathbf{G} = \mathbf{R}^r_t \, {}^t\mathbf{G} \, {\mathbf{R}^r_t}^\top
-    \label{eq:G_rotated}
-\end{equation}
-In Figure \ref{fig:gradients_rotated_single_anal}, we see how the gradients plots
-vary with respect to the gradients in Figure \ref{fig:gradients_single_anal},
-since the rotations introduce naturally a modification in the elettromagnetic field.
-However, the rotated gradient tensor matrix ${}^r \mathbf{G}$ remains symmetric.
-In addition, in Figure \ref{fig:NSS_rotated_single_anal}, it is also evident how the
-NSS distribution remains invariant under all the different rotations, and it is 
-just affected by the translation in the sense that the peak now is located
-at the new location of the source. 
-% MATRICI USATE PER LA ROTAZIONE
-%R_array{1} = rotationMatrix(70, 0, 0);
-%R_drones{1} = rotationMatrix(170, 0, 0);
-\begin{figure}
-\centering
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_rotated_single_anal.jpg}
-\caption{Plot of the gradient tensor $\mathbf{G}$ elements
-when computed analytically after the position of the signle source is translated to $(2,2,0)$ and an 
-introduction of the different rotations, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_t^g$.}
-\label{fig:gradients_rotated_single_anal}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/NSS_rotated_single_anal.jpg}
-    \caption{Plot of the NSS computed analytically after the position of the signle source is translated to $(2,2,0)$ and 
-    different roations are introduced, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_t^g$.}
-    \label{fig:NSS_rotated_single_anal}
-\end{figure}
-
-\subsubsection{Central difference method}
-We also simulate and compare another method to find the gradient tensor matrix
-${}^r \mathbf{G}$, which comes closer to a real world scenario.
-We call this method numerical and it consists of obtaining the 
-signal measured by the instrument, which is the electromagnetic field intensity
-${}^r \mathbf{H}$, and then compute directly its relative gradient tensor using a 
-numerical approximation.
-We simulate and simplify the way the authors of \cite{NSS_single_localization} use 
-a cubic structure measurement array composed of eight
-TAMs\footnote{TAM stands for Tri-Axial Magnetometer} in order to obtain the magnetic
-field information and then compute the gradient tensor ${}^r \mathbf{G}$.
-
-\noindent
 \\
-In order to numerically compute the gradient of a 3D vector field $ \mathbf{H}( \mathbf{p}): \mathbb{R}^3 \to \mathbb{R}^3$,
-we apply the central difference method approximation.
-Note that we omit the superscript associated with the transmitter frame \( F_t \), 
-as we are referring to a general vector field in Cartesian space. In our scenario, however, 
-we have \( \mathbf{p} = {}^t \mathbf{p}_{tr} \), whose coordinates are \( (x, y, z) \).
-As seen before, the gradient matrix $ \mathbf{G}$ is a \(3 \times 3\) matrix
-and its $(i,j)$th entry is $G_{ij} = \partial H_i / \partial q_j$, therefore
-remembering the definition of gradient as column vector \ref{eq:nabla}, we can write the gradient tensor as:
-\begin{equation}
- \mathbf{G} =
+&=
 \begin{bmatrix}
-\frac{\partial \mathbf{H}}{\partial x} \\
-\frac{\partial \mathbf{H}}{\partial y} \\
-\frac{\partial \mathbf{H}}{\partial z}
+ B_{xx} & B_{yx} & B_{zx}\\
+ B_{xy} & B_{yy} & B_{zy}\\
+ B_{xz} & B_{yz} & B_{zz}\\
 \end{bmatrix}
-=
-\begin{bmatrix}
-    \nabla H_x &
-    \nabla H_y &
-    \nabla H_z
-\end{bmatrix}
+\end{aligned}
+\label{eq:Jacobian}
 \end{equation}
+It represents the spatial rate of change of the magnetic field vector $\mathbf{B}$
+along the three mutually orthogonal directions of the Cartesian coordinates.
 
-Let's consider a small perturbation $\delta$, which perturbs the magnetic field intensity $\mathbf{H}$ in every 
-coordinate direction, for all the components $H_i$ of the vector field. Then, the partial derivative of $\mathbf{H}$ with 
-respect to a coordinate \( q_j \) is given by:
+\noindent\\
+In most cases, rotational invariants,
+such as the Frobenius norm of $\mathbf{G}$ and any combination of its
+eigenvalues, are sensitive to the direction of the target magnetic
+moment vector $\mathbf{m}$ \cite{NSS_single_localization}. The magnetic moment represents the strength 
+and orientation of the magnetic field, and for a magnetic dipole of a current
+loop it is defined as follows, \cite{book-magnetism}:
 \begin{equation}
-\frac{\partial \mathbf{H}}{\partial q_j} (\mathbf{p}) \approx \frac{\mathbf{H}(\mathbf{p} + \delta \mathbf{e}_j) 
-- \mathbf{H}(\mathbf{p} - \delta \mathbf{e}_j)}{2\delta}
-\label{eq:G_num}
+ \mathbf{m} = I \, \mathbf{S}
 \end{equation}
+where $I$ is the current flowing in the loop and $\mathbf{S}$, is the normal to the area of the loop
+and it is not to be confused with $S$ in \ref{eq:dvolume}, which is the area
+of the section of the wire.
 
-where \( \mathbf{e}_j \) denotes the unit vector in the \( j \)-th direction. The gradient matrix, 
-\( \mathbf{G} \), is constructed by repeating this process for each coordinate direction.
-The \( j \)-th row of \( \mathbf{G} \) is:
+\noindent\\
+In our representation of the magnetic dipole, with the Cartesian axes
+defined in Figure \ref{fig:dipole}, the direction of the magnetic moment is the $x$-axis,
+and the magnitude is:
 \begin{equation}
-\mathbf{G}_j = \frac{\partial \mathbf{H}}{\partial q_j} (\mathbf{p}) = 
-\nabla^\top H_i (\mathbf{p})
-\label{eq:G_completa}
+ m = I \, \pi \, b^2
+    \label{eq:magnetic_moment}  
 \end{equation}
 
-\begin{figure}
-\centering
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_single_num.jpg}
-\caption{Plot of the gradient tensor \( \mathbf{G} \) elements
-when computed numerically as in \eqref{eq:G_num}, for a single source located
-at the center \( (0,0,0) \) of the space, with no rotations between the coordinate
-frames \( F_g \), \( F_r \), and \( F_t \).}
-\label{fig:gradients_single_num}
-\end{figure}
+\noindent\\
+Instead the NSS\footnote{NSS stands for Normalized Source Strength}, a tensor invariant calculated 
+from the eigenvalues of the magnetic gradient tensor $\mathbf{G}$, 
+does not depend on the magnetization direction and it 
+is completely isotropic around the magnetic dipole \cite{multiple_real_plots_invariants}.
+This follows from the magnetic gradient tensor $\mathbf{G}$ being symmetric and traceless,
+thanks to Maxwell's equations.
 
-In Figure \ref{fig:gradients_single_num}, we show the results obtained by computing the 
-gradient tensor \( \mathbf{G} \) numerically, compared to the analytical method, 
-for the case where there are no rotations between reference frames, and the source is located 
-at the origin. We computed the difference between the gradient tensor matrices 
-in the analytical and numerical cases, \( \Delta \mathbf{G} = \mathbf{G}_{\text{analytical}} - \mathbf{G}_{\text{numerical}} \), 
-and calculated the Frobenius norm  \ref{eq:frobenius} of the difference matrix at all points \( \mathbf{p} \) in space.
-The error was found to be on the order of \( 10^{-13} \), indicating a very accurate approximation.
-The Frobenius norm is given by the square root of the sum of the squared elements \( \delta H_{ij} \) 
-of the difference matrix \( \Delta \mathbf{G} \):
+\noindent\\
+In particular from the fourth Eq.\ref{eq:B}, 
+and from the definition of gradient \eqref{eq:gradient} we deduce the traceless property:
 \begin{equation}
-    \|\Delta \mathbf{G}\|_F = \sqrt{\sum_{i=1}^3 \sum_{j=1}^3 |\Delta H_{ij}|^2}
-    \label{eq:frobenius}
+    \nabla \cdot \mathbf{B} = 0
+    \Rightarrow
+ \frac{\partial B_x}{\partial x} +\frac{\partial B_y}{\partial y} + \frac{\partial B_z}{\partial z} = 0
+    \Rightarrow
+ B_{xx} + B_{yy} + B_{zz} = 0
 \end{equation}
-For conciseness, we omit the plot of the NSS since it remains the same, 
-as the gradients did not change.
-    
-\noindent
-\\
-Next, we need to verify that the gradient tensor matrix remains symmetric under 
-rototranslations of the coordinate frames and that the NSS value also remains invariant.
-In particular, we apply the following transformations to each point $\mathbf{p}$ in space:
-firstly we express $\mathbf{p}$ in the transmitter frame using \ref{eq:pt}, which we denoted as 
-${}^t \mathbf{p}_{tr}$.
-Then we apply rotation $\mathbf{R}^r_t$ to obtain the point expressed in the receiver coordinates:
+
+\noindent\\
+Instead, from the second Maxwell's equation \eqref{eq:curl_H}, in the case
+of the quasi-static field assumption we used before, and considering regions
+of space where there is an absence of electric currents (\(\mathbf{J} = 0\)),
+the curl of \(\mathbf{B}\) is zero (\(\nabla \times \mathbf{B} = 0\)), \cite{NSS_single_different_dimensions}.
+Then, from the definition of curl \eqref{eq:curl_calculation}, we deduce the symmetry property:
 \begin{equation}
-   {}^r \mathbf{p}_{tr}  = \mathbf{R}^r_t \, {}^t \mathbf{p}_{tr}
-   \label{eq:p__in_receiver}
+    \nabla \times \mathbf{B} = 0
+    \begin{aligned}[t]
+        &\Rightarrow \frac{\partial B_x}{\partial y} - \frac{\partial B_y}{\partial x} = 0, \quad 
+ \frac{\partial B_x}{\partial z} - \frac{\partial B_z}{\partial x} = 0, \quad 
+ \frac{\partial B_y}{\partial z} - \frac{\partial B_z}{\partial y} = 0 \\
+        &\Rightarrow B_{xy} = B_{yx}, \quad B_{xz} = B_{zx}, \quad B_{yz} = B_{zy}
+\end{aligned}
 \end{equation}
-Now, we perturb ${}^r \mathbf{p}_{tr}$ by $\delta$ positively and negatively, in the receiver frame:
-\[
-\begin{cases}
-    {}^r \mathbf{p}_{tr} + \delta \mathbf{e}_j \\
-    {}^r \mathbf{p}_{tr} - \delta \mathbf{e}_j
-\end{cases} 
-\quad \text{where } j \in \{ x_r, y_r, z_r \} \, \text{relative to the coordinate frame } F_r.
-\]
-We find the perturbed magnetic field intensity in the transmitter frame using Eq. \ref{eq:final_H}:
-${}^t \mathbf{H} ( {\mathbf{R}^r_t}^\top ({}^r \mathbf{p}_{tr} \pm \delta \mathbf{e}_j) )$.
-Therefore, we are now able to find the perturbed magnetic field intensity in the receiver frame
-${}^r \mathbf{H}$ and apply the central difference approximation 
-\ref{eq:G_num} to compute the gradient tensor in the receiver reference frame 
-${}^r \mathbf{G}$:
+
+\noindent\\
+The NSS is a combination of the eigenvalues of the tensor \( \mathbf{G} \).
+In order to find the eigenvectors of a matrix, we need to solve the equation:
 \begin{equation}
-    \frac{\partial \mathbf{H}}{\partial q_j} = 
-    \frac{
-    \mathbf{R}^r_t \, {}^t \mathbf{H} ( {\mathbf{R}^r_t}^\top ({}^r \mathbf{p}_{tr} + \delta \mathbf{e}_j) )
-    - \mathbf{R}^r_t \, {}^t \mathbf{H} ( {\mathbf{R}^r_t}^\top ({}^r \mathbf{p}_{tr} - \delta \mathbf{e}_j) )}
-    {2 \delta}
+\mathbf{G} \mathbf{v}_i = \lambda_i \mathbf{v}_i
+\label{eq:eigen}
 \end{equation}
-where $j \in \{ x_r, y_r, z_r \}$ as before.
+which is true for all pairs of eigenvalue \( \lambda_i \) and eigenvector \( \mathbf{v}_i \).
 
-\noindent
-Finally, we obtained the rows of ${}^r \mathbf{G}$ and using Eq.\ref{eq:G_completa}, 
-we obtain the complete gradient matrix. Then we can compute the eigenvalues and the NSS
-with Eq. \ref{eq:NSS}.
-
-\begin{figure}
-\centering
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_rotated_single_num.jpg}
-\caption{Plot of the gradient tensor ${}^r \mathbf{G}$ elements
-when computed numerically after the position of the single source is translated to $(2,2,0)$ and an 
-introduction of the different rotations, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
-\label{fig:gradients_rotated_single_num}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{images/NSS_rotated_single_num.jpg}
-\caption{Plot of the NSS computed numerically, after the position of the signle source is translated to $(2,2,0)$ and 
-different roations are introduced, expressed using $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
-\label{fig:NSS_rotated_single_num}
-\end{figure}
-
-\noindent
-\\
-In Figure \ref{fig:gradients_rotated_single_num}, we see that we obtain the same 
-gradient tensor matrix at all points in space like in the analytical approach, and therefore 
-we verify that it respects the symmetry property.
-Naturally, the computed NSS remains unchanged as well, as we show in Fig.~\ref{fig:NSS_rotated_single_num}.
-
-\newpage
-\section{Multiple Victims Case}
-%https://math.stackexchange.com/questions/4761965/addition-of-vectors-in-different-coordinate-systems
-%https://www2.physics.ox.ac.uk/sites/default/files/2011-10-08/coordinates_pdf_51202.pdf
-\begin{figure}[H]
-    \centering
-    \tdplotsetmaincoords{70}{110}
-    \begin{tikzpicture}[tdplot_main_coords]
-    \draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$y_g$};
-    \draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$z_g$};
-    \draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$x_g$};
-    % Point Pt1
-    \coordinate (Pt1) at (5,0,5);
-    \draw[->, thick] (0,0,0) -- (Pt1) node[pos=0.5,anchor= west]{$\mathbf{p}_{t_1}$};
-    % pr
-    \draw[->, thick] (0,0,0) -- (p1) node[pos=0.5,anchor=west]{$\mathbf{p}_r$};
-    % Point Pt2
-    \coordinate (Pt2) at (0,5,3);
-    \draw[->, thick] (0,0,0) -- (Pt2) node[pos=0.5,anchor= south]{$\mathbf{p}_{t_2}$};
-    % Point t1p
-    \coordinate (p1) at (5,5,6);
-    \draw[->, thick] (5,0,5) -- (p1) node[pos=0.5, anchor=south]{$\stackrel{t_1}{\phantom{p}\bm{p}}$};      
-    \node at (p1) [anchor=south] {$\bm{p}$};    
-    % Point t2p
-    \coordinate (p2) at (5,5,6);
-    \draw[->, thick] (0,5,3) -- (p2) node[pos=0.5, anchor=south]{$\stackrel{t_2}{\phantom{p}\bm{p}}$};
-    \node at (p2) [anchor=south] {$\bm{p}$};
-    % Vectors H1 and H2
-    \coordinate (H1) at (3,1.5,3); 
-    \coordinate (H2) at (1,3,3); 
-    \draw[->, thick, blue] (p1) -- (H1) node[anchor=north west]{$\mathbf{H}_1$};
-    \draw[->, thick, red] (p1) -- (H2) node[anchor=north]{$\mathbf{H}_2$};
-    % Angle arc
-        \pic ["$\alpha$",draw = black, ->,
-        angle radius=7mm,
-        angle eccentricity=1.3, 
-        ] { angle = H1--p1--H2};
-    \coordinate (Shift) at (5,0,5);
-    \tdplotsetrotatedcoordsorigin{(Shift)}
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (.7,0,0) node[anchor=north]{$y_{t_1}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,.7,0) node[anchor=west]{$z_{t_1}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,0,.7) node[anchor=south]{$x_{t_1}$};
-    \coordinate (Shift) at (0,5,3);
-    \tdplotsetrotatedcoordsorigin{(Shift)}
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (.7,0,0) node[anchor=north]{$y_{t_2}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,.7,0) node[anchor=west]{$z_{t_2}$};
-    \draw[thick,tdplot_rotated_coords,->] (0,0,0) --
-    (0,0,.7) node[anchor=south]{$x_{t_2}$};
-    \end{tikzpicture}
-    \caption{Only 2 victims case}
-    \label{fig:frames-2victim}
-\end{figure}
-In the case of multiple victims, an ARTVA transmitter is attached to each
-avalanche victim and emits an electromagnetic field. Consequently, the signal received 
-by each drone (receiver) is a superposition of the effects of the multiple 
-electromagnetic sources. In addition, each source has a uniquely oriented
-body frame, which we will denote with $ F_{t_i}$, 
-where \( i = 1, 2, \dots, n \) and \( n \in \mathbb{N} \) is the total number of sources.
-In addition, we also define the global (inertial) frame $F_g$ and the receiver frame relative to the
-each drone $F_r$, in the same way as the single victim case.
-Then, the relative position of the receiver with respect to each trasmitter 
-${}^{t_i} \mathbf{p}_{{t_i}r}$ is denoted by ${}^{t_i} \mathbf{p}$, for semplicity;
-and the position of the $i$-th source in the global frame is denoted by 
-$\mathbf{p}_{t_i}$.
-The relative orientation of frames $F_{t_1}, F_{t_2}, \dots, F_{t_n}$ with respect to 
-the reference frame $F_g$ are denoted with $\mathbf{R}^g_{t_i} \in \textit{SO}(3)$.
-Instead the rotation matrix of the $i$-th transmitter frame $F_{t_i}$ with respect to the receiver
-frame $F_r$ is written as $\mathbf{R}^r_{t_i} \in \textit{SO}(3)$.
-
-Then, considering the receiver drone positioned at point $\mathbf{p}$ in space, the superposition
-of all the electromagnetic fields can be expressed 
-as the sum of the magnetic field intensity vectors \(\mathbf{H}_n\), 
-when projected in the receiver frame $F_r$, as in \cite{multiple_spacecraft}:
+\noindent\\
+The eigenvalues are found by solving the characteristic polynomial, defined as:
 \begin{equation}
-    {}^r \mathbf{H}_{\text{tot}} = 
-    {}^r \mathbf{H}_1 + {}^r \mathbf{H}_2 + \cdots + {}^r \mathbf{H}_n 
-    \label{eq:sum_H}
+\det(\mathbf{G} - \lambda \mathbf{I}) = 0
+\label{eq:characteristic}
 \end{equation}
-Therefore, since the receiver is rotated with respect to each transmitter, we can rewrite it as:
-\begin{equation}
-    {}^r \mathbf{H}_{\text{tot}} = 
-    \mathbf{R}^r_{t_1} \, {}^{t_1} \mathbf{H}_1({}^{t_1} \mathbf{p}) + \mathbf{R}^r_{t_2} \, {}^{t_2} \mathbf{H}_2({}^{t_2} \mathbf{p}) + \cdots + \mathbf{R}^r_{t_n} \, {}^{t_n} \mathbf{H}_n({}^{t_n} \mathbf{p})
-\label{eq:sum_H_rotated}
-\end{equation}
-Remembering Eq.\ref{eq:H_spheric}, we can express each single magnetic field intensity vector generated
-by the \(i\)-th magnetic source as:
-\[
-{}^{t_i} \mathbf{H}_i = \frac{I b^2}{4\pi r^3} \left( \mathbf{e}_{r_i} \, 2 \cos \theta + \mathbf{e}_{\theta_i} \, \sin \theta \right)
-\]
-Furthermore, we use the same homogeneous transformation as in the single victims case, Eq.\ref{eq:pt}:
-\begin{equation}
-    \mathbf{p}_{t_i} + \mathbf{R}^g_{t_i} \, {}^{t_i} \mathbf{p} = \mathbf{p}_r
-    \label{eq:pt_multi}  
-\end{equation}
-which is again inverted:
-\begin{equation}
-    {}^{t_i} \mathbf{p} = {\mathbf{R}^g_{t_i}}^\top \, \left( \mathbf{p}_r - \mathbf{p}_{t_i} \right)
-    \label{eq:pt_transmitter}
-\end{equation}
-In Figure \ref{fig:frames-2victim}, for clarity, we represent all the frames described before, 
-in the case of only two victims.
- 
+where \( \mathbf{I} \) is the identity matrix.
 
-\subsection{Total Magnitude}
-In the multiple victims case, the use of the total magnitude of the magnetic
-field intensity $|| \mathbf{H} ||$ as a mean to infer the position of
-the multiple sources, is an unfeasible strategy.
-In this section, we motivate the rationale behind our reasoning, by obtaining
-the mathematical formula of the total magnitude.
-Specifically, we aim to demonstrate that, even after the use of the previous 
-approximation \ref{eq:approx}, the total magnitude is highly non-linear and 
-non-invertible (not even partially bijective).
-
-\noindent
-In both the single-victim and multiple ones scenarios, the orientation of the receiver frame 
-relative to the transmitter frame did not affect the magnitude of the magnetic 
-field intensity.
-This is because the magnitude of any vector field (having the same 
-properties of any vector quantity) is rotationally invariant.
-Supposing only one source, the projection of the electromagnetic field intensity on the receiver frame is ${}^r\mathbf{H}$,
-and it is related to ${}^t \mathbf{H}$ in Eq.\ref{eq:H_receiver}; then 
-using simple linear algebra definitions we can write:
+\noindent\\
+Expanding the determinant yields the cubic equation:
 \begin{equation}
-\|{}^r\mathbf{H}\|^2 = \|\mathbf{R}^r_t \, {}^t\mathbf{H}\|^2 = 
-(\mathbf{R}^r_t \, {}^t\mathbf{H}) \cdot (\mathbf{R}^t_r \, {}^t\mathbf{H}) = 
-{}^t\mathbf{H}^\top \, {\mathbf{R}^r_t}\mkern-2mu^\top \, \mathbf{R}^r_t \, {}^t\mathbf{H} = 
-{}^t\mathbf{H}^\top \, {}^t\mathbf{H} = \|{}^t\mathbf{H}\|^2
-\label{eq:magnitude_invariant}
+\lambda^3 - I_1 \lambda^2 + I_2 \lambda - I_3 = 0
 \end{equation}
-This shows that the magnitude of the vector field expressed in the receiver 
-coordinate frame $F_r$ is equal to the one expressed in the trasmitter frame $F_t$.
+where \( I_1 \) is the trace of the gradient tensor \( \mathbf{G} \), 
+\( I_2 \) is the sum of the principal minors, 
+and \( I_3 \) is the determinant of \( \mathbf{G} \). 
 
-\noindent
-In the multiple vicims case, the receiver frame is oriented in a different way
-for each one of the $n$ trasmitter ones. However, the total magnitude is still unaffected by the 
-different rotations, thanks to the result we have just obtained from Eq. \ref{eq:magnitude_invariant}.
-Let's suppose, for simplicity, the case of only two sources like in Figure \ref{fig:frames-2victim}.
-We want to find the total magnitude of the magnetic field intensity in Eq. \ref{eq:sum_H_rotated}.
-Therefore, we apply the law of cosines from linear algebra:
-\[
-|| \mathbf{H}_{\text{tot}}||^2 = ||{}^r \mathbf{H}_1||^2 + ||{}^r \mathbf{H}_2||^2 + 2 \, ||{}^r\mathbf{H}_1|| \, ||{}^r\mathbf{H}_2|| \cos \alpha
-\]
-where \( \alpha \) is the angle between the two vectors \( \mathbf{H}_1 \) and \( \mathbf{H}_2 \) on the only plane which contains both vector fields.
-To use the approximation in Eq. \ref{eq:approx}, we need to express the vector fields
-in the transmitter reference frame:
+\noindent\\
+However, since \( \mathbf{G} \) is traceless, meaning that the coefficient 
+of \( \lambda^2 \) vanishes, \( I_1 = 0 \), we can simplify the cubic equation as done in
+\cite{NSS_single_different_dimensions}:
+\begin{equation}
+\lambda^3 + I_2 \lambda - I_3 = 0
+\end{equation}
+The invariants \( I_1 \), \( I_2 \), and \( I_3 \) are found
+following the linear algebra definitions mentioned before and simplified thanks to the symmetric property:
+
+\noindent\\
+\textbf{1.} \, \( I_1 \) (Trace):
 \begin{align*}
-\|\mathbf{H}_{\text{tot}}\|^2 = 
-&\ \|\mathbf{R}^r_{t_1} \, {}^t_1 \mathbf{H}_1\|^2 + \|\mathbf{R}^r_{t_2} \, {}^t_2 \mathbf{H}_2\|^2  + 2 \, \|\mathbf{R}^r_{t_1} \, {}^t_1 \mathbf{H}_1\| \, \|\mathbf{R}^r_{t_2} \, {}^t_2 \mathbf{H}_2\| \cos \alpha \\
-= &\ \|{}^t \mathbf{H}_1\|^2 + \|{}^t \mathbf{H}_2\|^2 + 2 \, \|{}^t \mathbf{H}_1\| \, \|{}^t \mathbf{H}_2\| \cos \alpha.
+ I_1 = B_{xx} + B_{yy} + B_{zz} = 0
 \end{align*}
 
 \noindent
-Substituting Eq.\ref{eq:H_mag_cart} of the magnetic field magnitude after the approximation, 
-with the Cartesian coordinates of reference frame $F_t$:
-\[
-\begin{aligned}
-|| \mathbf{H}_{\text{tot}}||^2 &= \left( \frac{m}{4 \pi} \right)^2 \left( \frac{(ab)^2}{b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2)} \right)^3 
-+ \left( \frac{m}{4 \pi} \right)^2 \left( \frac{(ab)^2}{b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2)} \right)^3 + \\
-& + 2 \, \cos \alpha \left( \frac{m}{4 \pi} \right)^2 \left( \frac{(ab)^2}{b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2)} \right)^{3/2} \left( \frac{(ab)^2}{b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2)} \right)^{3/2} = \\
-&= \left( \frac{m \, (ab)^3}{4 \pi} \right)^2 \left( \left( \frac{1}{b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2)} \right)^3 
-+  \left( \frac{1}{b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2)} \right)^3 \right. + \\
-& \left. + \, 2 \, \cos \alpha \left( \frac{1}{(b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2))(b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2))} \right)^{3/2} \right)
-\end{aligned}
-\]
-Note that a and b, have the same values for all the fields since they have been chosen in order to optimize the magnitude of the 
-general magnetic field intensity $\mathbf{H}$. 
-Also we suppose that the radius $b$ and the current $I$ are the same for all the devices (so same magnetic moment $m$).
-Bringing the common terms to the left side and inverting all the fractions:
-\[
-\begin{aligned}
-\left( \frac{m \, (a b)^3}{4 \pi \, || \mathbf{H}_{\text{tot}}||} \right)^2 &= \left( b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2) \right)^3 + \left( b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2) \right)^3 + \\
-& + 2 \, \cos \alpha \left( (b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2))(b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2)) \right)^{3/2}
-\end{aligned}
-\]
+\textbf{2.} \, \( I_2 \) (Sum of principal minors):
+\begin{align*}
+ I_2 &= B_{xx}B_{yy} + B_{yy}B_{zz} + B_{xx}B_{zz} 
+ - (B_{xy}B_{yx} + B_{yz}B_{zy} + B_{xz}B_{zx}) = \\
+        &= B_{xx}B_{yy} + B_{yy}B_{zz} + B_{xx}B_{zz} 
+ - (B_{xy}^2 + B_{yz}^2 + B_{xz}^2)
+\end{align*}
 
 \noindent
-From this point it is not possible to carry out the mathematical operations that 
-have been carried out in the single-victim case.
-Therefore, it is not possible to find a mapping as in \ref{eq:mapping},
-as the above equation is not even partially bijective.
-Furthermore, the non-invertibility and non linearities, determined by the cross terms,
-would only increase in the cases of more than two victims.
-In the following section, we will describe an alternative approach, which employs the
-NSS as a mean to estimate the position of multiple avalanche victims. 
-
-\subsection{Normalized Source Strength}
-As already mentioned, the properties of rotational invariance (see Eq.\ref{eq:rotational_invariance}) 
-and rapid decaying of the NSS (see Eq.\ref{eq:NSS_decay}) are 
-particularly beneficial in the multiple-victims case.
-In this section, we will describe how we compute the gradient tensor matrix 
-${}^r G_{\text{tot}}$ and the NSS in the multiple-victims case,
-for a drone located at point $p$ in space with a rigidly attatched body fram $F_t$.
-We employ these procedures to simulate the results over a spatial range of $[10, 10]$ meters, 
-when we fix the $z$-coordinate fixed at 3 m (i.e., the \( xy \)-plane at \( z = 3 \)), 
-in which three victims are positioned at \((0, 0, 0)\), \((-6, -6, 0)\), and \((7, 7, 0)\) respectively.
-% The rotations are 
-% R_array{1} = rotationMatrix(130, 0, 0);
-% R_array{2} = rotationMatrix(0, 50, 0);  
-% R_array{3} = rotationMatrix(0, 0, 140);
-
-% R_drones{1} = rotationMatrix(90, 0, 0);
-% R_drones{2} = rotationMatrix(0, 200, 0);  
-% R_drones{3} = rotationMatrix(0, 0, 300);
-
-\subsubsection{Analitycal method}
-The analytical method in the multiple-victims case is similar to the single-victims one;
-we will describe the general procedure when different orientations
-are present between the different reference frames $F_g$, $F_r$, and $F_{t_i}$.
-
-Firstly, for each different $i$-th source we express the point at which the NSS needs to be obtained
-in the transmitter reference frame $F_{t_i}$, in the same way as Eq.\ref{eq:pt_multi}.
-
-Secondly, we use the analytical expression in Eq.\ref{eq:G_analit}, to compute the gradient tensor 
-in the transmitter frame ${}^{t_i} \mathbf{G}_i$, of the $i$-th source.
-Then we transform ${}^{t_i} \mathbf{G}_i$ in ${}^r \mathbf{G}_i$, the gradient expressed in the receiver frame using Eq.\ref{eq:rotated_gradient_tensor}.
-
-Finally, we find ${}^r \mathbf{G}_{\text{tot}}$, the total gradient tensor by summing all the gradient tensors
-relative to the different suorces in the common receiver frame:
-\begin{align}
-{}^r \mathbf{G}_{\text{tot}} &= 
-\mathbf{R}^r_{t_1}  \, {}^{t_1}\mathbf{G}_1({}^{t_1} \mathbf{p}) \, {\mathbf{R}^r_{t_1}}\mkern-2mu^\top + \dots + \mathbf{R}^r_{t_n}  \, {}^{t_n}\mathbf{G}_n({}^{t_n} \mathbf{p}) \, {\mathbf{R}^r_{t_n}}\mkern-2mu^\top \nonumber = \\
-&= 
-\mathbf{R}^r_{t_1}  \, {}^{t_1}\mathbf{G}_1({R^g_{t_1}}\mkern-4mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1})) \, {\mathbf{R}^r_{t_1}}\mkern-3mu^\top + 
-\cdots + \mathbf{R}^r_{t_n}   {}^{t_n}\mathbf{G}_n({R^g_{t_1}}\mkern-3mu^\top ( \mathbf{p}_r - \mathbf{p}_{t_1}))  {\mathbf{R}^r_{t_n}}\mkern-3mu^\top
-\label{eq:G_tot}
-\end{align}
-Note that we sum the gradient matrices, rather than summing the 
-magnetic field intensity vectors \( {}^r \mathbf{H}_i \), 
-as the gradient operation is linear. 
-Thanks to linearity, the gradient matrix of the sum of the vectors 
-is equal to the sum of the gradient tensors.
- 
-%GRADIENTS ANALYTICAL NO ROTATIONS
-\begin{figure}
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_multi_anal.jpg}
-\caption{Plot of the gradient tensor ${}^r \mathbf{G}_{\text{tot}}$ elements
-when computed analytically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$; with no rotations 
-between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
-\label{fig:gradients_multi_anal}
-\end{figure}
-
-%NSS ANALYTICAL NO ROTATIONS
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{images/NSS_multi_anal.jpg}
-\caption{Plot of the NSS computed analytically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$; with no rotations 
-between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
-\label{fig:NSS_multi_anal}
-\end{figure}
-
-%GRADIENTS ANALYTICAL ROTATIONS
-\begin{figure}
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_rotated_multi_anal.jpg}
-\caption{Plot of the gradient tensor ${}^r \mathbf{G}_{\text{tot}}$ elements
-when computed analytically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$. }
-\label{fig:gradients_rotated_multi_anal}
-\end{figure}
-
-%NSS ANALYTICAL ROTATIONS
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{images/NSS_rotated_multi_anal.jpg}
-\caption{Plot of the NSS computed analytically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
-\label{fig:NSS_rotated_multi_anal}
-\end{figure}
-
-\noindent
-By looking at Fig.\ref{fig:gradients_multi_anal} and Fig.\ref{fig:gradients_rotated_multi_anal}
-we can observe that the components of the gradient matrix vary in one case with respect to another;
-however the matrix mantains the symmetry property.
-Instead, by comparing Fig.\ref{fig:NSS_multi_anal} with Fig.\ref{fig:NSS_rotated_multi_anal}
-we verify that the NSS distribution is rotationally invariant, like in the single victims case.
-
-\subsubsection{Numerical method}
-The numerical method in the multiple-victims case is similar to the single-victims one as well;
-we will describe the general procedure when different orientations
-are present between the different reference frames $F_g$, $F_r$, and $F_{t_i}$.
-
-We procede in the same way as in the analytical method: for each different $i$-th source we express the 
-point at which the $k$-th UAV is localized,
-in the transmitter reference frame $F_t$, Eq.\ref{eq:pt_multi}.
-Then we apply rotation $\mathbf{R}^r_{t_i}$ to obtain the point expressed 
-in the receiver coordinates, which we denote by ${}^r \mathbf{p}_{t_ir}$, similarly to Eq.\ref{eq:p__in_receiver}.
-So that we can perturb ${}^r \mathbf{p}_{t_ir}$ by $\delta$, along each direction $j$ of the 
-receiver coordinates $(x_r, y_r, z_r)$:
-\[
-\begin{cases}
-    {}^r \mathbf{p}_{t_ir} + \delta \mathbf{e}_j \\
-    {}^r \mathbf{p}_{t_ir} - \delta \mathbf{e}_j
-\end{cases} 
-\quad \text{where } j \in \{ x_r, y_r, z_r \} \, \text{relative to the coordinate frame } F_r.
-\]
-Then, to obtain the perturbed magnetic field intensity and so use Eq.\ref{eq:final_H}, we need to 
-revert the last transformation and therefore we transpose the rotation matrix $\mathbf{R}^r_{t_i}$ to 
-obtain the reverse transformation:
-\[
-\begin{cases}
-    {}^{t_i} \mathbf{p}^+ = {\mathbf{R}^r_{t_i}}^\top \, ({}^r \mathbf{p}_{t_ir} + \delta \mathbf{e}_j) \\
-    {}^{t_i} \mathbf{p}^- =  {\mathbf{R}^r_{t_i}}^\top \, ({}^r \mathbf{p}_{t_ir} - \delta \mathbf{e}_j) \\
-\end{cases}
-\]
-We now have computed the perturbed magnetic field intensity vector in the transmitter frame 
-generated by each one of the $i$-th source, denoted as ${}^{t_i} \mathbf{H}_i$.
-Then, we rotatate each perturbed magnetic field vector to express it in the common receiver
-reference frame, so that we can add the contribution of each electromagnetic field
-together and obtain ${}^r \mathbf{H}_{\text{tot}}$, which is exactly what is described
-in Eq.\ref{eq:sum_H_rotated}:
-\[
-\begin{cases}
-    {}^r \mathbf{H}_{\text{tot}}^+ = 
-    R^{t_1}_r \, {}^{r} \mathbf{H}_1({}^{t_1} \mathbf{p}^+)
-    + \cdots + R^{t_n}_r \, {}^{t_n} \mathbf{H}_n({}^{t_n} \mathbf{p}^+) \\
-    {}^r \mathbf{H}_{\text{tot}}^- = R^{t_1}_r \, {}^{r} \mathbf{H}_1({}^{t_1} \mathbf{p}^-)
-    + \cdots + R^{t_n}_r \, {}^{t_n} \mathbf{H}_n({}^{t_n} \mathbf{p}^-)
-\end{cases}
-\]
-
-Finally, we can find the perturbed magnetic field intensity in the receiver frame
-${}^r \mathbf{H}_i$ and apply the central difference approximation 
-\ref{eq:G_num} to compute the total gradient tensor in the receiver reference frame 
-${}^r \mathbf{G}_{\text{tot}}$:
-\begin{equation}
-    \frac{\partial \mathbf{H}_{\text{tot}}}{\partial q_j} = 
-    \frac{
-     {}^r \mathbf{H}_{\text{tot}}^+ ({}^r \mathbf{p}_{t_1r}, \dots , {}^r \mathbf{p}_{t_nr})
-    -  {}^r \mathbf{H}_{\text{tot}}^- ({}^r \mathbf{p}_{t_1r}, \dots , {}^r \mathbf{p}_{t_nr})}
-    {2 \delta}
-\end{equation}
-
-\noindent
-Finally, we obtained the rows of ${}^r \mathbf{G}_{\text{tot}}$ and using Eq.\ref{eq:G_completa}, 
-we obtain the complete gradient matrix. Then, we can compute the eigenvalues and the NSS
-with Eq.\ref{eq:NSS}, in the same way as the single-victim case.
-
-%GRADIENTS NUMERICAL NO ROTATIONS
-\begin{figure}
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_multi_num.jpg}
-\caption{Plot of the gradient tensor ${}^r \mathbf{G}_{\text{tot}}$ elements
-when computed numerically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$; with no rotations 
-between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
-\label{fig:gradients_multi_num}
-\end{figure}
-
-%NSS NUMERICAL NO ROTATIONS 
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{images/NSS_multi_num.jpg}
-\caption{Plot of the NSS computed numerically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$; with no rotations 
-between the coordinate frames \( F_g \), \( F_r \), and \( F_t \).}
-\label{fig:NSS_multi_num}
-\end{figure}
-
-%GRADIENTS NUMERICAL ROTATIONS
-\begin{figure}
-\hspace*{-0.2\textwidth}
-\includegraphics[width=1.4\textwidth]{images/gradients_rotated_multi_num.jpg}
-\caption{Plot of the gradient tensor ${}^r \mathbf{G}_{\text{tot}}$ elements
-when computed numerically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
-\label{fig:gradients_rotated_multi_num}
-\end{figure}
-
-%NSS NUMERICAL ROTATIONS 
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{images/NSS_rotated_multi_num.jpg}
-\caption{Plot of the NSS computed numerically in the case of multiple sources positioned at  $(0,0,0)$, $(-6,-6,0)$, and $(7,7,0)$;
-with rotations $\mathbf{R}^r_t$ and $\mathbf{R}_g^t$.}
-\label{fig:NSS_rotated_multi_num}
-\end{figure} 
-
-By looking at Fig.\ref{fig:gradients_multi_num} and Fig.\ref{fig:gradients_rotated_multi_num}
-we can observe again that the gradients vary in the case in which the reference
-frames $F_{t_i}$, $F_r$ and $F_g$ have different orientations with respect to one another;
-however the matrix mantains the symmetry property.
-Instead, by comparing Fig.\ref{fig:NSS_multi_num} with Fig.\ref{fig:NSS_rotated_multi_num}
-we verify that the NSS distribution is rotationally invariant, like in all the other cases both with 
-single or multiple victims.
-
-
-\subsection{Final Model}
-In the final model of the multiple-victims scenario, we consider an ARTVA transmitter attached 
-to each $i$-th victim among the $n \in \mathbb{N}$ victims, where \( i = 1, \ldots, n \).
-In addition, we employ a swarm of $m \in \mathbb{N}$ UAVs to locate the position
-of at least $m$ victims if $m \min n$, otherwise to localize them all.
-We assume the position of the $j$-th drone, \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) ,
-to be known at every sample time \( \tau_k \), where \( k, j \in \mathbb{N} \) 
-and \( j = 1, \ldots, m \).
-We also consider each UAV to be equipped, with an ARTVA receiver, or any other 
-instrument capable of detecting the electromagnetic field at different points,
-like the TAMs in \cite{NSS_single_localization}.
-Since ARTVAs are the most commonly used instruments we compute the NSS using the
-analytical method, but we note that the numerical method could be employed
-in the precence of any other suitable equipment.
-
-Knowing the position of the $j$-th drone $\mathbf{p}_{r}(\tau_k)$, 
-we compute the NSS using the analytical expression of the gradient tensor, which depends
-only on the position of the receiver drone in the transmitter frame
-${}^{t_i} \mathbf{p}(\tau_k)$.
-From Eq. \ref{eq:pt_multi} we express the position of each $j$-th drone
-in the relative trasmitter frame $F_{t_i}$ of each $i$-th source:
-\begin{equation}
-    {}^{t_i} \mathbf{p}(\tau_k) = {R^g_{t_i}}^\top \, \left( \mathbf{p}_{r}(\tau_k) - \mathbf{p}_{t_i}(\tau_k) \right)
-\end{equation}
-Then, we compute the gradient tensor matrix relative to a single source 
-${}^{t_i} \mathbf{G}_i({}^{t_i} \mathbf{p})$ using the analytical expression in \ref{eq:G_analit}:
-\begin{equation}
-    {}^{t_i} \mathbf{G}_i = \frac{1}{r_i^{5/2}}
-    \scalebox{0.90}{$
-    \begin{bmatrix}
-    3 x_i (-2 x_i^2 + 3y_i^2 + 3z_i^2) & 3 y_i (-4 x_i^2 + y_i^2 + z_i^2) & 3 z_i (-4x_i^2 + y_i^2 + z_i^2) \\
-    3 y_i (-4 x_i^2 + y_i^2 + z_i^2) & 3 x_i (x_i^2 - 4 y_i^2 + z_i^2) & -15 x_i y_i z_i \\
-    3 z_i (-4 x_i^2 + y_i^2 + z_i^2) & -15 x_i y_i z_i & 3 x_i (x_i^2 + y_i^2 - 4 z_i^2)
-    \end{bmatrix}
-    $}
-\end{equation}
-where $r_i$ is the distance between the $i$-th source and the receiver position 
-$\mathbf{p}_{r}(\tau_k)$ and  $(x_i, y_i, z_i)$ are the coordinates 
-relative to ${}^{t_i} \mathbf{p}(\tau_k)$.
-
-\noindent
-\\
-Subsequently, we sum all the gradient tensors rotated in the common receiver frame $F_{r}$
-to obtain ${}^{r} \mathbf{G}_{\text{tot}} ({}^{t_1} \mathbf{p}, \dots {}^{t_n} \mathbf{p})$, in the same way as Eq. \ref{eq:G_tot}.
-
-Finally, we conpute the eigenvalues of total gradient 
-tensor to find the NSS relative to all sources using Eq.\ref{eq:NSS},
- at each time step \( \tau_k \):
-\begin{equation}
-    \text{NSS}_\text{tot}(\tau_k) = \sqrt{{\lambda_{\text{tot}_2}}^2 - \lambda_{\text{tot}_1} \lambda_{\text{tot}_3}}
-    \label{eq:NSS_multi_final}
-\end{equation}
-where $\lambda_{\text{tot}_1}$, $\lambda_{\text{tot}_2}$ and $\lambda_{\text{tot}_3}$
-are the ordered (from min to max) eigenvalues relative to the total magnetic gradient tensor.
-
-\noindent
-\\
-Therefore, we model the intensity of the signal received by each UAV using the NSS
-as an output funcion of the form \( y_j : \mathbb{R}^3 
-\times \mathbb{R} \rightarrow \mathbb{R} \):
-\begin{equation}
-y_j(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k) = \mathbf{\Phi}(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k) + 
-w_t(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k)
-\label{eq:received_signal}
-\end{equation}
-where $\mathbf{\Phi}(\mathbf{p}_{r}, \mathbf{p}_{t_i}, \tau_k)$ is the NSS
-relative to each $j$-th receiver and 
-and \( w : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R} \) 
-represents the measurement noise related to the electromagnetic interference,
-defined in \ref{eq:H_rotated_noise}.
-
-\subsection{Modified Particle Swarm Optimization with Exclusion Zones}
-\label{sec:PSO}
-The PSO algorithm is an intelligent population-based stochastic optimization technique 
-that simulates the behavior of a natural biological swarm. 
-As already mentioned, each “particle” represents a potential solution in the search space
-and it updates its velocity and position based on the historical best positions 
-of both the individual and the entire population.
- 
-\noindent
-\\
-We asssume that $m$ seeker drones act as $m$ particles moving in the search-space, 
-like in \cite{3}; therefore we denote the position of each particle as the $j$-th UAV
-$\mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^2$, at the $\tau_k$ time step.
-\noindent
-\\
-\textbf{Assumption}
-\\
-We make the assumption that the UAVs fly at a constant height; therefore we can
-simplify the search task on the 2D plane.
-Furthermore, in the standard PSO algorithm \cite{PSO_original}, the particles are randomly 
-initialized within the search-space. In contrast, our model assumes that the UAVs 
-start from the center of the space, they then move in the search space 
-uniformly and once they reach the desired position the PSO algorithm
-effectively start, as will be explanied morein detail later.
-
-The value of the function to be optimized, usually
-called the cost function, is evaluated at the position of the particle at 
-each time step $\tau_k$ and it is modeled using the signal 
-received by the receiver UAV at its current location
-\( y_j : \mathbb{R}^2 
-\times \mathbb{R} \rightarrow \mathbb{R} \), expressed in 
-Eq.\ref{eq:received_signal}.
-
-The multiple-source seeking task is performed on a search-space $\Omega$ 
-where the multiple victims are located, 
-defined as the solution space where the $y_j$ funtion is maximized.
-\[
-\Omega = (x, y, z) \, \text{s.t.} \,
-\begin{cases}
-    X_{\min} \leq x \leq X_{\max}, \\
-    Y_{\min} \leq y \leq Y_{\max}, \\
-    Z_{\min} \leq z \leq Z_{\max}
-\end{cases}
-\]
-where $X_{\min}$, $X_{\max}$, $Y_{\min}$, and $Y_{\min}$ denote the horizontal
-boundaries and $Z_{\min}$, $Z_{\max}$ denote the ground level and
-the highest limit respectively.
-\noindent
-\\
-\textbf{Assumption}
-\\
-We limit the search-space to the 2D plane as well, as we are not interested
-in determining the burial depth of the victims, 
-which would need the emplyment of a different 
-invariant from the NSS.
-Instead, we fix the $z$ coordinate to the ground level for all the victims;
-while we assume a constant flying height of 3m for the UAVs, as already mentioned.
-Therefore, the search space becomes:
-\[
-\Omega = (x, y, z) \, \text{s.t.} \,
-\begin{cases}
-    X_{\min} \leq x \leq X_{\max}, \\
-    Y_{\min} \leq y \leq Y_{\max}, \\
-    z = Z_{\text{fixed}}
-\end{cases}
-\]
-
-\noindent
-\\
-The standard PSO algorithm iterative update of each particle's velocity
-(Eq.~\ref{eq:model_velocity}) and position (Eq.~\ref{eq:model_position})
-in the search-space to improve its solution is defined as:
-\begin{align}
-    \mathbf{v}_{j}(\tau_k+1) &= \omega \mathbf{v}_{j}(\tau_k) 
-    + c_1 r_1 \big(\mathbf{pbest}_{j}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\big) + \notag \\
-    &\quad + c_2 r_2 \big(\mathbf{gbest}(\tau_k) - \mathbf{p}_{j}(\tau_k)\big) \label{eq:model_velocity} \\
-    \mathbf{p}_{r_j}(\tau_k + 1) &= \mathbf{p}_{r_j}(\tau_k) + \mathbf{v}_{j}(\tau_k+1) \label{eq:model_position}
-\end{align}
-where $\mathbf{pbest}_j$ represents the $j$-th particle's individual best position vector  
-, $\mathbf{gbest}$ the global best position vector, $\omega$ is the inertia weight,
-$c_1$ and $c_2$ are positive constants, and $r_1, r_2 \sim \textit{U}(0,1)$ are random variables 
-uniformly distributed over the interval $[0, 1]$.
-
-A best previous position is where a particle obtains the 
-maximum value of the output function in its search
-history.
-In \ref{eq:model_velocity}, velocity $\mathbf{v}_{j}(\tau_k+1)$ 
-consists of three terms: the effect of drone’s previous velocity, 
-effect of its best known position and effect of global best
-known position.
-While the inertia weight is critical in balancing global and local search. 
-A larger inertia weight facilitates global exploration while a smaller one
-facilitates local exploitation.
-
-In the standard PSO algorithm, there is only one global best particle, 
-which means that only one optimal solution can be found. This limitation 
-poses a challenge when dealing with our problem, where we are looking for multiple sources, 
-and therefore, multiple local and global optima exist. To address this challenge, 
-we employ the same strategy of the modified version of the PSO algorithm \cite{PSO_IMPORTANT}. 
-In this modification, the swarm is divided into $M$ subpopulations, each tasked with exploring 
-different regions of the search space. Following this idea, the \textit{gbest} is referred to as 
-the best particle of each subpopulation, not as the global best particle in the whole population. 
-This means that these $M$ best particles are separately able to catch different optima, 
-at most $M$ optima.
+\textbf{3.} \, \( I_3 \) (Determinant):
+\begin{align*}
+ I_3 &= B_{xx} (B_{yy} B_{zz} - B_{zy} B_{yz}) 
+ - B_{yx} (B_{xy} B_{zz} - B_{zy} B_{xz}) 
+ + B_{zx} (B_{xy} B_{yz} - B_{yy} B_{xz}) = \\
+        &= B_{xx}B_{yy}B_{zz} + 2B_{xy}B_{yz}B_{xz} - 
+ B_{xx}B_{yz}^2 - B_{yy}B_{xz}^2 - B_{zz}B_{xy}^2
+\end{align*}
 
 \noindent\\
-In addition, we perform further modifications to the PSO algorithm,
-we introduce physical constraints as already done in \cite{3}, 
-an exclusion zone mechanism and a percistency of excitation 
-Firstly, uniform random noise is added to the velocity of each 
-particle to achieve a \textit{persistence of excitation} state,
-allowing every drone to explore new and different directions, 
-as described in Eq.\ref{eq:persistence_of_excitation}:
-\begin{equation}
-    \mathbf{v}_j(\tau_k + 1) = \mathbf{v}_j(\tau_k) + \beta \cdot \mathbf{w} \cdot ||\mathbf{v}_j(\tau_k)||
-\label{eq:persistence_of_excitation}
-\end{equation}
-where:
-\begin{itemize}
-    \item \(\beta\) is an hyperparameter chosen experimentally in the [0,1] range.
-    \item \(\mathbf{w} = [\text{w}_1, \text{w}_2]^\top\) and \(\text{w}_1, \text{w}_2 \sim \mathcal{U}(-1, 1)\) represents a random vector where each component is uniformly distributed between \(-1\) and \(1\).
-    \item \(||\mathbf{v}_j(\tau_k)||\) is the magnitude of the velocity vector of particle \(j\).
-\end{itemize}
+It is shown later in Section \ref{invariance} that these coefficients are rotational invariants of 
+the tensor \( \mathbf{G} \), meaning that they are unchanged by a 
+rotation of the coordinate axes. They have the neat property that they can be simply expressed
+directly in terms of the tensor components with respect to any
+Cartesian reference frame.
 
 \noindent\\
-Secondly, the UAVs are confined to the 
-search-space and secondly their velocity is 
-capped to a max value to avoid speed "explosion", \cite{3}.
-The constraints are formulated as follows:
-\begin{empheq}[left=\empheqlbrace]{alignat=2}
-    \mathbf{p}_{r_j}(\tau_k + 1) &= \mathbf{p}_\text{lim}, &\quad \text{if } \mathbf{p}_{r_j}(\tau_k) \notin \Omega \label{eq:boundary_condition}\\
-    \mathbf{v}_j(\tau_k + 1) &= v_{\text{max}} \frac{\mathbf{v}_j(\tau_k)}{\|\mathbf{v}_j(\tau_k)\|}, &\qquad \text{if } \|\mathbf{v}_j(\tau_k)\| > v_{\text{max}} \label{eq:velocity_clamping}
-\end{empheq}           
-where \( \mathbf{p}_\text{lim} \) is the nearest point on the boundaries of the search space \( \Omega \), 
-and \( v_{\text{max}} \) denotes the maximum allowed step length.
+Each distinct root of the cubic equation defines a corresponding 
+eigenvalue of the tensor. From linear algebra, we know that for each eigenvalue \( \lambda_i \), the 
+associated eigenvectors can be found as non-zero vectors 
+\( \mathbf{v}_i \) that satisfy Eq.\ref{eq:eigen}.
 
-\noindent
-This means that:
-\begin{itemize}
-    \item If the UAV exits the search space limits (i.e., \( \mathbf{p}_{r_j}(\tau_k+1) \notin \Omega \)), 
-    its position is corrected to the nearest boundary point of \( \Omega \) 
-    in the next time step.
-    \item If the magnitude of the velocity \( \|\mathbf{v}_j(\tau_k + 1)\| \) 
-    exceeds the maximum allowable speed \( v_{\text{max}} \), 
-    then the velocity is scaled down to \( v_{\text{max}} \), 
-    while maintaining the same direction.
-\end{itemize}
-
-\subsubsection{Exclusion Zone Mechanism}
-In order to avoid clustering around the same source 
-and to ensure that the swarm does not converge only 
-on a few sources, we introduce an exclusion zone mechanism. 
-This strategy enforces additional positional constraints 
-on the drones by leveraging the fact that each drone 
-knows its current position in the search space.
-
-\noindent
-\\
-A drone \( j \) defines an exclusion zone when it detects a source 
-with a signal strength, the NSS, greater than a predefined threshold 
-\( \text{NSS}_{\text{thresh}} \). The exclusion zone is represented 
-as a circular region, centered around the position of the drone, defined by:
-\[
-\mathcal{E}_j = \{ \mathbf{p} \in \mathbb{R}^3 \mid \|\mathbf{p} - \mathbf{c}_j\| 
-\leq r_{\text{excl}} \},
-\]
-where:
-\begin{itemize}
-    \item \( \mathbf{c}_j \) is the center of the exclusion zone, 
-    corresponding to the position of the drone when the source 
-    is detected (\( \mathbf{p}_{r_j}(\tau_k) \)).
-    \item \( r_{\text{excl}} \) is the radius of the exclusion zone, 
-    chosen experimentally.
-\end{itemize}
-
-\noindent
-\\
-Instead, a drone \( j \) shares the center \( \mathbf{c}_j \) and radius 
-\( r_{\text{excl}} \) of its exclusion zone with neighboring drones 
-if they are within the communication range \( r_{\text{comm}} \). 
-A neighboring UAV \( l \) receives the exclusion zone when:
-\begin{equation}
-\|\mathbf{p}_{r_l}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\| \leq r_{\text{comm}}
-\label{eq:in_comm}
-\end{equation}
-Each drone maintains a list of shared exclusion zones 
-\( \mathcal{E}_\text{shared} \), which is defined as:
-\[
-\mathcal{E}_\text{shared} = \{\mathcal{E}_1, \mathcal{E}_2, \dots, \mathcal{E}_j\}
-\]
-which is an unordered and incomplete set of 
-where the union is over all exclusion zones shared by neighboring drones.
-
-\paragraph{Checking}
-Each drone continuously checks whether its current position 
-\( \mathbf{p}_{r_j}(\tau_k) \) lies within any shared exclusion zone. 
-This is verified by:
-\[
-\mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_\text{shared}.
-\]
-
-\paragraph{Avoidance}
-If a drone \( j \) finds itself within a shared exclusion zone at time \( \tau_k \), 
-it computes a new goal position \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \) 
-to escape the zone. The avoidance mechanism follows these steps:
-\[
-\mathbf{d}_j(\tau_k) = \mathbf{c}_j(\tau_k) - \mathbf{p}_{r_j}(\tau_k),
-\]
-where \( \mathbf{d}_j(\tau_k) \) is the direction vector pointing away 
-from the exclusion zone center \( \mathbf{c}_j(\tau_k) \), and 
-\( \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_j(\tau_k) \).
 \noindent\\
-The goal position the drone needs to reach in the next time steps is then calculated as:
+Also, since \( \mathbf{G} \) is a symmetric real \( 3 \times 3 \) matrix, 
+all its eigenvalues are real, and the eigenvectors corresponding to 
+distinct eigenvalues are orthogonal. It is always possible to construct 
+an orthonormal set of the three eigenvectors, even in cases where the 
+eigenvalues are degenerate (i.e., two or more eigenvalues are equal).
+
+\noindent\\
+Furthermore, it is demonstrated later in Section \ref{invariance} that the eigenvalues \( \lambda_{\text{min}} \), 
+\( \lambda_{\text{med}} \), and \( \lambda_{\text{max}} \) are rotational 
+invariants of the tensor \cite{NSS_single_different_dimensions}.
+Therefore, any combination of the eigenvalues 
+constitutes a rotational invariant and the NSS is defined as:
 \begin{equation}
-    \mathbf{p}_{r_j}^{\text{goal}} = \mathbf{p}_{r_j}(\tau_k) 
-    + \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|}
-    \label{eq:move_away}
+\text{NSS} = \sqrt{\lambda_{\text{med}}^2 - \lambda_{\text{min}} \lambda_{\text{max}}}
+\label{eq:NSS}
 \end{equation}
-where:
-\begin{itemize}
-    \item \( \alpha \): Step size parameter that determines 
-    the distance the drone moves away from the exclusion zone.
-    \item \( \mathbf{p}_{r_j}^{\text{goal}} \): The computed 
-    goal position outside the exclusion zone.
-    \item \( \|\mathbf{d}_j(\tau_k)\| \): Norm (magnitude) of the direction 
-    vector \( \mathbf{d}_j(\tau_k) \), which is used for normalization.
-\end{itemize}
 
-Once the drone reaches \( \mathbf{p}_{r_j}^{\text{goal}} \), 
-it resumes the PSO algorithm, continuing to search for new sources. 
-This mechanism ensures the drone moves directly away from the 
-exclusion zone while covering a distance proportional to \( \alpha \).
+\noindent\\
+Additionally, it is shown that the NSS is inversely proportional to the fourth power of 
+the distance between the computed point in space and the source \cite{NSS_single_localization}:
+\begin{equation}
+\text{NSS} = \frac{3 \mu_0 m}{4 \pi r^4}
+\label{eq:NSS_decay}
+\end{equation}
+From which it is also evident that it is a rotational invariant (since it depends
+only on the distance $r$) and also that it does not depend on the direction of the magnetic
+moment $\mathbf{m}$, only on its magnitude.
 
+\newpage
+\subsubsection{Demonstration of Rotation Invariance}
+\label{invariance}
+Let's define the gradient operator $\nabla$ in any Cartesian  
+coordinate-system $(x, y, z)$, given by 
+\begin{equation}
+\nabla = 
+\begin{bmatrix} 
+\frac{\partial}{\partial x} \\ 
+\frac{\partial}{\partial y} \\
+\frac{\partial}{\partial z}
+\end{bmatrix}
+\label{eq:nabla}
+\end{equation}
+as a column vector.
 
-% \subsection{Communication Topology}
+\noindent\\
+Let \( (x, y, z) \) be the Cartesian coordinates in the original frame, 
+and \( (x', y', z') \) denote the coordinates in a rotated frame. 
+The rotation is defined by a rotation matrix, which for simplicity, 
+we assume to be a rotation around the \( z \)-axis by an angle \( \theta \):
+\[
+\mathbf{R}_z(\theta) = 
+\begin{pmatrix}
+\cos \theta & -\sin \theta & 0 \\
+\sin \theta & \cos \theta & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\]
 
-% \subsection{Metrics}
-% --- we terminate when the value is greater than a threshold
+\noindent\\
+The new coordinates $(x', y', z')$ after the rotation are related to 
+the original coordinates by:
+\[
+\begin{bmatrix} 
+x' \\ 
+y' \\
+z'
+\end{bmatrix} 
+= 
+\mathbf{R}_z\mkern-2mu(\theta)
+\begin{bmatrix} 
+x \\ 
+y \\
+z
+\end{bmatrix}
+\]
 
-% in \cite{3}
-% qui si parla di standard PSO chiamato SPSO
-% The swarm size is determined by , where is the
-% dimension of the search space. Standard value of the parameters
-% are as follows:
+\noindent\\
+Using the chain rule, we express the derivatives with respect to the rotated coordinates 
+in terms of the original derivatives: 
+\[
+\frac{\partial}{\partial x'} = \cos(\theta) \frac{\partial}{\partial x} 
+- \sin(\theta) \frac{\partial}{\partial y}
+\]
+\[
+\frac{\partial}{\partial y'} = \sin(\theta) \frac{\partial}{\partial x} 
++ \cos(\theta) \frac{\partial}{\partial y}
+\]
+\[
+\frac{\partial}{\partial z'} = \frac{\partial}{\partial z}
+\]
 
+\noindent\\
+Thus, the gradient operator in the rotated coordinate system 
+can be expressed in matrix form as:
+\begin{equation}
+\nabla' 
+= 
+\mathbf{R}_z\mkern-2mu(\theta) \, \nabla
+\label{eq:gradient_rotated}
+\end{equation}
 
-% To evaluate the seeking time and energy consumption, we define
-% . Thus, provides a measure on
-% the total “time” to complete a search since it is proportional to
-% search time based on the assumption that all seekers have equal
-% speed. The actual time cannot be computed in simulations due to
-% the lack of the concept of speed, but serves the same
-% purpose.
-% In addition, we also count the number of iterations ,
-% measure the total distance traveled by all robots.
+\noindent\\
+Now, let \( \mathbf{B} \) be a 3D vector field exspressed as a column vector as well:
+\[
+\mathbf{B}(x, y, z) = 
+\begin{bmatrix}
+ B_x(x, y, z) \\
+ B_y(x, y, z) \\
+ B_z(x, y, z)
+\end{bmatrix}
+\]
+
+\noindent\\
+The components of the vector field after the rotation 
+are given by:
+\begin{equation}
+ \mathbf{B}' = \mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{B}
+\label{eq:vect_rotated}
+\end{equation}
+
+\noindent\\
+Then, we can rewrite the definition of the gradient tensor \eqref{eq:gradient},
+in matrix form \cite{gradient_tensor_rotated}:
+\[
+\mathbf{G} = \nabla \mathbf{B}^\top
+\]
+Which becomes in the rotated coordinates $(x', y', z')$:
+\[
+\mathbf{G}' = \nabla' \mathbf{B}'^\top
+\]
+
+\noindent\\
+Thus, substituting \ref{eq:gradient_rotated} and \ref{eq:vect_rotated}
+into the expression for \( G' \), we obtain:
+\[
+\mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \,  \nabla \, (\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{B})^\top
+\]
+
+\noindent\\
+Using the linear algebra property of the transpose of the product of two matrices:
+\[
+\mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \, \nabla \, (\mathbf{B}^\top {\mathbf{R}}^\top_z\mkern-3.5mu(\theta))
+\]
+
+\noindent\\
+Recognizing that \( \nabla \, \mathbf{B}^\top \) is the original gradient 
+\( \mathbf{G} \), we finally obtain the same result as \cite{gradient_tensor_rotated}:
+\begin{equation}
+ \mathbf{G}' = \mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta)
+    \label{eq:rotated_gradient_tensor}
+\end{equation}
+
+\noindent\\
+Firstly, we focus on the eigenvalues of \( \mathbf{G} \), namely 
+\( \lambda_{\text{min}} \), \( \lambda_{\text{med}} \), and \( \lambda_{\text{max}} \). 
+To demonstrate rotational invariance, we recall the characteristic polynomial 
+\eqref{eq:characteristic}, which defines the eigenvalues of \( \mathbf{G} \). 
+Under a coordinate rotation, the tensor \( \mathbf{G} \) transforms as shown in 
+Eq.\ref{eq:rotated_gradient_tensor}. Then, the characteristic equation for the rotated tensor is:
+\[
+ \det(\mathbf{G}' - \lambda \mathbf{I}) = 
+ \det(\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta) - \lambda \mathbf{I})
+\]
+
+\noindent\\
+Using Binet's Theorem and the property of orthogonal matrices \( \det\mkern-2mu\big(\mathbf{R}\big) = \det\mkern-2mu\big(\mathbf{R}^\top\big) = 1 \):
+\begin{equation}
+ \det\mkern-2mu\big(\mathbf{R}_z\mkern-2mu(\theta) \, (\mathbf{G} - \lambda \mathbf{I}) \, {\mathbf{R}}^\top_z\mkern-3.5mu(\theta)\big) = 
+ \det\mkern-2mu\big(\mathbf{G} - \lambda \mathbf{I}\big)
+    \label{eq:rotational_invariance}
+\end{equation}
+
+\noindent\\
+Consequently, the eigenvalues \( \lambda_{\text{min}} \), \( \lambda_{\text{med}} \), 
+and \( \lambda_{\text{max}} \) of the tensor \( \mathbf{G} \) remain unchanged, 
+proving that they are rotationally invariant.
+
+\noindent\\
+Secondly, we now demonstrate how \( I_2 \) and \( I_3 \) are rotational invariants 
+with respect to a rotation of the coordinate systems.
+\( I_2 \) is defined as the sum of the principal minors of order 2 of \( \mathbf{G} \). 
+From linear algebra, we know that the sum of principal minors is a linear combination of the eigenvalues
+of a matrix, which is in turn rotational invariant, as we just demonstrated, therefore \( I_2 \)
+is a rotational invariant as well.
+
+\noindent\\
+Similarly, the determinant of \( \mathbf{G} \), \( I_3 \),
+is also invariant under orthogonal transformations. 
+This is again due to the fact that the determinant of orthogonal matrices is 1 and thanks
+to Binet's Theorem:
+\[
+\det\mkern-3mu\big(\mathbf{G}'\big) = \det\mkern-3mu\big(\mathbf{R}_z\mkern-2mu(\theta) \, \mathbf{G} \, {\mathbf{R}}^\top_z\mkern-2mu(\theta)\big) = 
+\det\mkern-3mu\big(\mathbf{R}_z\mkern-2mu(\theta) \big) \det\mkern-3mu\big(\mathbf{G}\big) \det\mkern-3mu\big({\mathbf{R}}^\top_z\mkern-2mu(\theta)\big) = 
+\det\mkern-3mu\big(\mathbf{G}\big)
+\]
+
+\noindent\\
+As \( I_2 \) and \( I_3 \) are constructed respectively from the sum of principal minors 
+and the determinant of \( \mathbf{G} \), both quantities remain invariant under any rotation 
+of the coordinate system.
+\end{document}

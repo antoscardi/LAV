@@ -1,0 +1,77 @@
+\documentclass[main]{subfiles}
+\begin{document}
+\section{Conclusions}
+%RILEGGERE LE CONCLUSIONI
+In this work, we modify the PSO algorithm to address the challenging
+task of multi-source localization using a decentralized swarm of UAVs.
+The results show that, in general, the algorithm produces reliable
+performance with precise estimates and fast convergence times, even in
+complex configurations. However, as an inherently heuristic approach,
+the PSO is not guaranteed to always converge, and certain situations
+highlight its potential drawbacks.
+
+\noindent\\
+One of the main challenges we face is overcoming the superposition in
+signal strength from multiple sources or victims. This is our primary
+focus, as it inherently complicates the identification of individual
+sources. To address this issue, we implement a strategy (the PSO) that
+allows the swarm to localize multiple sources based on the aggregated
+signal, effectively bypassing the need to separate and identify
+individual ones. While this approach proves successful in enabling the
+swarm to locate sources in challenging scenarios, it introduces a
+trade-off: the certainty of finding a source is reduced because the PSO
+heuristic approach relies on some degree of randomness and the exclusion
+zone mechanism.
+
+\noindent\\
+Another notable drawback is that the algorithm occasionally fails in
+scenarios where drones are repeatedly attracted to the same sources,
+preventing effective exploration of the search space. This limitation
+prevents the swarm's ability to identify and reach faraway
+sources, when near others. This behavior is an intrinsic limitation of 
+the problem. Additionally, when sources
+are positioned too closely together, as demonstrated in Case 3, the
+algorithm struggles to differentiate between them, resulting in reduced
+accuracy unless additional drones are introduced to improve coverage.
+
+\noindent\\
+One potential enhancement in our algorithm is the employment of adaptive mechanisms 
+for tuning the PSO parameters, such as inertia weight 
+which could dynamically adjust based on the swarm's progress or environmental 
+conditions, improving convergence speed and accuracy.
+In addition, investigating hybrid optimization methods that combine 
+the PSO with local search or other heuristic approaches could provide a more 
+comprehensive solution for complex multi-source localization tasks.
+
+\noindent\\
+On the other hand, the algorithm's strengths lie in its adaptability and
+the benefits of a decentralized approach. The exclusion zone mechanism
+enables the swarm to dynamically adjust its search strategy based on the
+locations of previously detected sources, promoting faster convergence
+and improved accuracy. This adaptability is especially valuable in
+multi-source localization problems, where the location of all different
+sources rapidly is crucial.
+Furthermore, our work also introduces another novel aspect: 
+the implementation of the PSO algorithm to provide control command velocities 
+to the drones in real time, integrating the PSO into the control
+loop.
+
+\noindent\\
+The decentralized nature of our approach offers further advantages. By
+removing the reliance on a central computation unit, the system becomes
+more robust to communication noise and failures. This autonomy allows
+the drones to operate effectively under challenging conditions, such as
+mountainous terrain or adverse weather, where communication may be
+intermittent or delayed. While decentralization may lead to slightly
+slower convergence and higher estimation errors due to partial
+information exchange, it remains an effective solution in scenarios
+where centralized coordination is impractical or resource-intensive.
+
+\noindent\\
+In conclusion, our implementation demonstrates that while the modified PSO
+algorithm encounters limitations in specific cases, it provides a
+powerful and flexible tool for decentralized multi-source localization.
+By addressing the challenge of signal overlap, our algorithm proves to be
+both effective and efficient in complex conditions and environment-associated
+with avalanche victims' localization.
+\end{document}
