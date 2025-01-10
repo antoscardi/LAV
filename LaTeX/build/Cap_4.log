@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  4 JAN 2025 19:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  10 JAN 2025 00:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1176,41 +1176,124 @@ Package: empheq 2017/03/31 v2.15 Emphasizing equations
 \EQ_mathdisplay_box=\box148
 \EQ_tag_box=\box149
 \g_EQ_temprow_int=\count529
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
-\MT@toks=\toks63
-\MT@tempbox=\box150
-\MT@count=\count530
-LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
-LaTeX Info: Redefining \leftprotrusion on input line 1062.
-\MT@prot@toks=\toks64
-LaTeX Info: Redefining \rightprotrusion on input line 1081.
-LaTeX Info: Redefining \textls on input line 1392.
-\MT@outer@kern=\dimen330
-LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
-\MT@listname@count=\count531
- (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype-pdftex.def
-File: microtype-pdftex.def 2024/03/29 v3.1b Definitions specific to pdftex (RS)
-LaTeX Info: Redefining \lsstyle on input line 902.
-LaTeX Info: Redefining \lslig on input line 902.
-\MT@outer@space=\skip135
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
+Package: newtxtext 2024/04/01 v1.744(Michael Sharpe) latex and unicode latex support for TeXGyreTermesX
+ `newtxtext' v1.744, 2024/04/01 Text macros taking advantage of TeXGyre Termes and its extensions (msharpe) (/usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty
+Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+ (/usr/local/texlive/2024/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/local/texlive/2024/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks63
+\XKV@tempa@toks=\toks64
 )
-Package microtype Info: Loading configuration file microtype.cfg.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
-))
-\c@definition=\count532
-\c@theorem=\count533
+\XKV@depth=\count530
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)) (/usr/local/texlive/2024/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+) (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.sty (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.tex
+\xs_counta=\count531
+\xs_countb=\count532
+)
+Package: xstring 2023/08/22 v1.86 String manipulations (CT)
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+LaTeX Font Info:    Setting ntxLF sub-encoding to TS1/0 on input line 24.
+LaTeX Font Info:    Setting ntxTLF sub-encoding to TS1/0 on input line 24.
+LaTeX Font Info:    Setting ntxOsF sub-encoding to TS1/0 on input line 24.
+LaTeX Font Info:    Setting ntxTOsF sub-encoding to TS1/0 on input line 24.
+ (/usr/local/texlive/2024/texmf-dist/tex/generic/kastrup/binhex.tex)
+\ntx@tmpcnta=\count533
+\ntx@cnt=\count534
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/fontaxes/fontaxes.sty
+Package: fontaxes 2020/07/21 v1.0e Font selection axes
+LaTeX Info: Redefining \upshape on input line 29.
+LaTeX Info: Redefining \itshape on input line 31.
+LaTeX Info: Redefining \slshape on input line 33.
+LaTeX Info: Redefining \swshape on input line 35.
+LaTeX Info: Redefining \scshape on input line 37.
+LaTeX Info: Redefining \sscshape on input line 39.
+LaTeX Info: Redefining \ulcshape on input line 41.
+LaTeX Info: Redefining \textsw on input line 47.
+LaTeX Info: Redefining \textssc on input line 48.
+LaTeX Info: Redefining \textulc on input line 49.
+)
+\tx@sixem=\dimen330
+\tx@y=\dimen331
+\tx@x=\dimen332
+\tx@tmpdima=\dimen333
+\tx@tmpdimb=\dimen334
+\tx@tmpdimc=\dimen335
+\tx@tmpdimd=\dimen336
+\tx@tmpdime=\dimen337
+\tx@tmpdimf=\dimen338
+\tx@dimA=\dimen339
+\tx@dimAA=\dimen340
+\tx@dimB=\dimen341
+\tx@dimBB=\dimen342
+\tx@dimC=\dimen343
+LaTeX Info: Redefining \oldstylenums on input line 902.
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
+\c@definition=\count535
+\c@theorem=\count536
  (/usr/local/texlive/2024/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
 \langwohyphens=\language90
 LaTeX Info: Redefining \_ on input line 43.
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
-)))
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/verse/verse.sty
+Package: verse 2014/05/10 v2.4b verse typesetting
+\c@vslineno=\count537
+\c@poemline=\count538
+\c@fvsline=\count539
+\c@modulo@vs=\count540
+\c@verse@envctr=\count541
+\versewidth=\skip135
+\vgap=\skip136
+\vindent=\skip137
+\stanzaskip=\skip138
+\vleftskip=\skip139
+\vrightskip=\skip140
+\c@chrsinstr=\count542
+\beforepoemtitleskip=\skip141
+\afterpoemtitleskip=\skip142
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
+\MT@toks=\toks65
+\MT@tempbox=\box150
+\MT@count=\count543
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
+LaTeX Info: Redefining \leftprotrusion on input line 1062.
+\MT@prot@toks=\toks66
+LaTeX Info: Redefining \rightprotrusion on input line 1081.
+LaTeX Info: Redefining \textls on input line 1392.
+\MT@outer@kern=\dimen344
+LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
+\MT@listname@count=\count544
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2024/03/29 v3.1b Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 902.
+LaTeX Info: Redefining \lslig on input line 902.
+\MT@outer@space=\skip143
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
+))))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (build/Cap_4.aux)
+LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 2.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
+File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
+)
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 12.0pt on input line 2.
+ (build/Cap_4.aux
+
+LaTeX Warning: Label `eq:move_away' multiply defined.
+
+)
 \openout1 = `Cap_4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
@@ -1233,17 +1316,17 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
  (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count534
-\scratchdimen=\dimen331
+\scratchcounter=\count545
+\scratchdimen=\dimen345
 \scratchbox=\box151
-\nofMPsegments=\count535
-\nofMParguments=\count536
-\everyMPshowfont=\toks65
-\MPscratchCnt=\count537
-\MPscratchDim=\dimen332
-\MPnumerator=\count538
-\makeMPintoPDFobject=\count539
-\everyMPtoPDFconversion=\toks66
+\nofMPsegments=\count546
+\nofMParguments=\count547
+\everyMPshowfont=\toks67
+\MPscratchCnt=\count548
+\MPscratchDim=\dimen346
+\MPnumerator=\count549
+\makeMPintoPDFobject=\count550
+\everyMPtoPDFconversion=\toks68
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -1307,11 +1390,16 @@ Package biblatex Info: Reference segment=0 on input line 2.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
+\c@mv@tabular=\count551
+\c@mv@boldtabular=\count552
 LaTeX Info: Redefining \microtypecontext on input line 2.
 Package microtype Info: Applying patch `item' on input line 2.
 Package microtype Info: Applying patch `toc' on input line 2.
 Package microtype Info: Applying patch `eqnum' on input line 2.
-Package microtype Info: Applying patch `footnote' on input line 2.
+
+
+Package microtype Warning: Unable to apply patch `footnote' on input line 2.
+
 Package microtype Info: Applying patch `verbatim' on input line 2.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
@@ -1323,9 +1411,18 @@ LaTeX Info: Redefining \showhyphens on input line 2.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-ptm.cfg
+(/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+)
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 17.28pt on input line 3.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 17.28pt on input line 3.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 14.4pt on input line 5.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 14.4pt on input line 5.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
 LaTeX Font Info:    Trying to load font information for U+msa on input line 10.
@@ -1339,7 +1436,18 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) Excluding 'comment' comment.
+)
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.95pt on input line 41.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 12.0pt on input line 53.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 63.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 63.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 6.0pt on input line 63.
+
 
 LaTeX Warning: Reference `intro' on page 1 undefined on input line 82.
 
@@ -1347,7 +1455,12 @@ LaTeX Warning: Reference `intro' on page 1 undefined on input line 82.
 
 [1
 
-{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc}]
+{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}]
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 98.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 7.0pt on input line 98.
+
 
 LaTeX Warning: Reference `eq:H_spheric' on page 2 undefined on input line 104.
 
@@ -1379,17 +1492,15 @@ LaTeX Warning: Reference `eq:magnetic_moment' on page 3 undefined on input line 
 [6]
 
 [7]
-Overfull \hbox (1.49472pt too wide) in paragraph at lines 425--430
-\OT1/qtm/m/n/12 (-20) dis-tribut-ing com-pu-ta-tion across mul-ti-ple agents (the UAVs), this method re-duces com-pu-ta-tional
- []
-
-
 
 [8]
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 496.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
-File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
+LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 496.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
+File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
+LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
+(Font)              scaled to size 12.0pt on input line 496.
+
 
 [9{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
 
@@ -1401,21 +1512,22 @@ File: images/gradients_single_anal.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_single_anal.jpg  used on input line 565.
 (pdftex.def)             Requested size: 613.91551pt x 305.02837pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 564--571
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 564--571
  []|  [] 
  []
 
 
-LaTeX Warning: Reference `eq:NSS' on page 10 undefined on input line 577.
 
-<images/NSS_single_anal.jpg, id=186, 1927.2pt x 957.5775pt>
+[10]
+
+LaTeX Warning: Reference `eq:NSS' on page 11 undefined on input line 577.
+
+<images/NSS_single_anal.jpg, id=193, 1927.2pt x 957.5775pt>
 File: images/NSS_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_single_anal.jpg>
 Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 584.
 (pdftex.def)             Requested size: 350.81174pt x 174.29984pt.
 
-
-[10]
 
 [11 <./images/gradients_single_anal.jpg>]
 
@@ -1427,7 +1539,7 @@ File: images/gradients_rotated_single_anal.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_rotated_single_anal.jpg  used on input line 632.
 (pdftex.def)             Requested size: 613.91551pt x 305.02837pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 631--635
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 631--635
  []|  [] 
  []
 
@@ -1444,14 +1556,19 @@ Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 
 
 LaTeX Warning: Reference `eq:nabla' on page 14 undefined on input line 666.
 
-<images/gradients_single_num.jpg, id=225, 1927.2pt x 957.5775pt>
+<images/gradients_single_num.jpg, id=226, 1927.2pt x 957.5775pt>
 File: images/gradients_single_num.jpg Graphic file (type jpg)
 <use images/gradients_single_num.jpg>
 Package pdftex.def Info: images/gradients_single_num.jpg  used on input line 703.
 (pdftex.def)             Requested size: 613.91551pt x 305.02837pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 702--707
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 702--707
  []|  [] 
+ []
+
+
+Overfull \hbox (0.36075pt too wide) in paragraph at lines 728--735
+\OT1/ntxtlf/m/n/12 (-20) Next, we need to ver-ify that the gra-di-ent ten-sor ma-trix re-mains sym-met-ric un-der ro-to-trans-la-tions
  []
 
 
@@ -1459,17 +1576,8 @@ Overfull \hbox (89.70526pt too wide) in paragraph at lines 702--707
 [14]
 
 [15 <./images/gradients_single_num.jpg>]
-Overfull \hbox (2.97278pt too wide) in paragraph at lines 728--735
-\OT1/qtm/m/n/12 (-20) Next, we need to ver-ify that the gra-di-ent ten-sor ma-trix re-mains sym-met-ric un-der ro-to-trans-la-tions
- []
-
 
 LaTeX Warning: Reference `eq:final_H' on page 16 undefined on input line 749.
-
-
-Overfull \hbox (22.90573pt too wide) in paragraph at lines 748--755
-\OT1/qtm/m/n/12 (-20) We find the per-turbed mag-netic field in-ten-sity in the trans-mit-ter frame us-ing Eq. []: $[][]\OT1/cmr/bx/n/12 H\OT1/cmr/m/n/12 ([][]([][]\OT1/cmr/bx/n/12 p[] \OMS/cmsy/m/n/12 ^^F
- []
 
 
 LaTeX Warning: Reference `eq:NSS' on page 16 undefined on input line 767.
@@ -1480,7 +1588,7 @@ File: images/gradients_rotated_single_num.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_rotated_single_num.jpg  used on input line 772.
 (pdftex.def)             Requested size: 613.91551pt x 305.02837pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 771--775
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 771--775
  []|  [] 
  []
 
@@ -1500,22 +1608,16 @@ LaTeX Warning: Reference `eq:H_spheric' on page 18 undefined on input line 886.
 
 
 [18]
-Overfull \hbox (18.05771pt too wide) in paragraph at lines 917--926
-\OT1/qtm/m/n/12 (-20) quan-tity) is ro-ta-tion-ally in-vari-ant. Sup-pos-ing only one source, the pro-jec-tion of the elec-tro-mag-netic
- []
-
-
 
 [19]
 
-LaTeX Warning: Reference `eq:rotational_invariance' on page 20 undefined on input line 992.
-
-
-LaTeX Warning: Reference `eq:NSS_decay' on page 20 undefined on input line 993.
-
-
-
 [20]
+
+LaTeX Warning: Reference `eq:rotational_invariance' on page 21 undefined on input line 992.
+
+
+LaTeX Warning: Reference `eq:NSS_decay' on page 21 undefined on input line 993.
+
 
 LaTeX Warning: Reference `eq:rotated_gradient_tensor' on page 21 undefined on input line 1023.
 
@@ -1525,7 +1627,7 @@ File: images/gradients_multi_anal.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_multi_anal.jpg  used on input line 1045.
 (pdftex.def)             Requested size: 613.91551pt x 315.8994pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 1044--1048
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 1044--1048
 []|  [] 
  []
 
@@ -1540,7 +1642,7 @@ File: images/gradients_rotated_multi_anal.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_rotated_multi_anal.jpg  used on input line 1064.
 (pdftex.def)             Requested size: 613.91551pt x 305.02837pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 1063--1067
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 1063--1067
 []|  [] 
  []
 
@@ -1568,7 +1670,7 @@ File: images/gradients_multi_num.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_multi_num.jpg  used on input line 1157.
 (pdftex.def)             Requested size: 613.91551pt x 315.8994pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 1156--1160
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 1156--1160
 []|  [] 
  []
 
@@ -1583,7 +1685,7 @@ File: images/gradients_rotated_multi_num.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/gradients_rotated_multi_num.jpg  used on input line 1176.
 (pdftex.def)             Requested size: 613.91551pt x 305.02837pt.
 
-Overfull \hbox (89.70526pt too wide) in paragraph at lines 1175--1179
+Overfull \hbox (89.50119pt too wide) in paragraph at lines 1175--1179
 []|  [] 
  []
 
@@ -1611,35 +1713,35 @@ LaTeX Warning: Reference `eq:NSS' on page 27 undefined on input line 1251.
 [29]
 
 [30]
-Overfull \hbox (14.83138pt too wide) in paragraph at lines 1497--1499
-[]$\OMS/cmsy/m/n/12 k\OT1/cmr/bx/n/12 d[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^\[]\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 k$\OT1/qtm/m/n/12 (-20) : Norm (mag-ni-tude) of the di-rec-tion vec-tor $\OT1/cmr/bx/n/12 d[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^\[]\OT1/cmr/m/n/12 )$\OT1/qtm/m/n/12 (-20) , which is used for nor-mal-iza-tion. 
- []
 
+[31]
 
-
-[31] (build/Cap_4.aux)
+[32] (build/Cap_4.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
-L3 programming layer <2024-09-10>
+L3 programming layer <2020/03/25>
  ***********
 
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `Cap_4.out' has not changed.
-(rerunfilecheck)             Checksum: D4EE2AFE81F1D390F39175262ED3D41D;2365.
+(rerunfilecheck)             Checksum: 031F6079131AAB805C9D1F6C18462C9F;2391.
 Package logreq Info: Writing requests to 'Cap_4.run.xml'.
 \openout1 = `Cap_4.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 49479 strings out of 473579
- 1045372 string characters out of 5728234
- 1923236 words of memory out of 5000000
- 71379 multiletter control sequences out of 15000+600000
- 621360 words of font info for 188 fonts, out of 8000000 for 9000
+ 51095 strings out of 473579
+ 1075095 string characters out of 5728234
+ 1944694 words of memory out of 5000000
+ 72756 multiletter control sequences out of 15000+600000
+ 614984 words of font info for 347 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 104i,17n,104p,1698b,1188s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 104i,17n,104p,1698b,1220s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{cite.0@PSO_IMPORTANT} has been referenced but does not exist, replaced by a fixed one
 
@@ -1653,7 +1755,19 @@ pdfTeX warning (dest): name{cite.0@3} has been referenced but does not exist, re
 pdfTeX warning (dest): name{cite.0@multiple_spacecraft} has been referenced but does not exist, replaced by a fixed one
 
 
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist, replaced by a fixed one
+
+
 pdfTeX warning (dest): name{cite.0@NSS_single_localization} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 
 pdfTeX warning (dest): name{cite.0@book-robotics} has been referenced but does not exist, replaced by a fixed one
@@ -1664,11 +1778,11 @@ pdfTeX warning (dest): name{cite.0@similar-main} has been referenced but does no
 
 pdfTeX warning (dest): name{cite.0@main} has been referenced but does not exist, replaced by a fixed one
 
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on build/Cap_4.pdf (31 pages, 3672922 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
+Output written on build/Cap_4.pdf (32 pages, 3700517 bytes).
 PDF statistics:
- 539 PDF objects out of 1000 (max. 8388607)
- 442 compressed objects within 5 object streams
+ 545 PDF objects out of 1000 (max. 8388607)
+ 446 compressed objects within 5 object streams
  122 named destinations out of 1000 (max. 500000)
- 38083 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 74947 words of extra memory for PDF output out of 89155 (max. 10000000)
 

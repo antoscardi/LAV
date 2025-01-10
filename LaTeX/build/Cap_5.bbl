@@ -353,7 +353,7 @@
       \endverb
       \keyw{Vehicles;Attitude control;Vehicle dynamics;Aerodynamics;Quaternions;Robustness;Stability analysis;Aerial robotics;hybrid control;interconnected systems;nonlinear control;robust control}
     \endentry
-    \entry{ENU}{unknown}{}{}
+    \entry{ENU}{article}{}{}
       \name{author}{1}{}{%
         {{hash=11093eae0463a2f5e2857120c256fc3c}{%
            family={Rochford},

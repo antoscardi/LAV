@@ -261,6 +261,8 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/commath/commath.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/commath/commath.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.sty
@@ -423,8 +425,6 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarr
 INPUT /usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT /usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 INPUT /usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty
@@ -454,6 +454,8 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/subfiles/subfiles.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/subfiles/subfiles.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/verse/verse.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/verse/verse.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype-pdftex.def

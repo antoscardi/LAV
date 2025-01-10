@@ -5,7 +5,7 @@ The purpose of this chapter is to model the dynamical system
 of each UAV and describe the control strategies used to achieve the 
 desired position and velocity, while ensuring stability and robustness.
 The focus of our work is to localize the position of the 
-avalanche victims, therefore the control task of the drones' flight 
+avalanche victims, therefore the control task of the UAVs' flight 
 is limited and interested mainly in controlling the altitude 
 (maintaining a fixed height) and the horizontal positions
 $x$ and $y$.
@@ -20,7 +20,7 @@ expressed in terms of both the inertial frame \( F_g \) and the
 body frame \( F_b \).
 As already mentioned, we have assumed the body frame $F_b$
 to coincide with the receiver frame $F_r$, relative to the
-the ARTVA equipment installed on the drone; therefore 
+the ARTVA equipment installed on the UAV; therefore 
 from now on we will denote the body frame with $F_r$.
 
 \noindent\\
@@ -442,25 +442,25 @@ Combining the translational and rotational dynamics, the complete UAV dynamics i
 \noindent\\
 More explicitly we can expand these equations and thanks to inverting Eq.\ref{eq:angular_rates_to_rpy}
 and how we defined rotation matrix $\mathbf{R}_r^g$ in Eq.\ref{eq:attitude}, we obtain
-a system with twelve states and four control inputs:
-{\large
+a system with twelve states and four control inputs:\vspace{0.2cm}
+%{\large
 \begin{equation}
-    \begin{cases}
+\begin{cases}
  \dot{x}_r = v_x \\[6pt]
  \dot{y}_r = v_y \\[6pt]
  \dot{z}_r = v_z \\[6pt]
- \dot{v_x} = -d_{f,x} + (\cos(\psi) \sin(\theta) \cos(\phi) + \sin(\psi) \sin(\phi)) \frac{T}{m} \\[6pt]
- \dot{v_y} = -d_{f,y} + (\sin(\psi) \sin(\theta) \cos(\phi) - \cos(\psi) \sin(\phi)) \frac{T}{m} \\[6pt]
- \dot{v_z} = -d_{f,z} - g + \cos(\theta) \cos(\phi) \frac{T}{m} \\[6pt]
- \dot{\phi} = p + \sin(\phi) \tan(\theta) q + \cos(\phi) \tan(\theta) r \\[6pt]
+ \dot{v_x} = -d_{f,x} + (\cos(\psi) \sin(\theta) \cos(\phi) + \sin(\psi) \sin(\phi)) \frac{T}{m} \\[8pt]
+ \dot{v_y} = -d_{f,y} + (\sin(\psi) \sin(\theta) \cos(\phi) - \cos(\psi) \sin(\phi)) \frac{T}{m} \\[8pt]
+ \dot{v_z} = -d_{f,z} - g + \cos(\theta) \cos(\phi) \frac{T}{m} \\[8pt]
+ \dot{\phi} = p + \sin(\phi) \tan(\theta) q + \cos(\phi) \tan(\theta) r \\[8pt]
  \dot{\theta} = \cos(\phi) q - \sin(\phi) r \\[6pt]
- \dot{\psi} = \sin(\phi) \sec(\theta) q + \cos(\phi) \sec(\theta) r \\[6pt]
- \dot{p} = \tau_{\phi} + \frac{I_y - I_z}{I_x} qr + \frac{\tau_\phi}{I_x} \\[8pt]
- \dot{q} = \tau_{\theta} + \frac{I_z - I_x}{I_y} pr + \frac{\tau_\theta}{I_y} \\[8pt]
- \dot{r} = \tau_{\psi} + \frac{I_x - I_y}{I_z} pq + \frac{\tau_\psi}{I_z}
-    \end{cases}
-    \label{eq:final_model_more}
-\end{equation}}
+ \dot{\psi} = \sin(\phi) \sec(\theta) q + \cos(\phi) \sec(\theta) r \\[8pt]
+ \dot{p} =  \frac{I_y - I_z}{I_x} qr + \frac{\tau_\phi}{I_x} \\[10pt]
+ \dot{q} =  \frac{I_z - I_x}{I_y} pr + \frac{\tau_\theta}{I_y} \\[10pt]
+ \dot{r} =  \frac{I_x - I_y}{I_z} pq + \frac{\tau_\psi}{I_z}
+\end{cases}
+\label{eq:final_model_more}
+\end{equation}%}
 \noindent
 where $\tau_{\phi}, \tau_{\theta}, \tau_{\psi}$ are the components of input
 torque vector $\boldsymbol{\tau}_{\text{u}} = (\tau_{\phi}, \tau_{\theta}, \tau_{\psi})^\top $.
@@ -512,14 +512,14 @@ The simplified dynamics are:
 \noindent\\
 Explicitly expanded as:
 \begin{subequations}
-\begin{align}
+\begin{empheq}[left=\empheqlbrace]{align}
  \ddot{x}_r &= (\cos\psi \sin\theta \cos\phi + \sin\psi \sin\phi) \frac{T}{m} \label{eq:position_control_x}\\[6pt] 
  \ddot{y}_r &= (\sin\psi \sin\theta \cos\phi - \cos\psi \sin\phi) \frac{T}{m} \label{eq:position_control_y}\\[6pt] 
  \ddot{z}_r &= \cos\theta \cos\phi \frac{T}{m} - g  \label{eq:position_control_z}\\[6pt] 
  \dot{\phi} &= \frac{\tau_{\phi}}{I_x} \\[8pt]
  \dot{\theta} &= \frac{\tau_{\theta}}{I_y} \\[8pt]
  \dot{\psi} &= \frac{\tau_{\psi}}{I_z}
-\end{align}
+\end{empheq}
 \label{eq:simplified_model}
 \end{subequations}
 \noindent\\
@@ -794,7 +794,7 @@ While the input force was defined earlier in Eq.\ref{eq:true_input}.
     \end{tikzpicture}
     \caption{Quadrotor model }
 \end{figure}
-The configuration chosen for the drone to determine the 
+The configuration chosen for the quadrotor to determine the 
 relationship between the rotor speeds and the torques 
 and thrust vector is the standard "+" configuration, 
 as in \cite{figura_bella_drone, model_quadrotor, 
@@ -853,9 +853,9 @@ T \\
 \]
 
 \noindent\\
-As already stated, the drone is an underactuated system, 
+As already stated, the quadrotor is an underactuated system, 
 meaning that the 4 controllable inputs (the \( \omega_i \) angular velocities) are 
-fewer than the 6 DOF\footnote{DOF stands for Degrees of Freedom} the drone's movement has. 
+fewer than the 6 DOF\footnote{DOF stands for Degrees of Freedom} the quadrotor's movement has. 
 To determine the rotor velocities \( \omega_i^2 \), 
 the matrix \( \mathbf{A} \) must be invertible.
 Matrix \( \mathbf{A} \) is invertible when \( c_t, c_d, l \neq 0 \), which is always true. 
@@ -922,7 +922,7 @@ taking the square root of the computed \( \omega_i^2 \) values.
     \caption{Block diagram of the PID control applied to the PSO algorithm}
     \label{fig:control_PSO}
 \end{figure}
-Finally, in order to ensure that the drones in the PSO swarm follows
+Finally, in order to ensure that the UAVs in the PSO swarm follows
 the desired velocity and position commands we integrate the 
 PID control described in the previous Section \ref{sec:PID_control} 
 with the PSO algorithm described in Section \ref{sec:PSO}.
@@ -930,19 +930,19 @@ The block diagram of the complete localization and control
 system is shown in Figure \ref{fig:control_PSO}.
 
 \noindent\\
-\textbf{Important}\noindent\\
+\textbf{Remark}\noindent\\
 Note that the PSO algorithm updates are performed at a sample time 
 $\tau_s \neq \tau_k$, where $s \in \mathbb{N}$, which is less 
 frequent than the control time step $\tau_k$.
 In particular, the PSO algorithm updates once every second, while 
 $\tau_k \in \mathbb{R}$.
 This implies that at each sample time $\tau_s$ the NSS value is 
-evaluated by each $j$-th receiver drone at $\mathbf{p}_{r_j}(\tau_s)$ using 
+evaluated by each $j$-th receiver UAV at $\mathbf{p}_{r_j}(\tau_s)$ using 
 Eq.\ref{eq:received_signal}.
 This value is used to update the personal best position $\mathbf{pbest}_{j}$
-of each drone and the group best position $\mathbf{gbest}$ of each group,
+of each UAV and the group best position $\mathbf{gbest}$ of each group,
 which occurs when the current NSS value exceeds previous records. 
-Then, the drones update their 2D velocities and positions
+Then, the UAVs update their 2D velocities and positions
 as in Equations~\ref{eq:model_velocity} and \ref{eq:model_position}:
 \begin{align}
  \mathbf{v}_{j}(\tau_s+1) &= \omega \mathbf{v}_{j}(\tau_s) 
@@ -961,20 +961,27 @@ are then used as velocity and position desired commands for the PSO, when
 $\tau_s = \tau_k$.
 Then, during the next time interval $\Delta \def \tau_{s+1} - \tau_s$ the PID
 control algorithm ensures the desired position and velocity are reached,
-and the drone's movement follows the full dynamics system defined in 
+and the UAV's movement follows the full dynamics system defined in 
 Eq.\ref{eq:final_model_more}:
 \begin{equation}
  \dot{\mathbf{\xi}}(\tau_k) = f(\mathbf{\xi}(\tau_k))
 \end{equation}
-where the drone’s state $\mathbf{\xi}$ is updated at each time step $\tau_k$ in the 
+where the UAV’s state $\mathbf{\xi}$ is updated at each time step $\tau_k$ in the 
 interval $\Delta = \tau_{s+1} - \tau_s$.
 Additionally, the control dynamics ensure the 
 search space boundary conditions as in
 Eq.\ref{eq:boundary_condition}.
 This iterative alternation between PSO updates and 
-independent drone 
+independent UAV 
 control enables the swarm to balance global 
 exploration and local exploitation, 
 ensuring efficient source localization and actual 
 control inputs.
+
+\noindent\\
+Finally, we note that the comtrol inputs (rotor velocities
+$\omega_i$) have been limited to $\omega_\text{max}$, 
+in order to respect the physical limitations of real 
+rotors. 
+
 \end{document}

@@ -289,7 +289,7 @@ function rotor_velocities = compute_rotor_velocities(F, torques)
         1, 1, 1, 1;              % Total thrust
         0, -l, 0, l;             % Roll torque
         l, 0, -l, 0;             % Pitch torque
-        -c, +c, -c, +c;            % Yaw torque
+        -c, +c, -c, +c;          % Yaw torque
     ];
     b_vector = [F; torques];
     rotor_velocities = sqrt(A \ b_vector);
@@ -299,6 +299,12 @@ function rotor_velocities = compute_rotor_velocities(F, torques)
         disp(rotor_velocities)
         error("Negative speed")
     end
+
+    if any(rotor_velocities > 700)
+        disp(rotor_velocities)
+        disp("Speed more than 700 rad/s")
+        rotor_velocities(rotor_velocities > 700) = 700;
+    end    
 end
 
 function rotor_forces = compute_rotor_forces(rotor_velocities)

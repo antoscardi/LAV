@@ -30,7 +30,7 @@
 \contentsline {subsubsection}{\numberline {3.3.1}Magnetic Field Intensity H}{26}{subsubsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.4}Normalized Source Strength}{27}{subsection.3.4}%
 \contentsline {subsubsection}{\numberline {3.4.1}Demonstration of Rotation Invariance}{32}{subsubsection.3.4.1}%
-\contentsline {section}{\numberline {4}Mathematical Model}{35}{section.4}%
+\contentsline {section}{\numberline {4}Mathematical Model of Transmitter/Receiver System}{35}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Single Victim Case}{35}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Magnitude of Magnetic Field Intensity H}{36}{subsubsection.4.1.1}%
 \contentsline {subsubsection}{\numberline {4.1.2}Finding the ARTVA position}{38}{subsubsection.4.1.2}%
@@ -42,8 +42,6 @@
 \contentsline {subsubsection}{\numberline {4.2.2}Normalized Source Strength}{55}{subsubsection.4.2.2}%
 \contentsline {subsubsection}{\numberline {4.2.3}Final Model}{61}{subsubsection.4.2.3}%
 \contentsline {subsubsection}{\numberline {4.2.4}Modified Particle Swarm Optimization with Exclusion Zones}{62}{subsubsection.4.2.4}%
-\contentsline {paragraph}{Checking}{65}{section*.25}%
-\contentsline {paragraph}{Avoidance}{65}{section*.26}%
 \contentsline {section}{\numberline {5}Control}{67}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Notations}{67}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Complete Quadrotor Dynamics}{71}{subsection.5.2}%
@@ -52,11 +50,11 @@
 \contentsline {subsubsection}{\numberline {5.2.3}Final Complete Quadrotor Dynamics}{74}{subsubsection.5.2.3}%
 \contentsline {subsection}{\numberline {5.3}Simplified Dynamics}{75}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}PID Control}{76}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Position Control}{77}{subsubsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.2}Attitude Control}{78}{subsubsection.5.4.2}%
-\contentsline {subsubsection}{\numberline {5.4.3}Rotor Velocities}{79}{subsubsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.5}PID Control applied to PSO}{80}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Experiments}{82}{section.6}%
+\contentsline {subsubsection}{\numberline {5.4.1}Position Control}{76}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Attitude Control}{77}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Rotor Velocities}{78}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}PID Control applied to PSO}{79}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Simulations}{82}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Implementation}{82}{subsection.6.1}%
 \contentsline {subsubsection}{\numberline {6.1.1}\texttt {ARTVAs} class}{85}{subsubsection.6.1.1}%
 \contentsline {subsubsection}{\numberline {6.1.2}\texttt {Plotter} class}{85}{subsubsection.6.1.2}%
@@ -67,4 +65,4 @@
 \contentsline {subsubsection}{\numberline {6.2.1}PID for Trajectory Tracking}{93}{subsubsection.6.2.1}%
 \contentsline {subsubsection}{\numberline {6.2.2}PSO with Control}{96}{subsubsection.6.2.2}%
 \contentsline {section}{\numberline {7}Conclusions}{101}{section.7}%
-\contentsline {section}{Ringraziamenti}{110}{section*.48}%
+\contentsline {section}{Ringraziamenti}{110}{section*.47}%

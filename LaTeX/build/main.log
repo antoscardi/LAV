@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  5 JAN 2025 03:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  10 JAN 2025 03:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -626,57 +626,75 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip91
 \thm@headsep=\skip92
 \dth@everypar=\toks44
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
+Package: empheq 2017/03/31 v2.15 Emphasizing equations
+\l_EQ_equationtype_int=\count340
+\l_EQ_alignmentmode_int=\count341
+\l_EQ_totalwidth_dim=\dimen290
+\l_EQ_displaywidth_dim=\dimen291
+\l_EQ_temp_linewidth_dim=\dimen292
+\l_EQ_linewidth_dim=\dimen293
+\EmphEqdelimitershortfall=\dimen294
+\EmphEqdelimiterfactor=\count342
+\g_EQ_toptag_height_dim=\dimen295
+\g_EQ_bottomtag_depth_dim=\dimen296
+\g_EQ_toprow_height_dim=\dimen297
+\g_EQ_bottomrow_depth_dim=\dimen298
+\g_EQ_widesttag_dim=\dimen299
+\EQ_mathdisplay_box=\box112
+\EQ_tag_box=\box113
+\g_EQ_temprow_int=\count343
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
  (/usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count340
+\lrq@indent=\count344
  (/usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count341
-\c@listtotal=\count342
-\c@listcount=\count343
-\c@liststart=\count344
-\c@liststop=\count345
-\c@citecount=\count346
-\c@citetotal=\count347
-\c@multicitecount=\count348
-\c@multicitetotal=\count349
-\c@instcount=\count350
-\c@maxnames=\count351
-\c@minnames=\count352
-\c@maxitems=\count353
-\c@minitems=\count354
-\c@citecounter=\count355
-\c@maxcitecounter=\count356
-\c@savedcitecounter=\count357
-\c@uniquelist=\count358
-\c@uniquename=\count359
-\c@refsection=\count360
-\c@refsegment=\count361
-\c@maxextratitle=\count362
-\c@maxextratitleyear=\count363
-\c@maxextraname=\count364
-\c@maxextradate=\count365
-\c@maxextraalpha=\count366
-\c@abbrvpenalty=\count367
-\c@highnamepenalty=\count368
-\c@lownamepenalty=\count369
-\c@maxparens=\count370
-\c@parenlevel=\count371
-\blx@tempcnta=\count372
-\blx@tempcntb=\count373
-\blx@tempcntc=\count374
-\c@blx@maxsection=\count375
-\blx@maxsegment@0=\count376
-\blx@notetype=\count377
-\blx@parenlevel@text=\count378
-\blx@parenlevel@foot=\count379
-\blx@sectionciteorder@0=\count380
-\blx@sectionciteorderinternal@0=\count381
-\blx@entrysetcounter=\count382
-\blx@biblioinstance=\count383
+\c@tabx@nest=\count345
+\c@listtotal=\count346
+\c@listcount=\count347
+\c@liststart=\count348
+\c@liststop=\count349
+\c@citecount=\count350
+\c@citetotal=\count351
+\c@multicitecount=\count352
+\c@multicitetotal=\count353
+\c@instcount=\count354
+\c@maxnames=\count355
+\c@minnames=\count356
+\c@maxitems=\count357
+\c@minitems=\count358
+\c@citecounter=\count359
+\c@maxcitecounter=\count360
+\c@savedcitecounter=\count361
+\c@uniquelist=\count362
+\c@uniquename=\count363
+\c@refsection=\count364
+\c@refsegment=\count365
+\c@maxextratitle=\count366
+\c@maxextratitleyear=\count367
+\c@maxextraname=\count368
+\c@maxextradate=\count369
+\c@maxextraalpha=\count370
+\c@abbrvpenalty=\count371
+\c@highnamepenalty=\count372
+\c@lownamepenalty=\count373
+\c@maxparens=\count374
+\c@parenlevel=\count375
+\blx@tempcnta=\count376
+\blx@tempcntb=\count377
+\blx@tempcntc=\count378
+\c@blx@maxsection=\count379
+\blx@maxsegment@0=\count380
+\blx@notetype=\count381
+\blx@parenlevel@text=\count382
+\blx@parenlevel@foot=\count383
+\blx@sectionciteorder@0=\count384
+\blx@sectionciteorderinternal@0=\count385
+\blx@entrysetcounter=\count386
+\blx@biblioinstance=\count387
 \labelnumberwidth=\skip93
 \labelalphawidth=\skip94
 \biblabelsep=\skip95
@@ -688,9 +706,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read3
 \blx@bcfout=\write4
 \blx@langwohyphens=\language89
-\c@mincomprange=\count384
-\c@maxcomprange=\count385
-\c@mincompwidth=\count386
+\c@mincomprange=\count388
+\c@maxcomprange=\count389
+\c@mincompwidth=\count390
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -700,74 +718,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'ieee.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count387
-\c@savedafterword=\count388
-\c@annotator=\count389
-\c@savedannotator=\count390
-\c@author=\count391
-\c@savedauthor=\count392
-\c@bookauthor=\count393
-\c@savedbookauthor=\count394
-\c@commentator=\count395
-\c@savedcommentator=\count396
-\c@editor=\count397
-\c@savededitor=\count398
-\c@editora=\count399
-\c@savededitora=\count400
-\c@editorb=\count401
-\c@savededitorb=\count402
-\c@editorc=\count403
-\c@savededitorc=\count404
-\c@foreword=\count405
-\c@savedforeword=\count406
-\c@holder=\count407
-\c@savedholder=\count408
-\c@introduction=\count409
-\c@savedintroduction=\count410
-\c@namea=\count411
-\c@savednamea=\count412
-\c@nameb=\count413
-\c@savednameb=\count414
-\c@namec=\count415
-\c@savednamec=\count416
-\c@translator=\count417
-\c@savedtranslator=\count418
-\c@shortauthor=\count419
-\c@savedshortauthor=\count420
-\c@shorteditor=\count421
-\c@savedshorteditor=\count422
-\c@labelname=\count423
-\c@savedlabelname=\count424
-\c@institution=\count425
-\c@savedinstitution=\count426
-\c@lista=\count427
-\c@savedlista=\count428
-\c@listb=\count429
-\c@savedlistb=\count430
-\c@listc=\count431
-\c@savedlistc=\count432
-\c@listd=\count433
-\c@savedlistd=\count434
-\c@liste=\count435
-\c@savedliste=\count436
-\c@listf=\count437
-\c@savedlistf=\count438
-\c@location=\count439
-\c@savedlocation=\count440
-\c@organization=\count441
-\c@savedorganization=\count442
-\c@origlocation=\count443
-\c@savedoriglocation=\count444
-\c@origpublisher=\count445
-\c@savedorigpublisher=\count446
-\c@publisher=\count447
-\c@savedpublisher=\count448
-\c@language=\count449
-\c@savedlanguage=\count450
-\c@origlanguage=\count451
-\c@savedoriglanguage=\count452
-\c@pageref=\count453
-\c@savedpageref=\count454
+\c@afterword=\count391
+\c@savedafterword=\count392
+\c@annotator=\count393
+\c@savedannotator=\count394
+\c@author=\count395
+\c@savedauthor=\count396
+\c@bookauthor=\count397
+\c@savedbookauthor=\count398
+\c@commentator=\count399
+\c@savedcommentator=\count400
+\c@editor=\count401
+\c@savededitor=\count402
+\c@editora=\count403
+\c@savededitora=\count404
+\c@editorb=\count405
+\c@savededitorb=\count406
+\c@editorc=\count407
+\c@savededitorc=\count408
+\c@foreword=\count409
+\c@savedforeword=\count410
+\c@holder=\count411
+\c@savedholder=\count412
+\c@introduction=\count413
+\c@savedintroduction=\count414
+\c@namea=\count415
+\c@savednamea=\count416
+\c@nameb=\count417
+\c@savednameb=\count418
+\c@namec=\count419
+\c@savednamec=\count420
+\c@translator=\count421
+\c@savedtranslator=\count422
+\c@shortauthor=\count423
+\c@savedshortauthor=\count424
+\c@shorteditor=\count425
+\c@savedshorteditor=\count426
+\c@labelname=\count427
+\c@savedlabelname=\count428
+\c@institution=\count429
+\c@savedinstitution=\count430
+\c@lista=\count431
+\c@savedlista=\count432
+\c@listb=\count433
+\c@savedlistb=\count434
+\c@listc=\count435
+\c@savedlistc=\count436
+\c@listd=\count437
+\c@savedlistd=\count438
+\c@liste=\count439
+\c@savedliste=\count440
+\c@listf=\count441
+\c@savedlistf=\count442
+\c@location=\count443
+\c@savedlocation=\count444
+\c@organization=\count445
+\c@savedorganization=\count446
+\c@origlocation=\count447
+\c@savedoriglocation=\count448
+\c@origpublisher=\count449
+\c@savedorigpublisher=\count450
+\c@publisher=\count451
+\c@savedpublisher=\count452
+\c@language=\count453
+\c@savedlanguage=\count454
+\c@origlanguage=\count455
+\c@savedoriglanguage=\count456
+\c@pageref=\count457
+\c@savedpageref=\count458
 \shorthandwidth=\skip101
 \shortjournalwidth=\skip102
 \shortserieswidth=\skip103
@@ -791,19 +809,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
-\c@textcitecount=\count455
-\c@textcitetotal=\count456
-\c@textcitemaxnames=\count457
-\c@biburlbigbreakpenalty=\count458
-\c@biburlbreakpenalty=\count459
-\c@biburlnumpenalty=\count460
-\c@biburlucpenalty=\count461
-\c@biburllcpenalty=\count462
+\c@textcitecount=\count459
+\c@textcitetotal=\count460
+\c@textcitemaxnames=\count461
+\c@biburlbigbreakpenalty=\count462
+\c@biburlbreakpenalty=\count463
+\c@biburlnumpenalty=\count464
+\c@biburlucpenalty=\count465
+\c@biburllcpenalty=\count466
 \biburlbigskip=\muskip19
 \biburlnumskip=\muskip20
 \biburlucskip=\muskip21
 \biburllcskip=\muskip22
-\c@smartand=\count463
+\c@smartand=\count467
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
@@ -821,8 +839,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count464
-\c@bbx:relatedtotal=\count465
+\c@bbx:relatedcount=\count468
+\c@bbx:relatedtotal=\count469
 ))))
 Package biblatex Info: Trying to load citation style 'ieee'...
 Package biblatex Info: ... file 'ieee.cbx' found.
@@ -832,10 +850,10 @@ Package biblatex Info: Trying to load citation style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.cbx' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
 File: numeric-comp.cbx 2024/03/21 v3.20 biblatex citation style (PK/MW)
-\c@cbx@tempcnta=\count466
-\c@cbx@tempcntb=\count467
-\c@cbx@tempcntc=\count468
-\c@cbx@tempcntd=\count469
+\c@cbx@tempcnta=\count470
+\c@cbx@tempcntb=\count471
+\c@cbx@tempcntc=\count472
+\c@cbx@tempcntd=\count473
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -863,8 +881,8 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-09-10 L3 programming layer (loader) 
  (/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count470
-\l__pdf_internal_box=\box112
+\l__color_backend_stack_int=\count474
+\l__pdf_internal_box=\box114
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2024-09-10 L3 programming layer (loader) 
@@ -876,12 +894,12 @@ Package: xparse 2024-08-16 L3 Experimental document command parser
 Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
-\csq@reset=\count471
-\csq@gtype=\count472
-\csq@glevel=\count473
-\csq@qlevel=\count474
-\csq@maxlvl=\count475
-\csq@tshold=\count476
+\csq@reset=\count475
+\csq@gtype=\count476
+\csq@glevel=\count477
+\csq@qlevel=\count478
+\csq@maxlvl=\count479
+\csq@tshold=\count480
 \csq@ltx@everypar=\toks45
  (/usr/local/texlive/2024/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
@@ -893,11 +911,11 @@ File: csquotes.cfg
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
 \labelindent=\skip115
-\enit@outerparindent=\dimen290
+\enit@outerparindent=\dimen300
 \enit@toks=\toks46
-\enit@inbox=\box113
-\enit@count@id=\count477
-\enitdp@description=\count478
+\enit@inbox=\box115
+\enit@count@id=\count481
+\enitdp@description=\count482
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write5
  Excluding comment 'comment') (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/tgtermes.sty
@@ -907,7 +925,7 @@ File: tikzlibraryangles.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryquotes.code.tex
 File: tikzlibraryquotes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryintersections.code.tex (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
-\pgf@intersect@solutions=\count479
+\pgf@intersect@solutions=\count483
 )) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary3d.code.tex
 File: tikzlibrary3d.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryperspective.code.tex
@@ -921,24 +939,24 @@ Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
  (/usr/local/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen291
-\captionmargin=\dimen292
-\caption@leftmargin=\dimen293
-\caption@rightmargin=\dimen294
-\caption@width=\dimen295
-\caption@indent=\dimen296
-\caption@parindent=\dimen297
-\caption@hangindent=\dimen298
+\caption@tempdima=\dimen301
+\captionmargin=\dimen302
+\caption@leftmargin=\dimen303
+\caption@rightmargin=\dimen304
+\caption@width=\dimen305
+\caption@indent=\dimen306
+\caption@parindent=\dimen307
+\caption@hangindent=\dimen308
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count480
-\c@continuedfloat=\count481
+\c@caption@flags=\count484
+\c@continuedfloat=\count485
 Package caption Info: hyperref package is loaded.
 )
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count482
+\c@subfigure=\count486
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count483
+\c@subtable=\count487
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/physics/physics.sty
 Package: physics 
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty
@@ -956,7 +974,7 @@ File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen299
+\arrowsize=\dimen309
 ))) (/usr/local/texlive/2024/texmf-dist/tex/latex/carlisle/slashed.sty
 Package: slashed 1997/01/16 v0.01 Feynman Slashed Character Notation (DPC)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest.sty
@@ -983,26 +1001,26 @@ File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box114
-\pgfnodeparttwobox=\box115
-\pgfnodepartthreebox=\box116
-\pgfnodepartfourbox=\box117
-\pgfnodeparttwentybox=\box118
-\pgfnodepartnineteenbox=\box119
-\pgfnodeparteighteenbox=\box120
-\pgfnodepartseventeenbox=\box121
-\pgfnodepartsixteenbox=\box122
-\pgfnodepartfifteenbox=\box123
-\pgfnodepartfourteenbox=\box124
-\pgfnodepartthirteenbox=\box125
-\pgfnodeparttwelvebox=\box126
-\pgfnodepartelevenbox=\box127
-\pgfnodeparttenbox=\box128
-\pgfnodepartninebox=\box129
-\pgfnodeparteightbox=\box130
-\pgfnodepartsevenbox=\box131
-\pgfnodepartsixbox=\box132
-\pgfnodepartfivebox=\box133
+\pgfnodepartlowerbox=\box116
+\pgfnodeparttwobox=\box117
+\pgfnodepartthreebox=\box118
+\pgfnodepartfourbox=\box119
+\pgfnodeparttwentybox=\box120
+\pgfnodepartnineteenbox=\box121
+\pgfnodeparteighteenbox=\box122
+\pgfnodepartseventeenbox=\box123
+\pgfnodepartsixteenbox=\box124
+\pgfnodepartfifteenbox=\box125
+\pgfnodepartfourteenbox=\box126
+\pgfnodepartthirteenbox=\box127
+\pgfnodeparttwelvebox=\box128
+\pgfnodepartelevenbox=\box129
+\pgfnodeparttenbox=\box130
+\pgfnodepartninebox=\box131
+\pgfnodeparteightbox=\box132
+\pgfnodepartsevenbox=\box133
+\pgfnodepartsixbox=\box134
+\pgfnodepartfivebox=\box135
 ))) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
 File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/pgfopts/pgfopts.sty
@@ -1018,64 +1036,64 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/inlinedef/inlinedef.sty
 Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
 \ID@toks=\toks49
-\ID@count=\count484
+\ID@count=\count488
 )
 \ID@usercommands=\toks50
-\safeloop@depth=\count485
-\safeRKloop@depth=\count486
-\forest@temp@dimen=\dimen300
-\forest@temp@count=\count487
-\forest@n=\count488
-\forest@temp@global@count=\count489
+\safeloop@depth=\count489
+\safeRKloop@depth=\count490
+\forest@temp@dimen=\dimen310
+\forest@temp@count=\count491
+\forest@n=\count492
+\forest@temp@global@count=\count493
 \forest@temp@toks=\toks51
-\forest@temparray@M=\count490
-\forest@temparray@N=\count491
-\forest@global@temparray@M=\count492
-\forest@global@temparray@N=\count493
-\forest@isnum@count=\count494
-\forest@isdim@nonintpart=\count495
-\forest@isdim@dimen=\dimen301
-\forest@sort@m=\count496
-\forest@sort@k=\count497
-\forest@sort@p=\count498
+\forest@temparray@M=\count494
+\forest@temparray@N=\count495
+\forest@global@temparray@M=\count496
+\forest@global@temparray@N=\count497
+\forest@isnum@count=\count498
+\forest@isdim@nonintpart=\count499
+\forest@isdim@dimen=\dimen311
+\forest@sort@m=\count500
+\forest@sort@k=\count501
+\forest@sort@p=\count502
 \bracket@content=\toks52
 \bracket@afterthought=\toks53
-\forest@node@maxid=\count499
-\forest@process@left@M=\count500
-\forest@process@left@N=\count501
-\forest@process@right@M=\count502
-\forest@process@right@N=\count503
-\forest@process@saved@M=\count504
-\forest@process@saved@N=\count505
-\forest@process@result@M=\count506
-\forest@process@result@N=\count507
-\forest@process@n=\count508
+\forest@node@maxid=\count503
+\forest@process@left@M=\count504
+\forest@process@left@N=\count505
+\forest@process@right@M=\count506
+\forest@process@right@N=\count507
+\forest@process@saved@M=\count508
+\forest@process@saved@N=\count509
+\forest@process@result@M=\count510
+\forest@process@result@N=\count511
+\forest@process@n=\count512
 \forest@nodewalk@branch@toks=\toks54
 \forest@nodewalk@shortsteps@resolution=\toks55
 \forest@do@dynamics=\toks56
-\forest@box=\box134
-\forest@xg=\dimen302
-\forest@yg=\dimen303
-\forest@xs=\dimen304
-\forest@ys=\dimen305
+\forest@box=\box136
+\forest@xg=\dimen312
+\forest@yg=\dimen313
+\forest@xs=\dimen314
+\forest@ys=\dimen315
 \forest@pi@toks=\toks57
 \forest@segment@toks=\toks58
 \forest@PIi@toks=\toks59
 \forest@PIii@toks=\toks60
 \forest@copy@in=\read4
 \forest@copy@out=\write6
-\forest@externalize@max@outer@n=\count509
-\forest@externalize@inner@n=\count510
+\forest@externalize@max@outer@n=\count513
+\forest@externalize@inner@n=\count514
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest-lib-linguistics.sty
 Package: forest-lib-linguistics 2017/07/14 v0.1.2
-\standardnodestrutbox=\box135
+\standardnodestrutbox=\box137
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count511
+\c@AlgoLine=\count515
 \algocf@hangindent=\skip116
  (/usr/local/texlive/2024/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count512
+\c@checkoddpage=\count516
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/relsize/relsize.sty
@@ -1089,88 +1107,70 @@ Package: relsize 2013/03/29 ver 4.1
 \skiplength=\skip122
 \algomargin=\skip123
 \skipalgocfslide=\skip124
-\algowidth=\dimen306
-\inoutsize=\dimen307
-\inoutindent=\dimen308
-\interspacetitleruled=\dimen309
-\interspacealgoruled=\dimen310
-\interspacetitleboxruled=\dimen311
+\algowidth=\dimen316
+\inoutsize=\dimen317
+\inoutindent=\dimen318
+\interspacetitleruled=\dimen319
+\interspacealgoruled=\dimen320
+\interspacetitleboxruled=\dimen321
 \algocf@ruledwidth=\skip125
-\algocf@inoutbox=\box136
-\algocf@inputbox=\box137
+\algocf@inoutbox=\box138
+\algocf@inputbox=\box139
 \AlCapSkip=\skip126
 \AlCapHSkip=\skip127
 \algoskipindent=\skip128
-\algocf@nlbox=\box138
-\algocf@hangingbox=\box139
-\algocf@untilbox=\box140
+\algocf@nlbox=\box140
+\algocf@hangingbox=\box141
+\algocf@untilbox=\box142
 \algocf@skipuntil=\skip129
-\algocf@capbox=\box141
+\algocf@capbox=\box143
 \algocf@lcaptionbox=\skip130
 \algoheightruledefault=\skip131
 \algoheightrule=\skip132
 \algotitleheightruledefault=\skip133
 \algotitleheightrule=\skip134
-\c@algocfline=\count513
-\c@algocfproc=\count514
-\c@algocf=\count515
-\algocf@algoframe=\box142
-\algocf@algobox=\box143
+\c@algocfline=\count517
+\c@algocfproc=\count518
+\c@algocf=\count519
+\algocf@algoframe=\box144
+\algocf@algobox=\box145
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count516
+\c@float@type=\count520
 \float@exts=\toks61
-\float@box=\box144
+\float@box=\box146
 \@float@everytoks=\toks62
-\@floatcapt=\box145
+\@floatcapt=\box147
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/media9.sty
 Package: media9 2024/09/16 v1.29 acrobat-9/X compatible media
-\g_mix_pkgresizeflag_int=\count517
+\g_mix_pkgresizeflag_int=\count521
  (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/pdfbase.sty
 Package: pdfbase 2024/09/16 v0.59 driver independent access to low-level PDF features
-\g_pbs_page_int=\count518
-\g_pbs_oc_int=\count519
+\g_pbs_page_int=\count522
+\g_pbs_oc_int=\count523
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/ocgx2/ocgbase.sty
 Package: ocgbase 2024/09/15 v0.24 support package for ocgx2.sty
 )
-\l_mix_poster_box=\box146
-\g_mix_wd_dim=\dimen312
-\g_mix_ht_dim=\dimen313
-\g_mix_dp_dim=\dimen314
-\g_mix_rmcnt_int=\count520
-\l_mix_viewcnt_int=\count521
-\g@mix@page@int=\count522
-\g_mix_resizeflag_int=\count523
-\l_mix_lineno_int=\count524
-\l_mix_pbtn_box=\box147
-\g_mix_mbtncnt_int=\count525
-\mix@btn@dim=\dimen315
+\l_mix_poster_box=\box148
+\g_mix_wd_dim=\dimen322
+\g_mix_ht_dim=\dimen323
+\g_mix_dp_dim=\dimen324
+\g_mix_rmcnt_int=\count524
+\l_mix_viewcnt_int=\count525
+\g@mix@page@int=\count526
+\g_mix_resizeflag_int=\count527
+\l_mix_lineno_int=\count528
+\l_mix_pbtn_box=\box149
+\g_mix_mbtncnt_int=\count529
+\mix@btn@dim=\dimen325
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen316
-\pgfarrowlength=\dimen317
-\pgfarrowwidth=\dimen318
-\pgfarrowlinewidth=\dimen319
+\pgfarrowinset=\dimen326
+\pgfarrowlength=\dimen327
+\pgfarrowwidth=\dimen328
+\pgfarrowlinewidth=\dimen329
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
-Package: empheq 2017/03/31 v2.15 Emphasizing equations
-\l_EQ_equationtype_int=\count526
-\l_EQ_alignmentmode_int=\count527
-\l_EQ_totalwidth_dim=\dimen320
-\l_EQ_displaywidth_dim=\dimen321
-\l_EQ_temp_linewidth_dim=\dimen322
-\l_EQ_linewidth_dim=\dimen323
-\EmphEqdelimitershortfall=\dimen324
-\EmphEqdelimiterfactor=\count528
-\g_EQ_toptag_height_dim=\dimen325
-\g_EQ_bottomtag_depth_dim=\dimen326
-\g_EQ_toprow_height_dim=\dimen327
-\g_EQ_bottomrow_depth_dim=\dimen328
-\g_EQ_widesttag_dim=\dimen329
-\EQ_mathdisplay_box=\box148
-\EQ_tag_box=\box149
-\g_EQ_temprow_int=\count529
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
 Package: newtxtext 2024/04/01 v1.744(Michael Sharpe) latex and unicode latex support for TeXGyreTermesX
  `newtxtext' v1.744, 2024/04/01 Text macros taking advantage of TeXGyre Termes and its extensions (msharpe) (/usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty
@@ -1280,33 +1280,33 @@ File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
 ))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
-LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 120.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 118.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 120.
+(Font)              scaled to size 12.0pt on input line 118.
  (build/main.aux (build/title.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
  (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count545
@@ -1360,7 +1360,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 120.
+Package hyperref Info: Link coloring OFF on input line 118.
 (build/main.out) (build/main.out)
 \@outlinefile=\write7
 \openout7 = `main.out'.
@@ -1378,29 +1378,29 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (build/main.bbl)
-Package biblatex Info: Reference section=0 on input line 120.
-Package biblatex Info: Reference segment=0 on input line 120.
+Package biblatex Info: Reference section=0 on input line 118.
+Package biblatex Info: Reference segment=0 on input line 118.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@mv@tabular=\count551
 \c@mv@boldtabular=\count552
-LaTeX Info: Redefining \microtypecontext on input line 120.
-Package microtype Info: Applying patch `item' on input line 120.
-Package microtype Info: Applying patch `toc' on input line 120.
-Package microtype Info: Applying patch `eqnum' on input line 120.
+LaTeX Info: Redefining \microtypecontext on input line 118.
+Package microtype Info: Applying patch `item' on input line 118.
+Package microtype Info: Applying patch `toc' on input line 118.
+Package microtype Info: Applying patch `eqnum' on input line 118.
 
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 120.
+Package microtype Warning: Unable to apply patch `footnote' on input line 118.
 
-Package microtype Info: Applying patch `verbatim' on input line 120.
+Package microtype Info: Applying patch `verbatim' on input line 118.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 120.
+LaTeX Info: Redefining \showhyphens on input line 118.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1454,23 +1454,23 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf-pc.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc} <./SapienzaLogo.pdf>])
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 129.
+(Font)              scaled to size 12.0pt on input line 127.
 
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.146 \clearpage
+l.144 \clearpage
                  [1
 
 
 
 ]
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 17.28pt on input line 147.
+(Font)              scaled to size 17.28pt on input line 145.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 147.
+(Font)              scaled to size 17.28pt on input line 145.
  (build/main.toc
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 12.0pt on input line 1.
@@ -1479,12 +1479,12 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 [2
 
 ]
-LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 61.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 59.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/ot1ntxtt.fd
 File: ot1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/ntxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 61.
+(Font)              scaled to size 12.0pt on input line 59.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `ntxtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1607,7 +1607,7 @@ Overfull \hbox (29.3747pt too wide) in paragraph at lines 632--633
 [35
 
 ]
-<images/polar_plot.png, id=864, 338.2236pt x 330.2739pt>
+<images/polar_plot.png, id=865, 338.2236pt x 330.2739pt>
 File: images/polar_plot.png Graphic file (type png)
 <use images/polar_plot.png>
 Package pdftex.def Info: images/polar_plot.png  used on input line 135.
@@ -1629,7 +1629,7 @@ Package pdftex.def Info: images/polar_plot.png  used on input line 135.
 [42]
 
 [43]
-<images/gradients_single_anal.jpg, id=954, 1927.2pt x 957.5775pt>
+<images/gradients_single_anal.jpg, id=955, 1927.2pt x 957.5775pt>
 File: images/gradients_single_anal.jpg Graphic file (type jpg)
 <use images/gradients_single_anal.jpg>
 Package pdftex.def Info: images/gradients_single_anal.jpg  used on input line 565.
@@ -1642,7 +1642,7 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 564--571
 
 
 [44]
-<images/NSS_single_anal.jpg, id=966, 1927.2pt x 957.5775pt>
+<images/NSS_single_anal.jpg, id=967, 1927.2pt x 957.5775pt>
 File: images/NSS_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_single_anal.jpg>
 Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 584.
@@ -1650,7 +1650,7 @@ Package pdftex.def Info: images/NSS_single_anal.jpg  used on input line 584.
 
 
 [45 <./images/gradients_single_anal.jpg>]
-<images/gradients_rotated_single_anal.jpg, id=980, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_single_anal.jpg, id=981, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_single_anal.jpg Graphic file (type jpg)
 <use images/gradients_rotated_single_anal.jpg>
 Package pdftex.def Info: images/gradients_rotated_single_anal.jpg  used on input line 632.
@@ -1660,7 +1660,7 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 631--635
  []|  [] 
  []
 
-<images/NSS_rotated_single_anal.jpg, id=981, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_single_anal.jpg, id=982, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_single_anal.jpg Graphic file (type jpg)
 <use images/NSS_rotated_single_anal.jpg>
 Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 640.
@@ -1670,7 +1670,7 @@ Package pdftex.def Info: images/NSS_rotated_single_anal.jpg  used on input line 
 [46 <./images/NSS_single_anal.jpg>]
 
 [47 <./images/gradients_rotated_single_anal.jpg> <./images/NSS_rotated_single_anal.jpg>]
-<images/gradients_single_num.jpg, id=999, 1927.2pt x 957.5775pt>
+<images/gradients_single_num.jpg, id=1000, 1927.2pt x 957.5775pt>
 File: images/gradients_single_num.jpg Graphic file (type jpg)
 <use images/gradients_single_num.jpg>
 Package pdftex.def Info: images/gradients_single_num.jpg  used on input line 703.
@@ -1690,7 +1690,7 @@ Overfull \hbox (0.36075pt too wide) in paragraph at lines 728--735
 [48]
 
 [49 <./images/gradients_single_num.jpg>]
-<images/gradients_rotated_single_num.jpg, id=1026, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_single_num.jpg, id=1027, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_single_num.jpg Graphic file (type jpg)
 <use images/gradients_rotated_single_num.jpg>
 Package pdftex.def Info: images/gradients_rotated_single_num.jpg  used on input line 772.
@@ -1700,7 +1700,7 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 771--775
  []|  [] 
  []
 
-<images/NSS_rotated_single_num.jpg, id=1027, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_single_num.jpg, id=1028, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_single_num.jpg Graphic file (type jpg)
 <use images/NSS_rotated_single_num.jpg>
 Package pdftex.def Info: images/NSS_rotated_single_num.jpg  used on input line 780.
@@ -1716,7 +1716,7 @@ Package pdftex.def Info: images/NSS_rotated_single_num.jpg  used on input line 7
 [53]
 
 [54]
-<images/gradients_multi_anal.jpg, id=1084, 1927.2pt x 991.705pt>
+<images/gradients_multi_anal.jpg, id=1085, 1927.2pt x 991.705pt>
 File: images/gradients_multi_anal.jpg Graphic file (type jpg)
 <use images/gradients_multi_anal.jpg>
 Package pdftex.def Info: images/gradients_multi_anal.jpg  used on input line 1045.
@@ -1726,12 +1726,12 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 1044--1048
 []|  [] 
  []
 
-<images/NSS_multi_anal.jpg, id=1085, 1927.2pt x 991.705pt>
+<images/NSS_multi_anal.jpg, id=1086, 1927.2pt x 991.705pt>
 File: images/NSS_multi_anal.jpg Graphic file (type jpg)
 <use images/NSS_multi_anal.jpg>
 Package pdftex.def Info: images/NSS_multi_anal.jpg  used on input line 1055.
 (pdftex.def)             Requested size: 350.81174pt x 180.51178pt.
-<images/gradients_rotated_multi_anal.jpg, id=1086, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_multi_anal.jpg, id=1087, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_multi_anal.jpg Graphic file (type jpg)
 <use images/gradients_rotated_multi_anal.jpg>
 Package pdftex.def Info: images/gradients_rotated_multi_anal.jpg  used on input line 1064.
@@ -1741,7 +1741,7 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 1063--1067
 []|  [] 
  []
 
-<images/NSS_rotated_multi_anal.jpg, id=1087, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_multi_anal.jpg, id=1088, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_multi_anal.jpg Graphic file (type jpg)
 <use images/NSS_rotated_multi_anal.jpg>
 Package pdftex.def Info: images/NSS_rotated_multi_anal.jpg  used on input line 1074.
@@ -1753,7 +1753,7 @@ Package pdftex.def Info: images/NSS_rotated_multi_anal.jpg  used on input line 1
 [56 <./images/gradients_multi_anal.jpg> <./images/NSS_multi_anal.jpg>]
 
 [57 <./images/gradients_rotated_multi_anal.jpg> <./images/NSS_rotated_multi_anal.jpg>]
-<images/gradients_multi_num.jpg, id=1119, 1927.2pt x 991.705pt>
+<images/gradients_multi_num.jpg, id=1120, 1927.2pt x 991.705pt>
 File: images/gradients_multi_num.jpg Graphic file (type jpg)
 <use images/gradients_multi_num.jpg>
 Package pdftex.def Info: images/gradients_multi_num.jpg  used on input line 1157.
@@ -1763,12 +1763,12 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 1156--1160
 []|  [] 
  []
 
-<images/NSS_multi_num.jpg, id=1120, 1927.2pt x 991.705pt>
+<images/NSS_multi_num.jpg, id=1121, 1927.2pt x 991.705pt>
 File: images/NSS_multi_num.jpg Graphic file (type jpg)
 <use images/NSS_multi_num.jpg>
 Package pdftex.def Info: images/NSS_multi_num.jpg  used on input line 1167.
 (pdftex.def)             Requested size: 350.81174pt x 180.51178pt.
-<images/gradients_rotated_multi_num.jpg, id=1121, 1927.2pt x 957.5775pt>
+<images/gradients_rotated_multi_num.jpg, id=1122, 1927.2pt x 957.5775pt>
 File: images/gradients_rotated_multi_num.jpg Graphic file (type jpg)
 <use images/gradients_rotated_multi_num.jpg>
 Package pdftex.def Info: images/gradients_rotated_multi_num.jpg  used on input line 1176.
@@ -1778,7 +1778,7 @@ Overfull \hbox (89.50119pt too wide) in paragraph at lines 1175--1179
 []|  [] 
  []
 
-<images/NSS_rotated_multi_num.jpg, id=1122, 1927.2pt x 957.5775pt>
+<images/NSS_rotated_multi_num.jpg, id=1123, 1927.2pt x 957.5775pt>
 File: images/NSS_rotated_multi_num.jpg Graphic file (type jpg)
 <use images/NSS_rotated_multi_num.jpg>
 Package pdftex.def Info: images/NSS_rotated_multi_num.jpg  used on input line 1186.
@@ -1808,7 +1808,7 @@ Package pdftex.def Info: images/NSS_rotated_multi_num.jpg  used on input line 11
 ]
 
 [68]
-<images/ECEF_ENU_Longitude_Latitude_relationships.png, id=1231, 521.95pt x 501.875pt>
+<images/ECEF_ENU_Longitude_Latitude_relationships.png, id=1230, 521.95pt x 501.875pt>
 File: images/ECEF_ENU_Longitude_Latitude_relationships.png Graphic file (type png)
 <use images/ECEF_ENU_Longitude_Latitude_relationships.png>
 Package pdftex.def Info: images/ECEF_ENU_Longitude_Latitude_relationships.png  used on input line 108.
@@ -1834,8 +1834,6 @@ File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
 [74]
 
 [75]
-
-[76]
 LaTeX Font Info:    Trying to load font information for OT1+qhv on input line 630.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/ot1qhv.fd
 File: ot1qhv.fd 2009/09/25 v1.2 font definition file for OT1/qhv
@@ -1846,23 +1844,25 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qhv' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<images/quad_model.png, id=1354, 398.48875pt x 307.1475pt>
+<images/quad_model.png, id=1347, 398.48875pt x 307.1475pt>
 File: images/quad_model.png Graphic file (type png)
 <use images/quad_model.png>
 Package pdftex.def Info: images/quad_model.png  used on input line 630.
 (pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
 
+[76]
+
 [77{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc} <./images/quad_model.png>]
 
 [78]
-
-[79]
 File: images/quad_model.png Graphic file (type png)
 <use images/quad_model.png>
 Package pdftex.def Info: images/quad_model.png  used on input line 921.
 (pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
+
+[79]
 
 [80])
 
@@ -1910,38 +1910,38 @@ Package microtype Info: Loading generic protrusion settings for font family
 [91]
 
 [92]
-<images/trajectory_comparison.pdf, id=1637, 389.455pt x 309.155pt>
+<images/trajectory_comparison.pdf, id=1636, 389.455pt x 309.155pt>
 File: images/trajectory_comparison.pdf Graphic file (type pdf)
 <use images/trajectory_comparison.pdf>
-Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 702.
+Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 701.
 (pdftex.def)             Requested size: 350.81174pt x 278.48694pt.
 
 
 [93]
-<images/pid_x.pdf, id=1647, 378.41376pt x 314.17375pt>
+<images/pid_x.pdf, id=1646, 378.41376pt x 314.17375pt>
 File: images/pid_x.pdf Graphic file (type pdf)
 <use images/pid_x.pdf>
-Package pdftex.def Info: images/pid_x.pdf  used on input line 711.
+Package pdftex.def Info: images/pid_x.pdf  used on input line 710.
 (pdftex.def)             Requested size: 197.3295pt x 163.8315pt.
-<images/pid_y.pdf, id=1648, 385.44pt x 308.15125pt>
+<images/pid_y.pdf, id=1647, 385.44pt x 308.15125pt>
 File: images/pid_y.pdf Graphic file (type pdf)
 <use images/pid_y.pdf>
-Package pdftex.def Info: images/pid_y.pdf  used on input line 717.
+Package pdftex.def Info: images/pid_y.pdf  used on input line 716.
 (pdftex.def)             Requested size: 197.3295pt x 157.7569pt.
-<images/pid_z.pdf, id=1649, 387.4475pt x 303.1325pt>
+<images/pid_z.pdf, id=1648, 387.4475pt x 303.1325pt>
 File: images/pid_z.pdf Graphic file (type pdf)
 <use images/pid_z.pdf>
-Package pdftex.def Info: images/pid_z.pdf  used on input line 724.
+Package pdftex.def Info: images/pid_z.pdf  used on input line 723.
 (pdftex.def)             Requested size: 210.48436pt x 164.67896pt.
-<images/pid_sim.pdf, id=1650, 1224.575pt x 681.54625pt>
+<images/pid_sim.pdf, id=1649, 1224.575pt x 681.54625pt>
 File: images/pid_sim.pdf Graphic file (type pdf)
 <use images/pid_sim.pdf>
-Package pdftex.def Info: images/pid_sim.pdf  used on input line 732.
+Package pdftex.def Info: images/pid_sim.pdf  used on input line 731.
 (pdftex.def)             Requested size: 438.513pt x 244.05652pt.
-<images/rotor_velocities.pdf, id=1651, 378.41376pt x 306.14375pt>
+<images/rotor_velocities.pdf, id=1650, 378.41376pt x 306.14375pt>
 File: images/rotor_velocities.pdf Graphic file (type pdf)
 <use images/rotor_velocities.pdf>
-Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 739.
+Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 738.
 (pdftex.def)             Requested size: 306.95775pt x 248.33476pt.
 
 
@@ -1950,59 +1950,59 @@ Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 739.
 [95 <./images/pid_x.pdf> <./images/pid_y.pdf> <./images/pid_z.pdf> <./images/pid_sim.pdf>]
 
 [96 <./images/rotor_velocities.pdf>]
-<images/case_1.pdf, id=1945, 1122.1925pt x 718.685pt>
+<images/case_1.pdf, id=1944, 1122.1925pt x 718.685pt>
 File: images/case_1.pdf Graphic file (type pdf)
 <use images/case_1.pdf>
-Package pdftex.def Info: images/case_1.pdf  used on input line 806.
+Package pdftex.def Info: images/case_1.pdf  used on input line 805.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 806--807
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 805--806
  [][] 
  []
 
 
 
 [97 <./images/case_1.pdf>]
-<images/case_2.pdf, id=2032, 1122.1925pt x 718.685pt>
+<images/case_2.pdf, id=2031, 1122.1925pt x 718.685pt>
 File: images/case_2.pdf Graphic file (type pdf)
 <use images/case_2.pdf>
-Package pdftex.def Info: images/case_2.pdf  used on input line 845.
+Package pdftex.def Info: images/case_2.pdf  used on input line 844.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 845--846
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 844--845
  [][] 
  []
 
-<images/case_2_more.pdf, id=2033, 1122.1925pt x 718.685pt>
+<images/case_2_more.pdf, id=2032, 1122.1925pt x 718.685pt>
 File: images/case_2_more.pdf Graphic file (type pdf)
 <use images/case_2_more.pdf>
-Package pdftex.def Info: images/case_2_more.pdf  used on input line 851.
+Package pdftex.def Info: images/case_2_more.pdf  used on input line 850.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 851--852
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 850--851
  [][] 
  []
 
 
 
 [98 <./images/case_2.pdf>]
-<images/case_3_fail.pdf, id=2121, 1122.1925pt x 718.685pt>
+<images/case_3_fail.pdf, id=2120, 1122.1925pt x 718.685pt>
 File: images/case_3_fail.pdf Graphic file (type pdf)
 <use images/case_3_fail.pdf>
-Package pdftex.def Info: images/case_3_fail.pdf  used on input line 890.
+Package pdftex.def Info: images/case_3_fail.pdf  used on input line 889.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 890--891
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 889--890
  [][] 
  []
 
-<images/case_3.pdf, id=2122, 1114.1625pt x 718.685pt>
+<images/case_3.pdf, id=2121, 1114.1625pt x 718.685pt>
 File: images/case_3.pdf Graphic file (type pdf)
 <use images/case_3.pdf>
-Package pdftex.def Info: images/case_3.pdf  used on input line 899.
+Package pdftex.def Info: images/case_3.pdf  used on input line 898.
 (pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 899--900
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 898--899
  [][] 
  []
 
@@ -2023,7 +2023,7 @@ Overfull \hbox (26.30971pt too wide) in paragraph at lines 899--900
 ]
 
 [104]
-Overfull \hbox (28.09525pt too wide) in paragraph at lines 165--165
+Overfull \hbox (28.09525pt too wide) in paragraph at lines 163--163
 []\OT1/ntxtlf/m/n/12 (-20) D. Grif-fiths, \OT1/ntxtlf/m/it/12 (-20) In-tro-duc-tion to Elec-tro-dy-nam-ics\OT1/ntxtlf/m/n/12 (-20) . Pear-son Ed-u-ca-tion, 2014, \OT1/ntxtlf/m/sc/12 (-20) isbn\OT1/ntxtlf/m/n/12 (-20) : 9780321972101.
  []
 
@@ -2032,12 +2032,12 @@ Overfull \hbox (28.09525pt too wide) in paragraph at lines 165--165
 [105]
 
 [106]
-Overfull \hbox (0.65959pt too wide) in paragraph at lines 165--165
+Overfull \hbox (0.65959pt too wide) in paragraph at lines 163--163
 \OT1/ntxtlf/m/n/12 (-20) in avalanches us-ing ARVA: an ex-tremum seek-ing ap-proach," \OT1/ntxtlf/m/it/12 (-20) CoRR\OT1/ntxtlf/m/n/12 (-20) , vol. abs/2106.14514,
  []
 
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/scit' will be
-(Font)              scaled to size 12.0pt on input line 164.
+(Font)              scaled to size 12.0pt on input line 162.
 
 
 [107]
@@ -2054,17 +2054,17 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 72DFDB694F4212F5C6BA230ED6A500E9;12563.
+(rerunfilecheck)             Checksum: 88C6742B522FF6C02E1A4231937F98E7;12727.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53990 strings out of 473579
- 1134566 string characters out of 5728234
- 1972042 words of memory out of 5000000
- 74918 multiletter control sequences out of 15000+600000
- 642246 words of font info for 510 fonts, out of 8000000 for 9000
+ 53979 strings out of 473579
+ 1134383 string characters out of 5728234
+ 1972077 words of memory out of 5000000
+ 74916 multiletter control sequences out of 15000+600000
+ 641639 words of font info for 503 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,22n,87p,1934b,1611s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
@@ -2127,11 +2127,11 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on build/main.pdf (111 pages, 5413250 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
+Output written on build/main.pdf (111 pages, 5402810 bytes).
 PDF statistics:
- 2792 PDF objects out of 2984 (max. 8388607)
- 2508 compressed objects within 26 object streams
- 572 named destinations out of 1000 (max. 500000)
+ 2787 PDF objects out of 2984 (max. 8388607)
+ 2505 compressed objects within 26 object streams
+ 571 named destinations out of 1000 (max. 500000)
  99529 words of extra memory for PDF output out of 106986 (max. 10000000)
 

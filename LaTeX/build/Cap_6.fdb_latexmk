@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber build/Cap_6"] 1736026202.23991 "build/Cap_6.bcf" "build/Cap_6.bbl" "build/Cap_6" 1736026233.66823 0
+["biber build/Cap_6"] 1736026202.23991 "build/Cap_6.bcf" "build/Cap_6.bbl" "build/Cap_6" 1736461069.03793 0
   "bibliography.bib" 1736023802.97323 52107 c5f3078488c3c9ddbe787e0ef569d182 ""
-  "build/Cap_6.bcf" 1736026233.49047 108379 bfc2f78db78fe29154bb9450657e394e "pdflatex"
+  "build/Cap_6.bcf" 1736461068.90163 108379 bfc2f78db78fe29154bb9450657e394e "pdflatex"
   (generated)
   "build/Cap_6.bbl"
   "build/Cap_6.blg"
   (rewritten before read)
-["pdflatex"] 1736026231.33952 "/home/anto/University/LAV/LaTeX/Cap_6.tex" "build/Cap_6.pdf" "Cap_6" 1736026233.66867 0
-  "/home/anto/University/LAV/LaTeX/Cap_6.tex" 1736026231.16652 44623 43057b36c14adeb59d8db1245034044b ""
+["pdflatex"] 1736461067.07828 "/home/anto/University/LAV/LaTeX/Cap_6.tex" "build/Cap_6.pdf" "Cap_6" 1736461069.03817 0
+  "/home/anto/University/LAV/LaTeX/Cap_6.tex" 1736461064.94568 44576 2d44ed406882bfe548c0912d5ae44b59 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc" 1422827479 2083 60e36f8eac802fcaf19eabe2633b406e ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc" 1529098226 3124 3813fd4c981d99822890a2861b0d274c ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -294,6 +294,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/refcount/refcount.sty" 1576624809 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/relsize/relsize.sty" 1369619135 15542 c4cc3164fe24f2f2fbb06eb71b1da4c4 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657483315 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/setspace/setspace.sty" 1670275497 22490 8cac309b79a4c53a4ffce4b1b07aead0 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/subfiles/subfiles.cls" 1605478891 1507 57de335d88fde4e5c924dfed577fdb74 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/subfiles/subfiles.sty" 1605478891 5262 70ab9987ec94ed2beeb5c2d951d465f6 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/ot1qtm.fd" 1254269485 1658 6498913f3cf87f63c3ecc1bc62cc901f ""
@@ -310,6 +311,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/units/nicefrac.sty" 1137111039 4029 0462ee5ab265cf59dc15a41a3b883101 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/units/units.sty" 1137111039 2134 65ad9fb19763b1681bea4cb389fe84f8 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/verse/verse.sty" 1707868051 9071 6317579311a885a54ef1a6b1f319c93e ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty" 1700082560 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1655411236 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty" 1585258158 8314 7803f78066c4f9d008405191a4b43073 ""
@@ -317,11 +319,11 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1727571937 5477429 32a2a3a09e7e10c5f90c819db1b0ec36 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727571976 3325966 669b58d2a9b28a670986370fac89bc16 ""
   "/usr/local/texlive/2024/texmf.cnf" 1727571931.86701 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "Cap_6.tex" 1736026231.16652 44623 43057b36c14adeb59d8db1245034044b ""
-  "build/Cap_6.aux" 1736026233.48247 5991 55cb8cdf55100f76f676c5997f4f4def "pdflatex"
-  "build/Cap_6.bbl" 1736026208.95899 3997 ab1a9e627bd43bd6a4d73500e7516636 "biber build/Cap_6"
-  "build/Cap_6.out" 1736026233.48647 1352 8c3bd1c0f78d98550f57a3158044ef6d "pdflatex"
-  "build/Cap_6.run.xml" 1736026233.49047 2411 34a63fb4b82d8f458e1f29ec2ef9019d "pdflatex"
+  "Cap_6.tex" 1736461064.94568 44576 2d44ed406882bfe548c0912d5ae44b59 ""
+  "build/Cap_6.aux" 1736461068.89763 5987 5544ce1d5f651f6d55e467a7901ada6e "pdflatex"
+  "build/Cap_6.bbl" 1736026234.83844 3997 ab1a9e627bd43bd6a4d73500e7516636 "biber build/Cap_6"
+  "build/Cap_6.out" 1736461068.90163 1352 809e21b2d2430258a781f6e96fa1dda5 "pdflatex"
+  "build/Cap_6.run.xml" 1736461068.90163 2411 34a63fb4b82d8f458e1f29ec2ef9019d "pdflatex"
   "images/case_1.pdf" 1735923128.05239 208844 45471d4153b712215a66ea1ac3b941c6 ""
   "images/case_2.pdf" 1735923851.21196 243399 96ec966afcc2c514e971f91c632be64f ""
   "images/case_2_more.pdf" 1735924072.51474 185968 a215f11c4cffdb314cbb2976e70029e0 ""
@@ -333,7 +335,7 @@
   "images/pid_z.pdf" 1735777084.96947 25046 d1cdb57ca1ecd56715eba9c2719dd131 ""
   "images/rotor_velocities.pdf" 1735778487.71601 32288 6b06b95e5b96676785173f3b8f7f0538 ""
   "images/trajectory_comparison.pdf" 1735778486.93202 41694 6069cebc9e8769545b0650b676a7ac08 ""
-  "main.tex" 1736023829.65497 3645 77214a5eb9b45c2b2d5ec9a00503672b ""
+  "main.tex" 1736042401.42574 4572 b2a5529a781c12c5f877011b226de190 ""
   (generated)
   "build/Cap_6.aux"
   "build/Cap_6.bcf"

@@ -1,6 +1,6 @@
 \documentclass[main]{subfiles}
 \begin{document}
-\section{Mathematical Model}
+\section{Mathematical Model of Transmitter/Receiver System}
 
 \subsection{Single Victim Case}
 \begin{figure}[H]
@@ -45,7 +45,7 @@ Three Cartesian coordinate frames are defined as \cite{main} and shown in Figure
 \begin{enumerate}[label=(\roman*)]
     \item Frame $g$ (global): denoted as $F_g = (O_g, x_g, y_g, z_g)$, is the global (inertial) frame with origin $O_g$,
     fixed reference for all objects in space.
-    \item Frame $r$ (receiver ARTVA): denoted as $F_r = (O_r, x_r, y_r, z_r)$, is the body right-hand frame associated with the receiver installed on the drone.
+    \item Frame $r$ (receiver ARTVA): denoted as $F_r = (O_r, x_r, y_r, z_r)$, is the body right-hand frame associated with the receiver installed on the UAV.
     \item Frame $t$ (transmitter ARTVA): denoted as $F_t = (O_t, x_t, y_t, z_t)$, is the body right-hand frame associated with the transmitter worn by the victim.
 \end{enumerate}
 
@@ -402,8 +402,8 @@ since it is not critical in either single-victim or multiple-victim cases.
 \textbf{Final Model}\noindent\\
 In the final model of the single-victim case, we consider one victim to 
 which it is attached an ARTVA transmitter and \( m \in \mathbb{N} \) receivers, 
-each rigidly attached to each drone. 
-We define the position of the $j$-th drone at sample time \( \tau_k \) with \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) 
+each rigidly attached to each UAV. 
+We define the position of the $j$-th UAV at sample time \( \tau_k \) with \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) 
 where \( k, i \in \mathbb{N} \) and \( j = 1, \ldots, m \).
 
 \noindent\\
@@ -548,15 +548,15 @@ neither, and therefore do not influence the results.
 In Figure \ref{fig:gradients_single_anal}, we show the gradients for a single
 source centered at the origin of the space, when the global frame 
 $F_g$ coincides with the transmitter (source) frame $F_t$ and also when there 
-is no rotation between these frames and the receiver frame $F_r$ of the drones. 
+is no rotation between these frames and the receiver frame $F_r$ of the UAVs. 
 In this way, we have that the magnetic field intensity ${}^t \mathbf{H} = {}^g \mathbf{H}$
 can be computed using the inertial coordinates, and also the
 NSS at any point in space coincides with the signal received by 
-any drone located at that point.
+any UAV located at that point.
 The gradients are calculated on a grid of equally spaced points in the range $[-5, 5]$ when we fix the $z$ coordinates
-at 3 m, considering a reasonable flying height for the drones.
+at 3 m, considering a reasonable flying height for the UAVs.
 We need to fix one coordinate in order to be able to plot 
-a function of 3 variables, but also because we assume the drones
+a function of 3 variables, but also because we assume the UAVs
 flying always at a fixed height, as will be explained more in 
 depth lately.   
 \begin{figure}
@@ -577,13 +577,13 @@ After having found the gradient tensor $\mathbf{G}$, we numerically
 compute its eigenvalues and we find the NSS using the definition \eqref{eq:NSS}.
 In Figure \ref{fig:NSS_single_anal}, we plot the NSS distribution over the same grid,
 with the same $z$ value fixed.
-These values will be the signals received by the drones at their location
+These values will be the signals received by the UAVs at their location
 in space in the multiple-victim case, which will be explained more in-depth in the following paragraph.
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{images/NSS_single_anal.jpg}
 \caption{Plot of the NSS values computed at each point on the grid, which
-represent the signal received by the drones, in the case of a single source located
+represent the signal received by the UAVs, in the case of a single source located
 at the center $(0,0,0)$ of the space when there are no rotations between the coordinates
 frames $F_g$, $F_r$, $F_t$..}
 \label{fig:NSS_single_anal}
@@ -848,14 +848,14 @@ Naturally, the computed NSS remains unchanged as well, as we show in Fig.~\ref{f
 \end{figure}
 In the case of multiple victims, an ARTVA transmitter is attached to each
 avalanche victim and emits an electromagnetic field. Consequently, the signal received 
-by each drone (receiver) is a superposition of the effects of the multiple 
+by each UAV (receiver) is a superposition of the effects of the multiple 
 electromagnetic sources. In addition, each source has a uniquely oriented
 body frame, which we will denote with $ F_{t_i}$, 
 where \( i = 1, 2, \dots, n \) and \( n \in \mathbb{N} \) is the total number of sources.
 
 \noindent\\
 In addition, we also define the global (inertial) frame $F_g$ and the receiver frame relative to the
-each drone $F_r$, in the same way as the single victim case.
+each UAV $F_r$, in the same way as the single victim case.
 Then, the relative position of the receiver with respect to each transmitter 
 ${}^{t_i} \mathbf{p}_{{t_i}r}$ is denoted by ${}^{t_i} \mathbf{p}$, for simplicity;
 and the position of the $i$-th source in the global frame is denoted by 
@@ -866,7 +866,7 @@ Instead the rotation matrix of the $i$-th transmitter frame $F_{t_i}$ with respe
 frame $F_r$ is written as $\mathbf{R}^r_{t_i} \in \textit{SO}(3)$.
 
 \noindent\\
-Then, considering the receiver drone positioned at point $\mathbf{p}$ in space, the superposition
+Then, considering the receiver UAV positioned at point $\mathbf{p}$ in space, the superposition
 of all the electromagnetic fields can be expressed 
 as the sum of the magnetic field intensity vectors \(\mathbf{H}_n\), 
 when projected in the receiver frame $F_r$, as in \cite{multiple_spacecraft}:
@@ -965,7 +965,7 @@ with the Cartesian coordinates of reference frame $F_t$:
 & \left. + \, 2 \, \cos \alpha \left( \frac{1}{(b^2 \, x_1^2 + a^2 \, (y_1^2 + z_1^2))(b^2 \, x_2^2 + a^2 \, (y_2^2 + z_2^2))} \right)^{3/2} \right)
 \end{aligned}
 \]
-Note that a and b, have the same values for all the fields since they have been chosen in order to optimize the magnitude of the 
+Note that $a$ and $b$, have the same values for all the fields since they have been chosen in order to optimize the magnitude of the 
 general magnetic field intensity $\mathbf{H}$.
 
 \noindent\\
@@ -994,7 +994,7 @@ and rapid decaying of the NSS (see Eq.\ref{eq:NSS_decay}) are
 particularly beneficial in the multiple-victims case.
 In this section, we will describe how we compute the gradient tensor matrix 
 ${}^r G_{\text{tot}}$ and the NSS in the multiple-victims case,
-for a drone located at point $p$ in space with a rigidly attached body frame $F_t$.
+for a UAV located at point $p$ in space with a rigidly attached body frame $F_t$.
 We employ these procedures to simulate the results over a spatial range of $[10, 10]$ meters, 
 when we fix the $z$-coordinate fixed at 3 m (i.e., the \( xy \)-plane at \( z = 3 \)), 
 in which three victims are positioned at \((0, 0, 0)\), \((-6, -6, 0)\), and \((7, 7, 0)\) respectively.
@@ -1204,7 +1204,7 @@ In the final model of the multiple-victims scenario, we consider an ARTVA transm
 to each $i$-th victim among the $n \in \mathbb{N}$ victims, where \( i = 1, \ldots, n \).
 In addition, we employ a swarm of $m \in \mathbb{N}$ UAVs to locate the position
 of at least $m$ victims if $m \min n$, otherwise to localize them all.
-We assume the position of the $j$-th drone, \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) ,
+We assume the position of the $j$-th UAV, \( \mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^3 \) ,
 to be known at every sample time \( \tau_k \), where \( k, j \in \mathbb{N} \) 
 and \( j = 1, \ldots, m \).
 
@@ -1217,11 +1217,11 @@ analytical method, but we note that the numerical method could be employed
 in the presence of any other suitable equipment.
 
 \noindent\\
-Knowing the position of the $j$-th drone $\mathbf{p}_{r}(\tau_k)$, 
+Knowing the position of the $j$-th UAV $\mathbf{p}_{r}(\tau_k)$, 
 we compute the NSS using the analytical expression of the gradient tensor, which depends
-only on the position of the receiver drone in the transmitter frame
+only on the position of the receiver UAV in the transmitter frame
 ${}^{t_i} \mathbf{p}(\tau_k)$.
-From Eq.\ref{eq:pt_multi} we express the position of each $j$-th drone
+From Eq.\ref{eq:pt_multi} we express the position of each $j$-th UAV
 in the relative transmitter frame $F_{t_i}$ of each $i$-th source:
 \begin{equation}
     {}^{t_i} \mathbf{p}(\tau_k) = {R^g_{t_i}}^\top \, \left( \mathbf{p}_{r}(\tau_k) - \mathbf{p}_{t_i}(\tau_k) \right)
@@ -1281,7 +1281,7 @@ and it updates its velocity and position based on the historical best positions
 of both the individual and the entire population.
  
 \noindent\\
-We assume that $m$ seeker drones act as $m$ particles moving in the search space, 
+We assume that $m$ seeker UAVs act as $m$ particles moving in the search space, 
 like in \cite{3}; therefore we denote the position of each particle as the $j$-th UAV
 $\mathbf{p}_{r_j}(\tau_k) \in \mathbb{R}^2$, at the $\tau_k$ time step.
 
@@ -1357,7 +1357,7 @@ A best previous position is where a particle obtains the
 maximum value of the output function in its search
 history.
 In \ref{eq:model_velocity}, velocity $\mathbf{v}_{j}(\tau_k+1)$ 
-consists of three terms: the effect of the drone’s previous velocity, 
+consists of three terms: the effect of the UAV’s previous velocity, 
 effect of its best-known position and effect of global best
 known position.
 While the inertia weight is critical in balancing global and local search. 
@@ -1382,7 +1382,7 @@ we introduce physical constraints as already done in \cite{3},
 an exclusion zone mechanism and a persistence of excitation 
 Firstly, uniform random noise is added to the velocity of each 
 particle to achieve a \textit{persistence of excitation} state,
-allowing every drone to explore new and different directions, 
+allowing every UAV to explore new and different directions, 
 as described in Eq.\ref{eq:persistence_of_excitation}:
 \begin{equation}
     \mathbf{v}_j(\tau_k + 1) = \mathbf{v}_j(\tau_k) + \beta \cdot \mathbf{w} \cdot ||\mathbf{v}_j(\tau_k)||
@@ -1425,14 +1425,14 @@ In order to avoid clustering around the same source
 and to ensure that the swarm does not converge only 
 on a few sources, we introduce an exclusion zone mechanism. 
 This strategy enforces additional positional constraints 
-on the drones by leveraging the fact that each drone 
+on the UAVs by leveraging the fact that each UAV 
 knows its current position in the search space.
 
 \noindent\\
-A drone \( j \) defines an exclusion zone when it detects a source 
+A UAV \( j \) defines an exclusion zone when it detects a source 
 with a signal strength, the NSS, greater than a predefined threshold 
 \( \text{NSS}_{\text{thresh}} \). The exclusion zone is represented 
-as a circular region, centered around the position of the drone, defined by:
+as a circular region, centered around the position of the UAV, defined by:
 \[
 \mathcal{E}_j = \{ \mathbf{p} \in \mathbb{R}^3 \mid \|\mathbf{p} - \mathbf{c}_j\| 
 \leq r_{\text{excl}} \},
@@ -1440,68 +1440,68 @@ as a circular region, centered around the position of the drone, defined by:
 Where:
 \begin{itemize}
     \item \( \mathbf{c}_j \) is the center of the exclusion zone, 
-    corresponding to the position of the drone when the source 
+    corresponding to the position of the UAV when the source 
     is detected (\( \mathbf{p}_{r_j}(\tau_k) \)).
     \item \( r_{\text{excl}} \) is the radius of the exclusion zone, 
     chosen experimentally.
 \end{itemize}
 
 \noindent\\
-Instead, a drone \( j \) shares the center \( \mathbf{c}_j \) and radius 
-\( r_{\text{excl}} \) of its exclusion zone with neighboring drones 
+Instead, a UAV \( j \) shares the center \( \mathbf{c}_j \) and radius 
+\( r_{\text{excl}} \) of its exclusion zone with neighboring UAVs 
 if they are within the communication range \( r_{\text{comm}} \). 
 A neighboring UAV \( l \) receives the exclusion zone when:
 \begin{equation}
 \|\mathbf{p}_{r_l}(\tau_k) - \mathbf{p}_{r_j}(\tau_k)\| \leq r_{\text{comm}}
 \label{eq:in_comm}
 \end{equation}
-Each drone maintains a list of shared exclusion zones 
+Each UAV maintains a list of shared exclusion zones 
 \( \mathcal{E}_\text{shared} \), which is defined as:
 \[
 \mathcal{E}_\text{shared} = \{\mathcal{E}_1, \mathcal{E}_2, \dots, \mathcal{E}_j\}
 \]
 which is an unordered and incomplete set of 
-where the union is over all exclusion zones shared by neighboring drones.
+where the union is over all exclusion zones shared by neighboring UAVs.
 
-\paragraph{Checking}
-Each drone continuously checks whether its current position 
-\( \mathbf{p}_{r_j}(\tau_k) \) lies within any shared exclusion zone. 
-This is verified by:
-\[
-\mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_\text{shared}.
-\]
-
-\paragraph{Avoidance}
-If a drone \( j \) finds itself within a shared exclusion zone at time \( \tau_k \), 
-it computes a new goal position \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \) 
-to escape the zone. The avoidance mechanism follows these steps:
-\[
-\mathbf{d}_j(\tau_k) = \mathbf{c}_j(\tau_k) - \mathbf{p}_{r_j}(\tau_k),
-\]
-where \( \mathbf{d}_j(\tau_k) \) is the direction vector pointing away 
-from the exclusion zone center \( \mathbf{c}_j(\tau_k) \), and 
-\( \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_j(\tau_k) \).
 \noindent\\
-The goal position the drone needs to reach in the next time steps is then calculated as:
-\begin{equation}
-    \mathbf{p}_{r_j}^{\text{goal}} = \mathbf{p}_{r_j}(\tau_k) 
-    + \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|}
-    \label{eq:move_away}
-\end{equation}
-Where:
+The exclusion zone mechanism follows these steps:
 \begin{itemize}
-    \item \( \alpha \): Step size parameter that determines 
-    the distance the drone moves away from the exclusion zone.
-    \item \( \mathbf{p}_{r_j}^{\text{goal}} \): The computed 
-    goal position outside the exclusion zone.
-    \item \( \|\mathbf{d}_j(\tau_k)\| \): Norm (magnitude) of the direction 
-    vector \( \mathbf{d}_j(\tau_k) \), which is used for normalization.
+    \item Each UAV continuously checks whether its current position 
+    \( \mathbf{p}_{r_j}(\tau_k) \) lies within any shared exclusion zone. 
+    This is verified by:
+    \[
+    \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_\text{shared}.
+    \]
+    \item If a UAV \( j \) finds itself within a shared exclusion zone at time \( \tau_k \), 
+    it computes a new goal position \( \mathbf{p}_{r_j}^{\text{goal}}(\tau_k + 1) \) 
+    to escape the zone. Then there is an avoidance mechanism which
+    computes the direction to follow to move away from the exclusion zone:
+    \[
+    \mathbf{d}_j(\tau_k) = \mathbf{c}_j(\tau_k) - \mathbf{p}_{r_j}(\tau_k)
+    \]
+    where \( \mathbf{d}_j(\tau_k) \) is the direction vector pointing away 
+    from the exclusion zone center \( \mathbf{c}_j(\tau_k) \) and 
+    \( \mathbf{p}_{r_j}(\tau_k) \in \mathcal{E}_j(\tau_k) \) is again the actual
+    position of the UAV.
+    \noindent\\
+    The goal position the UAV needs to reach in the next time steps is then calculated as:
+    \begin{equation}
+        \mathbf{p}_{r_j}^{\text{goal}} = \mathbf{p}_{r_j}(\tau_k) 
+        + \alpha \frac{\mathbf{d}_j(\tau_k)}{\|\mathbf{d}_j(\tau_k)\|}
+        \label{eq:move_away}
+    \end{equation}
+    Where \( \alpha \) is the step size parameter that determines 
+        the distance the UAV moves away from the exclusion zone,
+         \( \mathbf{p}_{r_j}^{\text{goal}} \) is the computed 
+        goal position outside the exclusion zone, and
+        \( \|\mathbf{d}_j(\tau_k)\| \)is the magnitude of the direction 
+        vector \( \mathbf{d}_j(\tau_k) \), used for normalization.
 \end{itemize}
 
 \noindent\\
-Once the drone reaches \( \mathbf{p}_{r_j}^{\text{goal}} \), 
+Once the UAV reaches \( \mathbf{p}_{r_j}^{\text{goal}} \), 
 it resumes the PSO algorithm, continuing to search for new sources. 
-This mechanism ensures the drone moves directly away from the 
+This mechanism ensures the UAV moves directly away from the 
 exclusion zone while covering a distance proportional to \( \alpha \).
 
 

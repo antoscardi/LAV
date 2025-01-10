@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  4 JAN 2025 22:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  9 JAN 2025 23:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1176,45 +1176,23 @@ Package: empheq 2017/03/31 v2.15 Emphasizing equations
 \EQ_mathdisplay_box=\box148
 \EQ_tag_box=\box149
 \g_EQ_temprow_int=\count529
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
-\MT@toks=\toks63
-\MT@tempbox=\box150
-\MT@count=\count530
-LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
-LaTeX Info: Redefining \leftprotrusion on input line 1062.
-\MT@prot@toks=\toks64
-LaTeX Info: Redefining \rightprotrusion on input line 1081.
-LaTeX Info: Redefining \textls on input line 1392.
-\MT@outer@kern=\dimen330
-LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
-\MT@listname@count=\count531
- (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype-pdftex.def
-File: microtype-pdftex.def 2024/03/29 v3.1b Definitions specific to pdftex (RS)
-LaTeX Info: Redefining \lsstyle on input line 902.
-LaTeX Info: Redefining \lslig on input line 902.
-\MT@outer@space=\skip135
-)
-Package microtype Info: Loading configuration file microtype.cfg.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
-)) (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
 Package: newtxtext 2024/04/01 v1.744(Michael Sharpe) latex and unicode latex support for TeXGyreTermesX
  `newtxtext' v1.744, 2024/04/01 Text macros taking advantage of TeXGyre Termes and its extensions (msharpe) (/usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
  (/usr/local/texlive/2024/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/local/texlive/2024/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks65
-\XKV@tempa@toks=\toks66
+\XKV@toks=\toks63
+\XKV@tempa@toks=\toks64
 )
-\XKV@depth=\count532
+\XKV@depth=\count530
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.sty (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.tex
-\xs_counta=\count533
-\xs_countb=\count534
+\xs_counta=\count531
+\xs_countb=\count532
 )
 Package: xstring 2023/08/22 v1.86 String manipulations (CT)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/carlisle/scalefnt.sty)
@@ -1223,8 +1201,8 @@ LaTeX Font Info:    Setting ntxTLF sub-encoding to TS1/0 on input line 24.
 LaTeX Font Info:    Setting ntxOsF sub-encoding to TS1/0 on input line 24.
 LaTeX Font Info:    Setting ntxTOsF sub-encoding to TS1/0 on input line 24.
  (/usr/local/texlive/2024/texmf-dist/tex/generic/kastrup/binhex.tex)
-\ntx@tmpcnta=\count535
-\ntx@cnt=\count536
+\ntx@tmpcnta=\count533
+\ntx@cnt=\count534
  (/usr/local/texlive/2024/texmf-dist/tex/latex/fontaxes/fontaxes.sty
 Package: fontaxes 2020/07/21 v1.0e Font selection axes
 LaTeX Info: Redefining \upshape on input line 29.
@@ -1238,31 +1216,71 @@ LaTeX Info: Redefining \textsw on input line 47.
 LaTeX Info: Redefining \textssc on input line 48.
 LaTeX Info: Redefining \textulc on input line 49.
 )
-\tx@sixem=\dimen331
-\tx@y=\dimen332
-\tx@x=\dimen333
-\tx@tmpdima=\dimen334
-\tx@tmpdimb=\dimen335
-\tx@tmpdimc=\dimen336
-\tx@tmpdimd=\dimen337
-\tx@tmpdime=\dimen338
-\tx@tmpdimf=\dimen339
-\tx@dimA=\dimen340
-\tx@dimAA=\dimen341
-\tx@dimB=\dimen342
-\tx@dimBB=\dimen343
-\tx@dimC=\dimen344
+\tx@sixem=\dimen330
+\tx@y=\dimen331
+\tx@x=\dimen332
+\tx@tmpdima=\dimen333
+\tx@tmpdimb=\dimen334
+\tx@tmpdimc=\dimen335
+\tx@tmpdimd=\dimen336
+\tx@tmpdime=\dimen337
+\tx@tmpdimf=\dimen338
+\tx@dimA=\dimen339
+\tx@dimAA=\dimen340
+\tx@dimB=\dimen341
+\tx@dimBB=\dimen342
+\tx@dimC=\dimen343
 LaTeX Info: Redefining \oldstylenums on input line 902.
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
 )
-\c@definition=\count537
-\c@theorem=\count538
+\c@definition=\count535
+\c@theorem=\count536
  (/usr/local/texlive/2024/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
 \langwohyphens=\language90
 LaTeX Info: Redefining \_ on input line 43.
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
-)))
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/verse/verse.sty
+Package: verse 2014/05/10 v2.4b verse typesetting
+\c@vslineno=\count537
+\c@poemline=\count538
+\c@fvsline=\count539
+\c@modulo@vs=\count540
+\c@verse@envctr=\count541
+\versewidth=\skip135
+\vgap=\skip136
+\vindent=\skip137
+\stanzaskip=\skip138
+\vleftskip=\skip139
+\vrightskip=\skip140
+\c@chrsinstr=\count542
+\beforepoemtitleskip=\skip141
+\afterpoemtitleskip=\skip142
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
+\MT@toks=\toks65
+\MT@tempbox=\box150
+\MT@count=\count543
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
+LaTeX Info: Redefining \leftprotrusion on input line 1062.
+\MT@prot@toks=\toks66
+LaTeX Info: Redefining \rightprotrusion on input line 1081.
+LaTeX Info: Redefining \textls on input line 1392.
+\MT@outer@kern=\dimen344
+LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
+\MT@listname@count=\count544
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2024/03/29 v3.1b Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 902.
+LaTeX Info: Redefining \lslig on input line 902.
+\MT@outer@space=\skip143
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
+))))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 2.
@@ -1294,16 +1312,16 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
  (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count539
+\scratchcounter=\count545
 \scratchdimen=\dimen345
 \scratchbox=\box151
-\nofMPsegments=\count540
-\nofMParguments=\count541
+\nofMPsegments=\count546
+\nofMParguments=\count547
 \everyMPshowfont=\toks67
-\MPscratchCnt=\count542
+\MPscratchCnt=\count548
 \MPscratchDim=\dimen346
-\MPnumerator=\count543
-\makeMPintoPDFobject=\count544
+\MPnumerator=\count549
+\makeMPintoPDFobject=\count550
 \everyMPtoPDFconversion=\toks68
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1368,11 +1386,16 @@ Package biblatex Info: Reference segment=0 on input line 2.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
+\c@mv@tabular=\count551
+\c@mv@boldtabular=\count552
 LaTeX Info: Redefining \microtypecontext on input line 2.
 Package microtype Info: Applying patch `item' on input line 2.
 Package microtype Info: Applying patch `toc' on input line 2.
 Package microtype Info: Applying patch `eqnum' on input line 2.
-Package microtype Info: Applying patch `footnote' on input line 2.
+
+
+Package microtype Warning: Unable to apply patch `footnote' on input line 2.
+
 Package microtype Info: Applying patch `verbatim' on input line 2.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
@@ -1384,11 +1407,9 @@ LaTeX Info: Redefining \showhyphens on input line 2.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-ptm.cfg
+(/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
-\c@mv@tabular=\count545
-\c@mv@boldtabular=\count546
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 17.28pt on input line 3.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
@@ -1459,18 +1480,19 @@ LaTeX Warning: Reference `eq:G_analit' on page 4 undefined on input line 198.
 LaTeX Warning: Reference `eq:NSS_multi_final' on page 4 undefined on input line 202.
 
 
-
-[4]
 Underfull \hbox (badness 10000) in paragraph at lines 226--241
 
  []
 
 
 
+[4]
+
+LaTeX Warning: Reference `eq:final_model_more' on page 5 undefined on input line 283.
+
+
+
 [5]
-
-LaTeX Warning: Reference `eq:final_model_more' on page 6 undefined on input line 283.
-
 
 LaTeX Warning: Reference `eq:desired_thrust' on page 6 undefined on input line 290.
 
@@ -1493,16 +1515,13 @@ LaTeX Warning: Reference `eq:input_psi' on page 6 undefined on input line 302.
 LaTeX Warning: Reference `eq:rotor_velocities' on page 6 undefined on input line 308.
 
 
-
-[6]
-
-LaTeX Warning: Reference `eq:model_velocity2' on page 7 undefined on input line 334.
+LaTeX Warning: Reference `eq:model_velocity2' on page 6 undefined on input line 334.
 
 
-LaTeX Warning: Reference `eq:persistence_of_excitation' on page 7 undefined on input line 335.
+LaTeX Warning: Reference `eq:persistence_of_excitation' on page 6 undefined on input line 335.
 
 
-LaTeX Warning: Reference `eq:velocity_clamping' on page 7 undefined on input line 337.
+LaTeX Warning: Reference `eq:velocity_clamping' on page 6 undefined on input line 337.
 
 LaTeX Font Info:    Trying to load font information for OT1+txtt on input line 385.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/ot1txtt.fd
@@ -1515,6 +1534,8 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
+
+[6]
 
 LaTeX Warning: Reference `eq:in_comm' on page 7 undefined on input line 391.
 
@@ -1529,154 +1550,149 @@ LaTeX Warning: Reference `eq:move_away' on page 7 undefined on input line 407.
 
 [9]
 
+LaTeX Warning: Reference `sec:PSO+PID' on page 10 undefined on input line 510.
+
+
+LaTeX Warning: Reference `eq:model_position2' on page 10 undefined on input line 545.
+
+
+LaTeX Warning: Reference `eq:boundary_condition' on page 10 undefined on input line 548.
+
+
+LaTeX Warning: Reference `eq:persistence_of_excitation' on page 10 undefined on input line 603.
+
+
+LaTeX Warning: Reference `eq:velocity_clamping' on page 10 undefined on input line 603.
+
+
+LaTeX Warning: Reference `eq:model_position2' on page 10 undefined on input line 603.
+
+
+LaTeX Warning: Reference `eq:boundary_condition' on page 10 undefined on input line 603.
+
+
+
 [10]
-
-LaTeX Warning: Reference `sec:PSO+PID' on page 11 undefined on input line 507.
-
-
-LaTeX Warning: Reference `eq:model_position2' on page 11 undefined on input line 542.
-
-
-LaTeX Warning: Reference `eq:boundary_condition' on page 11 undefined on input line 545.
-
-
-LaTeX Warning: Reference `eq:persistence_of_excitation' on page 11 undefined on input line 602.
-
-
-LaTeX Warning: Reference `eq:velocity_clamping' on page 11 undefined on input line 602.
-
-
-LaTeX Warning: Reference `eq:model_position2' on page 11 undefined on input line 602.
-
-
-LaTeX Warning: Reference `eq:boundary_condition' on page 11 undefined on input line 602.
-
-
-LaTeX Warning: Float too large for page by 127.19656pt on input line 602.
-
-
 
 [11]
 
-[12]
-
-LaTeX Warning: Reference `eq:final_model' on page 13 undefined on input line 613.
+LaTeX Warning: Reference `eq:final_model' on page 12 undefined on input line 615.
 
 
-LaTeX Warning: Reference `eq:rotor_velocities' on page 13 undefined on input line 684.
+LaTeX Warning: Reference `eq:rotor_velocities' on page 12 undefined on input line 686.
 
-<images/trajectory_comparison.pdf, id=249, 389.455pt x 309.155pt>
+<images/trajectory_comparison.pdf, id=243, 389.455pt x 309.155pt>
 File: images/trajectory_comparison.pdf Graphic file (type pdf)
 <use images/trajectory_comparison.pdf>
-Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 700.
+Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 702.
 (pdftex.def)             Requested size: 350.81174pt x 278.48694pt.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 701.
+(Font)              scaled to size 10.95pt on input line 703.
 
 
-[13]
-<images/pid_x.pdf, id=263, 378.41376pt x 314.17375pt>
+[12]
+<images/pid_x.pdf, id=256, 378.41376pt x 314.17375pt>
 File: images/pid_x.pdf Graphic file (type pdf)
 <use images/pid_x.pdf>
-Package pdftex.def Info: images/pid_x.pdf  used on input line 709.
+Package pdftex.def Info: images/pid_x.pdf  used on input line 711.
 (pdftex.def)             Requested size: 197.3295pt x 163.8315pt.
-<images/pid_y.pdf, id=264, 385.44pt x 308.15125pt>
+<images/pid_y.pdf, id=257, 385.44pt x 308.15125pt>
 File: images/pid_y.pdf Graphic file (type pdf)
 <use images/pid_y.pdf>
-Package pdftex.def Info: images/pid_y.pdf  used on input line 715.
+Package pdftex.def Info: images/pid_y.pdf  used on input line 717.
 (pdftex.def)             Requested size: 197.3295pt x 157.7569pt.
-<images/pid_z.pdf, id=265, 387.4475pt x 303.1325pt>
+<images/pid_z.pdf, id=258, 387.4475pt x 303.1325pt>
 File: images/pid_z.pdf Graphic file (type pdf)
 <use images/pid_z.pdf>
-Package pdftex.def Info: images/pid_z.pdf  used on input line 722.
+Package pdftex.def Info: images/pid_z.pdf  used on input line 724.
 (pdftex.def)             Requested size: 210.48436pt x 164.67896pt.
-<images/pid_sim.pdf, id=266, 1224.575pt x 681.54625pt>
+<images/pid_sim.pdf, id=259, 1224.575pt x 681.54625pt>
 File: images/pid_sim.pdf Graphic file (type pdf)
 <use images/pid_sim.pdf>
-Package pdftex.def Info: images/pid_sim.pdf  used on input line 730.
+Package pdftex.def Info: images/pid_sim.pdf  used on input line 732.
 (pdftex.def)             Requested size: 438.513pt x 244.05652pt.
-<images/rotor_velocities.pdf, id=267, 378.41376pt x 306.14375pt>
+<images/rotor_velocities.pdf, id=260, 378.41376pt x 306.14375pt>
 File: images/rotor_velocities.pdf Graphic file (type pdf)
 <use images/rotor_velocities.pdf>
-Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 737.
+Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 739.
 (pdftex.def)             Requested size: 306.95775pt x 248.33476pt.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 738.
+(Font)              scaled to size 10.95pt on input line 740.
 
 
-LaTeX Warning: Reference `eq:rotor_velocities' on page 14 undefined on input line 738.
+LaTeX Warning: Reference `eq:rotor_velocities' on page 13 undefined on input line 740.
 
 
-LaTeX Warning: Reference `eq:rotor_velocities' on page 14 undefined on input line 738.
+LaTeX Warning: Reference `eq:rotor_velocities' on page 13 undefined on input line 740.
 
 
 
-[14 <./images/trajectory_comparison.pdf>]
+[13 <./images/trajectory_comparison.pdf>]
 
-[15 <./images/pid_x.pdf> <./images/pid_y.pdf> <./images/pid_z.pdf> <./images/pid_sim.pdf>]
+[14 <./images/pid_x.pdf> <./images/pid_y.pdf> <./images/pid_z.pdf> <./images/pid_sim.pdf>]
 
-[16 <./images/rotor_velocities.pdf>]
-<images/case_1.pdf, id=561, 1122.1925pt x 718.685pt>
+[15 <./images/rotor_velocities.pdf>]
+<images/case_1.pdf, id=555, 1122.1925pt x 718.685pt>
 File: images/case_1.pdf Graphic file (type pdf)
 <use images/case_1.pdf>
-Package pdftex.def Info: images/case_1.pdf  used on input line 804.
+Package pdftex.def Info: images/case_1.pdf  used on input line 806.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 804--805
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 806--807
  [][] 
  []
 
 
 
-[17 <./images/case_1.pdf>]
-<images/case_2.pdf, id=648, 1122.1925pt x 718.685pt>
+[16 <./images/case_1.pdf>]
+<images/case_2.pdf, id=642, 1122.1925pt x 718.685pt>
 File: images/case_2.pdf Graphic file (type pdf)
 <use images/case_2.pdf>
-Package pdftex.def Info: images/case_2.pdf  used on input line 843.
+Package pdftex.def Info: images/case_2.pdf  used on input line 845.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 843--844
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 845--846
  [][] 
  []
 
-<images/case_2_more.pdf, id=649, 1122.1925pt x 718.685pt>
+<images/case_2_more.pdf, id=643, 1122.1925pt x 718.685pt>
 File: images/case_2_more.pdf Graphic file (type pdf)
 <use images/case_2_more.pdf>
-Package pdftex.def Info: images/case_2_more.pdf  used on input line 849.
+Package pdftex.def Info: images/case_2_more.pdf  used on input line 851.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 849--850
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 851--852
  [][] 
  []
 
 
 
-[18 <./images/case_2.pdf>]
-<images/case_3_fail.pdf, id=737, 1122.1925pt x 718.685pt>
+[17 <./images/case_2.pdf>]
+<images/case_3_fail.pdf, id=731, 1122.1925pt x 718.685pt>
 File: images/case_3_fail.pdf Graphic file (type pdf)
 <use images/case_3_fail.pdf>
-Package pdftex.def Info: images/case_3_fail.pdf  used on input line 888.
+Package pdftex.def Info: images/case_3_fail.pdf  used on input line 890.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 888--889
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 890--891
  [][] 
  []
 
-<images/case_3.pdf, id=738, 1114.1625pt x 718.685pt>
+<images/case_3.pdf, id=732, 1114.1625pt x 718.685pt>
 File: images/case_3.pdf Graphic file (type pdf)
 <use images/case_3.pdf>
-Package pdftex.def Info: images/case_3.pdf  used on input line 897.
+Package pdftex.def Info: images/case_3.pdf  used on input line 899.
 (pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 897--898
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 899--900
  [][] 
  []
 
 
 
-[19 <./images/case_2_more.pdf>]
+[18 <./images/case_2_more.pdf>]
 
-[20 <./images/case_3_fail.pdf> <./images/case_3.pdf>] (build/Cap_6.aux)
+[19 <./images/case_3_fail.pdf> <./images/case_3.pdf>] (build/Cap_6.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -1686,17 +1702,17 @@ L3 programming layer <2020/03/25>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Cap_6.out' has not changed.
-(rerunfilecheck)             Checksum: 8C3BD1C0F78D98550F57A3158044EF6D;1352.
+(rerunfilecheck)             Checksum: 809E21B2D2430258A781F6E96FA1DDA5;1352.
 Package logreq Info: Writing requests to 'Cap_6.run.xml'.
 \openout1 = `Cap_6.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 50679 strings out of 473579
- 1064234 string characters out of 5728234
- 1936973 words of memory out of 5000000
- 72310 multiletter control sequences out of 15000+600000
- 611938 words of font info for 346 fonts, out of 8000000 for 9000
+ 50844 strings out of 473579
+ 1066879 string characters out of 5728234
+ 1938845 words of memory out of 5000000
+ 72474 multiletter control sequences out of 15000+600000
+ 611695 words of font info for 343 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  104i,22n,104p,1698b,854s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
@@ -1706,10 +1722,10 @@ pdfTeX warning (dest): name{cite.0@PSO_original} has been referenced but does no
 pdfTeX warning (dest): name{cite.0@drone} has been referenced but does not exist, replaced by a fixed one
 
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on build/Cap_6.pdf (20 pages, 1617976 bytes).
+Output written on build/Cap_6.pdf (19 pages, 1617605 bytes).
 PDF statistics:
- 1096 PDF objects out of 1200 (max. 8388607)
- 962 compressed objects within 10 object streams
- 145 named destinations out of 1000 (max. 500000)
+ 1088 PDF objects out of 1200 (max. 8388607)
+ 955 compressed objects within 10 object streams
+ 143 named destinations out of 1000 (max. 500000)
  68250 words of extra memory for PDF output out of 74296 (max. 10000000)
 

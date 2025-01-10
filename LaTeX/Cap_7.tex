@@ -25,14 +25,14 @@ zone mechanism.
 
 \noindent\\
 Another notable drawback is that the algorithm occasionally fails in
-scenarios where drones are repeatedly attracted to the same sources,
+scenarios where UAVs are repeatedly attracted to the same sources,
 preventing effective exploration of the search space. This limitation
 prevents the swarm's ability to identify and reach faraway
 sources, when near others. This behavior is an intrinsic limitation of 
 the problem. Additionally, when sources
 are positioned too closely together, as demonstrated in Case 3, the
 algorithm struggles to differentiate between them, resulting in reduced
-accuracy unless additional drones are introduced to improve coverage.
+accuracy unless additional UAVs are introduced to improve coverage.
 
 \noindent\\
 One potential enhancement in our algorithm is the employment of adaptive mechanisms 
@@ -53,14 +53,14 @@ multi-source localization problems, where the location of all different
 sources rapidly is crucial.
 Furthermore, our work also introduces another novel aspect: 
 the implementation of the PSO algorithm to provide control command velocities 
-to the drones in real time, integrating the PSO into the control
+to the UAVs in real time, integrating the PSO into the control
 loop.
 
 \noindent\\
 The decentralized nature of our approach offers further advantages. By
 removing the reliance on a central computation unit, the system becomes
 more robust to communication noise and failures. This autonomy allows
-the drones to operate effectively under challenging conditions, such as
+the UAVs to operate effectively under challenging conditions, such as
 mountainous terrain or adverse weather, where communication may be
 intermittent or delayed. While decentralization may lead to slightly
 slower convergence and higher estimation errors due to partial

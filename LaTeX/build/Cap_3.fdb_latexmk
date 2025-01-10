@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber build/Cap_3"] 1736031412.51927 "build/Cap_3.bcf" "build/Cap_3.bbl" "build/Cap_3" 1736031417.21618 0
+["biber build/Cap_3"] 1736031412.51927 "build/Cap_3.bcf" "build/Cap_3.bbl" "build/Cap_3" 1736473952.88939 0
   "bibliography.bib" 1736023802.97323 52107 c5f3078488c3c9ddbe787e0ef569d182 ""
-  "build/Cap_3.bcf" 1736031417.08444 109326 c1d494fa223b5361a0e306208f79d95d "pdflatex"
+  "build/Cap_3.bcf" 1736473952.72049 109326 c1d494fa223b5361a0e306208f79d95d "pdflatex"
   (generated)
   "build/Cap_3.bbl"
   "build/Cap_3.blg"
   (rewritten before read)
-["pdflatex"] 1736031415.4201 "/home/anto/University/LAV/LaTeX/Cap_3.tex" "build/Cap_3.pdf" "Cap_3" 1736031417.21643 0
-  "/home/anto/University/LAV/LaTeX/Cap_3.tex" 1736031412.36061 36296 e4c896bb81f1cce48c536f883c1dcba9 ""
+["pdflatex"] 1736473950.92145 "/home/anto/University/LAV/LaTeX/Cap_3.tex" "build/Cap_3.pdf" "Cap_3" 1736473952.88974 0
+  "/home/anto/University/LAV/LaTeX/Cap_3.tex" 1736473950.80451 36365 5136d0196ea5e360b2d90cc6bc32a358 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc" 1422827479 2083 60e36f8eac802fcaf19eabe2633b406e ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -304,6 +304,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/units/nicefrac.sty" 1137111039 4029 0462ee5ab265cf59dc15a41a3b883101 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/units/units.sty" 1137111039 2134 65ad9fb19763b1681bea4cb389fe84f8 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/verse/verse.sty" 1707868051 9071 6317579311a885a54ef1a6b1f319c93e ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty" 1700082560 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1655411236 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty" 1585258158 8314 7803f78066c4f9d008405191a4b43073 ""
@@ -311,12 +312,12 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1727571937 5477429 32a2a3a09e7e10c5f90c819db1b0ec36 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727571976 3325966 669b58d2a9b28a670986370fac89bc16 ""
   "/usr/local/texlive/2024/texmf.cnf" 1727571931.86701 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "Cap_3.tex" 1736031412.36061 36296 e4c896bb81f1cce48c536f883c1dcba9 ""
-  "build/Cap_3.aux" 1736031417.08044 6574 dc11dfb5267f36d584850339e79a1c0b "pdflatex"
-  "build/Cap_3.bbl" 1736031413.56057 10531 1b7cad94baf527c561003950f1e57135 "biber build/Cap_3"
-  "build/Cap_3.out" 1736031417.08044 1929 67aa536be66d8e4b61be207b6fede1ee "pdflatex"
-  "build/Cap_3.run.xml" 1736031417.08444 2411 e3bc6976dc477709cc096455541419a9 "pdflatex"
-  "main.tex" 1736030398.17511 3667 49845c0e7fc76f141c3bf2dffa694085 ""
+  "Cap_3.tex" 1736473950.80451 36365 5136d0196ea5e360b2d90cc6bc32a358 ""
+  "build/Cap_3.aux" 1736473952.71649 6574 dc11dfb5267f36d584850339e79a1c0b "pdflatex"
+  "build/Cap_3.bbl" 1736031418.2644 10531 1b7cad94baf527c561003950f1e57135 "biber build/Cap_3"
+  "build/Cap_3.out" 1736473952.71649 1929 67aa536be66d8e4b61be207b6fede1ee "pdflatex"
+  "build/Cap_3.run.xml" 1736473952.72049 2411 e3bc6976dc477709cc096455541419a9 "pdflatex"
+  "main.tex" 1736473531.8133 4589 ae708189d269b428e1871592ccdcc932 ""
   (generated)
   "build/Cap_3.aux"
   "build/Cap_3.bcf"
