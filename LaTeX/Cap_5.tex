@@ -979,9 +979,13 @@ ensuring efficient source localization and actual
 control inputs.
 
 \noindent\\
-Finally, we note that the comtrol inputs (rotor velocities
+Finally, we note that the control inputs (rotor velocities
 $\omega_i$) have been limited to $\omega_\text{max}$, 
 in order to respect the physical limitations of real 
-rotors. 
+rotors, in the same way the reference velocities of the 
+PSO are limited to a $v_\text{max}$.
+For simplicity, we do not limit the linear velocities of the UAVs 
+since we have already placed constraints on the angular velocities 
+and on the PSO references.
 
 \end{document}

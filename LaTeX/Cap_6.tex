@@ -13,14 +13,15 @@ summarized in Table \ref{tab:drone_parameters}:
 \caption{\textbf{Drone Physical Parameters}}
 \begin{tabular}{c c c c}
 \hline\hline
-\textbf{Symbol}  & \textbf{Value}       & \textbf{Unit}         & \textbf{Description} \\ \hline\hline
-\(m\)           & \(0.4\)              & \(\text{kg}\)          & Total mass of the UAV \\
-\(J_x\)         & \(3.8278 \times 10^{-3}\) & \(\text{kg}\cdot\text{m}^2\) & Moment of inertia about $x$-axis \\
-\(J_y\)         & \(3.8278 \times 10^{-3}\) & \(\text{kg}\cdot\text{m}^2\) & Moment of inertia about $y$-axis \\
-\(J_z\)         & \(7.1345 \times 10^{-3}\) & \(\text{kg}\cdot\text{m}^2\) & Moment of inertia about $z$-axis \\
-\(l\)           & \(0.205\)            & \(\text{m}\)           & Distance from center to rotor \\
-\(c_t\)         & \(6.354 \times 10^{-4}\) & --                     & Coefficient for thrust generation \\
-\(c_d\)         & \(0.048\)            & --                     & Coefficient for torque generation \\
+\textbf{Symbol}     & \textbf{Value}       & \textbf{Unit}         & \textbf{Description} \\ \hline\hline
+\(m\)               & \(0.4\)              & \(\text{kg}\)          & Total mass of the UAV \\
+\(J_x\)             & \(3.8278 \times 10^{-3}\) & \(\text{kg}\cdot\text{m}^2\) & Moment of inertia about $x$-axis \\
+\(J_y\)             & \(3.8278 \times 10^{-3}\) & \(\text{kg}\cdot\text{m}^2\) & Moment of inertia about $y$-axis \\
+\(J_z\)             & \(7.1345 \times 10^{-3}\) & \(\text{kg}\cdot\text{m}^2\) & Moment of inertia about $z$-axis \\
+$\omega_\text{max}$ &$260$                  &$\text{rad/s}$                    & Maximum  velocity of each rotor\\
+\(l\)               & \(0.205\)            & \(\text{m}\)           & Distance from center to rotor \\
+\(c_t\)             & \(6.354 \times 10^{-4}\) & --                     & Coefficient for thrust generation \\
+\(c_d\)             & \(0.048\)            & --                     & Coefficient for torque generation \\
 \hline\hline
 \end{tabular}
 \label{tab:drone_parameters}
@@ -105,17 +106,17 @@ particles' data).
 \begin{tabular}{c c c c}
 \hline\hline
 \textbf{Symbol}              & \textbf{Value}        & \textbf{Unit}           & \textbf{Description}      \\ \hline\hline                   
-\(n_{\text{iterations}}\) (\texttt{n\_iterations})      & 500                   & --                      & Number of iterations      \\
+\(n_{\text{iterations}}\) (\texttt{n\_iterations})     & 600                   & --                      & Number of iterations      \\
 \(\omega\) (\texttt{inertia})                          & 1.05                  & --                      & Inertia weight            \\
 \(c_1\) (\texttt{cognitive\_factor})                   & 2.05                  & --                      & Cognitive factor          \\
 \(c_2\) (\texttt{social\_factor})                      & 1.5                   & --                      & Social factor             \\
- \texttt{NSS\_threshold}                               & 350300                & --                      & NSS signal locating threshold\\
+ \texttt{NSS\_threshold}                               & 290000                & --                      & NSS signal locating threshold\\
 \(\beta\) (\texttt{velocity\_randomness})              & 0.5                   & --                      & Velocity randomness       \\ \hline
 \(\Omega_{x,y}\) (\texttt{bounds})                     & \([-80, 80]\)         & \(\text{m}\)            & Search space limits       \\
-\(v_{\text{max}}\) (\texttt{max\_velocity})            & 2                     & \(\text{m/s}\)          & Maximum velocity          \\                
+\(v_{\text{max}}\) (\texttt{max\_velocity})            & 1.5                   & \(\text{m/s}\)          & Maximum velocity          \\                
 \(r_{\text{comm}}\) (\texttt{communication\_radius})   & 10                    & \(\text{m}\)           & Communication radius      \\
-\(\alpha\) (\texttt{step\_size})                       & 120                    & \(\text{m}\)           & Move away distance        \\
-\(r_{\text{excl}}\) (\texttt{exclusion\_zone\_radius}) & 3                     & \(\text{m}\)           & Exclusion zone radius     \\
+\(\alpha\) (\texttt{step\_size})                       & 120                   & \(\text{m}\)           & Move away distance        \\
+\(r_{\text{excl}}\) (\texttt{exclusion\_zone\_radius}) & 2.5                   & \(\text{m}\)           & Exclusion zone radius     \\
 \(\delta t\) (\texttt{dt})                             & 0.04                  & \(\text{s}\)           & Control time step         \\
 \(\Delta\) (\texttt{iteration\_duration})              & 1                     & \(\text{s}\)           & PSO iteration duration    \\
 \hline\hline
@@ -496,13 +497,6 @@ where \texttt{angle\_step} is the angular increment to uniformly divide the spac
 \texttt{drone\_angle} represents the angle assigned to each UAV, 
 while \texttt{m} is the slope of the trajectory calculated from the UAV's angle. 
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=\textwidth]{images/exploration_pattern.jpg} 
-%     \caption{Radial exploration pattern for 5 drones at the end of the Exploration Phase.}
-%     \label{fig:exploration_pattern}
-% \end{figure}
-
 \noindent\\
 \textbf{Exploitation Phase}\noindent\\
 This is the most important part of the simulation since it involves
@@ -592,20 +586,24 @@ Algorithm~\ref{alg:PSO}.
             \textbf{Apply} persistence of excitation as in Eq.\eqref{eq:persistence_of_excitation}\;
             \textbf{Limit} velocity to \texttt{max\_velocity} as in Eq.\eqref{eq:velocity_clamping}\;
             \textbf{Desired} position: as in Eq.\eqref{eq:model_position2}\;
+            \textbf{Enforce} boundaries on desired position as in Eq.\eqref{eq:boundary_condition}\;
             \textbf{Set} \texttt{iteration\_duration} to 1\;
             \For{\(\texttt{t} = 0 : \texttt{dt} : \texttt{iteration\_duration}\)}{
                 \textbf{Control} dynamics: \textit{update\_state()}\;
-                \textbf{Enforce} boundaries on position as in Eq.\eqref{eq:boundary_condition}\;
  }
  }
  }
 \end{algorithm}
 \noindent\\
 Note that the inertia of a UAV that has found a source 
-is set to zero (\(\omega = 0.5\)), increasing
+is reduced (\(\omega = 0.5\)), the same way the maximum allowed velocity
+in the PSO is reduced to $v_\text{max}=0.5 \, \text{m/s}$, increasing
 convergence speed. The final output is the set of best estimates 
 \texttt{g\_best\_values}, composed of the best-estimated position 
 of a source by each group.
+Finally, we want to note that during the movement dynamics
+of the UAVs the exlusion zone mechanism and the NSS signal reception
+are both implemented, but not repeated in Alg.\ref{alg:PSO} for brevity.
 
 \newpage
 \subsection{Results}
@@ -758,7 +756,7 @@ initialized with the hyperparameters described in the previous sections.
 The UAVs start their search with an initial position at the 
 center of the search space, defined as \([0, 0]\). 
 Their initial velocities are randomized using the velocity randomness
-factor capped at a maximum velocity of \(2 \, \text{m/s}\) 
+factor capped at a maximum velocity of \(1.5 \, \text{m/s}\) 
 to prevent overshooting targets. The search space is constrained within bounds 
 of \([-80, 80] \, \text{m}\) for both the \(x\) and \(y\) directions.
 
@@ -781,18 +779,19 @@ In the following sections, we report the results relative to 3 different
 scenarios regarding the number of UAVs employed and the positions of the victims
 in space, under nominal conditions both for the ARTVA signal and the PID controller.
 
-\textbf{Case 1}
+\noindent\\
+\textbf{Case 1}\\
 In the first case, the PSO algorithm needs to locate four sources positioned 
 at \([20, 50] \, \text{m}\), \([-50, 70] \, \text{m}\), \([60, 30] \, \text{m}\), 
 and \([-10, 30] \, \text{m}\), 
 randomly distributed across the search space.
 
 \noindent\\
-The time it took for the swarm to find the victims was 292 seconds (\(\sim 4.9\) minutes),
+The time it took for the swarm to find the victims was 151 seconds (\(\sim 2.52\) minutes),
 during which the UAVs successfully converged on the sources, 
-achieving precise estimates with an average error of \(0.09 \, \text{m}\). The estimate for the first source was 
-just \(0.025 \, \text{m}\) away, while the second, third, and fourth sources were 
-located with errors of \(0.287 \, \text{m}\), \(0.013 \, \text{m}\), and \(0.053 \, \text{m}\), respectively.
+achieving precise estimates with an average error of \(0.38 \, \text{m}\). The estimate for the first source was 
+just \(0.756 \, \text{m}\) away, while the second, third, and fourth sources were 
+located with errors of \(0.295 \, \text{m}\), \(0.165 \, \text{m}\), and \(0.283 \, \text{m}\), respectively.
 
 \noindent\\
 In Figure~\ref{fig:case1} we can see  
@@ -807,18 +806,66 @@ worked in favor of UAVs 3 and 4 in successfully locating a source.
     \label{fig:case1}
 \end{figure}
 
-\textbf{Case 2}
+\noindent\\
+We also show the control inputs necessary to achieve the desired
+results during the Exploitation phase in Figure \ref{fig:rotor_vel_pso}, as the 
+ones during the Exploration phase have already been shown in the previous section.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/rotor_vels_pso.pdf}
+    \caption[rotor_vel Case 1]{Rotor velocities for all UAVs during the Exploitation Phase in Case 1.}
+    \label{fig:rotor_vel_pso}
+\end{figure}
+
+\noindent\\
+Furthermore, the desired control inputs generated by the PSO algorithm are 
+compared with the actual positions (Figures \ref{fig:position_x_pso} and \ref{fig:position_y_pso}) and 
+velocities (Figures \ref{fig:velocity_x_pso} and \ref{fig:velocity_y_pso}) for each drone. 
+Divided into the $x$ and $y$ components, the figures demonstrate that the controller 
+performs adequately in the position control task (which is the primary focus of our interest), 
+while showing slightly less accuracy in the velocity control, which has a more erratic behavior and therefore is more 
+difficult to track.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/comparison_velocity-x_pso.pdf}
+    \caption[Velocity-X Case 1]{Comparison of the $x$-component of velocity between the input control and real UAV velocities during the PSO phase in Case 1.}
+    \label{fig:velocity_x_pso}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/comparison_velocity-y_pso.pdf}
+    \caption[Velocity-Y Case 1]{Comparison of the $y$-component of velocity between the input control and real UAV velocities during the PSO phase in Case 1.}
+    \label{fig:velocity_y_pso}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/comparison_position-x_pso.pdf}
+    \caption[Position-X Case 1]{Comparison of the $x$-component of position between the input control and real UAV positions during the PSO phase in Case 1.}
+    \label{fig:position_x_pso}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/comparison_position-y_pso.pdf}
+    \caption[Position-Y Case 1]{Comparison of the $y$-component of position between the input control and real UAV positions during the PSO phase in Case 1.}
+    \label{fig:position_y_pso}
+\end{figure}
+
+\noindent\\
+\textbf{Case 2}\\
 In the second case, the PSO algorithm is again tasked with locating four 
 sources positioned at \([-70, -70] \, \text{m}\), \([70, 70] \, \text{m}\), \([-70, 70] \, \text{m}\), and \([70, -70] \, \text{m}\), 
 distributed very far apart across the search space.
 
 \noindent\\
-The time it took for the swarm to locate the sources was 336 seconds (\(\sim 5.6\) minutes). 
+The time it took for the swarm to locate the sources was 519 seconds (\(\sim 8.65\) minutes). 
 During this time, 
-the UAVs successfully converged on the sources, achieving an average error of \(0.10 \, \text{m}\). 
-The estimates for all the sources were: the first source was \(0.16 \, \text{m}\) away, 
-the second was \(0.002 \, \text{m}\) away, the third was \(0.001 \, \text{m}\) away, 
-and the fourth was \(0.233 \, \text{m}\). 
+the UAVs successfully converged on the sources, achieving an average error of \(0.39 \, \text{m}\). 
+The estimates for all the sources were: the first source was \(1.025 \, \text{m}\) away, 
+the second was \(0.180 \, \text{m}\) away, the third was \(0.147 \, \text{m}\) away, 
+and the fourth was \(0.208 \, \text{m}\). 
 
 \noindent\\
 In Figure~\ref{fig:case2}, the sources' locations and the UAVs' 
@@ -830,11 +877,9 @@ the signal they send are less strong.
 To evaluate the impact of increasing the number of UAVs, a second simulation 
 was conducted by adding a UAV to the swarm. 
 Naturally, we see improved performance in the total time
-needed by the UAVs to find all victims, which was just 137 seconds (\(\sim 2.3\) minutes).
-The average error across all sources slightly increased to \(0.26 \, \text{m}\),
-due to the very high time reduction which did not consent the UAVs
-to converge towards more precise positions. 
-Instead, the time improvement was due to some UAVs 
+needed by the UAVs to find all victims, which was just 233 seconds (\(\sim 3.88\) minutes).
+The average error across all sources slightly decreased to \(0.37 \, \text{m}\). 
+The time improvement was due to some UAVs 
 having a better trajectory during the exploration phase, which brought 
 them nearer the sources.
 Figure~\ref{fig:case2more} illustrates the results of this improved configuration. 
@@ -852,12 +897,13 @@ Figure~\ref{fig:case2more} illustrates the results of this improved configuratio
     \label{fig:case2more}
 \end{figure}
 
-\textbf{Case 3}
+\noindent\\
+\textbf{Case 3}\\
 In the third case, the PSO algorithm faces a challenging scenario where 
-the four sources are positioned very close to each other, only \(6 \, \text{m}\) apart, 
-at \([20, 50] \, \text{m}\), \([26, 50] \, \text{m}\), \([20, 56] \, \text{m}\), and \([26, 56] \, \text{m}\). 
+the four sources are positioned very close to each other, only \(8 \, \text{m}\) apart, 
+at \([20, 50] \, \text{m}\), \([28, 50] \, \text{m}\), \([20, 58] \, \text{m}\), and \([28, 58] \, \text{m}\). 
 This situation is particularly difficult for the algorithm due to 
-the fact that we have an exclusion zone radius of \(3 \, \text{m}\) and 
+the fact that we have an exclusion zone radius of \(2.5 \, \text{m}\) and 
 whenever one UAV gets inside the exclusion zone of another
 it has to go \(120 \, \text{m}\) away.
 Therefore, when three UAVs have found their sources, the fourth has only a few
@@ -865,7 +911,7 @@ possible directions to reach the fourth source.
 
 \noindent\\
 Initially, with four UAVs, the algorithm fails to reliably 
-locate all sources within the 500 seconds allocated for the simulation,
+locate all sources within the 600 seconds (10 min) allocated for the simulation,
 as seen in Figure~\ref{fig:case3fail}. 
 While increasing the simulation time could potentially improve performance, 
 this approach is unsuitable for our time-sensitive application, where
@@ -875,11 +921,11 @@ after the time of the accident.
 \noindent\\
 To address this issue, an additional UAV is introduced, increasing the 
 swarm size to five UAVs. Now, the algorithm successfully 
-locates all sources in 293 seconds (approximately \(4.9\) minutes). 
-The estimates for the sources are: the first source was \(0.245 \, \text{m}\) away, 
-the second was \(0.32 \, \text{m}\) away, the third was \(0.265 \, \text{m}\) away, and the 
-fourth was \(0.12 \, \text{m}\) away. The total error for all valid estimates was 
-reduced to \(0.24 \, \text{m}\), demonstrating the effectiveness of increasing the 
+locates all sources in 544 seconds (\(\sim 9\) minutes). 
+The estimates for the sources are: the first source was \(0.227 \, \text{m}\) away, 
+the second was \(0.925 \, \text{m}\) away, the third was \(0.160 \, \text{m}\) away, and the 
+fourth was \(0.152 \, \text{m}\) away. The total error for all valid estimates was 
+\(0.37 \, \text{m}\), demonstrating the effectiveness of increasing the 
 swarm size in challenging scenarios.
 In Figure~\ref{fig:case3}, the addition of a fifth UAV and the subsequent 
 success in the localization can be seen clearly.

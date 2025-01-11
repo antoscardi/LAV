@@ -71,29 +71,38 @@ classdef Particle < handle
         end
 
         % Update the particle's velocity based on personal and global best
-        function obj = update_velocity(obj, g_best_local, cognitive, social)
+        function pso_velocity = update_velocity(obj, g_best_local, cognitive, social)
             % Personal and social components
-            obj.velocity = obj.inertia * obj.velocity + ...
+            pso_velocity = obj.inertia * obj.velocity + ...
                            cognitive * rand() * (obj.p_best - obj.position) + ...
                            social * rand() * (g_best_local - obj.position);
             %disp(obj.velocity)
             % Add random noise to velocity 
-            obj.velocity = obj.velocity + obj.velocity_randomness * (2 * rand(1, 2) - 1) * norm(obj.velocity);
+            pso_velocity = pso_velocity + obj.velocity_randomness * (2 * rand(1, 2) - 1) * norm(pso_velocity);
 
             % Cap velocity to max allowable speed
-            if norm(obj.velocity) > obj.max_velocity
-                obj.velocity = (obj.velocity / norm(obj.velocity)) * obj.max_velocity;
+            if norm(pso_velocity) > obj.max_velocity
+                pso_velocity = (pso_velocity / norm(pso_velocity)) * obj.max_velocity;
             end
+
+            % Update PSO velocity
+            if any(isnan(pso_velocity)) || any(isinf(pso_velocity))
+                pso_velocity = [0, 0]; % Replace with zeros
+            end
+
             %fprintf('Drone %d has velocity [%.1f, %.1f]\n', ...
             %        obj.identifier, obj.velocity(1), obj.velocity(2));     
         end
         
         % Update particle's position based on velocity and apply boundary conditions
-        function state_dot = update_state(obj, dt, state, desired_position, desired_velocity, desired_acceleration)
+        function [state_dot, rotor_velocities] = update_state(obj, dt, state, desired_position, desired_velocity, desired_acceleration)
 
             % Controller inputs
             [input_torques, input_force] = obj.controller.control_laws(state, desired_position, desired_velocity, ...
             desired_acceleration);
+
+            % Compute rotor velocities
+            rotor_velocities = obj.controller.compute_rotor_velocities(input_force, input_torques);
 
             % Use the controller to compute the state derivative (new state)
             state_dot = obj.controller.quadrotor_full_dynamics(dt, state, input_force, input_torques);   
@@ -108,10 +117,11 @@ classdef Particle < handle
                 %fprintf('Drone %d has received an NSS signal of  %.1f.\n', ...
                 %    obj.identifier, obj.nss_best_value);
             end
-            if obj.nss_value > 350300 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
+            if obj.nss_value > 290000 && ~obj.victim_found_flag && isempty(obj.my_exclusion_zone)
                 obj.victim_found_flag = true;
                 % Remove inertia
                 obj.inertia = 0.5;
+                obj.max_velocity = 0.5; % ADDED NEW
                 obj.my_exclusion_zone = obj.position;  % Add current position as my exclusion zone
                 fprintf('Drone %d has found a source at position [%.1f, %.1f]\n', ...
                     obj.identifier, obj.position(1), obj.position(2));
@@ -176,6 +186,8 @@ classdef Particle < handle
                 direction_away_normalized(1), direction_away_normalized(2));
             % Update the position of the drone by moving it a small step away %IN OPPOSITE DIRECTION FROM WHERE YOU CAME FROM
             obj.position = obj.position + step_size * direction_away_normalized;
+            % Clamp the particle's position to the bounds
+            obj.position = max(min(obj.position, obj.bounds(2)), obj.bounds(1));
             % Print the new position of the drone
             fprintf('New Drone Position: [%.2f, %.2f]\n', obj.position(1), obj.position(2));
             %error("stop")

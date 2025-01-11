@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  10 JAN 2025 03:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  11 JAN 2025 09:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1872,13 +1872,13 @@ Package pdftex.def Info: images/quad_model.png  used on input line 921.
 
 ]
 LaTeX Font Info:    Font shape `OT1/ntxtt/b/n' will be
-(Font)              scaled to size 12.0pt on input line 74.
+(Font)              scaled to size 12.0pt on input line 75.
 
 
 [83]
 
 [84]
-Underfull \hbox (badness 10000) in paragraph at lines 226--241
+Underfull \hbox (badness 10000) in paragraph at lines 227--242
 
  []
 
@@ -1887,12 +1887,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 226--241
 [85]
 
 [86]
-LaTeX Font Info:    Trying to load font information for OT1+txtt on input line 385.
+LaTeX Font Info:    Trying to load font information for OT1+txtt on input line 386.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/ot1txtt.fd
 File: ot1txtt.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/ntxtt/m/it' in size <12> not available
-(Font)              Font shape `OT1/txtt/m/sl' tried instead on input line 385.
+(Font)              Font shape `OT1/txtt/m/sl' tried instead on input line 386.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `txtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1910,38 +1910,38 @@ Package microtype Info: Loading generic protrusion settings for font family
 [91]
 
 [92]
-<images/trajectory_comparison.pdf, id=1636, 389.455pt x 309.155pt>
+<images/trajectory_comparison.pdf, id=1637, 389.455pt x 309.155pt>
 File: images/trajectory_comparison.pdf Graphic file (type pdf)
 <use images/trajectory_comparison.pdf>
-Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 701.
+Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 699.
 (pdftex.def)             Requested size: 350.81174pt x 278.48694pt.
 
 
 [93]
-<images/pid_x.pdf, id=1646, 378.41376pt x 314.17375pt>
+<images/pid_x.pdf, id=1647, 378.41376pt x 314.17375pt>
 File: images/pid_x.pdf Graphic file (type pdf)
 <use images/pid_x.pdf>
-Package pdftex.def Info: images/pid_x.pdf  used on input line 710.
+Package pdftex.def Info: images/pid_x.pdf  used on input line 708.
 (pdftex.def)             Requested size: 197.3295pt x 163.8315pt.
-<images/pid_y.pdf, id=1647, 385.44pt x 308.15125pt>
+<images/pid_y.pdf, id=1648, 385.44pt x 308.15125pt>
 File: images/pid_y.pdf Graphic file (type pdf)
 <use images/pid_y.pdf>
-Package pdftex.def Info: images/pid_y.pdf  used on input line 716.
+Package pdftex.def Info: images/pid_y.pdf  used on input line 714.
 (pdftex.def)             Requested size: 197.3295pt x 157.7569pt.
-<images/pid_z.pdf, id=1648, 387.4475pt x 303.1325pt>
+<images/pid_z.pdf, id=1649, 387.4475pt x 303.1325pt>
 File: images/pid_z.pdf Graphic file (type pdf)
 <use images/pid_z.pdf>
-Package pdftex.def Info: images/pid_z.pdf  used on input line 723.
+Package pdftex.def Info: images/pid_z.pdf  used on input line 721.
 (pdftex.def)             Requested size: 210.48436pt x 164.67896pt.
-<images/pid_sim.pdf, id=1649, 1224.575pt x 681.54625pt>
+<images/pid_sim.pdf, id=1650, 1224.575pt x 681.54625pt>
 File: images/pid_sim.pdf Graphic file (type pdf)
 <use images/pid_sim.pdf>
-Package pdftex.def Info: images/pid_sim.pdf  used on input line 731.
+Package pdftex.def Info: images/pid_sim.pdf  used on input line 729.
 (pdftex.def)             Requested size: 438.513pt x 244.05652pt.
-<images/rotor_velocities.pdf, id=1650, 378.41376pt x 306.14375pt>
+<images/rotor_velocities.pdf, id=1651, 378.41376pt x 306.14375pt>
 File: images/rotor_velocities.pdf Graphic file (type pdf)
 <use images/rotor_velocities.pdf>
-Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 738.
+Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 736.
 (pdftex.def)             Requested size: 306.95775pt x 248.33476pt.
 
 
@@ -1950,88 +1950,123 @@ Package pdftex.def Info: images/rotor_velocities.pdf  used on input line 738.
 [95 <./images/pid_x.pdf> <./images/pid_y.pdf> <./images/pid_z.pdf> <./images/pid_sim.pdf>]
 
 [96 <./images/rotor_velocities.pdf>]
-<images/case_1.pdf, id=1944, 1122.1925pt x 718.685pt>
+<images/case_1.pdf, id=1945, 1122.1925pt x 718.685pt>
 File: images/case_1.pdf Graphic file (type pdf)
 <use images/case_1.pdf>
-Package pdftex.def Info: images/case_1.pdf  used on input line 805.
+Package pdftex.def Info: images/case_1.pdf  used on input line 804.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 805--806
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 804--805
  [][] 
  []
 
+<images/rotor_vels_pso.pdf, id=1947, 1445.4pt x 718.685pt>
+File: images/rotor_vels_pso.pdf Graphic file (type pdf)
+<use images/rotor_vels_pso.pdf>
+Package pdftex.def Info: images/rotor_vels_pso.pdf  used on input line 815.
+(pdftex.def)             Requested size: 438.513pt x 218.0307pt.
 
 
 [97 <./images/case_1.pdf>]
-<images/case_2.pdf, id=2031, 1122.1925pt x 718.685pt>
+<images/comparison_velocity-x_pso.pdf, id=2037, 1445.4pt x 718.685pt>
+File: images/comparison_velocity-x_pso.pdf Graphic file (type pdf)
+<use images/comparison_velocity-x_pso.pdf>
+Package pdftex.def Info: images/comparison_velocity-x_pso.pdf  used on input line 830.
+(pdftex.def)             Requested size: 438.513pt x 218.0307pt.
+<images/comparison_velocity-y_pso.pdf, id=2038, 1445.4pt x 718.685pt>
+File: images/comparison_velocity-y_pso.pdf Graphic file (type pdf)
+<use images/comparison_velocity-y_pso.pdf>
+Package pdftex.def Info: images/comparison_velocity-y_pso.pdf  used on input line 837.
+(pdftex.def)             Requested size: 438.513pt x 218.0307pt.
+<images/comparison_position-x_pso.pdf, id=2039, 1445.4pt x 718.685pt>
+File: images/comparison_position-x_pso.pdf Graphic file (type pdf)
+<use images/comparison_position-x_pso.pdf>
+Package pdftex.def Info: images/comparison_position-x_pso.pdf  used on input line 844.
+(pdftex.def)             Requested size: 438.513pt x 218.0307pt.
+<images/comparison_position-y_pso.pdf, id=2040, 1445.4pt x 718.685pt>
+File: images/comparison_position-y_pso.pdf Graphic file (type pdf)
+<use images/comparison_position-y_pso.pdf>
+Package pdftex.def Info: images/comparison_position-y_pso.pdf  used on input line 851.
+(pdftex.def)             Requested size: 438.513pt x 218.0307pt.
+
+
+[98 <./images/rotor_vels_pso.pdf>]
+
+[99 <./images/comparison_velocity-x_pso.pdf> <./images/comparison_velocity-y_pso.pdf>]
+
+[100 <./images/comparison_position-x_pso.pdf> <./images/comparison_position-y_pso.pdf>]
+<images/case_2.pdf, id=2456, 1122.1925pt x 718.685pt>
 File: images/case_2.pdf Graphic file (type pdf)
 <use images/case_2.pdf>
-Package pdftex.def Info: images/case_2.pdf  used on input line 844.
-(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
-
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 844--845
- [][] 
- []
-
-<images/case_2_more.pdf, id=2032, 1122.1925pt x 718.685pt>
-File: images/case_2_more.pdf Graphic file (type pdf)
-<use images/case_2_more.pdf>
-Package pdftex.def Info: images/case_2_more.pdf  used on input line 850.
-(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
-
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 850--851
- [][] 
- []
-
-
-
-[98 <./images/case_2.pdf>]
-<images/case_3_fail.pdf, id=2120, 1122.1925pt x 718.685pt>
-File: images/case_3_fail.pdf Graphic file (type pdf)
-<use images/case_3_fail.pdf>
-Package pdftex.def Info: images/case_3_fail.pdf  used on input line 889.
+Package pdftex.def Info: images/case_2.pdf  used on input line 889.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
 Overfull \hbox (26.30971pt too wide) in paragraph at lines 889--890
  [][] 
  []
 
-<images/case_3.pdf, id=2121, 1114.1625pt x 718.685pt>
+<images/case_2_more.pdf, id=2457, 1122.1925pt x 718.685pt>
+File: images/case_2_more.pdf Graphic file (type pdf)
+<use images/case_2_more.pdf>
+Package pdftex.def Info: images/case_2_more.pdf  used on input line 895.
+(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
+
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 895--896
+ [][] 
+ []
+
+
+
+[101 <./images/case_2.pdf>]
+<images/case_3_fail.pdf, id=2544, 1122.1925pt x 718.685pt>
+File: images/case_3_fail.pdf Graphic file (type pdf)
+<use images/case_3_fail.pdf>
+Package pdftex.def Info: images/case_3_fail.pdf  used on input line 935.
+(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
+
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 935--936
+ [][] 
+ []
+
+
+
+[102 <./images/case_2_more.pdf>]
+<images/case_3.pdf, id=2630, 1122.1925pt x 718.685pt>
 File: images/case_3.pdf Graphic file (type pdf)
 <use images/case_3.pdf>
-Package pdftex.def Info: images/case_3.pdf  used on input line 898.
-(pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
+Package pdftex.def Info: images/case_3.pdf  used on input line 944.
+(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 898--899
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 944--945
  [][] 
  []
 
 )
 
-[99 <./images/case_2_more.pdf>]
+[103 <./images/case_3_fail.pdf>]
 
-[100 <./images/case_3_fail.pdf> <./images/case_3.pdf>] (./Cap_7.tex
+[104 <./images/case_3.pdf>] (./Cap_7.tex
 
-[101
+[105
 
 ])
 
-[102]
+[106]
 
-[103
+[107
 
 ]
 
-[104]
+[108]
 Overfull \hbox (28.09525pt too wide) in paragraph at lines 163--163
 []\OT1/ntxtlf/m/n/12 (-20) D. Grif-fiths, \OT1/ntxtlf/m/it/12 (-20) In-tro-duc-tion to Elec-tro-dy-nam-ics\OT1/ntxtlf/m/n/12 (-20) . Pear-son Ed-u-ca-tion, 2014, \OT1/ntxtlf/m/sc/12 (-20) isbn\OT1/ntxtlf/m/n/12 (-20) : 9780321972101.
  []
 
 
 
-[105]
+[109]
 
-[106]
+[110]
 Overfull \hbox (0.65959pt too wide) in paragraph at lines 163--163
 \OT1/ntxtlf/m/n/12 (-20) in avalanches us-ing ARVA: an ex-tremum seek-ing ap-proach," \OT1/ntxtlf/m/it/12 (-20) CoRR\OT1/ntxtlf/m/n/12 (-20) , vol. abs/2106.14514,
  []
@@ -2040,13 +2075,13 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/scit' will be
 (Font)              scaled to size 12.0pt on input line 162.
 
 
-[107]
+[111]
 
-[108]
+[112]
 
-[109] (./ringraziamenti.tex)
+[113] (./ringraziamenti.tex)
 
-[110
+[114
 
 ] (build/main.aux (build/title.aux))
  ***********
@@ -2054,16 +2089,16 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 88C6742B522FF6C02E1A4231937F98E7;12727.
+(rerunfilecheck)             Checksum: 46D07168DCAC4EB982E814AF014B35F0;12727.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53979 strings out of 473579
- 1134383 string characters out of 5728234
- 1972077 words of memory out of 5000000
- 74916 multiletter control sequences out of 15000+600000
+ 54033 strings out of 473579
+ 1136256 string characters out of 5728234
+ 1971331 words of memory out of 5000000
+ 74956 multiletter control sequences out of 15000+600000
  641639 words of font info for 503 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,22n,87p,1934b,1611s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2128,10 +2163,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on build/main.pdf (111 pages, 5402810 bytes).
+Output written on build/main.pdf (115 pages, 8029737 bytes).
 PDF statistics:
- 2787 PDF objects out of 2984 (max. 8388607)
- 2505 compressed objects within 26 object streams
- 571 named destinations out of 1000 (max. 500000)
- 99529 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 3218 PDF objects out of 3580 (max. 8388607)
+ 2888 compressed objects within 29 object streams
+ 580 named destinations out of 1000 (max. 500000)
+ 99554 words of extra memory for PDF output out of 106986 (max. 10000000)
 

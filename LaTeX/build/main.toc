@@ -64,5 +64,5 @@
 \contentsline {subsection}{\numberline {6.2}Results}{93}{subsection.6.2}%
 \contentsline {subsubsection}{\numberline {6.2.1}PID for Trajectory Tracking}{93}{subsubsection.6.2.1}%
 \contentsline {subsubsection}{\numberline {6.2.2}PSO with Control}{96}{subsubsection.6.2.2}%
-\contentsline {section}{\numberline {7}Conclusions}{101}{section.7}%
-\contentsline {section}{Ringraziamenti}{110}{section*.47}%
+\contentsline {section}{\numberline {7}Conclusions}{105}{section.7}%
+\contentsline {section}{Ringraziamenti}{114}{section*.52}%

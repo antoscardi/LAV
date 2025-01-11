@@ -15,7 +15,7 @@ label_font_size = 17;
 legend_font_size = 18;
 % Create a VideoWriter object with high-quality settings
 dt = 0.04;                  % Time step (s)
-do_video = false;
+do_video = true;
 if do_video
     video_filename = 'figures/quadrotor_simulation.mp4';
     video = VideoWriter('figures/quadrotor_simulation', 'Uncompressed AVI');
@@ -85,7 +85,7 @@ time = 0:dt:T_sim;          % Simulation time (s)
  % Parameters
  z_max = 5;      % Maximum altitude
  k = 0.5;        % Smoothness factor for exponential rise
- v = 2;          % Constant velocity in x-y plane
+ v = 1.5;          % Constant velocity in x-y plane
  angle = pi/4;   % Angle of projection in x-y plane (45 degrees)
 
  % Define desired position as a function of time
@@ -300,10 +300,10 @@ function rotor_velocities = compute_rotor_velocities(F, torques)
         error("Negative speed")
     end
 
-    if any(rotor_velocities > 700)
+    if any(rotor_velocities > 260)
         disp(rotor_velocities)
         disp("Speed more than 700 rad/s")
-        rotor_velocities(rotor_velocities > 700) = 700;
+        rotor_velocities(rotor_velocities > 260) = 260;
     end    
 end
 

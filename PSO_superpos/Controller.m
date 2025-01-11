@@ -96,7 +96,7 @@ classdef Controller < handle
             input_torques = [tau_phi; tau_theta; tau_psi];
         end
 
-        function rotor_velocities = compute_rotor_velocities(F, torques) 
+        function rotor_velocities = compute_rotor_velocities(obj, F, torques) 
             % Solve for rotor speeds squared
             A = obj.c_t * [
                 1, 1, 1, 1;              % Total thrust
@@ -112,6 +112,11 @@ classdef Controller < handle
                 disp(rotor_velocities)
                 error("Negative speed")
             end
+            if any(rotor_velocities > 260)
+                disp(rotor_velocities)
+                disp("Speed more than 700 rad/s")
+                rotor_velocities(rotor_velocities > 260) = 260;
+            end 
         end
     end
 end

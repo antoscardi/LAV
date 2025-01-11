@@ -1,15 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'build/Cap_4.blg'
-[48] biber:340> INFO - === ven gen 10, 2025, 00:51:08
-[59] Biber.pm:420> INFO - Reading 'build/Cap_4.bcf'
-[107] Biber.pm:994> INFO - Found 8 citekeys in bib section 0
-[116] Biber.pm:4463> INFO - Processing section 0
-[124] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[128] bibtex.pm:1713> INFO - LaTeX decoding ...
-[192] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
-[279] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[279] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[279] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[280] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[288] bbl.pm:676> INFO - Writing 'build/Cap_4.bbl' with encoding 'UTF-8'
-[291] bbl.pm:779> INFO - Output to build/Cap_4.bbl
+[50] biber:340> INFO - === ven gen 10, 2025, 20:28:28
+[60] Biber.pm:420> INFO - Reading 'build/Cap_4.bcf'
+[110] Biber.pm:994> INFO - Found 8 citekeys in bib section 0
+[119] Biber.pm:4463> INFO - Processing section 0
+[126] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[129] bibtex.pm:1713> INFO - LaTeX decoding ...
+[186] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
+[271] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[271] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[271] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[271] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[281] bbl.pm:676> INFO - Writing 'build/Cap_4.bbl' with encoding 'UTF-8'
+[284] bbl.pm:779> INFO - Output to build/Cap_4.bbl

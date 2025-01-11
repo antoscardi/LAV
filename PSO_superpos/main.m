@@ -14,33 +14,31 @@ rng(seed)
 n_drones = 5;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 500;      % Total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 600;      % 10 min total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-80, 80];      % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
                          % from (-100, -100) to (100, 100).
 
-max_velocity = 2;        % Maximum allowable velocity for each drone (m/s). Limits how fast a drone can move within 
+max_velocity = 1.5;      % Maximum allowable velocity for each drone (m/s). Limits how fast a drone can move within 
                          % the search space, preventing overshooting the target.
 
 % Source fixed positions (the targets the drones need to find)
 % AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
 % QUANDO TROVANO VITTIMA INERTIA VIENE RIDOTTA A 0.5
-%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];     % n drones 4 randomness 0.5 ex zone 1
-%p_sources = [ 20, 50; 5, 70; 20, 57];                % n drone 3 randomness 0.1  (reduce rand or they will get stuck in the other exclusion zone)
-%p_sources = [ 20, 50; 20, 54];                       % 1 m apart, ex zone 0.5 m, n drones 2 doesn t work with any randomness
-p_sources = [20, 50; 26, 50; 20, 56; 26, 56];        % 6 m aoart
-%p_sources = [ -70, -70; 70, 70; -70, 70; 70, -70];    % far away 4 drones, randomness 0.2, ex zone 1   
+%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];         % n drones 4 randomness 0.5 ex zone 1
+p_sources = [20, 50; 28, 50; 20, 58; 28, 58];            % 8 m apart
+%p_sources = [ -70, -70; 70, 70.1; -70, 70; 70, -70];        % far away 4 drones, randomness 0.2, ex zone 1   
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
-inertia = 1.05;              % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
-                             % inertia promotes exploration, while lower values promote faster convergence.
-                             % Typical range: [1 - 1.4]
+inertia = 1.05;               % Inertia weight, controls how much of the drone's previous velocity is retained. Higher 
+                              % inertia promotes exploration, while lower values promote faster convergence.
+                              % Typical range: [1 - 1.4]
 
-cognitive_factor = 2.05;     % Cognitive factor (personal learning coefficient), governs how much a drone is attracted 
-                             % to its own best-known position. Higher values make drones focus on their personal best.
-                             % Typical range: [1.5 - 2.5]
+cognitive_factor = 2.05;      % Cognitive factor (personal learning coefficient), governs how much a drone is attracted 
+                              % to its own best-known position. Higher values make drones focus on their personal best.
+                              % Typical range: [1.5 - 2.5]
 
 social_factor = 1.5;         % Social factor (global learning coefficient), controls how much a drone is influenced by 
                              % the swarm's global best-known position. Higher values increase the influence of the swarm.
@@ -56,9 +54,9 @@ velocity_randomness = 0.5;   % Factor between 0 and 1 that controls the amount o
 
 communication_radius = 10;   % Distance between two drones that enables communication with each other.
 
-step_size = 120;  %ERA 40    % Set how far the drone should move away in ONLY ONE ITERATION
+step_size = 120;             % Set how far the drone should move away in ONLY ONE ITERATION
 
-exclusion_zone_radius = 3;
+exclusion_zone_radius = 2.5;
 
 dt = 0.04;                    % Time step for simulation dynamics
 iteration_duration = 1;       % PSO ITERATION DURATION
@@ -83,12 +81,14 @@ particles = init_drones(exclusion_zone_radius, n_drones, bounds, group_indices, 
 % Initialize the Plotter
 plotter = Plotter(p_sources, bounds, n_drones, group_indices);
 
-% Initialize a 3D matrix to store trajectories
-% Dimensions: [n_drones, n_iterations * (iteration_duration / dt), 2]
-% Assuming equal time steps for all drones
 % Preallocate trajectory data and a step counter for each drone
 trajectories = nan(n_drones, n_iterations * (iteration_duration / dt), 2);
 valid_steps = zeros(n_drones, 1); % Track valid steps for each drone
+% Preallocate for all drones, time steps, and 4 rotors
+rotor_velocities_history = nan(n_drones, (n_iterations) * (iteration_duration / dt), 4);
+velocity_history = nan(n_drones, (n_iterations) * (iteration_duration / dt), 2);
+velocity_pso_history = nan(n_drones, n_iterations, 2);
+position_pso_history = nan(n_drones, n_iterations, 3);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                        EXPLORATION PHASE                                                       %
@@ -120,6 +120,8 @@ for iter = iter:n_iterations
     for i = 1:n_drones
         particle = particles{i};
         group_idx = particle.group_idx;
+        % Clamp the particle's position to the bounds
+        %particle.position = max(min(particle.position, particle.bounds(2)), particle.bounds(1));
 
         % Loop through other drones
         for j = i+1:n_drones  % Start at i+1 to avoid double-checking
@@ -190,6 +192,7 @@ for iter = iter:n_iterations
             particle.nss_best_value = -Inf;   % Reset the best NSS value to a very low number
             % Reset velocity to encourage exploration
             particle.velocity = zeros(1, 2);  % Reset velocity for a fresh search
+            %particle.velocity = (2 * rand(1, 2) - 1) * particle.max_velocity;
         else
             % Evaluate NSS value at the position
             particle.evaluate_nss(@artva.superpositionNSS, p_sources);
@@ -201,35 +204,64 @@ for iter = iter:n_iterations
         end
 
         % Update velocity with personal and group best
-        particle.update_velocity(group_best_positions(group_idx, :), ...
+        pso_velocity = particle.update_velocity(group_best_positions(group_idx, :), ...
             cognitive_factor, social_factor);
 
         % Update particle position and apply boundary constraints
         % Simulate dynamics for iteration duration
-        %PSO Update
-        desired_position = [particle.position + particle.velocity, 0];
-        desired_velocity = [particle.velocity , 0];
+        % PSO Update
+        desired_position = [particle.position + pso_velocity, 0];
+        desired_position = max(min(desired_position, particle.bounds(2)), particle.bounds(1));
+        desired_velocity = [pso_velocity, 0];
         desired_acceleration = [0, 0, 0];
         z = 0;
         vz = 0;
         state = [particle.position, z, particle.velocity, vz, particle.rpy, particle.pqr];
+        position_pso_history(i, iter, :) = desired_position;
+        velocity_pso_history(i, iter, :) = pso_velocity;
         % ITERATION DURATION IS THE PSO time step
         iteration_duration = 1; 
         for t = 0:dt:iteration_duration
-            % Update state
-            state_dot = particle.update_state(dt, state, desired_position, desired_velocity, desired_acceleration);
+            % % Update state
+            [state_dot, rotor_velocities] = particle.update_state(dt, state, desired_position, desired_velocity, desired_acceleration);
             state = state + dt * state_dot;
-            % Enforce boundaries
-            if state(1) < particle.bounds(1) || state(1) > particle.bounds(2) || ...
-               state(2) < particle.bounds(1) || state(2) > particle.bounds(2)
-                % Clamp the position to the bounds
-                state(1) = max(min(state(1), particle.bounds(2)), particle.bounds(1));
-                state(2) = max(min(state(2), particle.bounds(2)), particle.bounds(1));
-                break; % Exit the loop as the particle hits the boundary
+            [is_in_exclusion_zone, which_one] = particle.check_if_in_exclusion_zone();
+            if is_in_exclusion_zone
+                 [particle, group_indices, n_groups, group_best_positions, group_best_values, iter] = ...
+                     handle_exclusion_zone(particle, particles, group_idx, group_indices, i, n_groups, ...
+                                         group_best_positions, group_best_values, iter, step_size, plotter);
+             else
+                 % Evaluate NSS value at the position
+                 particle.evaluate_nss(@artva.superpositionNSS, p_sources);
+                 % Update group best if necessary
+                 if particle.nss_value > group_best_values(group_idx)
+                     group_best_positions(group_idx, :) = particle.position;
+                     group_best_values(group_idx) = particle.nss_value;
+                 end
             end
+            % % Enforce boundaries
+            % if state(1) < particle.bounds(1) || state(1) > particle.bounds(2) || ...
+            %    state(2) < particle.bounds(1) || state(2) > particle.bounds(2)
+            %     % Clamp the position to the bounds
+            %     state(1) = max(min(state(1), particle.bounds(2)), particle.bounds(1));
+            %     state(2) = max(min(state(2), particle.bounds(2)), particle.bounds(1));
+            %     % Store the position in the trajectories matrix
+            %     valid_steps(i) = valid_steps(i) + 1;
+            %     %disp(valid_steps)
+            %     trajectories(i, valid_steps(i), :) = state(1:2);
+            %     velocity_history(i, valid_steps(i), : ) = state(4:5);
+            %     % Assuming 'rotor_velocities' is calculated for each drone
+            %     rotor_velocities_history(i, valid_steps(i), :) = rotor_velocities;
+            %     % Increment the step counter
+            %     step_counter = step_counter + 1;
+            %     break; % Exit the loop as the particle hits the boundary
+            % end
             % Store the position in the trajectories matrix
             valid_steps(i) = valid_steps(i) + 1;
             trajectories(i, valid_steps(i), :) = state(1:2);
+            velocity_history(i, valid_steps(i), : ) = state(4:5);
+            % Assuming 'rotor_velocities' is calculated for each drone
+            rotor_velocities_history(i, valid_steps(i), :) = rotor_velocities;
             % Increment the step counter
             step_counter = step_counter + 1;
         end
@@ -237,8 +269,8 @@ for iter = iter:n_iterations
         % Update particle position and velocity
         particle.position = state(1:2);  % Extract new position
         particle.velocity = state(4:5);  % Extract new velocity
-        obj.rpy = state(7:9);
-        obj.pqr = state(10:12);
+        particle.rpy = state(7:9);
+        particle.pqr = state(10:12);
 
         % Extract position of each particle
         positions(i, :) = particles{i}.position;  
@@ -266,3 +298,57 @@ compute_errors(p_sources, group_best_positions, max_error)
 
 % Plot trajectories for all drones
 plotter.plot_trajectories(trajectories, valid_steps, n_drones);
+
+%plotter.plot_rotor_vel(rotor_velocities_history, valid_steps, n_drones, dt);
+
+%plotter.plot_comparison(velocity_pso_history, velocity_history, n_drones, dt, 'velocity-x', max_velocity);
+%plotter.plot_comparison(velocity_pso_history, velocity_history, n_drones, dt, 'velocity-y', max_velocity);
+
+%plotter.plot_comparison(position_pso_history, trajectories, n_drones, dt, 'position-x', max_velocity);
+%plotter.plot_comparison(position_pso_history, trajectories, n_drones, dt, 'position-y', max_velocity);
+
+
+function [particle, group_indices, n_groups, group_best_positions, group_best_values, iter] = ...
+    handle_exclusion_zone(particle, particles, group_idx, group_indices, i, n_groups, ...
+                          group_best_positions, group_best_values, iter, step_size, plotter)
+    % Check if the drone has other drones in its group
+    drones_in_same_group = sum(cellfun(@(p) p.group_idx == group_idx, particles));
+
+    % If the drone is not alone in its group, assign a new group
+    if drones_in_same_group > 1
+    new_group_idx = max(group_indices) + 1;  % Assign a new group index (next available)
+    particle.group_idx = new_group_idx;
+    n_groups = n_groups + 1;
+    % Update group_indices to include the new group
+    group_indices(i) = new_group_idx;
+    % Add a new entry for the new group's best position and value
+    group_best_positions(new_group_idx, :) = particle.position;   % Initialize with the current position
+    group_best_values(new_group_idx) = -Inf;                      % Initialize best value to -Inf
+    % Update the plot
+    plotter.update_drone_color(particle, group_indices);
+    fprintf('Drone %d has left Group %d, and is now in new Group %d, moving away the exclusion zone.\n', ...
+        particle.identifier, group_idx, new_group_idx);
+    else
+    % If the drone is alone, it remains in the same group
+    fprintf('Drone %d is alone in Group %d, no group change needed.\n', particle.identifier, group_idx);
+    end
+
+    % Reset the group best
+    fprintf('Drone %d moved out of an exclusion zone (FROM FUNCTION). Resetting group best for group %d.\n', particle.identifier, group_idx);
+    % Move away from the exclusion zone
+    particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one, :), step_size);
+    % Increase the iteration number according to the step_size
+    fprintf('Increasing iteration from %d to %d simulate freezing other drones.\n', iter, iter + step_size);
+    iter = iter + step_size;
+    % Introduce randomness to the new position
+    random_position_far = particle.position + 100 * (2 * rand(1, 2) - 1);  % Set a far random position as new P-best
+    particle.p_best = random_position_far;
+    % Reset the group best
+    group_best_values(group_idx) = -Inf;
+    % Reset the NSS value
+    particle.nss_best_value = -Inf;   % Reset the best NSS value to a very low number
+    % Reset velocity to encourage exploration
+    particle.velocity = zeros(1, 2);  % Reset velocity for a fresh search
+    %particle.velocity = (2 * rand(1, 2) - 1) * particle.max_velocity;
+end
+
