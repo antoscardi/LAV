@@ -11,7 +11,7 @@ rng(seed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                              HYPERPARAMETERS                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n_drones = 5;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
+n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
 n_iterations = 600;      % 10 min total number of iterations for the PSO algorithm. This controls how long it will run.
@@ -26,8 +26,8 @@ max_velocity = 1.5;      % Maximum allowable velocity for each drone (m/s). Limi
 % Source fixed positions (the targets the drones need to find)
 % AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
 % QUANDO TROVANO VITTIMA INERTIA VIENE RIDOTTA A 0.5
-%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];         % n drones 4 randomness 0.5 ex zone 1
-p_sources = [20, 50; 28, 50; 20, 58; 28, 58];            % 8 m apart
+p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];         % n drones 4 randomness 0.5 ex zone 1
+%p_sources = [20, 50; 28, 50; 20, 58; 28, 58];            % 8 m apart
 %p_sources = [ -70, -70; 70, 70.1; -70, 70; 70, -70];        % far away 4 drones, randomness 0.2, ex zone 1   
 n_sources = size(p_sources, 1);
 
@@ -109,7 +109,6 @@ for iter = 1:ceil(bounds(2)/2 / max_velocity)
     time = (iter - 1) * iteration_duration;
     plotter.draw(positions, iter, time);
 end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                        MAIN PARTICLE SWARM OPTIMIZATION LOOP                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -306,7 +305,6 @@ plotter.plot_trajectories(trajectories, valid_steps, n_drones);
 
 %plotter.plot_comparison(position_pso_history, trajectories, n_drones, dt, 'position-x', max_velocity);
 %plotter.plot_comparison(position_pso_history, trajectories, n_drones, dt, 'position-y', max_velocity);
-
 
 function [particle, group_indices, n_groups, group_best_positions, group_best_values, iter] = ...
     handle_exclusion_zone(particle, particles, group_idx, group_indices, i, n_groups, ...

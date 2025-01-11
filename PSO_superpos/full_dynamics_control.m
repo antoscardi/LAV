@@ -10,11 +10,12 @@ blue = [0,0,205]/255;    % Blue color (RGB: 30,144,255)
 green = [0,128,0]/255; % Green color (RGB: 60,179,113)
 % Sizes of text
 global title_font_size label_font_size legend_font_size
-title_font_size = 20;
+title_font_size = 28;
 label_font_size = 17;
 legend_font_size = 18;
 % Create a VideoWriter object with high-quality settings
-dt = 0.04;                  % Time step (s)
+%dt = 0.04;                  % Time step (s)
+dt = 0.1;
 do_video = true;
 if do_video
     video_filename = 'figures/quadrotor_simulation.mp4';
@@ -57,9 +58,8 @@ rotor_speed_min = 0;                      % rad/s
 rotor_speed_max = 95;                     % rad/s
 radius = 0.1; % 10cm JUST FOR PLOTTING 
 
-
 % Time parameters
-T_sim = 25;                 % Simulation time 25 (s)
+T_sim = 27;                 % Simulation time 25 (s)
 N_steps = T_sim / dt;       % Total number of steps
 time = 0:dt:T_sim;          % Simulation time (s)
 
@@ -85,7 +85,7 @@ time = 0:dt:T_sim;          % Simulation time (s)
  % Parameters
  z_max = 5;      % Maximum altitude
  k = 0.5;        % Smoothness factor for exponential rise
- v = 1.5;          % Constant velocity in x-y plane
+ v = 2.1;          % Constant velocity in x-y plane
  angle = pi/4;   % Angle of projection in x-y plane (45 degrees)
 
  % Define desired position as a function of time
@@ -506,6 +506,7 @@ function plot_single_dimension(time, actual, desired, label, title_str)
     ylabel(label, 'Interpreter', 'latex', 'FontSize', label_font_size);
     legend({'Actual ', 'Desired '}, 'Interpreter', 'latex', 'FontSize', legend_font_size);
     title(title_str, 'Interpreter', 'latex', 'FontSize', title_font_size);
+    axis equal;
     grid on;
 end
 

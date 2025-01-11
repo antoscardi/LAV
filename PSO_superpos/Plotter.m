@@ -13,6 +13,9 @@ classdef Plotter < handle
         font_labels = 30;
         font_title = 30;
         font_legend = 26;
+        do_video = true;
+        video_filename = 'figures/case_1.avi';
+        video
     end
     
     methods
@@ -21,6 +24,11 @@ classdef Plotter < handle
             obj.initialize_plot(bounds, p_sources, n_drones, group_indices);
             obj.initialize_drones(n_drones, group_indices);
             obj.create_legend(group_indices);
+            if obj.do_video
+                obj.video = VideoWriter('figures/case_1', 'Uncompressed AVI');
+                obj.video.FrameRate = 5 ; % Match simulation time step
+                open(obj.video);
+            end
         end
         
         % Initialize the main plot
@@ -37,6 +45,7 @@ classdef Plotter < handle
             xlabel('x [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
             ylabel('y [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
             title('', 'FontSize', obj.font_title, 'Interpreter', 'latex');
+            axis equal;
             grid on; grid minor;
             obj.plot_circle_lines(n_drones);
         end
@@ -82,6 +91,11 @@ classdef Plotter < handle
             % Update the title
             title(obj.ax, sprintf('Iteration: %d, Simulation Time: %.1f s', iter, time), ...
                 'Interpreter', 'latex', 'FontSize', obj.font_title);
+            if obj.do_video
+                frame = getframe(obj.fig); % Capture high-resolution frame
+                %frame = imresize(frame.cdata, [995, 1910]);
+                writeVideo(obj.video, frame);
+            end
             pause(0.04);
             drawnow;
         end
@@ -129,6 +143,10 @@ classdef Plotter < handle
                 'FontSize', obj.font_legend, 'Interpreter', 'latex');
             title('Final Drone Positions and Group-Based Best Estimates', 'FontSize', obj.font_title, 'Interpreter', 'latex');
             hold off;
+            if obj.do_video
+                close(obj.video);
+                disp(['High-quality video saved as ', obj.video_filename]);
+            end
         end
 
         % Method to plot trajectories

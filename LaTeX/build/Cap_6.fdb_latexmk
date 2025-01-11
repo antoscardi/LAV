@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber build/Cap_6"] 1736026202.23991 "build/Cap_6.bcf" "build/Cap_6.bbl" "build/Cap_6" 1736582842.13449 0
+["biber build/Cap_6"] 1736026202.23991 "build/Cap_6.bcf" "build/Cap_6.bbl" "build/Cap_6" 1736626576.79694 0
   "bibliography.bib" 1736023802.97323 52107 c5f3078488c3c9ddbe787e0ef569d182 ""
-  "build/Cap_6.bcf" 1736582841.97959 108379 bfc2f78db78fe29154bb9450657e394e "pdflatex"
+  "build/Cap_6.bcf" 1736626576.63555 108379 bfc2f78db78fe29154bb9450657e394e "pdflatex"
   (generated)
   "build/Cap_6.bbl"
   "build/Cap_6.blg"
   (rewritten before read)
-["pdflatex"] 1736582838.87414 "/home/anto/University/LAV/LaTeX/Cap_6.tex" "build/Cap_6.pdf" "Cap_6" 1736582842.13476 0
-  "/home/anto/University/LAV/LaTeX/Cap_6.tex" 1736582838.76764 46825 8c87755cbb50a7115c73f4d04590ae69 ""
+["pdflatex"] 1736626573.29395 "/home/anto/University/LAV/LaTeX/Cap_6.tex" "build/Cap_6.pdf" "Cap_6" 1736626576.79723 0
+  "/home/anto/University/LAV/LaTeX/Cap_6.tex" 1736626573.1756 46835 df6e6b4beaabc946a36c084b07eeb2b4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc" 1422827479 2083 60e36f8eac802fcaf19eabe2633b406e ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc" 1529098226 3124 3813fd4c981d99822890a2861b0d274c ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -319,11 +319,11 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1727571937 5477429 32a2a3a09e7e10c5f90c819db1b0ec36 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727571976 3325966 669b58d2a9b28a670986370fac89bc16 ""
   "/usr/local/texlive/2024/texmf.cnf" 1727571931.86701 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "Cap_6.tex" 1736582838.76764 46825 8c87755cbb50a7115c73f4d04590ae69 ""
-  "build/Cap_6.aux" 1736582841.97559 7079 2a63a2cc9dde66025f654b5a6c9051de "pdflatex"
-  "build/Cap_6.bbl" 1736582796.94834 3997 ab1a9e627bd43bd6a4d73500e7516636 "biber build/Cap_6"
-  "build/Cap_6.out" 1736582841.97959 1352 809e21b2d2430258a781f6e96fa1dda5 "pdflatex"
-  "build/Cap_6.run.xml" 1736582841.98359 2411 34a63fb4b82d8f458e1f29ec2ef9019d "pdflatex"
+  "Cap_6.tex" 1736626573.1756 46835 df6e6b4beaabc946a36c084b07eeb2b4 ""
+  "build/Cap_6.aux" 1736626576.62755 7079 2a63a2cc9dde66025f654b5a6c9051de "pdflatex"
+  "build/Cap_6.bbl" 1736626264.24344 3997 ab1a9e627bd43bd6a4d73500e7516636 "biber build/Cap_6"
+  "build/Cap_6.out" 1736626576.62755 1352 809e21b2d2430258a781f6e96fa1dda5 "pdflatex"
+  "build/Cap_6.run.xml" 1736626576.63555 2411 34a63fb4b82d8f458e1f29ec2ef9019d "pdflatex"
   "images/case_1.pdf" 1736580725.85107 166209 564682c8da6ee4fbfa133f77c0fa19a8 ""
   "images/case_2.pdf" 1736581833.03488 566698 8dee2607a57345c018ff1fe0cdc52b09 ""
   "images/case_2_more.pdf" 1736582200.10132 303049 dcd3d0e8647680cf428a6dcd6a96b3f6 ""
@@ -334,12 +334,12 @@
   "images/comparison_velocity-x_pso.pdf" 1736580727.78709 216595 5cdb1c727a4332ab1582a45a933bb69b ""
   "images/comparison_velocity-y_pso.pdf" 1736580728.7871 217116 2ea6fd02949a1e667e5c59613b019559 ""
   "images/pid_sim.pdf" 1735777580.72346 42202 1e7a7fa070203c6bfaac1bdf0278726b ""
-  "images/pid_x.pdf" 1735777084.32548 25955 2c68efc6693140e8ec3ccc70ceeb6915 ""
-  "images/pid_y.pdf" 1735777084.75347 25770 280b8ff3f14eb6eafa50ee03dd27379a ""
-  "images/pid_z.pdf" 1735777084.96947 25046 d1cdb57ca1ecd56715eba9c2719dd131 ""
-  "images/rotor_velocities.pdf" 1735778487.71601 32288 6b06b95e5b96676785173f3b8f7f0538 ""
+  "images/pid_x.pdf" 1736626484.54098 18436 4d9e0e7cbe270014bd3bfc4338784d4e ""
+  "images/pid_y.pdf" 1736626484.73698 18281 23084e3f65c39cd22e06b7767e62349a ""
+  "images/pid_z.pdf" 1736626484.92897 17677 91062aedcdbe955e7025ea54e387e96f ""
+  "images/rotor_velocities.pdf" 1736625628.2182 21374 f1acedd4f8c4b95b7900e4f6cdf6b82c ""
   "images/rotor_vels_pso.pdf" 1736580726.82308 556072 5f24863b508f76ae0f667f43dcc1d3e4 ""
-  "images/trajectory_comparison.pdf" 1735778486.93202 41694 6069cebc9e8769545b0650b676a7ac08 ""
+  "images/trajectory_comparison.pdf" 1736625627.45021 28621 6a0007d98df5de451a5cb4257732ee8c ""
   "main.tex" 1736582801.32427 4589 ae708189d269b428e1871592ccdcc932 ""
   (generated)
   "build/Cap_6.aux"
