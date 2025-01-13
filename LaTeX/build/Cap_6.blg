@@ -1,15 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'build/Cap_6.blg'
-[66] biber:340> INFO - === sab gen 11, 2025, 21:16:17
-[77] Biber.pm:420> INFO - Reading 'build/Cap_6.bcf'
-[141] Biber.pm:994> INFO - Found 2 citekeys in bib section 0
-[153] Biber.pm:4463> INFO - Processing section 0
-[162] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[166] bibtex.pm:1713> INFO - LaTeX decoding ...
-[239] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
-[281] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[281] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[281] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[281] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[283] bbl.pm:676> INFO - Writing 'build/Cap_6.bbl' with encoding 'UTF-8'
-[284] bbl.pm:779> INFO - Output to build/Cap_6.bbl
+[50] biber:340> INFO - === lun gen 13, 2025, 14:40:04
+[60] Biber.pm:420> INFO - Reading 'build/Cap_6.bcf'
+[113] Biber.pm:994> INFO - Found 2 citekeys in bib section 0
+[123] Biber.pm:4463> INFO - Processing section 0
+[130] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[134] bibtex.pm:1713> INFO - LaTeX decoding ...
+[197] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
+[233] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[233] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[233] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[233] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[235] bbl.pm:676> INFO - Writing 'build/Cap_6.bbl' with encoding 'UTF-8'
+[236] bbl.pm:779> INFO - Output to build/Cap_6.bbl

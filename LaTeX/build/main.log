@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  11 JAN 2025 09:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  13 JAN 2025 14:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1910,34 +1910,34 @@ Package microtype Info: Loading generic protrusion settings for font family
 [91]
 
 [92]
-<images/trajectory_comparison.pdf, id=1637, 389.455pt x 309.155pt>
+<images/trajectory_comparison.pdf, id=1637, 388.45125pt x 307.1475pt>
 File: images/trajectory_comparison.pdf Graphic file (type pdf)
 <use images/trajectory_comparison.pdf>
 Package pdftex.def Info: images/trajectory_comparison.pdf  used on input line 699.
-(pdftex.def)             Requested size: 350.81174pt x 278.48694pt.
+(pdftex.def)             Requested size: 350.81174pt x 277.39096pt.
 
 
 [93]
-<images/pid_x.pdf, id=1647, 378.41376pt x 314.17375pt>
+<images/pid_x.pdf, id=1647, 360.34625pt x 306.14375pt>
 File: images/pid_x.pdf Graphic file (type pdf)
 <use images/pid_x.pdf>
 Package pdftex.def Info: images/pid_x.pdf  used on input line 708.
-(pdftex.def)             Requested size: 197.3295pt x 163.8315pt.
-<images/pid_y.pdf, id=1648, 385.44pt x 308.15125pt>
+(pdftex.def)             Requested size: 197.3295pt x 167.64616pt.
+<images/pid_y.pdf, id=1648, 372.39125pt x 311.1625pt>
 File: images/pid_y.pdf Graphic file (type pdf)
 <use images/pid_y.pdf>
 Package pdftex.def Info: images/pid_y.pdf  used on input line 714.
-(pdftex.def)             Requested size: 197.3295pt x 157.7569pt.
-<images/pid_z.pdf, id=1649, 387.4475pt x 303.1325pt>
+(pdftex.def)             Requested size: 197.3295pt x 164.88686pt.
+<images/pid_z.pdf, id=1649, 373.395pt x 311.1625pt>
 File: images/pid_z.pdf Graphic file (type pdf)
 <use images/pid_z.pdf>
 Package pdftex.def Info: images/pid_z.pdf  used on input line 721.
-(pdftex.def)             Requested size: 210.48436pt x 164.67896pt.
-<images/pid_sim.pdf, id=1650, 1224.575pt x 681.54625pt>
+(pdftex.def)             Requested size: 210.48436pt x 175.40356pt.
+<images/pid_sim.pdf, id=1650, 1220.56pt x 665.48625pt>
 File: images/pid_sim.pdf Graphic file (type pdf)
 <use images/pid_sim.pdf>
 Package pdftex.def Info: images/pid_sim.pdf  used on input line 729.
-(pdftex.def)             Requested size: 438.513pt x 244.05652pt.
+(pdftex.def)             Requested size: 438.513pt x 239.08745pt.
 <images/rotor_velocities.pdf, id=1651, 378.41376pt x 306.14375pt>
 File: images/rotor_velocities.pdf Graphic file (type pdf)
 <use images/rotor_velocities.pdf>
@@ -1995,17 +1995,17 @@ Package pdftex.def Info: images/comparison_position-y_pso.pdf  used on input lin
 [99 <./images/comparison_velocity-x_pso.pdf> <./images/comparison_velocity-y_pso.pdf>]
 
 [100 <./images/comparison_position-x_pso.pdf> <./images/comparison_position-y_pso.pdf>]
-<images/case_2.pdf, id=2456, 1122.1925pt x 718.685pt>
+<images/case_2.pdf, id=2426, 1114.1625pt x 718.685pt>
 File: images/case_2.pdf Graphic file (type pdf)
 <use images/case_2.pdf>
 Package pdftex.def Info: images/case_2.pdf  used on input line 889.
-(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
+(pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
 
 Overfull \hbox (26.30971pt too wide) in paragraph at lines 889--890
  [][] 
  []
 
-<images/case_2_more.pdf, id=2457, 1122.1925pt x 718.685pt>
+<images/case_2_more.pdf, id=2427, 1122.1925pt x 718.685pt>
 File: images/case_2_more.pdf Graphic file (type pdf)
 <use images/case_2_more.pdf>
 Package pdftex.def Info: images/case_2_more.pdf  used on input line 895.
@@ -2018,7 +2018,7 @@ Overfull \hbox (26.30971pt too wide) in paragraph at lines 895--896
 
 
 [101 <./images/case_2.pdf>]
-<images/case_3_fail.pdf, id=2544, 1122.1925pt x 718.685pt>
+<images/case_3_fail.pdf, id=2513, 1122.1925pt x 718.685pt>
 File: images/case_3_fail.pdf Graphic file (type pdf)
 <use images/case_3_fail.pdf>
 Package pdftex.def Info: images/case_3_fail.pdf  used on input line 935.
@@ -2031,11 +2031,11 @@ Overfull \hbox (26.30971pt too wide) in paragraph at lines 935--936
 
 
 [102 <./images/case_2_more.pdf>]
-<images/case_3.pdf, id=2630, 1122.1925pt x 718.685pt>
+<images/case_3.pdf, id=2600, 1114.1625pt x 718.685pt>
 File: images/case_3.pdf Graphic file (type pdf)
 <use images/case_3.pdf>
 Package pdftex.def Info: images/case_3.pdf  used on input line 944.
-(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
+(pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
 
 Overfull \hbox (26.30971pt too wide) in paragraph at lines 944--945
  [][] 
@@ -2097,7 +2097,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  54033 strings out of 473579
  1136256 string characters out of 5728234
- 1971331 words of memory out of 5000000
+ 1971329 words of memory out of 5000000
  74956 multiletter control sequences out of 15000+600000
  641639 words of font info for 503 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2163,10 +2163,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on build/main.pdf (115 pages, 8029737 bytes).
+Output written on build/main.pdf (115 pages, 7439554 bytes).
 PDF statistics:
- 3218 PDF objects out of 3580 (max. 8388607)
- 2888 compressed objects within 29 object streams
+ 3188 PDF objects out of 3580 (max. 8388607)
+ 2864 compressed objects within 29 object streams
  580 named destinations out of 1000 (max. 500000)
  99554 words of extra memory for PDF output out of 106986 (max. 10000000)
 

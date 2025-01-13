@@ -10,7 +10,7 @@ the real Draganflyer IV quadrotor \cite{drone}, these values are
 summarized in Table \ref{tab:drone_parameters}:
 \begin{table}[H]
 \centering
-\caption{\textbf{Drone Physical Parameters}}
+\caption{\textbf{UAV Physical Parameters}}
 \begin{tabular}{c c c c}
 \hline\hline
 \textbf{Symbol}     & \textbf{Value}       & \textbf{Unit}         & \textbf{Description} \\ \hline\hline
@@ -180,7 +180,7 @@ Instead, during the main PSO loop, UAVs evaluate
 their positions based on the NSS signal received from the \texttt{ARTVAs} class. 
 If a UAV detects NSS values higher than a (\texttt{NSS\_threshold}),
 it flags the localization of a UAV.
-Drones that enter exclusion zones move away from them and 
+UAVs that enter exclusion zones move away from them and 
 create a new group, with their velocities, 
 personal best (\texttt{p\_best} or $\mathbf{pbest}$), and group best 
 (\texttt{g\_best} or $\mathbf{gbest}$) resettled.
