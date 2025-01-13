@@ -20,7 +20,7 @@ do_video = true;
 if do_video
     video_filename = 'figures/quadrotor_simulation.mp4';
     video = VideoWriter('figures/quadrotor_simulation', 'Uncompressed AVI');
-    video.FrameRate = 1 / dt; % Match simulation time step
+    video.FrameRate = 1 / dt * 2; % Match simulation time step
     open(video);
 end
 % Model Parmeters
@@ -196,16 +196,11 @@ end
 % Extract results
 plot_results(time, desired_position, state_history, rotor_velocities_history, rotor_forces_history);
 % Save all other plots generated in the simulation
-exportgraphics(figure(2), fullfile('figures', 'plot_2.pdf'),'ContentType', 'vector');
-exportgraphics(figure(3), fullfile('figures', 'plot_3.pdf'),'ContentType', 'vector');
-exportgraphics(figure(4), fullfile('figures', 'plot_4.pdf'),'ContentType', 'vector');
-exportgraphics(figure(5), fullfile('figures', 'plot_5.pdf'),'ContentType', 'vector');
-exportgraphics(figure(6), fullfile('figures', 'plot_6.pdf'),'ContentType', 'vector');
-%saveas(figure(2), 'figures/plot_2.png');
-%saveas(figure(3), 'figures/plot_3.png');
-%saveas(figure(4), 'figures/plot_4.png');
-%saveas(figure(5), 'figures/plot_5.png');
-%saveas(figure(6), 'figures/plot_6.png');
+%exportgraphics(figure(2), fullfile('figures', 'plot_2.pdf'),'ContentType', 'vector');
+%exportgraphics(figure(3), fullfile('figures', 'plot_3.pdf'),'ContentType', 'vector');
+%exportgraphics(figure(4), fullfile('figures', 'plot_4.pdf'),'ContentType', 'vector');
+%exportgraphics(figure(5), fullfile('figures', 'plot_5.pdf'),'ContentType', 'vector');
+%exportgraphics(figure(6), fullfile('figures', 'plot_6.pdf'),'ContentType', 'vector');
 
 
 function x_dot = full_model(dt, state, F, input_torques)
@@ -322,7 +317,8 @@ end
 function figure_handle = init_plot(time, desired_position)
     global red blue green title_font_size label_font_size legend_font_size
     
-    figure_handle = figure('Name', 'Drone Trajectory Simulation', 'NumberTitle', 'off');
+    figure_handle = figure('Name', 'UAV Trajectory Simulation', 'NumberTitle', 'off');
+    figure_handle.Color = 'w';
     set(figure_handle, 'Units', 'pixels', 'Position', [100, 100, 1910, 995]); % Fixed size
     hold on;
     grid on;
@@ -405,7 +401,7 @@ function body_frame_handles = plot_drone(body_origin, R, t)
         body_frame_handles = [body_frame_handles; line_handle; circle_handle];
     end
     % Update plot title and view
-    title(sprintf('Drone Trajectory Simulation - Time: %.2f s', t), ...
+    title(sprintf('UAV Trajectory Simulation - Time: %.2f s', t), ...
         'FontSize', title_font_size, 'Interpreter', 'latex');
     pause(0.02);
 end
@@ -474,6 +470,7 @@ function plot_results(time, desired_position, state_history, rotor_velocities_hi
     plot(time, rotor_velocities_history(2, :), 'Color', orange,'LineWidth', 1.5);
     plot(time, rotor_velocities_history(3, :), 'Color', blue,'LineWidth', 1.5);
     plot(time, rotor_velocities_history(4, :), 'Color', green, 'LineWidth', 1.5);
+    %yline(260, 'Color', red, 'LineWidth', 1.5); % omega_max 
     xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', label_font_size);
     ylabel('$\omega_i$ [rad/s]', 'Interpreter', 'latex', 'FontSize', label_font_size);
     legend({'$\omega_1(t)$', '$\omega_2(t)$', '$\omega_3(t)$', '$\omega_4(t)$'}, 'Interpreter', 'latex', 'FontSize', legend_font_size);
@@ -490,7 +487,7 @@ function plot_results(time, desired_position, state_history, rotor_velocities_hi
     xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', label_font_size);
     ylabel('$F_i$ [N]', 'Interpreter', 'latex', 'FontSize', label_font_size);
     legend({'$F_1(t)$', '$F_2(t)$', '$F_3(t)$', '$F_4(t)$'}, 'Interpreter', 'latex', 'FontSize', legend_font_size);
-    title('Rotor velocities $F_i(t)$', 'Interpreter', 'latex', 'FontSize', title_font_size);
+    title('Rotor forces $F_i(t)$', 'Interpreter', 'latex', 'FontSize', title_font_size);
     grid on;
 end
 

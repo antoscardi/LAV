@@ -10,11 +10,11 @@ classdef Plotter < handle
         legend_entries
         plot_handles
         n_groups
-        font_labels = 30;
-        font_title = 30;
-        font_legend = 26;
+        font_labels = 20;
+        font_title = 24;
+        font_legend = 17;
         do_video = true;
-        video_filename = 'figures/case_1.avi';
+        video_filename = 'figures/case_3';
         video
     end
     
@@ -25,8 +25,9 @@ classdef Plotter < handle
             obj.initialize_drones(n_drones, group_indices);
             obj.create_legend(group_indices);
             if obj.do_video
-                obj.video = VideoWriter('figures/case_1', 'Uncompressed AVI');
-                obj.video.FrameRate = 5 ; % Match simulation time step
+                obj.video = VideoWriter(obj.video_filename, 'Uncompressed AVI');
+                %obj.video.Quality = 95;
+                obj.video.FrameRate = 20 ; % Match simulation time step
                 open(obj.video);
             end
         end
@@ -34,6 +35,7 @@ classdef Plotter < handle
         % Initialize the main plot
         function initialize_plot(obj, bounds, p_sources, n_drones, group_indices)
             obj.fig = figure;
+            obj.fig.Color = 'w';
             obj.fig.Position = [220, 1, 1480, 1080];
             obj.bounds = bounds;
             obj.n_groups = max(group_indices);
@@ -88,6 +90,8 @@ classdef Plotter < handle
         function draw(obj, positions, iter, time)
             obj.scatter_drones.XData = positions(:, 1);
             obj.scatter_drones.YData = positions(:, 2);
+            obj.ax.XLim = [obj.bounds(1), obj.bounds(2)];
+            obj.ax.YLim = [obj.bounds(1), obj.bounds(2)];
             % Update the title
             title(obj.ax, sprintf('Iteration: %d, Simulation Time: %.1f s', iter, time), ...
                 'Interpreter', 'latex', 'FontSize', obj.font_title);
@@ -126,7 +130,7 @@ classdef Plotter < handle
             unique_groups = unique(group_indices);
             for i = 1:obj.n_groups
                 obj.plot_handles{i} = scatter(NaN, NaN, 70, obj.colors(unique_groups(i), :), 'filled');
-                obj.legend_entries{i} = sprintf('Drone(s) in Group %d', unique_groups(i));
+                obj.legend_entries{i} = sprintf('UAV(s) in Group %d', unique_groups(i));
             end
             legend([obj.scatter_sources, [obj.plot_handles{:}]], 'Sources', obj.legend_entries{:}, ...
                 'FontSize', obj.font_legend, 'Location', 'northeastoutside', 'Interpreter', 'latex');
@@ -141,12 +145,8 @@ classdef Plotter < handle
             end
             legend([obj.scatter_sources, [obj.plot_handles{:}]], 'Sources', obj.legend_entries{:}, ...
                 'FontSize', obj.font_legend, 'Interpreter', 'latex');
-            title('Final Drone Positions and Group-Based Best Estimates', 'FontSize', obj.font_title, 'Interpreter', 'latex');
+            title('Final UAV Positions and Group-Based Best Estimates', 'FontSize', obj.font_title, 'Interpreter', 'latex');
             hold off;
-            if obj.do_video
-                close(obj.video);
-                disp(['High-quality video saved as ', obj.video_filename]);
-            end
         end
 
         % Method to plot trajectories
@@ -156,22 +156,32 @@ classdef Plotter < handle
             for i = 1:n_drones
                 % Extract valid trajectory for the current drone
                 drone_trajectory = squeeze(trajectories(i, 1:valid_steps(i), :)); % Only valid rows
-                
                 % Plot the trajectory
                 plot(drone_trajectory(:, 1), drone_trajectory(:, 2), '-', 'LineWidth', 3, ...
-                        'DisplayName', sprintf('Trajectory Drone %d', i), 'Color', obj.drone_colors(i, :));
+                        'DisplayName', sprintf('Trajectory UAV %d', i), 'Color', obj.drone_colors(i, :));
             end
             
             % Add labels, title, and legend
             xlabel('x [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
             ylabel('y [m]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
-            title('Drone Trajectories During PSO', 'FontSize', obj.font_title, 'Interpreter', 'latex');
+            title('UAV Trajectories and Final Estimates', 'FontSize', obj.font_title, 'Interpreter', 'latex');
             legend('FontSize', obj.font_legend, 'Location', 'northeastoutside', 'Interpreter', 'latex');
             grid on;
+            % Add final trajectory plot to the video
+            if obj.do_video
+                for frame_repeat = 1:10 % Repeat the final frame to make it visible for longer
+                    frame = getframe(obj.fig); % Capture high-resolution frame
+                    writeVideo(obj.video, frame); % Write the frame to the video
+                end
+            end
             a = annotation('rectangle',[0 0 1 1],'Color','w');
             exportgraphics(gcf, fullfile('figures', 'case_3.pdf'),'ContentType', 'vector');
             delete(a);
             hold off;
+            if obj.do_video
+                close(obj.video);
+                disp(['High-quality video saved as ', obj.video_filename]);
+            end
         end
 
         function plot_rotor_vel(obj, rotor_velocities_history, valid_steps, n_drones, dt)
@@ -216,30 +226,25 @@ classdef Plotter < handle
                 % Set axis labels and title with LaTeX formatting
                 xlabel_handle = xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels-8);
                 ylabel('$\omega_i$ [rad/s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels-8);
-                title(sprintf('Drone %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title-5);
+                title(sprintf('UAV %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title-5);
         
                 % Dynamically move x-axis label to the end of the plot
                 x_limits = xlim; % Get x-axis limits
                 xlabel_handle.Position(1) = x_limits(2); % Set the label position to the end of the x-axis
                 xlabel_handle.HorizontalAlignment = 'right'; % Align the label to the right for better appearance
-
                 % Add grid
                 grid on;
             end
         
             % Add a global title
             sgtitle('Control inputs $\omega_i(t)$', 'Interpreter', 'latex', 'FontSize', obj.font_title-3);
-        
             % Add a single legend outside the plotting area
             lg = legend(legend_handles, legend_labels, 'Interpreter', 'latex', 'FontSize', obj.font_legend, 'Orientation', 'horizontal');
             lg.Layout.Tile = 'north'; % Place the legend above the subplots
-        
             % Add the annotation box
             a = annotation('rectangle', [0 0 1 1], 'Color', 'w');
-        
             % Export the figure
             exportgraphics(gcf, fullfile('figures', 'rotor_vels_pso.pdf'), 'ContentType', 'vector');
-        
             % Remove the annotation box
             delete(a);
         end
@@ -250,7 +255,6 @@ classdef Plotter < handle
             blue = [0, 0, 205] / 255;     % Blue for real data
             red = [139, 0, 0] / 255;      % Red color (RGB: 139,0,0)
             orange = [0.922, 0.38, 0.24]; % Orange color (hex: #eb613d)
-        
             % Determine the index of the selected component and its labels
             switch component
                 case 'velocity-x'
@@ -279,14 +283,11 @@ classdef Plotter < handle
         
             % Create figure with Full HD dimensions
             figure('Position', [100, 100, 1920, 1080]); % Full HD dimensions
-        
             % Set up tiled layout
             tiledlayout(n_drones, 1, 'TileSpacing', 'Compact', 'Padding', 'Compact');
-        
             % Initialize handles for legend
             legend_handles = [];
             xlabel_handles = gobjects(n_drones, 1); % Preallocate for xlabel handles
-        
             % Loop through each drone to create subplots
             for i = 1:n_drones
                 % Extract input and real data for this drone
@@ -340,25 +341,15 @@ classdef Plotter < handle
                 % Plot real data as continuous curves
                 h2 = plot(time_real, real_values, 'Color', blue, 'LineWidth', 1.5, 'DisplayName', ['Real ', label]);
                 % Add horizontal lines for v_max and -v_max if applicable
-                if show_vmax
-                    h3 = yline(v_max, 'Color', red, 'LineWidth', 1.5); % v_max
-                    h4 = yline(-v_max, 'Color', orange, 'LineWidth', 1.5); % -v_max
-                end
                 hold off;
-        
                 % Collect handles only for the first subplot
                 if i == 1
-                    if show_vmax
-                        legend_handles = [h1, h2, h3, h4];
-                    else
-                        legend_handles = [h1, h2];
-                    end
+                    legend_handles = [h1, h2];
                 end
-        
                 % Set axis labels and title
                 xlabel_handles(i) = xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels - 8);
                 ylabel(ylabel_text, 'Interpreter', 'latex', 'FontSize', obj.font_labels - 8);
-                title(sprintf('Drone %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title - 5);
+                title(sprintf('UAV %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title - 5);
         
                 % Add grid
                 grid on;
