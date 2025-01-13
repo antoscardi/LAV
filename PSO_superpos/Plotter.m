@@ -13,7 +13,7 @@ classdef Plotter < handle
         font_labels = 20;
         font_title = 24;
         font_legend = 17;
-        do_video = true;
+        do_video = false;
         video_filename = 'figures/case_3';
         video
     end
@@ -175,7 +175,7 @@ classdef Plotter < handle
                 end
             end
             a = annotation('rectangle',[0 0 1 1],'Color','w');
-            exportgraphics(gcf, fullfile('figures', 'case_3.pdf'),'ContentType', 'vector');
+            exportgraphics(gcf, fullfile('figures', 'case_3_fail.pdf'),'ContentType', 'vector');
             delete(a);
             hold off;
             if obj.do_video
