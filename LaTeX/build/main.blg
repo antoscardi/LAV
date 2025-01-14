@@ -1,15 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'build/main.blg'
-[56] biber:340> INFO - === lun gen 13, 2025, 14:57:03
-[66] Biber.pm:420> INFO - Reading 'build/main.bcf'
-[126] Biber.pm:991> INFO - Using all citekeys in bib section 0
-[136] Biber.pm:4463> INFO - Processing section 0
-[143] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[146] bibtex.pm:1713> INFO - LaTeX decoding ...
-[208] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
-[680] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[680] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[680] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[680] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[742] bbl.pm:676> INFO - Writing 'build/main.bbl' with encoding 'UTF-8'
-[772] bbl.pm:779> INFO - Output to build/main.bbl
+[50] biber:340> INFO - === mar gen 14, 2025, 17:33:39
+[59] Biber.pm:420> INFO - Reading 'build/main.bcf'
+[118] Biber.pm:991> INFO - Using all citekeys in bib section 0
+[127] Biber.pm:4463> INFO - Processing section 0
+[134] Biber.pm:4654> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[138] bibtex.pm:1713> INFO - LaTeX decoding ...
+[195] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
+[646] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[646] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[646] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[646] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[703] bbl.pm:676> INFO - Writing 'build/main.bbl' with encoding 'UTF-8'
+[727] bbl.pm:779> INFO - Output to build/main.bbl

@@ -873,6 +873,14 @@ trajectories during the PSO optimization process are depicted.
 This case is one of the most complicated since the sources are near
 the borders of the search space and therefore
 the signal they send are less strong.
+Figure ~\ref{fig:case2} illustrates the "worst possible scenario".
+In fact, upon receiving the signal for the first time, the drone is does not know the optimal direction and 
+randomly moves toward the area of a 
+source already identified by another drone. 
+After entering the exclusion zone, it moves away from it in a direction defined so to explore a new area. 
+However, it ends up in previously identified sources twice. 
+Despite these unusual "maneuvers" caused by random exploration, 
+this example demonstrates that all targets are ultimately located, even in less favorable conditions.
 \noindent\\
 To evaluate the impact of increasing the number of UAVs, a second simulation 
 was conducted by adding a UAV to the swarm. 

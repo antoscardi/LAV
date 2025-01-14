@@ -947,11 +947,13 @@ as in Equations~\ref{eq:model_velocity} and \ref{eq:model_position}:
 \begin{align}
  \mathbf{v}_{j}(\tau_s+1) &= \omega \mathbf{v}_{j}(\tau_s) 
  + c_1 r_1 \big(\mathbf{pbest}_{j}(\tau_s) - \mathbf{p}_{r_j}(\tau_s)\big) + \notag \\
-    &\quad + c_2 r_2 \big(\mathbf{gbest}(\tau_s) - \mathbf{p}_{j}(\tau_s)\big) \label{eq:model_velocity2} \\
+    &\quad + c_2 r_2 \big(\mathbf{gbest}_l(\tau_s) - \mathbf{p}_{j}(\tau_s)\big) \label{eq:model_velocity2} \\
  \mathbf{p}_{r_j}(\tau_s + 1) &= \mathbf{p}_{r_j}(\tau_s) + \mathbf{v}_{j}(\tau_s+1) \label{eq:model_position2}
 \end{align}
-In addition, the velocity clamping in Eq.\ref{eq:velocity_clamping} is performed after
-this PSO update.
+where $l = 1, \ldots, M$ is the group best relative to each sub-group.
+In addition, the velocity clamping in Eq.\ref{eq:velocity_clamping} is performed right after
+this PSO update and the search space boundary conditions as in
+Eq.\ref{eq:boundary_condition} are employed to ensure the reference position does not lie outside the boundaries.
 We also note that the exclusion zone mechanism remains unvaried
 and follows the PSO algorithm in the same way.
 
@@ -968,9 +970,6 @@ Eq.\ref{eq:final_model_more}:
 \end{equation}
 where the UAV’s state $\mathbf{\xi}$ is updated at each time step $\tau_k$ in the 
 interval $\Delta = \tau_{s+1} - \tau_s$.
-Additionally, the control dynamics ensure the 
-search space boundary conditions as in
-Eq.\ref{eq:boundary_condition}.
 This iterative alternation between PSO updates and 
 independent UAV 
 control enables the swarm to balance global 

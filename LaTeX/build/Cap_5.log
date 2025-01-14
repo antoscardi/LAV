@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  9 JAN 2025 23:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  14 JAN 2025 17:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -631,57 +631,75 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip91
 \thm@headsep=\skip92
 \dth@everypar=\toks44
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
+Package: empheq 2017/03/31 v2.15 Emphasizing equations
+\l_EQ_equationtype_int=\count340
+\l_EQ_alignmentmode_int=\count341
+\l_EQ_totalwidth_dim=\dimen290
+\l_EQ_displaywidth_dim=\dimen291
+\l_EQ_temp_linewidth_dim=\dimen292
+\l_EQ_linewidth_dim=\dimen293
+\EmphEqdelimitershortfall=\dimen294
+\EmphEqdelimiterfactor=\count342
+\g_EQ_toptag_height_dim=\dimen295
+\g_EQ_bottomtag_depth_dim=\dimen296
+\g_EQ_toprow_height_dim=\dimen297
+\g_EQ_bottomrow_depth_dim=\dimen298
+\g_EQ_widesttag_dim=\dimen299
+\EQ_mathdisplay_box=\box112
+\EQ_tag_box=\box113
+\g_EQ_temprow_int=\count343
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
  (/usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count340
+\lrq@indent=\count344
  (/usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count341
-\c@listtotal=\count342
-\c@listcount=\count343
-\c@liststart=\count344
-\c@liststop=\count345
-\c@citecount=\count346
-\c@citetotal=\count347
-\c@multicitecount=\count348
-\c@multicitetotal=\count349
-\c@instcount=\count350
-\c@maxnames=\count351
-\c@minnames=\count352
-\c@maxitems=\count353
-\c@minitems=\count354
-\c@citecounter=\count355
-\c@maxcitecounter=\count356
-\c@savedcitecounter=\count357
-\c@uniquelist=\count358
-\c@uniquename=\count359
-\c@refsection=\count360
-\c@refsegment=\count361
-\c@maxextratitle=\count362
-\c@maxextratitleyear=\count363
-\c@maxextraname=\count364
-\c@maxextradate=\count365
-\c@maxextraalpha=\count366
-\c@abbrvpenalty=\count367
-\c@highnamepenalty=\count368
-\c@lownamepenalty=\count369
-\c@maxparens=\count370
-\c@parenlevel=\count371
-\blx@tempcnta=\count372
-\blx@tempcntb=\count373
-\blx@tempcntc=\count374
-\c@blx@maxsection=\count375
-\blx@maxsegment@0=\count376
-\blx@notetype=\count377
-\blx@parenlevel@text=\count378
-\blx@parenlevel@foot=\count379
-\blx@sectionciteorder@0=\count380
-\blx@sectionciteorderinternal@0=\count381
-\blx@entrysetcounter=\count382
-\blx@biblioinstance=\count383
+\c@tabx@nest=\count345
+\c@listtotal=\count346
+\c@listcount=\count347
+\c@liststart=\count348
+\c@liststop=\count349
+\c@citecount=\count350
+\c@citetotal=\count351
+\c@multicitecount=\count352
+\c@multicitetotal=\count353
+\c@instcount=\count354
+\c@maxnames=\count355
+\c@minnames=\count356
+\c@maxitems=\count357
+\c@minitems=\count358
+\c@citecounter=\count359
+\c@maxcitecounter=\count360
+\c@savedcitecounter=\count361
+\c@uniquelist=\count362
+\c@uniquename=\count363
+\c@refsection=\count364
+\c@refsegment=\count365
+\c@maxextratitle=\count366
+\c@maxextratitleyear=\count367
+\c@maxextraname=\count368
+\c@maxextradate=\count369
+\c@maxextraalpha=\count370
+\c@abbrvpenalty=\count371
+\c@highnamepenalty=\count372
+\c@lownamepenalty=\count373
+\c@maxparens=\count374
+\c@parenlevel=\count375
+\blx@tempcnta=\count376
+\blx@tempcntb=\count377
+\blx@tempcntc=\count378
+\c@blx@maxsection=\count379
+\blx@maxsegment@0=\count380
+\blx@notetype=\count381
+\blx@parenlevel@text=\count382
+\blx@parenlevel@foot=\count383
+\blx@sectionciteorder@0=\count384
+\blx@sectionciteorderinternal@0=\count385
+\blx@entrysetcounter=\count386
+\blx@biblioinstance=\count387
 \labelnumberwidth=\skip93
 \labelalphawidth=\skip94
 \biblabelsep=\skip95
@@ -693,9 +711,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read3
 \blx@bcfout=\write4
 \blx@langwohyphens=\language89
-\c@mincomprange=\count384
-\c@maxcomprange=\count385
-\c@mincompwidth=\count386
+\c@mincomprange=\count388
+\c@maxcomprange=\count389
+\c@mincompwidth=\count390
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -705,74 +723,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'ieee.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count387
-\c@savedafterword=\count388
-\c@annotator=\count389
-\c@savedannotator=\count390
-\c@author=\count391
-\c@savedauthor=\count392
-\c@bookauthor=\count393
-\c@savedbookauthor=\count394
-\c@commentator=\count395
-\c@savedcommentator=\count396
-\c@editor=\count397
-\c@savededitor=\count398
-\c@editora=\count399
-\c@savededitora=\count400
-\c@editorb=\count401
-\c@savededitorb=\count402
-\c@editorc=\count403
-\c@savededitorc=\count404
-\c@foreword=\count405
-\c@savedforeword=\count406
-\c@holder=\count407
-\c@savedholder=\count408
-\c@introduction=\count409
-\c@savedintroduction=\count410
-\c@namea=\count411
-\c@savednamea=\count412
-\c@nameb=\count413
-\c@savednameb=\count414
-\c@namec=\count415
-\c@savednamec=\count416
-\c@translator=\count417
-\c@savedtranslator=\count418
-\c@shortauthor=\count419
-\c@savedshortauthor=\count420
-\c@shorteditor=\count421
-\c@savedshorteditor=\count422
-\c@labelname=\count423
-\c@savedlabelname=\count424
-\c@institution=\count425
-\c@savedinstitution=\count426
-\c@lista=\count427
-\c@savedlista=\count428
-\c@listb=\count429
-\c@savedlistb=\count430
-\c@listc=\count431
-\c@savedlistc=\count432
-\c@listd=\count433
-\c@savedlistd=\count434
-\c@liste=\count435
-\c@savedliste=\count436
-\c@listf=\count437
-\c@savedlistf=\count438
-\c@location=\count439
-\c@savedlocation=\count440
-\c@organization=\count441
-\c@savedorganization=\count442
-\c@origlocation=\count443
-\c@savedoriglocation=\count444
-\c@origpublisher=\count445
-\c@savedorigpublisher=\count446
-\c@publisher=\count447
-\c@savedpublisher=\count448
-\c@language=\count449
-\c@savedlanguage=\count450
-\c@origlanguage=\count451
-\c@savedoriglanguage=\count452
-\c@pageref=\count453
-\c@savedpageref=\count454
+\c@afterword=\count391
+\c@savedafterword=\count392
+\c@annotator=\count393
+\c@savedannotator=\count394
+\c@author=\count395
+\c@savedauthor=\count396
+\c@bookauthor=\count397
+\c@savedbookauthor=\count398
+\c@commentator=\count399
+\c@savedcommentator=\count400
+\c@editor=\count401
+\c@savededitor=\count402
+\c@editora=\count403
+\c@savededitora=\count404
+\c@editorb=\count405
+\c@savededitorb=\count406
+\c@editorc=\count407
+\c@savededitorc=\count408
+\c@foreword=\count409
+\c@savedforeword=\count410
+\c@holder=\count411
+\c@savedholder=\count412
+\c@introduction=\count413
+\c@savedintroduction=\count414
+\c@namea=\count415
+\c@savednamea=\count416
+\c@nameb=\count417
+\c@savednameb=\count418
+\c@namec=\count419
+\c@savednamec=\count420
+\c@translator=\count421
+\c@savedtranslator=\count422
+\c@shortauthor=\count423
+\c@savedshortauthor=\count424
+\c@shorteditor=\count425
+\c@savedshorteditor=\count426
+\c@labelname=\count427
+\c@savedlabelname=\count428
+\c@institution=\count429
+\c@savedinstitution=\count430
+\c@lista=\count431
+\c@savedlista=\count432
+\c@listb=\count433
+\c@savedlistb=\count434
+\c@listc=\count435
+\c@savedlistc=\count436
+\c@listd=\count437
+\c@savedlistd=\count438
+\c@liste=\count439
+\c@savedliste=\count440
+\c@listf=\count441
+\c@savedlistf=\count442
+\c@location=\count443
+\c@savedlocation=\count444
+\c@organization=\count445
+\c@savedorganization=\count446
+\c@origlocation=\count447
+\c@savedoriglocation=\count448
+\c@origpublisher=\count449
+\c@savedorigpublisher=\count450
+\c@publisher=\count451
+\c@savedpublisher=\count452
+\c@language=\count453
+\c@savedlanguage=\count454
+\c@origlanguage=\count455
+\c@savedoriglanguage=\count456
+\c@pageref=\count457
+\c@savedpageref=\count458
 \shorthandwidth=\skip101
 \shortjournalwidth=\skip102
 \shortserieswidth=\skip103
@@ -796,19 +814,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
-\c@textcitecount=\count455
-\c@textcitetotal=\count456
-\c@textcitemaxnames=\count457
-\c@biburlbigbreakpenalty=\count458
-\c@biburlbreakpenalty=\count459
-\c@biburlnumpenalty=\count460
-\c@biburlucpenalty=\count461
-\c@biburllcpenalty=\count462
+\c@textcitecount=\count459
+\c@textcitetotal=\count460
+\c@textcitemaxnames=\count461
+\c@biburlbigbreakpenalty=\count462
+\c@biburlbreakpenalty=\count463
+\c@biburlnumpenalty=\count464
+\c@biburlucpenalty=\count465
+\c@biburllcpenalty=\count466
 \biburlbigskip=\muskip19
 \biburlnumskip=\muskip20
 \biburlucskip=\muskip21
 \biburllcskip=\muskip22
-\c@smartand=\count463
+\c@smartand=\count467
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
@@ -826,8 +844,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count464
-\c@bbx:relatedtotal=\count465
+\c@bbx:relatedcount=\count468
+\c@bbx:relatedtotal=\count469
 ))))
 Package biblatex Info: Trying to load citation style 'ieee'...
 Package biblatex Info: ... file 'ieee.cbx' found.
@@ -837,10 +855,10 @@ Package biblatex Info: Trying to load citation style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.cbx' found.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
 File: numeric-comp.cbx 2024/03/21 v3.20 biblatex citation style (PK/MW)
-\c@cbx@tempcnta=\count466
-\c@cbx@tempcntb=\count467
-\c@cbx@tempcntc=\count468
-\c@cbx@tempcntd=\count469
+\c@cbx@tempcnta=\count470
+\c@cbx@tempcntb=\count471
+\c@cbx@tempcntc=\count472
+\c@cbx@tempcntd=\count473
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -868,8 +886,8 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-09-10 L3 programming layer (loader) 
  (/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count470
-\l__pdf_internal_box=\box112
+\l__color_backend_stack_int=\count474
+\l__pdf_internal_box=\box114
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2024-09-10 L3 programming layer (loader) 
@@ -881,12 +899,12 @@ Package: xparse 2024-08-16 L3 Experimental document command parser
 Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
-\csq@reset=\count471
-\csq@gtype=\count472
-\csq@glevel=\count473
-\csq@qlevel=\count474
-\csq@maxlvl=\count475
-\csq@tshold=\count476
+\csq@reset=\count475
+\csq@gtype=\count476
+\csq@glevel=\count477
+\csq@qlevel=\count478
+\csq@maxlvl=\count479
+\csq@tshold=\count480
 \csq@ltx@everypar=\toks45
  (/usr/local/texlive/2024/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
@@ -898,11 +916,11 @@ File: csquotes.cfg
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
 \labelindent=\skip115
-\enit@outerparindent=\dimen290
+\enit@outerparindent=\dimen300
 \enit@toks=\toks46
-\enit@inbox=\box113
-\enit@count@id=\count477
-\enitdp@description=\count478
+\enit@inbox=\box115
+\enit@count@id=\count481
+\enitdp@description=\count482
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write5
  Excluding comment 'comment') (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/tgtermes.sty
@@ -912,7 +930,7 @@ File: tikzlibraryangles.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryquotes.code.tex
 File: tikzlibraryquotes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryintersections.code.tex (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
-\pgf@intersect@solutions=\count479
+\pgf@intersect@solutions=\count483
 )) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary3d.code.tex
 File: tikzlibrary3d.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryperspective.code.tex
@@ -926,24 +944,24 @@ Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
  (/usr/local/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen291
-\captionmargin=\dimen292
-\caption@leftmargin=\dimen293
-\caption@rightmargin=\dimen294
-\caption@width=\dimen295
-\caption@indent=\dimen296
-\caption@parindent=\dimen297
-\caption@hangindent=\dimen298
+\caption@tempdima=\dimen301
+\captionmargin=\dimen302
+\caption@leftmargin=\dimen303
+\caption@rightmargin=\dimen304
+\caption@width=\dimen305
+\caption@indent=\dimen306
+\caption@parindent=\dimen307
+\caption@hangindent=\dimen308
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count480
-\c@continuedfloat=\count481
+\c@caption@flags=\count484
+\c@continuedfloat=\count485
 Package caption Info: hyperref package is loaded.
 )
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count482
+\c@subfigure=\count486
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count483
+\c@subtable=\count487
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/physics/physics.sty
 Package: physics 
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty
@@ -961,7 +979,7 @@ File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen299
+\arrowsize=\dimen309
 ))) (/usr/local/texlive/2024/texmf-dist/tex/latex/carlisle/slashed.sty
 Package: slashed 1997/01/16 v0.01 Feynman Slashed Character Notation (DPC)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest.sty
@@ -988,26 +1006,26 @@ File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box114
-\pgfnodeparttwobox=\box115
-\pgfnodepartthreebox=\box116
-\pgfnodepartfourbox=\box117
-\pgfnodeparttwentybox=\box118
-\pgfnodepartnineteenbox=\box119
-\pgfnodeparteighteenbox=\box120
-\pgfnodepartseventeenbox=\box121
-\pgfnodepartsixteenbox=\box122
-\pgfnodepartfifteenbox=\box123
-\pgfnodepartfourteenbox=\box124
-\pgfnodepartthirteenbox=\box125
-\pgfnodeparttwelvebox=\box126
-\pgfnodepartelevenbox=\box127
-\pgfnodeparttenbox=\box128
-\pgfnodepartninebox=\box129
-\pgfnodeparteightbox=\box130
-\pgfnodepartsevenbox=\box131
-\pgfnodepartsixbox=\box132
-\pgfnodepartfivebox=\box133
+\pgfnodepartlowerbox=\box116
+\pgfnodeparttwobox=\box117
+\pgfnodepartthreebox=\box118
+\pgfnodepartfourbox=\box119
+\pgfnodeparttwentybox=\box120
+\pgfnodepartnineteenbox=\box121
+\pgfnodeparteighteenbox=\box122
+\pgfnodepartseventeenbox=\box123
+\pgfnodepartsixteenbox=\box124
+\pgfnodepartfifteenbox=\box125
+\pgfnodepartfourteenbox=\box126
+\pgfnodepartthirteenbox=\box127
+\pgfnodeparttwelvebox=\box128
+\pgfnodepartelevenbox=\box129
+\pgfnodeparttenbox=\box130
+\pgfnodepartninebox=\box131
+\pgfnodeparteightbox=\box132
+\pgfnodepartsevenbox=\box133
+\pgfnodepartsixbox=\box134
+\pgfnodepartfivebox=\box135
 ))) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
 File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/pgfopts/pgfopts.sty
@@ -1023,64 +1041,64 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )) (/usr/local/texlive/2024/texmf-dist/tex/latex/inlinedef/inlinedef.sty
 Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
 \ID@toks=\toks49
-\ID@count=\count484
+\ID@count=\count488
 )
 \ID@usercommands=\toks50
-\safeloop@depth=\count485
-\safeRKloop@depth=\count486
-\forest@temp@dimen=\dimen300
-\forest@temp@count=\count487
-\forest@n=\count488
-\forest@temp@global@count=\count489
+\safeloop@depth=\count489
+\safeRKloop@depth=\count490
+\forest@temp@dimen=\dimen310
+\forest@temp@count=\count491
+\forest@n=\count492
+\forest@temp@global@count=\count493
 \forest@temp@toks=\toks51
-\forest@temparray@M=\count490
-\forest@temparray@N=\count491
-\forest@global@temparray@M=\count492
-\forest@global@temparray@N=\count493
-\forest@isnum@count=\count494
-\forest@isdim@nonintpart=\count495
-\forest@isdim@dimen=\dimen301
-\forest@sort@m=\count496
-\forest@sort@k=\count497
-\forest@sort@p=\count498
+\forest@temparray@M=\count494
+\forest@temparray@N=\count495
+\forest@global@temparray@M=\count496
+\forest@global@temparray@N=\count497
+\forest@isnum@count=\count498
+\forest@isdim@nonintpart=\count499
+\forest@isdim@dimen=\dimen311
+\forest@sort@m=\count500
+\forest@sort@k=\count501
+\forest@sort@p=\count502
 \bracket@content=\toks52
 \bracket@afterthought=\toks53
-\forest@node@maxid=\count499
-\forest@process@left@M=\count500
-\forest@process@left@N=\count501
-\forest@process@right@M=\count502
-\forest@process@right@N=\count503
-\forest@process@saved@M=\count504
-\forest@process@saved@N=\count505
-\forest@process@result@M=\count506
-\forest@process@result@N=\count507
-\forest@process@n=\count508
+\forest@node@maxid=\count503
+\forest@process@left@M=\count504
+\forest@process@left@N=\count505
+\forest@process@right@M=\count506
+\forest@process@right@N=\count507
+\forest@process@saved@M=\count508
+\forest@process@saved@N=\count509
+\forest@process@result@M=\count510
+\forest@process@result@N=\count511
+\forest@process@n=\count512
 \forest@nodewalk@branch@toks=\toks54
 \forest@nodewalk@shortsteps@resolution=\toks55
 \forest@do@dynamics=\toks56
-\forest@box=\box134
-\forest@xg=\dimen302
-\forest@yg=\dimen303
-\forest@xs=\dimen304
-\forest@ys=\dimen305
+\forest@box=\box136
+\forest@xg=\dimen312
+\forest@yg=\dimen313
+\forest@xs=\dimen314
+\forest@ys=\dimen315
 \forest@pi@toks=\toks57
 \forest@segment@toks=\toks58
 \forest@PIi@toks=\toks59
 \forest@PIii@toks=\toks60
 \forest@copy@in=\read4
 \forest@copy@out=\write6
-\forest@externalize@max@outer@n=\count509
-\forest@externalize@inner@n=\count510
+\forest@externalize@max@outer@n=\count513
+\forest@externalize@inner@n=\count514
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/forest/forest-lib-linguistics.sty
 Package: forest-lib-linguistics 2017/07/14 v0.1.2
-\standardnodestrutbox=\box135
+\standardnodestrutbox=\box137
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count511
+\c@AlgoLine=\count515
 \algocf@hangindent=\skip116
  (/usr/local/texlive/2024/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count512
+\c@checkoddpage=\count516
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/relsize/relsize.sty
@@ -1094,88 +1112,70 @@ Package: relsize 2013/03/29 ver 4.1
 \skiplength=\skip122
 \algomargin=\skip123
 \skipalgocfslide=\skip124
-\algowidth=\dimen306
-\inoutsize=\dimen307
-\inoutindent=\dimen308
-\interspacetitleruled=\dimen309
-\interspacealgoruled=\dimen310
-\interspacetitleboxruled=\dimen311
+\algowidth=\dimen316
+\inoutsize=\dimen317
+\inoutindent=\dimen318
+\interspacetitleruled=\dimen319
+\interspacealgoruled=\dimen320
+\interspacetitleboxruled=\dimen321
 \algocf@ruledwidth=\skip125
-\algocf@inoutbox=\box136
-\algocf@inputbox=\box137
+\algocf@inoutbox=\box138
+\algocf@inputbox=\box139
 \AlCapSkip=\skip126
 \AlCapHSkip=\skip127
 \algoskipindent=\skip128
-\algocf@nlbox=\box138
-\algocf@hangingbox=\box139
-\algocf@untilbox=\box140
+\algocf@nlbox=\box140
+\algocf@hangingbox=\box141
+\algocf@untilbox=\box142
 \algocf@skipuntil=\skip129
-\algocf@capbox=\box141
+\algocf@capbox=\box143
 \algocf@lcaptionbox=\skip130
 \algoheightruledefault=\skip131
 \algoheightrule=\skip132
 \algotitleheightruledefault=\skip133
 \algotitleheightrule=\skip134
-\c@algocfline=\count513
-\c@algocfproc=\count514
-\c@algocf=\count515
-\algocf@algoframe=\box142
-\algocf@algobox=\box143
+\c@algocfline=\count517
+\c@algocfproc=\count518
+\c@algocf=\count519
+\algocf@algoframe=\box144
+\algocf@algobox=\box145
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count516
+\c@float@type=\count520
 \float@exts=\toks61
-\float@box=\box144
+\float@box=\box146
 \@float@everytoks=\toks62
-\@floatcapt=\box145
+\@floatcapt=\box147
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/media9.sty
 Package: media9 2024/09/16 v1.29 acrobat-9/X compatible media
-\g_mix_pkgresizeflag_int=\count517
+\g_mix_pkgresizeflag_int=\count521
  (/usr/local/texlive/2024/texmf-dist/tex/latex/media9/pdfbase.sty
 Package: pdfbase 2024/09/16 v0.59 driver independent access to low-level PDF features
-\g_pbs_page_int=\count518
-\g_pbs_oc_int=\count519
+\g_pbs_page_int=\count522
+\g_pbs_oc_int=\count523
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/ocgx2/ocgbase.sty
 Package: ocgbase 2024/09/15 v0.24 support package for ocgx2.sty
 )
-\l_mix_poster_box=\box146
-\g_mix_wd_dim=\dimen312
-\g_mix_ht_dim=\dimen313
-\g_mix_dp_dim=\dimen314
-\g_mix_rmcnt_int=\count520
-\l_mix_viewcnt_int=\count521
-\g@mix@page@int=\count522
-\g_mix_resizeflag_int=\count523
-\l_mix_lineno_int=\count524
-\l_mix_pbtn_box=\box147
-\g_mix_mbtncnt_int=\count525
-\mix@btn@dim=\dimen315
+\l_mix_poster_box=\box148
+\g_mix_wd_dim=\dimen322
+\g_mix_ht_dim=\dimen323
+\g_mix_dp_dim=\dimen324
+\g_mix_rmcnt_int=\count524
+\l_mix_viewcnt_int=\count525
+\g@mix@page@int=\count526
+\g_mix_resizeflag_int=\count527
+\l_mix_lineno_int=\count528
+\l_mix_pbtn_box=\box149
+\g_mix_mbtncnt_int=\count529
+\mix@btn@dim=\dimen325
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen316
-\pgfarrowlength=\dimen317
-\pgfarrowwidth=\dimen318
-\pgfarrowlinewidth=\dimen319
+\pgfarrowinset=\dimen326
+\pgfarrowlength=\dimen327
+\pgfarrowwidth=\dimen328
+\pgfarrowlinewidth=\dimen329
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/empheq.sty
-Package: empheq 2017/03/31 v2.15 Emphasizing equations
-\l_EQ_equationtype_int=\count526
-\l_EQ_alignmentmode_int=\count527
-\l_EQ_totalwidth_dim=\dimen320
-\l_EQ_displaywidth_dim=\dimen321
-\l_EQ_temp_linewidth_dim=\dimen322
-\l_EQ_linewidth_dim=\dimen323
-\EmphEqdelimitershortfall=\dimen324
-\EmphEqdelimiterfactor=\count528
-\g_EQ_toptag_height_dim=\dimen325
-\g_EQ_bottomtag_depth_dim=\dimen326
-\g_EQ_toprow_height_dim=\dimen327
-\g_EQ_bottomrow_depth_dim=\dimen328
-\g_EQ_widesttag_dim=\dimen329
-\EQ_mathdisplay_box=\box148
-\EQ_tag_box=\box149
-\g_EQ_temprow_int=\count529
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/newtx/newtxtext.sty
 Package: newtxtext 2024/04/01 v1.744(Michael Sharpe) latex and unicode latex support for TeXGyreTermesX
  `newtxtext' v1.744, 2024/04/01 Text macros taking advantage of TeXGyre Termes and its extensions (msharpe) (/usr/local/texlive/2024/texmf-dist/tex/latex/xpatch/xpatch.sty
@@ -1486,8 +1486,6 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 [8]
 
 [9]
-
-[10]
 LaTeX Font Info:    Trying to load font information for OT1+qhv on input line 630.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/tex-gyre/ot1qhv.fd
 File: ot1qhv.fd 2009/09/25 v1.2 font definition file for OT1/qhv
@@ -1498,49 +1496,51 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qhv' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<images/quad_model.png, id=219, 398.48875pt x 307.1475pt>
+<images/quad_model.png, id=212, 398.48875pt x 307.1475pt>
 File: images/quad_model.png Graphic file (type png)
 <use images/quad_model.png>
 Package pdftex.def Info: images/quad_model.png  used on input line 630.
 (pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
 
+[10]
+
 [11{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc} <./images/quad_model.png>]
 
+LaTeX Warning: Reference `fig:rotor_velocities' on page 12 undefined on input line 805.
+
+
+
 [12]
-
-LaTeX Warning: Reference `fig:rotor_velocities' on page 13 undefined on input line 805.
-
-
-
-[13]
 File: images/quad_model.png Graphic file (type png)
 <use images/quad_model.png>
 Package pdftex.def Info: images/quad_model.png  used on input line 921.
 (pdftex.def)             Requested size: 85.35722pt x 71.12985pt.
 
 
-LaTeX Warning: Reference `sec:PSO' on page 14 undefined on input line 928.
+LaTeX Warning: Reference `sec:PSO' on page 13 undefined on input line 928.
 
 
-LaTeX Warning: Reference `eq:received_signal' on page 14 undefined on input line 941.
+LaTeX Warning: Reference `eq:received_signal' on page 13 undefined on input line 941.
 
 
-LaTeX Warning: Reference `eq:model_velocity' on page 14 undefined on input line 946.
+LaTeX Warning: Reference `eq:model_velocity' on page 13 undefined on input line 946.
 
 
-LaTeX Warning: Reference `eq:model_position' on page 14 undefined on input line 946.
+LaTeX Warning: Reference `eq:model_position' on page 13 undefined on input line 946.
+
+
+
+[13]
+
+LaTeX Warning: Reference `eq:velocity_clamping' on page 14 undefined on input line 954.
+
+
+LaTeX Warning: Reference `eq:boundary_condition' on page 14 undefined on input line 956.
 
 
 
 [14]
-
-LaTeX Warning: Reference `eq:velocity_clamping' on page 15 undefined on input line 953.
-
-
-LaTeX Warning: Reference `eq:boundary_condition' on page 15 undefined on input line 973.
-
-
 
 [15] (build/Cap_5.aux)
  ***********
@@ -1558,13 +1558,13 @@ Package logreq Info: Writing requests to 'Cap_5.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 51879 strings out of 473579
- 1086364 string characters out of 5728234
- 1954479 words of memory out of 5000000
- 73630 multiletter control sequences out of 15000+600000
- 612424 words of font info for 295 fonts, out of 8000000 for 9000
+ 51866 strings out of 473579
+ 1086149 string characters out of 5728234
+ 1953464 words of memory out of 5000000
+ 73614 multiletter control sequences out of 15000+600000
+ 608951 words of font info for 288 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 104i,16n,104p,1698b,1289s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 104i,16n,104p,1698b,1291s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist, replaced by a fixed one
 
@@ -1604,11 +1604,11 @@ pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist,
 
 pdfTeX warning (dest): name{cite.0@model_quadrotor} has been referenced but does not exist, replaced by a fixed one
 
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb>
-Output written on build/Cap_5.pdf (15 pages, 333372 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb>
+Output written on build/Cap_5.pdf (15 pages, 314649 bytes).
 PDF statistics:
- 387 PDF objects out of 1000 (max. 8388607)
- 325 compressed objects within 4 object streams
- 95 named destinations out of 1000 (max. 500000)
- 70781 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 378 PDF objects out of 1000 (max. 8388607)
+ 320 compressed objects within 4 object streams
+ 96 named destinations out of 1000 (max. 500000)
+ 65661 words of extra memory for PDF output out of 74296 (max. 10000000)
 
