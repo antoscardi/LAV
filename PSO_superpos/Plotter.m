@@ -12,7 +12,7 @@ classdef Plotter < handle
         n_groups
         font_labels = 20;
         font_title = 24;
-        font_legend = 17;
+        font_legend = 20;
         do_video = false;
         video_filename = 'figures/case_3';
         video
@@ -224,9 +224,9 @@ classdef Plotter < handle
                 end
         
                 % Set axis labels and title with LaTeX formatting
-                xlabel_handle = xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels-8);
-                ylabel('$\omega_i$ [rad/s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels-8);
-                title(sprintf('UAV %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title-5);
+                xlabel_handle = xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+                ylabel('$\omega_i$ [rad/s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+                title(sprintf('UAV %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title);
         
                 % Dynamically move x-axis label to the end of the plot
                 x_limits = xlim; % Get x-axis limits
@@ -237,7 +237,7 @@ classdef Plotter < handle
             end
         
             % Add a global title
-            sgtitle('Control inputs $\omega_i(t)$', 'Interpreter', 'latex', 'FontSize', obj.font_title-3);
+            sgtitle('Control inputs $\omega_i(t)$', 'Interpreter', 'latex', 'FontSize', obj.font_title);
             % Add a single legend outside the plotting area
             lg = legend(legend_handles, legend_labels, 'Interpreter', 'latex', 'FontSize', obj.font_legend, 'Orientation', 'horizontal');
             lg.Layout.Tile = 'north'; % Place the legend above the subplots
@@ -347,9 +347,9 @@ classdef Plotter < handle
                     legend_handles = [h1, h2];
                 end
                 % Set axis labels and title
-                xlabel_handles(i) = xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels - 8);
-                ylabel(ylabel_text, 'Interpreter', 'latex', 'FontSize', obj.font_labels - 8);
-                title(sprintf('UAV %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title - 5);
+                xlabel_handles(i) = xlabel('$t$ [s]', 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+                ylabel(ylabel_text, 'Interpreter', 'latex', 'FontSize', obj.font_labels);
+                title(sprintf('UAV %d', i), 'Interpreter', 'latex', 'FontSize', obj.font_title);
         
                 % Add grid
                 grid on;
@@ -363,7 +363,7 @@ classdef Plotter < handle
             end
         
             % Add a global title
-            sgtitle(['Input vs Real ', label], 'Interpreter', 'latex', 'FontSize', obj.font_title - 3);
+            sgtitle(['Input vs Real ', label], 'Interpreter', 'latex', 'FontSize', obj.font_title);
         
             % Add a single legend outside the plotting area
             if show_vmax

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  16 JAN 2025 03:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  16 JAN 2025 05:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1998,46 +1998,45 @@ Package pdftex.def Info: images/comparison_position-y_pso.pdf  used on input lin
 <images/case_2.pdf, id=2434, 1114.1625pt x 718.685pt>
 File: images/case_2.pdf Graphic file (type pdf)
 <use images/case_2.pdf>
-Package pdftex.def Info: images/case_2.pdf  used on input line 899.
+Package pdftex.def Info: images/case_2.pdf  used on input line 898.
 (pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 899--900
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 898--899
  [][] 
  []
 
 <images/case_2_more.pdf, id=2435, 1122.1925pt x 718.685pt>
 File: images/case_2_more.pdf Graphic file (type pdf)
 <use images/case_2_more.pdf>
-Package pdftex.def Info: images/case_2_more.pdf  used on input line 905.
+Package pdftex.def Info: images/case_2_more.pdf  used on input line 904.
 (pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 905--906
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 904--905
  [][] 
  []
 
 
 
 [101 <./images/case_2.pdf>]
-<images/case_3_fail.pdf, id=2521, 1114.1625pt x 718.685pt>
+
+[102 <./images/case_2_more.pdf>]
+<images/case_3_fail.pdf, id=2607, 1122.1925pt x 718.685pt>
 File: images/case_3_fail.pdf Graphic file (type pdf)
 <use images/case_3_fail.pdf>
-Package pdftex.def Info: images/case_3_fail.pdf  used on input line 945.
-(pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
+Package pdftex.def Info: images/case_3_fail.pdf  used on input line 946.
+(pdftex.def)             Requested size: 464.82271pt x 297.67847pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 945--946
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 946--947
  [][] 
  []
 
-
-
-[102 <./images/case_2_more.pdf>]
 <images/case_3.pdf, id=2608, 1114.1625pt x 718.685pt>
 File: images/case_3.pdf Graphic file (type pdf)
 <use images/case_3.pdf>
-Package pdftex.def Info: images/case_3.pdf  used on input line 954.
+Package pdftex.def Info: images/case_3.pdf  used on input line 953.
 (pdftex.def)             Requested size: 464.82271pt x 299.82785pt.
 
-Overfull \hbox (26.30971pt too wide) in paragraph at lines 954--955
+Overfull \hbox (26.30971pt too wide) in paragraph at lines 953--954
  [][] 
  []
 
@@ -2095,11 +2094,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 54037 strings out of 473579
- 1136326 string characters out of 5728234
+ 54033 strings out of 473579
+ 1136256 string characters out of 5728234
  1971328 words of memory out of 5000000
  74956 multiletter control sequences out of 15000+600000
- 641958 words of font info for 506 fonts, out of 8000000 for 9000
+ 641639 words of font info for 503 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,22n,87p,1934b,1611s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
@@ -2163,7 +2162,7 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on build/main.pdf (115 pages, 7935276 bytes).
+Output written on build/main.pdf (115 pages, 8161253 bytes).
 PDF statistics:
  3196 PDF objects out of 3580 (max. 8388607)
  2872 compressed objects within 29 object streams

@@ -528,7 +528,7 @@ meaning that in the simulation, the UAV's journey to the goal is
 not displayed. Instead, in the next iteration, it will already 
 be at the designated location. However, the number of 
 iterations and the simulation time account for the actual 
-time required for the UAV to reach the goal at maximum speed,
+time required for the UAV to reach the goal at double maximum speed,
 so we have that the time result is actually worst than the real one,
 as by incrementing it, it is like we are "freezing" the other drones, which in reality can continue
 to move freely.
@@ -789,7 +789,7 @@ and \([-10, 30] \, \text{m}\),
 randomly distributed across the search space.
 
 \noindent\\
-The time it took for the swarm to find the victims was 151 seconds (\(\sim 2.52\) minutes),
+The time it took for the swarm to find the victims was 191 seconds (\(\sim 3.18\) minutes),
 during which the UAVs successfully converged on the sources, 
 achieving precise estimates with an average error of \(0.38 \, \text{m}\). The estimate for the first source was 
 just \(0.756 \, \text{m}\) away, while the second, third, and fourth sources were 
@@ -862,11 +862,11 @@ sources positioned at \([-70, -70] \, \text{m}\), \([70, 70] \, \text{m}\), \([-
 distributed very far apart across the search space.
 
 \noindent\\
-The time it took for the swarm to locate the sources was 519 seconds (\(\sim 8.65\) minutes). 
+The time it took for the swarm to locate the sources was 654 seconds (\(\sim 10.9\) minutes). 
 During this time, 
-the UAVs successfully converged on the sources, achieving an average error of \(0.39 \, \text{m}\). 
+the UAVs successfully converged on the sources, achieving an average error of \(0.37 \, \text{m}\). 
 The estimates for all the sources were: the first source was \(1.025 \, \text{m}\) away, 
-the second was \(0.180 \, \text{m}\) away, the third was \(0.147 \, \text{m}\) away, 
+the second was \(0.096 \, \text{m}\) away, the third was \(0.147 \, \text{m}\) away, 
 and the fourth was \(0.208 \, \text{m}\). 
 
 \noindent\\
@@ -887,11 +887,10 @@ this example demonstrates that all targets are ultimately located, even in less 
 To evaluate the impact of increasing the number of UAVs, a second simulation 
 was conducted by adding a UAV to the swarm. 
 Naturally, we see improved performance in the total time
-needed by the UAVs to find all victims, which was just 233 seconds (\(\sim 3.88\) minutes).
-The average error across all sources slightly decreased to \(0.37 \, \text{m}\). 
+needed by the UAVs to find all victims, which was just 279 seconds (\(\sim 3.88\) minutes).
+The average error across all sources remained unvaried, \(0.37 \, \text{m}\). 
 The time improvement was due to some UAVs 
-having a better trajectory during the exploration phase, which brought 
-them nearer the sources.
+having a better trajectory during the exploration phase.
 Figure~\ref{fig:case2more} illustrates the results of this improved configuration. 
 
 \begin{figure}
@@ -931,7 +930,7 @@ after the time of the accident.
 \noindent\\
 To address this issue, an additional UAV is introduced, increasing the 
 swarm size to five UAVs. Now, the algorithm successfully 
-locates all sources in 544 seconds (\(\sim 9\) minutes). 
+locates all sources in 777 seconds (\(\sim 12.9\) minutes). 
 The estimates for the sources are: the first source was \(0.227 \, \text{m}\) away, 
 the second was \(0.925 \, \text{m}\) away, the third was \(0.160 \, \text{m}\) away, and the 
 fourth was \(0.152 \, \text{m}\) away. The total error for all valid estimates was 
@@ -939,6 +938,8 @@ fourth was \(0.152 \, \text{m}\) away. The total error for all valid estimates w
 swarm size in challenging scenarios.
 In Figure~\ref{fig:case3}, the addition of a fifth UAV and the subsequent 
 success in the localization can be seen clearly.
+We want to note again that while this seems to be a long time,
+it does not represent the real time but only the the simulation one.
 
 \begin{figure}
     \centering
@@ -946,8 +947,6 @@ success in the localization can be seen clearly.
     \caption[PSO Case 3]{Results and Trajectories in Case 3 with fail.}
     \label{fig:case3fail}
 \end{figure}
-
-
 
 \begin{figure}
     \centering

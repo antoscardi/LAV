@@ -26,9 +26,9 @@ max_velocity = 1.5;      % Maximum allowable velocity for each drone (m/s). Limi
 % Source fixed positions (the targets the drones need to find)
 % AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
 % QUANDO TROVANO VITTIMA INERTIA VIENE RIDOTTA A 0.5
-p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];              % n drones 4 randomness 0.5 ex zone 1
+%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];              % n drones 4 randomness 0.5 ex zone 1
 %p_sources = [ -70, -70; 70, 70.1; -70, 70; 70, -70];          % far away 4 drones, randomness 0.2, ex zone 1
-%p_sources = [20, 50; 28, 50; 20, 58; 28, 58];                  % 8 m apart  
+p_sources = [20, 50; 28, 50; 20, 58; 28, 58];                  % 8 m apart  
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
@@ -180,7 +180,6 @@ while iter <= n_iterations
                 % If outside bounds, adjust the position to the nearest bound
                 particle.position = max(min(particle.position, particle.bounds(2)), particle.bounds(1));
                 smaller_step = norm(old_position - particle.position);
-                disp(smaller_step)
                 fprintf('Position out of bounds. Adjusting iteration from %d to %.1d to simulate freezing.\n', iter, floor(iter + smaller_step / (max_velocity*2)));
                 iter = iter + floor(smaller_step / (max_velocity*2)); %#ok<FXSET>
             else
