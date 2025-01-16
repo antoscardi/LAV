@@ -14,7 +14,7 @@ rng(seed)
 n_drones = 4;            % Number of drones in the swarm. Each drone acts as a particle in the PSO algorithm. The 
                          % drones will search the space to find the sources.
 
-n_iterations = 600;      % 10 min total number of iterations for the PSO algorithm. This controls how long it will run.
+n_iterations = 900;      % 15 min total number of iterations for the PSO algorithm. This controls how long it will run.
 
 bounds = [-80, 80];      % Search space boundaries for drone positions. This defines the limits for the x and y 
                          % coordinates within which the drones can move. Example: drones can move in a square area 
@@ -26,9 +26,9 @@ max_velocity = 1.5;      % Maximum allowable velocity for each drone (m/s). Limi
 % Source fixed positions (the targets the drones need to find)
 % AGGIUNGERE CASO IN CUI SONO TUTTI VICINI AL CENTR0
 % QUANDO TROVANO VITTIMA INERTIA VIENE RIDOTTA A 0.5
-%p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];             % n drones 4 randomness 0.5 ex zone 1
-%p_sources = [ -70, -70; 70, 70.1; -70, 70; 70, -70];        % far away 4 drones, randomness 0.2, ex zone 1
-p_sources = [20, 50; 28, 50; 20, 58; 28, 58];               % 8 m apart  
+p_sources = [ 20, 50; -50, 70; 60, 30; -10, 30];              % n drones 4 randomness 0.5 ex zone 1
+%p_sources = [ -70, -70; 70, 70.1; -70, 70; 70, -70];          % far away 4 drones, randomness 0.2, ex zone 1
+%p_sources = [20, 50; 28, 50; 20, 58; 28, 58];                  % 8 m apart  
 n_sources = size(p_sources, 1);
 
 % PSO Parameters
@@ -114,8 +114,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 step_counter = 1; % Counter to track time steps across iterations
 % Initialize exclusion zones as an empty matrix to store the positions of discovered sources
-for iter = iter:n_iterations
-    
+while iter <= n_iterations
+    %disp(iter)
     for i = 1:n_drones
         particle = particles{i};
         group_idx = particle.group_idx;
@@ -174,10 +174,20 @@ for iter = iter:n_iterations
             % Reset the group best
             fprintf('Drone %d moved out of an exclusion zone. Resetting group best for group %d.\n', particle.identifier, group_idx);
             % Move away from the exclusion zone
-            particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one, :), step_size);
-            % Increase the iteration number according to the step_size
-            fprintf('Increasing iteration from %d to %d simulate freezing other drones.\n', iter, iter + step_size);
-            iter = iter + step_size; %#ok<FXSET>
+            old_position = particle.move_away_from_exclusion(particle.shared_exclusion_zones(which_one, :), step_size);
+            % Check if the position is within the bounds
+            if any(particle.position < particle.bounds(1)) || any(particle.position > particle.bounds(2))
+                % If outside bounds, adjust the position to the nearest bound
+                particle.position = max(min(particle.position, particle.bounds(2)), particle.bounds(1));
+                smaller_step = norm(old_position - particle.position);
+                disp(smaller_step)
+                fprintf('Position out of bounds. Adjusting iteration from %d to %.1d to simulate freezing.\n', iter, floor(iter + smaller_step / (max_velocity*2)));
+                iter = iter + floor(smaller_step / (max_velocity*2)); %#ok<FXSET>
+            else
+                % If within bounds, increase by normal step size
+                fprintf('Increasing iteration from %d to %d based on normal step size.\n', iter, iter + step_size / (max_velocity*2));
+                iter = iter + step_size / (max_velocity*2); %#ok<FXSET>
+            end
             % Introduce randomness to the new position
             %randomness_factor = 10*rand(1, 2);  % Strong random boost to force exploration
             %randomness_factor = 0;
@@ -225,17 +235,21 @@ for iter = iter:n_iterations
             [state_dot, rotor_velocities] = particle.update_state(dt, state, desired_position, desired_velocity, desired_acceleration);
             state = state + dt * state_dot;
             [is_in_exclusion_zone, which_one] = particle.check_if_in_exclusion_zone();
+            %THIS IS DOING NOTHING ACTUALLY BUT WE LEAVE IT SO THAT I DOES NOT CHANGE THE RNG RESULT
             if is_in_exclusion_zone
+                disp("HERE1")
                  [particle, group_indices, n_groups, group_best_positions, group_best_values, iter] = ...
                      handle_exclusion_zone(particle, particles, group_idx, group_indices, i, n_groups, ...
                                          group_best_positions, group_best_values, iter, step_size, plotter);
              else
-                 % Evaluate NSS value at the position
-                 particle.evaluate_nss(@artva.superpositionNSS, p_sources);
-                 % Update group best if necessary
+                  % Evaluate NSS value at the position
+                  particle.evaluate_nss(@artva.superpositionNSS, p_sources);
+                  % Update group best if necessary
                  if particle.nss_value > group_best_values(group_idx)
-                     group_best_positions(group_idx, :) = particle.position;
-                     group_best_values(group_idx) = particle.nss_value;
+                    disp("HERE2")
+                    disp(particle.nss_value)
+                    group_best_positions(group_idx, :) = particle.position;
+                    group_best_values(group_idx) = particle.nss_value;
                  end
             end
             % % Enforce boundaries
@@ -284,6 +298,7 @@ for iter = iter:n_iterations
     end
 
     % Update plot with current drone positions
+    iter = iter + 1;
     time = (iter - 1) * iteration_duration;
     plotter.draw(positions, iter, time);
 end

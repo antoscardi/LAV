@@ -955,7 +955,8 @@ In addition, the velocity clamping in Eq.\ref{eq:velocity_clamping} is performed
 this PSO update and the search space boundary conditions as in
 Eq.\ref{eq:boundary_condition} are employed to ensure the reference position does not lie outside the boundaries.
 We also note that the exclusion zone mechanism remains unvaried
-and follows the PSO algorithm in the same way.
+and follows the PSO algorithm in the same way, the check if the drone is in an exlusion zone is done at every PSO $\tau_s$
+time step.
 
 \noindent\\
 The resulting $\mathbf{v}_{j}(\tau_s+1) = \mathbf{v}_d(\tau_s)$ and $\mathbf{p}_{r_j}(\tau_s + 1) = \mathbf{x}_d(\tau_s)$

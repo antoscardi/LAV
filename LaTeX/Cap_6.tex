@@ -106,7 +106,7 @@ particles' data).
 \begin{tabular}{c c c c}
 \hline\hline
 \textbf{Symbol}              & \textbf{Value}        & \textbf{Unit}           & \textbf{Description}      \\ \hline\hline                   
-\(n_{\text{iterations}}\) (\texttt{n\_iterations})     & 600                   & --                      & Number of iterations      \\
+\(n_{\text{iterations}}\) (\texttt{n\_iterations})     & 900                   & --                      & Number of iterations      \\
 \(\omega\) (\texttt{inertia})                          & 1.05                  & --                      & Inertia weight            \\
 \(c_1\) (\texttt{cognitive\_factor})                   & 2.05                  & --                      & Cognitive factor          \\
 \(c_2\) (\texttt{social\_factor})                      & 1.5                   & --                      & Social factor             \\
@@ -528,7 +528,10 @@ meaning that in the simulation, the UAV's journey to the goal is
 not displayed. Instead, in the next iteration, it will already 
 be at the designated location. However, the number of 
 iterations and the simulation time account for the actual 
-time required for the UAV to reach the goal at maximum speed.
+time required for the UAV to reach the goal at maximum speed,
+so we have that the time result is actually worst than the real one,
+as by incrementing it, it is like we are "freezing" the other drones, which in reality can continue
+to move freely.
 In case of a negative response, the \textit{evaluate\_nss()} is 
 called and the group best ($\mathbf{gbest}$) is updated if the received NSS signal 
 is greater than the previous best.
@@ -675,7 +678,6 @@ These plots highlight the individual tracking performance
 in each dimension and confirm the controller's precision 
 in following the desired positions.
 
-
 \noindent\\
 Figure \ref{fig:pid_sim} shows the simulation over time,
 providing an overview of the control system's behavior 
@@ -696,7 +698,7 @@ where wind disturbances or other environmental factors are not considered,
 since the primary focus of this work is not on control robustness.
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{images/trajectory_comparison.pdf}
+    \includegraphics[width=0.6\textwidth]{images/trajectory_comparison.pdf}
     \caption[3D Trajectory Tracking]{Comparison of the actual and desired trajectory in 3D space during the exploration phase.}
     \label{fig:pd_traj_comparison}
 \end{figure}
@@ -733,7 +735,7 @@ since the primary focus of this work is not on control robustness.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{images/rotor_velocities.pdf}
+    \includegraphics[width=0.6\textwidth]{images/rotor_velocities.pdf}
     \caption[Rotor Velocities]{Rotor velocities over time as calculated using \eqref{eq:rotor_velocities}, the actuation required for trajectory tracking.}
     \label{fig:rotor_velocities}
 \end{figure}
@@ -919,7 +921,7 @@ possible directions to reach the fourth source.
 
 \noindent\\
 Initially, with four UAVs, the algorithm fails to reliably 
-locate all sources within the 600 seconds (10 min) allocated for the simulation,
+locate all sources within the 900 seconds (15 min) allocated for the simulation,
 as seen in Figure~\ref{fig:case3fail}. 
 While increasing the simulation time could potentially improve performance, 
 this approach is unsuitable for our time-sensitive application, where

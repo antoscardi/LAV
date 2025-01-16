@@ -1466,7 +1466,7 @@ where the union is over all exclusion zones shared by neighboring UAVs.
 \noindent\\
 The exclusion zone mechanism follows these steps:
 \begin{itemize}
-    \item Each UAV continuously checks whether its current position 
+    \item Each UAV at each time step checks whether its current position 
     \( \mathbf{p}_{r_j}(\tau_k) \) lies within any shared exclusion zone. 
     This is verified by:
     \[
@@ -1499,6 +1499,7 @@ The exclusion zone mechanism follows these steps:
 \end{itemize}
 
 \noindent\\
+Note that the new goal is naturally set to be inside the boundaries of the search space.
 Once the UAV reaches \( \mathbf{p}_{r_j}^{\text{goal}} \), 
 it resumes the PSO algorithm, continuing to search for new sources. 
 This mechanism ensures the UAV moves directly away from the 

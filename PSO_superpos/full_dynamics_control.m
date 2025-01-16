@@ -10,13 +10,13 @@ blue = [0,0,205]/255;    % Blue color (RGB: 30,144,255)
 green = [0,128,0]/255; % Green color (RGB: 60,179,113)
 % Sizes of text
 global title_font_size label_font_size legend_font_size
-title_font_size = 28;
+title_font_size = 18;
 label_font_size = 17;
 legend_font_size = 18;
 % Create a VideoWriter object with high-quality settings
 %dt = 0.04;                  % Time step (s)
 dt = 0.1;
-do_video = true;
+do_video = false;
 if do_video
     video_filename = 'figures/quadrotor_simulation.mp4';
     video = VideoWriter('figures/quadrotor_simulation', 'Uncompressed AVI');
@@ -196,11 +196,11 @@ end
 % Extract results
 plot_results(time, desired_position, state_history, rotor_velocities_history, rotor_forces_history);
 % Save all other plots generated in the simulation
-%exportgraphics(figure(2), fullfile('figures', 'plot_2.pdf'),'ContentType', 'vector');
-%exportgraphics(figure(3), fullfile('figures', 'plot_3.pdf'),'ContentType', 'vector');
-%exportgraphics(figure(4), fullfile('figures', 'plot_4.pdf'),'ContentType', 'vector');
-%exportgraphics(figure(5), fullfile('figures', 'plot_5.pdf'),'ContentType', 'vector');
-%exportgraphics(figure(6), fullfile('figures', 'plot_6.pdf'),'ContentType', 'vector');
+exportgraphics(figure(2), fullfile('figures', 'plot_2.pdf'),'ContentType', 'vector');
+exportgraphics(figure(3), fullfile('figures', 'plot_3.pdf'),'ContentType', 'vector');
+exportgraphics(figure(4), fullfile('figures', 'plot_4.pdf'),'ContentType', 'vector');
+exportgraphics(figure(5), fullfile('figures', 'plot_5.pdf'),'ContentType', 'vector');
+exportgraphics(figure(6), fullfile('figures', 'plot_6.pdf'),'ContentType', 'vector');
 
 
 function x_dot = full_model(dt, state, F, input_torques)
