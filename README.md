@@ -19,7 +19,7 @@ This repository contains the **thesis work** on **decentralized UAV swarm contro
   
 ### 🔹Exploration Phase:
    
-![Image](https://github.com/user-attachments/assets/10b515a6-35a1-4a31-bed4-d9d40e3a7403) 
+![Image](https://github.com/user-attachments/assets/4f190024-e154-4686-b21d-f65195cb535e)
 
 ### 🔹 Exploitation Phase:
   
