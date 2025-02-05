@@ -21,7 +21,7 @@ This repository contains the **thesis work** on **decentralized UAV swarm contro
 ![Simulation 1](https://github.com/your-username/your-repo/assets/unique-video-id)  
 
 - **Exploitation Phase:**  
-![Simulation 2](https://github.com/your-username/your-repo/assets/unique-video-id)
+![Image](https://github.com/user-attachments/assets/34bb7520-8d7b-4b9c-a174-8f00fb396277)
 
 ---
 
