@@ -1,4 +1,4 @@
-# 🎓 Localization of Avalanche Victims by a Team of UAVs 
+# Localization of Avalanche Victims by a Team of UAVs 
 
 ![Thesis Cover](LaTeX/images/page_1_presentation.png)  
 
