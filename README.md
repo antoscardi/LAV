@@ -43,7 +43,7 @@ This repository contains my **thesis work** on **decentralized UAV swarm control
 
 #### 👤 Multiple Victims Case  
 ```bash
-git clone https://github.com/your-repo/thesis.git
+git clone https://github.com/antoscardi/LAV-Localization_of_Avalanche_Victims_by_a_Team_of_UAVs.git
 cd PSO_superpos
 matlab -r "main"
   ```
