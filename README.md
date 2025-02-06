@@ -1,6 +1,7 @@
 # Localization of Avalanche Victims by a Team of UAVs 
 
-![Thesis Cover](LaTeX/images/page_1_presentation.png)  
+ ![page_1_presentation](https://github.com/user-attachments/assets/e32742d9-2236-47d0-baa6-568141ca5f67)
+
 
 ## 📌 Overview  
 
@@ -19,11 +20,13 @@ This repository contains my **thesis work** on **decentralized UAV swarm control
   
 ### 🔹Exploration Phase:
    
-![Image](https://github.com/user-attachments/assets/4f190024-e154-4686-b21d-f65195cb535e)
+![quadrotor_simulation](https://github.com/user-attachments/assets/647e28a1-1fc7-40cd-b85e-7c2077849297)
+
 
 ### 🔹 Exploitation Phase:
   
-![Image](https://github.com/user-attachments/assets/34bb7520-8d7b-4b9c-a174-8f00fb396277)
+![case_1](https://github.com/user-attachments/assets/97c2b553-4883-4778-825e-7233b651fcd3)
+
 
 ---
 
