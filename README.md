@@ -4,7 +4,7 @@
 
 ## 📌 Overview  
 
-This repository contains the **thesis work** on **decentralized UAV swarm control** for **multi-source localization of avalanche victims**. The approach leverages **Particle Swarm Optimization (PSO)** and **Recursive Least Squares (RLS)** to estimate the victims position using electromagnetic signals.  
+This repository contains my **thesis work** on **decentralized UAV swarm control** for **multi-source localization of avalanche victims**. The approach leverages the **Particle Swarm Optimization (PSO)** and **Recursive Least Squares (RLS)** algorithms to estimate the victims position using electromagnetic signals (**ARTVA** sensor).  
 
 ### **Key Highlights**  
 - 🛰 **Swarm Intelligence** applied to rescue operations  
