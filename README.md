@@ -1,4 +1,4 @@
-# Localization of Avalanche Victims by a Team of UAVs 
+# 🚁 Localization of Avalanche Victims by a Team of UAVs 
 
  ![page_1_presentation](https://github.com/user-attachments/assets/e32742d9-2236-47d0-baa6-568141ca5f67)
 
